@@ -10,15 +10,16 @@ function App() {
       <h1 className="trockenbau">TROCKENBAU</h1>
       <h2 className="primavista">PRIMA VISTA</h2>
 
-      <p className="construction">Website under construction</p>
+      <p className="bau">Unsere Website befindet sich derzeit im Aufbau.</p>
 
       <div className="links">
+
         <a
           href="https://www.instagram.com/primavista.bauprojekte"
           target="_blank"
           rel="noreferrer"
         >
-          Instagram
+          <i className="fab fa-instagram"></i>
         </a>
 
         <a
@@ -26,8 +27,9 @@ function App() {
           target="_blank"
           rel="noreferrer"
         >
-          Facebook
+          <i className="fab fa-facebook"></i>
         </a>
+
       </div>
 
     </div>
