@@ -1,4 +1,4 @@
-import logo from "./assets/logo.png";
+import logo from "./assets/trockenbau.png";
 import "./styles/construction.css";
 
 function App() {
