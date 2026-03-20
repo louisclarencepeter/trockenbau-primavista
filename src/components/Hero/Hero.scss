@@ -1,0 +1,163 @@
+.hero {
+  padding: 100px 0;
+  background: linear-gradient(180deg, #ffffff 0%, #f2f2f2 100%);
+  position: relative;
+  box-shadow: inset 0 -1px 0 #e5e5e5;
+}
+
+.hero__container {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.hero__content {
+  max-width: 760px;
+}
+
+.hero__eyebrow {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c8a96a;
+}
+
+.hero__title {
+  max-width: 760px;
+  margin-bottom: 24px;
+  font-size: 58px;
+  line-height: 1.08;
+  color: #111111;
+}
+
+.hero__text {
+  max-width: 580px;
+  margin-bottom: 32px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #666666;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hero__visual {
+  display: flex;
+  justify-content: center;
+}
+
+.hero__card {
+  width: 100%;
+  max-width: 460px;
+  padding: 40px 32px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  border: 1px solid #eeeeee;
+}
+
+.hero__logo {
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto 32px;
+  display: block;
+}
+
+.hero__points {
+  display: grid;
+  gap: 14px;
+}
+
+.hero__point {
+  padding: 14px 18px;
+  background: #fafafa;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #1a1a1a;
+  border: 1px solid #eeeeee;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 1200px) {
+  .hero__title {
+    font-size: 52px;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero {
+    padding: 80px 0;
+  }
+
+  .hero__container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero__content {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .hero__title,
+  .hero__text {
+    max-width: 100%;
+  }
+
+  .hero__actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero__title {
+    font-size: 44px;
+    line-height: 1.12;
+  }
+
+  .hero__text {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero {
+    padding: 64px 0;
+  }
+
+  .hero__title {
+    font-size: 36px;
+  }
+
+  .hero__text {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__card {
+    padding: 28px 20px;
+  }
+
+  .hero__logo {
+    max-width: 180px;
+    margin-bottom: 24px;
+  }
+}

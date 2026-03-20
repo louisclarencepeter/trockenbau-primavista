@@ -1,0 +1,33 @@
+.button {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+/* Primary */
+.button-primary {
+  background-color: #C8A96A;
+  color: #fff;
+
+  &:hover {
+    background-color: #b89555;
+    transform: translateY(-2px);
+  }
+}
+
+/* Secondary */
+.button-secondary {
+  background-color: transparent;
+  border: 2px solid #1A1A1A;
+  color: #1A1A1A;
+
+  &:hover {
+    background-color: #1A1A1A;
+    color: #fff;
+  }
+}
