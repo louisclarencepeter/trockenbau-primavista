@@ -1,0 +1,55 @@
+/* =========================
+   COLOR SYSTEM - PRIMAVISTA
+   ========================= */
+
+/* Primary */
+$color-primary: #1A1A1A; // main brand (charcoal)
+
+/* Accent (premium gold) */
+$color-accent: #C8A96A;
+$color-accent-hover: #b89555;
+
+/* Backgrounds */
+$color-bg-main: #FFFFFF;
+$color-bg-section: #F5F5F5;
+$color-bg-dark: #111111;
+
+/* Text */
+$color-text-primary: #111111;
+$color-text-secondary: #555555;
+$color-text-muted: #888888;
+$color-text-light: #FFFFFF;
+
+/* Borders */
+$color-border-light: #E5E5E5;
+
+/* Shadows */
+$shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+$shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.1);
+
+/* =========================
+   GLOBAL USAGE EXAMPLES
+   ========================= */
+
+body {
+  background-color: $color-bg-main;
+  color: $color-text-primary;
+}
+
+.section {
+  background-color: $color-bg-section;
+}
+
+.button-primary {
+  background-color: $color-accent;
+  color: $color-text-light;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $color-accent-hover;
+    box-shadow: $shadow-hover;
+  }
+}
