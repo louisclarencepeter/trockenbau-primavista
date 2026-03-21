@@ -1,0 +1,111 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #eaeaea;
+}
+
+.navbar__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 88px;
+  gap: 24px;
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar__logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.navbar__brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.navbar__name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111111;
+}
+
+.navbar__tagline {
+  font-size: 13px;
+  color: #777777;
+}
+
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.navbar__link {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.navbar__link:hover {
+  color: #c8a96a;
+}
+
+.navbar__cta {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .navbar__nav {
+    display: none;
+  }
+
+  .navbar__container {
+    min-height: 78px;
+  }
+
+  .navbar__name {
+    font-size: 16px;
+  }
+
+  .navbar__tagline {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar__container {
+    gap: 12px;
+  }
+
+  .navbar__logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .navbar__name {
+    font-size: 15px;
+  }
+
+  .navbar__cta .button {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+}
