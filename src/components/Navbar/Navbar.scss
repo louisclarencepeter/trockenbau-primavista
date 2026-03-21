@@ -55,16 +55,18 @@
 }
 
 .navbar__link {
+  display: inline-block;
   font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 500;
   color: #1a1a1a;
   text-decoration: none;
-  transition: color 0.25s ease;
+  transition: color 0.25s ease, transform 0.25s ease;
 }
 
 .navbar__link:hover {
   color: #c8a96a;
+  transform: translateX(2px);
 }
 
 .navbar__cta {
