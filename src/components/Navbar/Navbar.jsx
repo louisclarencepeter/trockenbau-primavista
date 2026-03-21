@@ -4,16 +4,15 @@ import logo from '../../assets/logo.png';
 import Button from '../Button/Button';
 
 function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const navigationLinks = [
-    { href: '#leistungen', label: 'Leistungen' },
-    { href: '#referenzen', label: 'Referenzen' },
-    { href: '#ueber-uns', label: 'Uber uns' },
-    { href: '#kontakt', label: 'Kontakt' },
-  ];
+  const toggleMenu = () => {
+    setMenuOpen((prev) => !prev);
+  };
 
-  const closeMenu = () => setIsMenuOpen(false);
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
   return (
     <header className="navbar">
@@ -27,11 +26,10 @@ function Navbar() {
         </a>
 
         <nav className="navbar__nav">
-          {navigationLinks.map((link) => (
-            <a key={link.href} href={link.href} className="navbar__link">
-              {link.label}
-            </a>
-          ))}
+          <a href="#leistungen" className="navbar__link">Leistungen</a>
+          <a href="#referenzen" className="navbar__link">Referenzen</a>
+          <a href="#ueber-uns" className="navbar__link">Über uns</a>
+          <a href="#kontakt" className="navbar__link">Kontakt</a>
         </nav>
 
         <div className="navbar__cta">
@@ -39,30 +37,36 @@ function Navbar() {
         </div>
 
         <button
+          className={`navbar__toggle ${menuOpen ? 'is-active' : ''}`}
+          onClick={toggleMenu}
+          aria-label="Menü öffnen"
+          aria-expanded={menuOpen}
           type="button"
-          className="navbar__toggle"
-          aria-expanded={isMenuOpen}
-          aria-label={isMenuOpen ? 'Navigationsmenu schliessen' : 'Navigationsmenu offnen'}
-          onClick={() => setIsMenuOpen((open) => !open)}
         >
-          <span className="navbar__toggle-line" />
-          <span className="navbar__toggle-line" />
-          <span className="navbar__toggle-line" />
+          <span className="navbar__toggle-line"></span>
+          <span className="navbar__toggle-line"></span>
+          <span className="navbar__toggle-line"></span>
         </button>
       </div>
 
-      <div className={`navbar__mobile-menu${isMenuOpen ? ' navbar__mobile-menu--open' : ''}`}>
-        <nav className="container navbar__mobile-nav" aria-label="Mobile Navigation">
-          {navigationLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="navbar__mobile-link"
-              onClick={closeMenu}
-            >
-              {link.label}
-            </a>
-          ))}
+      <div className={`navbar__mobile ${menuOpen ? 'is-open' : ''}`}>
+        <nav className="navbar__mobile-nav">
+          <a href="#leistungen" className="navbar__mobile-link" onClick={closeMenu}>
+            Leistungen
+          </a>
+          <a href="#referenzen" className="navbar__mobile-link" onClick={closeMenu}>
+            Referenzen
+          </a>
+          <a href="#ueber-uns" className="navbar__mobile-link" onClick={closeMenu}>
+            Über uns
+          </a>
+          <a href="#kontakt" className="navbar__mobile-link" onClick={closeMenu}>
+            Kontakt
+          </a>
+
+          <div className="navbar__mobile-cta">
+            <Button variant="primary">Jetzt anfragen</Button>
+          </div>
         </nav>
       </div>
     </header>
