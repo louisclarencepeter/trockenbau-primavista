@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import './Trust.scss';
 import { CheckCircle, Clock, MessageCircle, Settings } from 'lucide-react';
 
@@ -25,13 +26,48 @@ const trustPoints = [
 ];
 
 function Trust() {
+  const trustRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const trustElement = trustRef.current;
+
+    if (!trustElement) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.2,
+        rootMargin: '0px 0px -10% 0px',
+      }
+    );
+
+    observer.observe(trustElement);
+
+    return () => {
+      observer.unobserve(trustElement);
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <section className="trust section" id="ueber-uns">
+    <section
+      ref={trustRef}
+      className={`trust section${isVisible ? ' trust--visible' : ''}`}
+      id="ueber-uns"
+    >
       <div className="container">
         <div className="trust__header">
-          <span className="trust__eyebrow">WARUM KUNDEN UNS VERTRAUEN</span>
-          <h2 className="trust__title">Qualität, auf die Sie sich verlassen können</h2>
-          <p className="trust__text">
+          <span className="trust__eyebrow trust__reveal">WARUM KUNDEN UNS VERTRAUEN</span>
+          <h2 className="trust__title trust__reveal">Qualität, auf die Sie sich verlassen können</h2>
+          <p className="trust__text trust__reveal">
             Wir verbinden saubere handwerkliche Ausführung mit klarer Kommunikation,
             zuverlässiger Planung und einem hohen Anspruch an jedes Detail.
           </p>
@@ -42,7 +78,7 @@ function Trust() {
             const Icon = point.icon;
 
             return (
-              <article className="trust__card" key={point.title}>
+              <article className="trust__card trust__reveal" key={point.title}>
                 <div className="trust__icon">
                   <Icon size={24} strokeWidth={2} />
                 </div>
