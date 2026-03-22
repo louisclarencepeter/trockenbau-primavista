@@ -1,21 +1,26 @@
 import './Trust.scss';
+import { CheckCircle, Clock, MessageCircle, Settings } from 'lucide-react';
 
 const trustPoints = [
   {
     title: 'Saubere Ausführung',
     text: 'Wir arbeiten präzise, strukturiert und mit hohem Anspruch an ein sauberes Endergebnis.',
+    icon: CheckCircle,
   },
   {
     title: 'Termintreue',
     text: 'Verlässliche Planung und pünktliche Umsetzung sorgen für einen reibungslosen Ablauf.',
+    icon: Clock,
   },
   {
     title: 'Klare Kommunikation',
     text: 'Transparente Abstimmung und direkte Erreichbarkeit schaffen Vertrauen in jeder Projektphase.',
+    icon: MessageCircle,
   },
   {
     title: 'Individuelle Lösungen',
     text: 'Jedes Projekt wird passend zu Raum, Anforderung und Zielsetzung geplant und umgesetzt.',
+    icon: Settings,
   },
 ];
 
@@ -33,13 +38,19 @@ function Trust() {
         </div>
 
         <div className="trust__grid">
-          {trustPoints.map((point) => (
-            <article className="trust__card" key={point.title}>
-              <div className="trust__icon"></div>
-              <h3 className="trust__card-title">{point.title}</h3>
-              <p className="trust__card-text">{point.text}</p>
-            </article>
-          ))}
+          {trustPoints.map((point) => {
+            const Icon = point.icon;
+
+            return (
+              <article className="trust__card" key={point.title}>
+                <div className="trust__icon">
+                  <Icon size={24} strokeWidth={2} />
+                </div>
+                <h3 className="trust__card-title">{point.title}</h3>
+                <p className="trust__card-text">{point.text}</p>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
