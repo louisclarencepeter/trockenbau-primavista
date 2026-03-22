@@ -1,6 +1,36 @@
 import { useEffect, useRef, useState } from 'react';
 import './Services.scss';
-import Card from '../Card/Card';
+import drywallImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 24.jpg';
+import renovationImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-39 5.jpg';
+import interiorImage from '../../assets/images/projects/PHOTO-2026-03-07-07-11-08 8.jpg';
+import finishingImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 18.jpg';
+
+const services = [
+  {
+    title: 'Trockenbau',
+    text: 'Moderne Innenausbau-Loesungen mit hoher Praezision und sauberer Ausfuehrung.',
+    image: drywallImage,
+    alt: 'Trockenbau-Arbeiten in einem modernen Innenraum',
+  },
+  {
+    title: 'Sanierung',
+    text: 'Fachgerechte Sanierung bestehender Raeume fuer neue Qualitaet und Funktionalitaet.',
+    image: renovationImage,
+    alt: 'Sanierter Innenraum mit sauber ausgefuehrten Wand- und Deckenarbeiten',
+  },
+  {
+    title: 'Renovierung',
+    text: 'Effiziente Renovierungsarbeiten fuer private und gewerbliche Objekte.',
+    image: finishingImage,
+    alt: 'Renovierungsprojekt mit hochwertiger handwerklicher Ausfuehrung',
+  },
+  {
+    title: 'Innenausbau',
+    text: 'Individuelle Gestaltung und Ausbau von Innenraeumen nach hohen Standards.',
+    image: interiorImage,
+    alt: 'Innenausbau mit klaren Linien und hochwertigem Finish',
+  },
+];
 
 function Services() {
   const servicesRef = useRef(null);
@@ -42,8 +72,8 @@ function Services() {
     >
       <div className="container">
         <div className="services__header">
-          <span className="services__eyebrow services__reveal">UNSERE LEISTUNGEN</span>
-          <h2 className="services__title services__reveal">Unsere Leistungen</h2>
+          <span className="services__eyebrow">WAS WIR ANBIETEN</span>
+<h2 className="services__title">Unsere Leistungen</h2>
           <p className="services__text services__reveal">
             Wir bieten professionelle Lösungen im Bereich Trockenbau, Sanierung
             und Innenausbau – zuverlässig, präzise und termingerecht.
@@ -51,33 +81,22 @@ function Services() {
         </div>
 
         <div className="services__grid">
-          <div className="services__card services__reveal">
-            <Card
-              title="Trockenbau"
-              text="Moderne Innenausbau-Lösungen mit hoher Präzision und sauberer Ausführung."
-            />
-          </div>
+          {services.map((service) => (
+            <article className="services__card services__reveal" key={service.title}>
+              <div className="services__image-wrap">
+                <img
+                  src={service.image}
+                  alt={service.alt}
+                  className="services__image"
+                />
+              </div>
 
-          <div className="services__card services__reveal">
-            <Card
-              title="Sanierung"
-              text="Fachgerechte Sanierung bestehender Räume für neue Qualität und Funktionalität."
-            />
-          </div>
-
-          <div className="services__card services__reveal">
-            <Card
-              title="Renovierung"
-              text="Effiziente Renovierungsarbeiten für private und gewerbliche Objekte."
-            />
-          </div>
-
-          <div className="services__card services__reveal">
-            <Card
-              title="Innenausbau"
-              text="Individuelle Gestaltung und Ausbau von Innenräumen nach höchsten Standards."
-            />
-          </div>
+              <div className="services__card-content">
+                <h3 className="services__card-title">{service.title}</h3>
+                <p className="services__card-text">{service.text}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
