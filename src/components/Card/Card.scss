@@ -1,22 +1,26 @@
 .card {
-  background: #fff;
-  padding: 24px;
+  height: 100%;
+  background: #ffffff;
+  padding: 28px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-  }
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
 }
 
 .card-title {
   font-family: 'Poppins', sans-serif;
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #111111;
 }
 
 .card-text {
-  color: #555;
+  color: #666666;
+  line-height: 1.7;
 }
