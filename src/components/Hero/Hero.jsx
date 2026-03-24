@@ -1,35 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
 import './Hero.scss';
 import Button from '../Button/Button';
 import heroMainImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40.jpg';
 import heroDetailImageOne from '../../assets/images/projects/PHOTO-2026-03-12-15-08-39 4.jpg';
 import heroDetailImageTwo from '../../assets/images/projects/PHOTO-2026-03-07-07-14-48.jpg';
+import useScrollReveal from '../../hooks/useScrollReveal';
 
 function Hero() {
-  const heroRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const heroElement = heroRef.current;
-
-    if (!heroElement) {
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      {
-        threshold: 0.25,
-        rootMargin: '0px 0px -10% 0px',
-      }
-    );
-
-    observer.observe(heroElement);
-
-    return () => observer.disconnect();
-  }, []);
+  const { sectionRef: heroRef, isVisible } = useScrollReveal({
+    threshold: 0.25,
+    rootMargin: '0px 0px -10% 0px',
+    once: false,
+  });
 
   return (
     <section

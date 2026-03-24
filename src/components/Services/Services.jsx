@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
 import './Services.scss';
 import drywallImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 24.jpg';
 import renovationImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-39 5.jpg';
 import interiorImage from '../../assets/images/projects/PHOTO-2026-03-07-07-11-08 8.jpg';
 import finishingImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 18.jpg';
+import useScrollReveal from '../../hooks/useScrollReveal';
 
 const services = [
   {
@@ -33,36 +33,9 @@ const services = [
 ];
 
 function Services() {
-  const servicesRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const servicesElement = servicesRef.current;
-
-    if (!servicesElement) {
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: 0.2,
-        rootMargin: '0px 0px -10% 0px',
-      }
-    );
-
-    observer.observe(servicesElement);
-
-    return () => {
-      observer.unobserve(servicesElement);
-      observer.disconnect();
-    };
-  }, []);
+  const { sectionRef: servicesRef, isVisible } = useScrollReveal({
+    once: false,
+  });
 
   return (
     <section
@@ -72,8 +45,8 @@ function Services() {
     >
       <div className="container">
         <div className="services__header">
-          <span className="services__eyebrow">WAS WIR ANBIETEN</span>
-<h2 className="services__title">Unsere Leistungen</h2>
+          <span className="services__eyebrow services__reveal">WAS WIR ANBIETEN</span>
+          <h2 className="services__title services__reveal">Unsere Leistungen</h2>
           <p className="services__text services__reveal">
             Wir bieten professionelle Lösungen im Bereich Trockenbau, Sanierung
             und Innenausbau – zuverlässig, präzise und termingerecht.

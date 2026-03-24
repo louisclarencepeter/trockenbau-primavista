@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
 import './Trust.scss';
 import { CheckCircle, Clock, MessageCircle, Settings } from 'lucide-react';
+import useScrollReveal from '../../hooks/useScrollReveal';
 
 const trustPoints = [
   {
@@ -26,36 +26,9 @@ const trustPoints = [
 ];
 
 function Trust() {
-  const trustRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const trustElement = trustRef.current;
-
-    if (!trustElement) {
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: 0.2,
-        rootMargin: '0px 0px -10% 0px',
-      }
-    );
-
-    observer.observe(trustElement);
-
-    return () => {
-      observer.unobserve(trustElement);
-      observer.disconnect();
-    };
-  }, []);
+  const { sectionRef: trustRef, isVisible } = useScrollReveal({
+    once: false,
+  });
 
   return (
     <section

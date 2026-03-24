@@ -60,19 +60,14 @@
   border: 1px solid #ececec;
   border-radius: 22px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+  transition: opacity 0.75s ease, transform 0.75s ease, box-shadow 0.3s ease;
   transition-delay: 0.38s;
 }
 
-.services__card:nth-child(2) {
-  transition-delay: 0.48s;
-}
-
-.services__card:nth-child(3) {
-  transition-delay: 0.58s;
-}
-
-.services__card:nth-child(4) {
-  transition-delay: 0.68s;
+@for $i from 1 through 8 {
+  .services__card:nth-child(#{$i}) {
+    transition-delay: 0.38s + (($i - 1) * 0.1s);
+  }
 }
 
 .services__image-wrap {
