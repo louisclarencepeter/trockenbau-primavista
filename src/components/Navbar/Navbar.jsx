@@ -28,7 +28,7 @@ function Navbar() {
         <nav className="navbar__nav">
           <a href="#leistungen" className="navbar__link">Leistungen</a>
           <a href="#referenzen" className="navbar__link">Referenzen</a>
-          <a href="#ueber-uns" className="navbar__link">Über uns</a>
+          <a href="#ueber-uns" className="navbar__link">Warum wir</a>
           <a href="#kontakt" className="navbar__link">Kontakt</a>
         </nav>
 
@@ -58,7 +58,7 @@ function Navbar() {
             Referenzen
           </a>
           <a href="#ueber-uns" className="navbar__mobile-link" onClick={closeMenu}>
-            Über uns
+            Warum wir
           </a>
           <a href="#kontakt" className="navbar__mobile-link" onClick={closeMenu}>
             Kontakt
