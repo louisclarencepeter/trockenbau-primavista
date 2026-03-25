@@ -23,18 +23,19 @@ function Navbar() {
       return;
     }
 
-    const navbarElement = document.querySelector('.navbar');
-    const navbarHeight = navbarElement ? navbarElement.offsetHeight : 0;
-    const extraOffset = 16;
-    const targetTop =
-      target.getBoundingClientRect().top + window.scrollY - navbarHeight - extraOffset;
-
-    window.scrollTo({
-      top: Math.max(0, targetTop),
+    target.scrollIntoView({
       behavior: 'smooth',
+      block: 'start',
     });
 
     window.history.replaceState(null, '', `#${id}`);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   const toggleMenu = () => {
@@ -60,7 +61,11 @@ function Navbar() {
       closeMenu();
     }
 
-    scrollToSection(id);
+    if (id === 'top') {
+      scrollToTop();
+    } else {
+      scrollToSection(id);
+    }
 
     if (shouldCloseInstantly) {
       window.requestAnimationFrame(() => {
@@ -78,46 +83,52 @@ function Navbar() {
       return undefined;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    const updateActiveSection = () => {
+      const navbarElement = document.querySelector('.navbar');
+      const mobileMenuElement = document.querySelector('.navbar__mobile');
+      const navbarHeight = navbarElement ? navbarElement.offsetHeight : 0;
+      const mobileMenuHeight =
+        menuOpen && mobileMenuElement ? mobileMenuElement.offsetHeight : 0;
+      const probeY = navbarHeight + mobileMenuHeight + 24;
 
-        if (visibleEntries.length > 0) {
-          setActiveSection(visibleEntries[0].target.id);
-        }
-      },
-      {
-        threshold: [0.2, 0.35, 0.5, 0.65],
-        rootMargin: '-20% 0px -45% 0px',
-      }
-    );
+      const activeMatch = sections.find((section) => {
+        const rect = section.getBoundingClientRect();
 
-    sections.forEach((section) => observer.observe(section));
+        return rect.top <= probeY && rect.bottom > probeY;
+      });
 
-    const firstSection = sections[0];
-
-    const handleScroll = () => {
-      if (!firstSection) {
+      if (activeMatch) {
+        setActiveSection(activeMatch.id);
         return;
       }
 
-      const activationOffset = 160;
+      const firstSection = sections[0];
 
-      if (window.scrollY < firstSection.offsetTop - activationOffset) {
-        setActiveSection('');
+      if (firstSection) {
+        const activationOffset = 160;
+
+        if (window.scrollY < firstSection.offsetTop - activationOffset) {
+          setActiveSection('');
+          return;
+        }
+      }
+
+      const lastSection = sections[sections.length - 1];
+
+      if (lastSection) {
+        setActiveSection(lastSection.id);
       }
     };
 
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    updateActiveSection();
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('resize', updateActiveSection);
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('resize', updateActiveSection);
     };
-  }, []);
+  }, [menuOpen]);
 
   return (
     <header className="navbar">

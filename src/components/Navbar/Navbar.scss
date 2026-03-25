@@ -1,7 +1,9 @@
+@use '../../styles/z-index' as z;
+
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: z.$z-navbar;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -106,7 +108,7 @@
   background: transparent;
   cursor: pointer;
   position: relative;
-  z-index: 1100;
+  z-index: z.$z-navbar-toggle;
   flex-direction: column;
   justify-content: center;
   align-items: center;
