@@ -33,8 +33,8 @@ function Hero() {
           </p>
 
           <div className="hero__actions hero__reveal">
-            <Button variant="primary">Kontakt aufnehmen</Button>
-            <Button variant="secondary">Unsere Leistungen</Button>
+            <Button href="#kontakt" variant="primary">Kontakt aufnehmen</Button>
+            <Button href="#leistungen" variant="secondary">Unsere Leistungen</Button>
           </div>
         </div>
 
