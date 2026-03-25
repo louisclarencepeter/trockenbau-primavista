@@ -98,6 +98,13 @@
   background: rgba(200, 169, 106, 0.12);
   color: #c8a96a;
   flex-shrink: 0;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.contact__info-item:hover .contact__icon {
+  background: #c8a96a;
+  color: #ffffff;
+  transform: translateY(-2px);
 }
 
 .contact__label {
