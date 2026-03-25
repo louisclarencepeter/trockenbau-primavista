@@ -49,7 +49,7 @@ function Hero() {
 
             <div className="hero__overlay hero__overlay--quality hero__reveal">
               <span className="hero__overlay-label">Prima Vista</span>
-              <strong>Saubere Ausfuehrung</strong>
+              <strong>Saubere Ausführung</strong>
               <span>Trockenbau, Sanierung und Innenausbau aus einer Hand.</span>
             </div>
 
