@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Navbar.scss';
 import logo from '../../assets/logo.png';
 import Button from '../Button/Button';
 
+const navItems = [
+  { id: 'leistungen', label: 'Leistungen' },
+  { id: 'referenzen', label: 'Referenzen' },
+  { id: 'ueber-uns', label: 'Warum wir' },
+  { id: 'kontakt', label: 'Kontakt' },
+];
+
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('leistungen');
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
@@ -13,6 +21,38 @@ function Navbar() {
   const closeMenu = () => {
     setMenuOpen(false);
   };
+
+  useEffect(() => {
+    const sections = navItems
+      .map(({ id }) => document.getElementById(id))
+      .filter(Boolean);
+
+    if (!sections.length) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visibleEntries.length > 0) {
+          setActiveSection(visibleEntries[0].target.id);
+        }
+      },
+      {
+        threshold: [0.2, 0.35, 0.5, 0.65],
+        rootMargin: '-20% 0px -45% 0px',
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <header className="navbar">
@@ -26,10 +66,15 @@ function Navbar() {
         </a>
 
         <nav className="navbar__nav">
-          <a href="#leistungen" className="navbar__link">Leistungen</a>
-          <a href="#referenzen" className="navbar__link">Referenzen</a>
-          <a href="#ueber-uns" className="navbar__link">Warum wir</a>
-          <a href="#kontakt" className="navbar__link">Kontakt</a>
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`navbar__link${activeSection === item.id ? ' is-active' : ''}`}
+            >
+              {item.label}
+            </a>
+          ))}
         </nav>
 
         <div className="navbar__cta">
@@ -51,18 +96,16 @@ function Navbar() {
 
       <div className={`navbar__mobile ${menuOpen ? 'is-open' : ''}`}>
         <nav className="navbar__mobile-nav">
-          <a href="#leistungen" className="navbar__mobile-link" onClick={closeMenu}>
-            Leistungen
-          </a>
-          <a href="#referenzen" className="navbar__mobile-link" onClick={closeMenu}>
-            Referenzen
-          </a>
-          <a href="#ueber-uns" className="navbar__mobile-link" onClick={closeMenu}>
-            Warum wir
-          </a>
-          <a href="#kontakt" className="navbar__mobile-link" onClick={closeMenu}>
-            Kontakt
-          </a>
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`navbar__mobile-link${activeSection === item.id ? ' is-active' : ''}`}
+              onClick={closeMenu}
+            >
+              {item.label}
+            </a>
+          ))}
 
           <div className="navbar__mobile-cta">
             <Button variant="primary">Jetzt anfragen</Button>
