@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { flushSync } from 'react-dom';
 import './Navbar.scss';
 import logo from '../../assets/logo.png';
 import Button from '../Button/Button';
@@ -13,13 +14,59 @@ const navItems = [
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const [isInstantClosing, setIsInstantClosing] = useState(false);
+
+  const scrollToSection = (id) => {
+    const target = document.getElementById(id);
+
+    if (!target) {
+      return;
+    }
+
+    const navbarElement = document.querySelector('.navbar');
+    const navbarHeight = navbarElement ? navbarElement.offsetHeight : 0;
+    const extraOffset = 16;
+    const targetTop =
+      target.getBoundingClientRect().top + window.scrollY - navbarHeight - extraOffset;
+
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: 'smooth',
+    });
+
+    window.history.replaceState(null, '', `#${id}`);
+  };
 
   const toggleMenu = () => {
+    setIsInstantClosing(false);
     setMenuOpen((prev) => !prev);
   };
 
   const closeMenu = () => {
+    setIsInstantClosing(false);
     setMenuOpen(false);
+  };
+
+  const handleNavClick = (id) => (event) => {
+    event.preventDefault();
+    const shouldCloseInstantly = menuOpen;
+
+    if (shouldCloseInstantly) {
+      flushSync(() => {
+        setIsInstantClosing(true);
+        setMenuOpen(false);
+      });
+    } else {
+      closeMenu();
+    }
+
+    scrollToSection(id);
+
+    if (shouldCloseInstantly) {
+      window.requestAnimationFrame(() => {
+        setIsInstantClosing(false);
+      });
+    }
   };
 
   useEffect(() => {
@@ -75,7 +122,7 @@ function Navbar() {
   return (
     <header className="navbar">
       <div className="container navbar__container">
-        <a href="#top" className="navbar__brand" onClick={closeMenu}>
+        <a href="#top" className="navbar__brand" onClick={handleNavClick('top')}>
           <img src={logo} alt="Trockenbau Prima Vista Logo" className="navbar__logo" />
           <div className="navbar__brand-text">
             <span className="navbar__name">Trockenbau Prima Vista</span>
@@ -89,6 +136,7 @@ function Navbar() {
               key={item.id}
               href={`#${item.id}`}
               className={`navbar__link${activeSection === item.id ? ' is-active' : ''}`}
+              onClick={handleNavClick(item.id)}
             >
               {item.label}
             </a>
@@ -96,7 +144,7 @@ function Navbar() {
         </nav>
 
         <div className="navbar__cta">
-          <Button href="#kontakt" onClick={closeMenu} variant="primary">
+          <Button href="#kontakt" onClick={handleNavClick('kontakt')} variant="primary">
             Jetzt anfragen
           </Button>
         </div>
@@ -114,21 +162,21 @@ function Navbar() {
         </button>
       </div>
 
-      <div className={`navbar__mobile ${menuOpen ? 'is-open' : ''}`}>
+      <div className={`navbar__mobile ${menuOpen ? 'is-open' : ''}${isInstantClosing ? ' is-instant' : ''}`}>
         <nav className="navbar__mobile-nav">
           {navItems.map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}
               className={`navbar__mobile-link${activeSection === item.id ? ' is-active' : ''}`}
-              onClick={closeMenu}
+              onClick={handleNavClick(item.id)}
             >
               {item.label}
             </a>
           ))}
 
           <div className="navbar__mobile-cta">
-            <Button href="#kontakt" onClick={closeMenu} variant="primary">
+            <Button href="#kontakt" onClick={handleNavClick('kontakt')} variant="primary">
               Jetzt anfragen
             </Button>
           </div>

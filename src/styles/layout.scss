@@ -6,8 +6,15 @@
 
 .section {
   padding: 100px 0;
+  scroll-margin-top: 112px;
 }
 
 .section-light {
   background: #F5F5F5;
+}
+
+@media (max-width: 992px) {
+  .section {
+    scroll-margin-top: 96px;
+  }
 }

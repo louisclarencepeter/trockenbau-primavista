@@ -148,6 +148,10 @@
   border-bottom: 1px solid transparent;
 }
 
+.navbar__mobile.is-instant {
+  transition: none;
+}
+
 .navbar__mobile.is-open {
   max-height: 500px;
   opacity: 1;
@@ -164,6 +168,7 @@
 
 .navbar__mobile-link {
   display: block;
+  position: relative;
   padding: 14px 0;
   font-family: 'Inter', sans-serif;
   font-size: 16px;
@@ -171,7 +176,21 @@
   color: #1a1a1a;
   text-decoration: none;
   border-bottom: 1px solid #f0f0f0;
-  transition: color 0.25s ease;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.navbar__mobile-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 72px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 999px;
+  background: #c8a96a;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
 }
 
 .navbar__mobile-link:hover {
@@ -181,6 +200,10 @@
 .navbar__mobile-link.is-active {
   color: #c8a96a;
   border-bottom-color: rgba(200, 169, 106, 0.32);
+}
+
+.navbar__mobile-link.is-active::after {
+  transform: scaleX(1);
 }
 
 .navbar__mobile-cta {
