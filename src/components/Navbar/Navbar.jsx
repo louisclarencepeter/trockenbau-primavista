@@ -12,7 +12,7 @@ const navItems = [
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('leistungen');
+  const [activeSection, setActiveSection] = useState('');
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
@@ -49,15 +49,33 @@ function Navbar() {
 
     sections.forEach((section) => observer.observe(section));
 
+    const firstSection = sections[0];
+
+    const handleScroll = () => {
+      if (!firstSection) {
+        return;
+      }
+
+      const activationOffset = 160;
+
+      if (window.scrollY < firstSection.offsetTop - activationOffset) {
+        setActiveSection('');
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => {
       observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
     <header className="navbar">
       <div className="container navbar__container">
-        <a href="/" className="navbar__brand" onClick={closeMenu}>
+        <a href="#top" className="navbar__brand" onClick={closeMenu}>
           <img src={logo} alt="Trockenbau Prima Vista Logo" className="navbar__logo" />
           <div className="navbar__brand-text">
             <span className="navbar__name">Trockenbau Prima Vista</span>
@@ -78,7 +96,9 @@ function Navbar() {
         </nav>
 
         <div className="navbar__cta">
-          <Button variant="primary">Jetzt anfragen</Button>
+          <Button href="#kontakt" onClick={closeMenu} variant="primary">
+            Jetzt anfragen
+          </Button>
         </div>
 
         <button
@@ -108,7 +128,9 @@ function Navbar() {
           ))}
 
           <div className="navbar__mobile-cta">
-            <Button variant="primary">Jetzt anfragen</Button>
+            <Button href="#kontakt" onClick={closeMenu} variant="primary">
+              Jetzt anfragen
+            </Button>
           </div>
         </nav>
       </div>

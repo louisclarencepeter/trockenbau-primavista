@@ -1,9 +1,12 @@
 .button {
   display: inline-block;
+  box-sizing: border-box;
+  max-width: 100%;
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
   font-family: 'Inter', sans-serif;
+  text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
   border: none;

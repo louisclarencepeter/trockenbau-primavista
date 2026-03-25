@@ -14,6 +14,7 @@ function Hero() {
 
   return (
     <section
+      id="top"
       ref={heroRef}
       className={`hero${isVisible ? ' hero--visible' : ''}`}
     >
