@@ -9,17 +9,17 @@ import project4 from '../../assets/images/projects/PHOTO-2026-03-07-07-11-08 8.j
 const supportingProjects = [
   {
     image: project2,
-    title: 'Trockenbau',
+    title: 'Decken- und Trockenbau',
     alt: 'Trockenbau-Projekt mit sichtbarer Decken- und Leitungsstruktur',
   },
   {
     image: project3,
-    title: 'Sanierung',
+    title: 'Sanierung im Bestand',
     alt: 'Sanierungsprojekt mit vorbereiteten Wand- und Deckenflächen',
   },
   {
     image: project4,
-    title: 'Innenausbau',
+    title: 'Moderner Innenausbau',
     alt: 'Innenausbau mit moderner Raumgestaltung und sauberer Ausführung',
   },
 ];
@@ -53,9 +53,10 @@ function Projects() {
               className="projects__image"
             />
             <div className="projects__overlay projects__overlay--featured">
-              <h3 className="projects__featured-title">Innenausbau Projekt</h3>
+              <h3 className="projects__featured-title">Wohnraum-Modernisierung</h3>
               <p className="projects__featured-text">
-                Moderner Trockenbau mit klaren Linien und präziser Ausführung.
+                Hochwertiger Innenausbau mit klarer Linienfuehrung und sauberer
+                handwerklicher Ausfuehrung.
               </p>
             </div>
           </article>
