@@ -3,6 +3,23 @@ import logo from '../../assets/logo.png';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
+  const socialLinks = [
+    {
+      href: 'https://facebook.com/',
+      label: 'Facebook',
+      iconClass: 'fa-brands fa-facebook-f',
+    },
+    {
+      href: 'https://instagram.com/',
+      label: 'Instagram',
+      iconClass: 'fa-brands fa-instagram',
+    },
+    {
+      href: 'https://youtube.com/',
+      label: 'YouTube',
+      iconClass: 'fa-brands fa-youtube',
+    },
+  ];
 
   return (
     <footer className="footer">
@@ -20,6 +37,21 @@ function Footer() {
                 Professionelle Lösungen für Trockenbau, Sanierung und Renovierung
                 mit Fokus auf Qualität, Präzision und saubere Ausführung.
               </p>
+
+              <div className="footer__socials" aria-label="Social Media">
+                {socialLinks.map((socialLink) => (
+                  <a
+                    key={socialLink.label}
+                    href={socialLink.href}
+                    className="footer__social-link"
+                    aria-label={socialLink.label}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <i className={socialLink.iconClass} aria-hidden="true"></i>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
