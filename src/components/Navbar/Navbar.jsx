@@ -6,8 +6,8 @@ import Button from '../Button/Button';
 
 const navItems = [
   { id: 'leistungen', label: 'Leistungen' },
+    { id: 'ueber-uns', label: 'Warum wir' },
   { id: 'referenzen', label: 'Referenzen' },
-  { id: 'ueber-uns', label: 'Warum wir' },
   { id: 'kontakt', label: 'Kontakt' },
 ];
 
