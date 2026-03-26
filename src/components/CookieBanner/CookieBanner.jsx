@@ -61,7 +61,7 @@ function CookieBanner() {
                 und grundlegende Funktionen bereitzustellen. Sie können der Verwendung
                 zustimmen oder ablehnen. Weitere Informationen finden Sie in unserem{' '}
                 <a href="#datenschutz" className="cookie-banner__link">
-                  Datenschutzhinweis
+                  Cookie-Einstellungen
                 </a>.
               </p>
             </div>
