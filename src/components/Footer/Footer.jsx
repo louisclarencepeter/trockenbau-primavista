@@ -85,7 +85,9 @@ function Footer() {
 
           <div className="footer__legal">
             <span className="footer__item">Impressum folgt</span>
-            <span className="footer__item">Datenschutz folgt</span>
+            <a href="#datenschutz" className="footer__link footer__link--legal" id="datenschutz">
+              Datenschutz folgt
+            </a>
           </div>
         </div>
       </div>

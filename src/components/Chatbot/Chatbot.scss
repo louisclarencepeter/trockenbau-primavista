@@ -218,7 +218,7 @@
 
 @media (max-width: 576px) {
   .chatbot {
-    left: 16px;
+    left: auto;
     right: 16px;
     bottom: 16px;
   }
@@ -230,12 +230,12 @@
 
   .chatbot__panel {
     right: 0;
-    left: 0;
+    left: auto;
     bottom: calc(100% + 12px);
-    width: 100%;
+    width: min(368px, calc(100vw - 32px));
     height: min(520px, calc(100vh - 168px));
     border-radius: 24px;
-    transform-origin: bottom center;
+    transform-origin: bottom right;
   }
 
   .chatbot__header-copy strong {
