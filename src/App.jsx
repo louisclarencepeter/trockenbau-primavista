@@ -9,6 +9,7 @@ import Trust from './components/Trust/Trust';
 import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact';
 import Chatbot from './components/Chatbot/Chatbot';
+import CookieBanner from './components/CookieBanner/CookieBanner';
 import Footer from './components/Footer/Footer';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Contact />
       <Footer />
       <Chatbot />
+      <CookieBanner />
     </>
   );
 }
