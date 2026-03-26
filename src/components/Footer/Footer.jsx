@@ -5,17 +5,14 @@ function Footer() {
   const currentYear = new Date().getFullYear();
   const socialLinks = [
     {
-      href: 'https://facebook.com/',
       label: 'Facebook',
       iconClass: 'fa-brands fa-facebook-f',
     },
     {
-      href: 'https://instagram.com/',
       label: 'Instagram',
       iconClass: 'fa-brands fa-instagram',
     },
     {
-      href: 'https://youtube.com/',
       label: 'YouTube',
       iconClass: 'fa-brands fa-youtube',
     },
@@ -40,16 +37,14 @@ function Footer() {
 
               <div className="footer__socials" aria-label="Social Media">
                 {socialLinks.map((socialLink) => (
-                  <a
+                  <span
                     key={socialLink.label}
-                    href={socialLink.href}
                     className="footer__social-link"
                     aria-label={socialLink.label}
-                    target="_blank"
-                    rel="noreferrer"
+                    title={`${socialLink.label} folgt bald`}
                   >
                     <i className={socialLink.iconClass} aria-hidden="true"></i>
-                  </a>
+                  </span>
                 ))}
               </div>
             </div>
@@ -89,8 +84,8 @@ function Footer() {
           </p>
 
           <div className="footer__legal">
-            <a href="#impressum" className="footer__link">Impressum</a>
-            <a href="#datenschutz" className="footer__link">Datenschutz</a>
+            <span className="footer__item">Impressum folgt</span>
+            <span className="footer__item">Datenschutz folgt</span>
           </div>
         </div>
       </div>

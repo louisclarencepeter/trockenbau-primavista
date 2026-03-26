@@ -8,6 +8,7 @@ import Services from './components/Services/Services';
 import Trust from './components/Trust/Trust';
 import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact';
+import Chatbot from './components/Chatbot/Chatbot';
 import Footer from './components/Footer/Footer';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Projects />
       <Contact />
       <Footer />
+      <Chatbot />
     </>
   );
 }
