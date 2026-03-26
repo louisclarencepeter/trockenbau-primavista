@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import './Chatbot.scss';
+import { MessageCircle, Send, X } from 'lucide-react';
 
 function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,14 +60,34 @@ function Chatbot() {
         className="chatbot__toggle"
         onClick={() => setIsOpen((prev) => !prev)}
         type="button"
+        aria-expanded={isOpen}
+        aria-controls="chatbot-panel"
       >
-        {isOpen ? 'Chat schliessen' : 'Chat starten'}
+        <span className="chatbot__toggle-icon">
+          <MessageCircle size={18} strokeWidth={2.2} />
+        </span>
+        <span className="chatbot__toggle-copy">
+          <strong>{isOpen ? 'Chat geoeffnet' : 'Projekt-Beratung'}</strong>
+          <span>{isOpen ? 'Chat schliessen' : 'Schnell eine Frage stellen'}</span>
+        </span>
       </button>
 
-      <div className="chatbot__panel" aria-hidden={!isOpen}>
+      <div className="chatbot__panel" aria-hidden={!isOpen} id="chatbot-panel">
         <div className="chatbot__header">
-          <strong>Prima Vista Chat</strong>
-          <span>Schnelle Hilfe zu Leistungen und Anfrage</span>
+          <div className="chatbot__header-copy">
+            <span className="chatbot__eyebrow">Prima Vista Support</span>
+            <strong>Wie koennen wir helfen?</strong>
+            <span>Schnelle Hilfe zu Leistungen, Ablauf und Anfrage.</span>
+          </div>
+
+          <button
+            className="chatbot__close"
+            onClick={() => setIsOpen(false)}
+            type="button"
+            aria-label="Chat schliessen"
+          >
+            <X size={18} strokeWidth={2.4} />
+          </button>
         </div>
 
         <div className="chatbot__messages" ref={messagesRef}>
@@ -90,7 +111,7 @@ function Chatbot() {
             placeholder="Nachricht schreiben..."
           />
           <button onClick={sendMessage} disabled={loading} type="button">
-            {loading ? '...' : 'Senden'}
+            {loading ? '...' : <Send size={16} strokeWidth={2.4} />}
           </button>
         </div>
       </div>

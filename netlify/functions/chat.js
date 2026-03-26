@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import process from 'process';
 
 const systemMessage = {
   role: 'system',
