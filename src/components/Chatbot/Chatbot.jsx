@@ -62,13 +62,10 @@ function Chatbot() {
         type="button"
         aria-expanded={isOpen}
         aria-controls="chatbot-panel"
+        aria-label="Chat öffnen"
       >
         <span className="chatbot__toggle-icon">
-          <MessageCircle size={18} strokeWidth={2.2} />
-        </span>
-        <span className="chatbot__toggle-copy">
-          <strong>{isOpen ? 'Chat geoeffnet' : 'Projekt-Beratung'}</strong>
-          <span>{isOpen ? 'Chat schliessen' : 'Schnell eine Frage stellen'}</span>
+          <MessageCircle size={26} strokeWidth={2.2} />
         </span>
       </button>
 

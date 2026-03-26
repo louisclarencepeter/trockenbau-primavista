@@ -1,12 +1,54 @@
 .cookie-banner {
   position: fixed;
-  left: 24px;
-  right: 24px;
+  left: max(20px, calc((100vw - 1240px) / 2));
+  right: max(20px, calc((100vw - 1240px) / 2));
   bottom: 24px;
   z-index: 1200;
   display: flex;
   justify-content: center;
   pointer-events: none;
+}
+
+.cookie-banner__trigger {
+  position: fixed;
+  left: max(20px, calc((100vw - 1240px) / 2));
+  bottom: 24px;
+  z-index: 1200;
+  display: inline-grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  background: transparent;
+  color: #111111;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.cookie-banner__trigger:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.cookie-banner__trigger-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(200, 169, 106, 0.16);
+  color: #c8a96a;
+  flex-shrink: 0;
+}
+
+.cookie-banner__trigger-icon svg {
+  width: 30px;
+  height: 30px;
 }
 
 .cookie-banner__content {
@@ -108,6 +150,13 @@
     left: 16px;
     right: 16px;
     bottom: 16px;
+  }
+
+  .cookie-banner__trigger {
+    left: 16px;
+    bottom: 16px;
+    width: 58px;
+    height: 58px;
   }
 
   .cookie-banner__content {
