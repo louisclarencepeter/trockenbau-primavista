@@ -2,6 +2,32 @@ import './Contact.scss';
 import { Mail, MapPin, Phone, MessageCircle } from 'lucide-react';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
+const contactItems = [
+  {
+    icon: Phone,
+    label: 'Telefon',
+    value: '+49 00 000000000',
+    href: 'tel:+490000000000',
+  },
+  {
+    icon: Mail,
+    label: 'E-Mail',
+    value: 'info@trockenbau-primavista.ch',
+    href: 'mailto:info@trockenbau-primavista.ch',
+  },
+  {
+    icon: MapPin,
+    label: 'Standort',
+    value: 'Frankfurt am Main',
+  },
+  {
+    icon: MessageCircle,
+    label: 'WhatsApp',
+    value: 'Jetzt schreiben',
+    href: 'https://wa.me/490000000000',
+  },
+];
+
 function Contact() {
   const { sectionRef: contactRef, isVisible } = useScrollReveal({
     once: false,
@@ -25,51 +51,39 @@ function Contact() {
             </p>
 
             <div className="contact__info">
-              <div className="contact__info-item contact__reveal">
-                <div className="contact__icon">
-                  <Phone size={22} strokeWidth={2} />
-                </div>
-                <div>
-                  <span className="contact__label">Telefon</span>
-                  <a href="tel:+490000000000" className="contact__link">
-                    +49 00 000000000
-                  </a>
-                </div>
-              </div>
+              {contactItems.map((item) => {
+                const Icon = item.icon;
 
-              <div className="contact__info-item contact__reveal">
-                <div className="contact__icon">
-                  <Mail size={22} strokeWidth={2} />
-                </div>
-                <div>
-                  <span className="contact__label">E-Mail</span>
-                  <a href="mailto:info@trockenbau-primavista.ch" className="contact__link">
-                    info@trockenbau-primavista.ch
-                  </a>
-                </div>
-              </div>
+                if (item.href) {
+                  return (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      className="contact__info-item contact__info-item--action contact__reveal"
+                    >
+                      <div className="contact__icon">
+                        <Icon size={22} strokeWidth={2} />
+                      </div>
+                      <div>
+                        <span className="contact__label">{item.label}</span>
+                        <span className="contact__link">{item.value}</span>
+                      </div>
+                    </a>
+                  );
+                }
 
-              <div className="contact__info-item contact__reveal">
-                <div className="contact__icon">
-                  <MapPin size={22} strokeWidth={2} />
-                </div>
-                <div>
-                  <span className="contact__label">Standort</span>
-                  <span className="contact__value">Frankfurt am Main</span>
-                </div>
-              </div>
-
-              <div className="contact__info-item contact__reveal">
-                <div className="contact__icon">
-                  <MessageCircle size={22} strokeWidth={2} />
-                </div>
-                <div>
-                  <span className="contact__label">WhatsApp</span>
-                  <a href="https://wa.me/490000000000" className="contact__link">
-                    Jetzt schreiben
-                  </a>
-                </div>
-              </div>
+                return (
+                  <div className="contact__info-item contact__reveal" key={item.label}>
+                    <div className="contact__icon">
+                      <Icon size={22} strokeWidth={2} />
+                    </div>
+                    <div>
+                      <span className="contact__label">{item.label}</span>
+                      <span className="contact__value">{item.value}</span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
