@@ -94,6 +94,7 @@
   background: #ffffff;
   border: 1px solid rgba(17, 17, 17, 0.08);
   box-shadow: 0 24px 60px rgba(17, 17, 17, 0.12);
+  position: relative;
 }
 
 .hero__photo-frame--main {
@@ -111,6 +112,28 @@
   object-fit: cover;
 }
 
+.hero__photo--main {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 1.2s ease;
+  transform: scale(1.03);
+}
+
+.hero__photo--detail-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 1.2s ease;
+  transform: scale(1.03);
+}
+
+.hero__photo--main.hero__photo--active,
+.hero__photo--detail-slide.hero__photo--active {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .hero__detail-stack {
   display: grid;
   gap: 18px;
@@ -119,11 +142,11 @@
 .hero__overlay {
   position: absolute;
   left: 24px;
-  right: 164px;
+  right: 24px;
   bottom: 24px;
   padding: 20px 22px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.92);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 245, 238, 0.9) 100%);
   backdrop-filter: blur(14px);
   box-shadow: 0 20px 40px rgba(17, 17, 17, 0.12);
   border: 1px solid rgba(17, 17, 17, 0.08);
@@ -238,7 +261,7 @@
   .hero__overlay {
     left: 18px;
     right: 18px;
-    bottom: 110px;
+    bottom: 18px;
   }
 }
 
@@ -275,8 +298,9 @@
   }
 
   .hero__overlay {
-    position: static;
-    margin-top: -6px;
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
     padding: 18px;
   }
 

@@ -1,32 +1,32 @@
 import './Services.scss';
 import drywallImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 24.jpg';
-import renovationImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-39 5.jpg';
+import renovationImage from '../../assets/images/projects/PHOTO-2026-03-07-08-04-24.jpg';
 import interiorImage from '../../assets/images/projects/PHOTO-2026-03-07-07-11-08 8.jpg';
-import finishingImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 18.jpg';
+import finishingImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 25.jpg';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
 const services = [
   {
     title: 'Trockenbau',
-    text: 'Moderne Innenausbau-Loesungen mit hoher Praezision und sauberer Ausfuehrung.',
+    text: 'Moderne Innenausbau-Lösungen mit hoher Präzision und sauberer Ausführung.',
     image: drywallImage,
     alt: 'Trockenbau-Arbeiten in einem modernen Innenraum',
   },
   {
     title: 'Sanierung',
-    text: 'Fachgerechte Sanierung bestehender Raeume fuer neue Qualitaet und Funktionalitaet.',
+    text: 'Fachgerechte Sanierung bestehender Räume für neue Qualität und Funktionalität.',
     image: renovationImage,
-    alt: 'Sanierter Innenraum mit sauber ausgefuehrten Wand- und Deckenarbeiten',
+    alt: 'Sanierter Innenraum mit sauber ausgeführten Wand- und Deckenarbeiten',
   },
   {
     title: 'Renovierung',
-    text: 'Effiziente Renovierungsarbeiten fuer private und gewerbliche Objekte.',
+    text: 'Effiziente Renovierungsarbeiten für private und gewerbliche Objekte.',
     image: finishingImage,
-    alt: 'Renovierungsprojekt mit hochwertiger handwerklicher Ausfuehrung',
+    alt: 'Renovierungsprojekt mit hochwertiger handwerklicher Ausführung',
   },
   {
     title: 'Innenausbau',
-    text: 'Individuelle Gestaltung und Ausbau von Innenraeumen nach hohen Standards.',
+    text: 'Individuelle Gestaltung und Ausbau von Innenräumen nach hohen Standards.',
     image: interiorImage,
     alt: 'Innenausbau mit klaren Linien und hochwertigem Finish',
   },

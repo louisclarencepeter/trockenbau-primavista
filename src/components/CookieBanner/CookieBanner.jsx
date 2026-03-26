@@ -1,30 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './CookieBanner.scss';
 
 function CookieBanner() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasChoice, setHasChoice] = useState(false);
-
-  useEffect(() => {
+  const [bannerState, setBannerState] = useState(() => {
     const cookieConsent = localStorage.getItem('cookie-consent');
+    return {
+      isVisible: !cookieConsent,
+      hasChoice: !!cookieConsent,
+    };
+  });
 
-    if (cookieConsent) {
-      setHasChoice(true);
-    } else {
-      setIsVisible(true);
-    }
-  }, []);
+  const isVisible = bannerState.isVisible;
+  const hasChoice = bannerState.hasChoice;
 
   const handleAccept = () => {
     localStorage.setItem('cookie-consent', 'accepted');
-    setHasChoice(true);
-    setIsVisible(false);
+    setBannerState({ isVisible: false, hasChoice: true });
   };
 
   const handleDecline = () => {
     localStorage.setItem('cookie-consent', 'declined');
-    setHasChoice(true);
-    setIsVisible(false);
+    setBannerState({ isVisible: false, hasChoice: true });
   };
 
   return (
@@ -33,7 +29,7 @@ function CookieBanner() {
         <button
           type="button"
           className="cookie-banner__trigger"
-          onClick={() => setIsVisible(true)}
+          onClick={() => setBannerState({ ...bannerState, isVisible: true })}
           aria-label="Cookie-Einstellungen öffnen"
         >
           <span className="cookie-banner__trigger-icon" aria-hidden="true">
@@ -65,7 +61,7 @@ function CookieBanner() {
                 und grundlegende Funktionen bereitzustellen. Sie können der Verwendung
                 zustimmen oder ablehnen. Weitere Informationen finden Sie in unserem{' '}
                 <a href="#datenschutz" className="cookie-banner__link">
-                  Datenschutz-Hinweis
+                  Datenschutzhinweis
                 </a>.
               </p>
             </div>

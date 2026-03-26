@@ -5,6 +5,9 @@ import project1 from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40.jpg
 import project2 from '../../assets/images/projects/PHOTO-2026-03-12-15-08-39 4.jpg';
 import project3 from '../../assets/images/projects/PHOTO-2026-03-07-07-14-48.jpg';
 import project4 from '../../assets/images/projects/PHOTO-2026-03-07-07-11-08 8.jpg';
+import project5 from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 18.jpg';
+import project6 from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 25.jpg';
+import project7 from '../../assets/images/projects/PHOTO-2026-03-07-08-04-24.jpg';
 
 const supportingProjects = [
   {
@@ -21,6 +24,21 @@ const supportingProjects = [
     image: project4,
     title: 'Moderner Innenausbau',
     alt: 'Innenausbau mit moderner Raumgestaltung und sauberer Ausführung',
+  },
+  {
+    image: project5,
+    title: 'Feine Detailarbeiten',
+    alt: 'Ausbauprojekt mit präzise ausgeführten Decken- und Übergangsdetails',
+  },
+  {
+    image: project6,
+    title: 'Renovierung mit Finish',
+    alt: 'Renovierungsprojekt mit hochwertigem Finish und sauberer Umsetzung',
+  },
+  {
+    image: project7,
+    title: 'Sanierte Wohnräume',
+    alt: 'Heller sanierter Wohnraum mit hochwertiger Ausführung',
   },
 ];
 
@@ -55,8 +73,8 @@ function Projects() {
             <div className="projects__overlay projects__overlay--featured">
               <h3 className="projects__featured-title">Wohnraum-Modernisierung</h3>
               <p className="projects__featured-text">
-                Hochwertiger Innenausbau mit klarer Linienfuehrung und sauberer
-                handwerklicher Ausfuehrung.
+                Hochwertiger Innenausbau mit klarer Linienführung und sauberer
+                handwerklicher Ausführung.
               </p>
             </div>
           </article>

@@ -45,7 +45,7 @@ function Contact() {
             <span className="contact__eyebrow contact__reveal">KONTAKT</span>
             <h2 className="contact__title contact__reveal">Lassen Sie uns über Ihr Projekt sprechen</h2>
             <p className="contact__text contact__reveal">
-              Sie planen einen Innenausbau, eine Sanierung oder Renovierung?
+              Sie planen einen Innenausbau, eine Sanierung oder eine Renovierung?
               Kontaktieren Sie uns für eine unverbindliche Anfrage. Wir beraten
               Sie gerne persönlich und finden die passende Lösung für Ihr Projekt.
             </p>
