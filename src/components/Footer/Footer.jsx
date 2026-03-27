@@ -40,7 +40,7 @@ function Footer() {
                   <span
                     key={socialLink.label}
                     className="footer__social-link"
-                    aria-label={socialLink.label}
+                    aria-hidden="true"
                     title={`${socialLink.label} folgt bald`}
                   >
                     <i className={socialLink.iconClass} aria-hidden="true"></i>
