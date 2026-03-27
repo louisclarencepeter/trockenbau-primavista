@@ -55,7 +55,7 @@ function Footer() {
               <h4 className="footer__heading">Navigation</h4>
               <a href="#leistungen" className="footer__link">Leistungen</a>
               <a href="#referenzen" className="footer__link">Referenzen</a>
-              <a href="#ueber-uns" className="footer__link">Warum wir</a>
+              <a href="#ueber-uns" className="footer__link">Über uns</a>
               <a href="#kontakt" className="footer__link">Kontakt</a>
             </div>
 

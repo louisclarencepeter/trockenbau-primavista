@@ -6,7 +6,7 @@ import Button from '../Button/Button';
 
 const navItems = [
   { id: 'leistungen', label: 'Leistungen' },
-  { id: 'ueber-uns', label: 'Warum wir' },
+  { id: 'ueber-uns', label: 'Über uns' },
   { id: 'referenzen', label: 'Referenzen' },
   { id: 'kontakt', label: 'Kontakt' },
 ];
@@ -89,7 +89,9 @@ function Navbar() {
       const navbarHeight = navbarElement ? navbarElement.offsetHeight : 0;
       const mobileMenuHeight =
         menuOpen && mobileMenuElement ? mobileMenuElement.offsetHeight : 0;
-      const probeY = navbarHeight + mobileMenuHeight + 24;
+      const headerOffset = navbarHeight + mobileMenuHeight;
+      const viewportProbe = Math.round(window.innerHeight * 0.32);
+      const probeY = Math.max(headerOffset + 24, viewportProbe);
 
       const activeMatch = sections.find((section) => {
         const rect = section.getBoundingClientRect();
