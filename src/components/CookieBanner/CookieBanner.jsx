@@ -59,9 +59,9 @@ function CookieBanner() {
               <p className="cookie-banner__text">
                 Diese Website verwendet Cookies, um die Benutzererfahrung zu verbessern
                 und grundlegende Funktionen bereitzustellen. Sie können der Verwendung
-                zustimmen oder ablehnen. Weitere Informationen finden Sie in unserem{' '}
+                zustimmen oder ablehnen. Weitere Informationen finden Sie in unserer{' '}
                 <a href="#datenschutz" className="cookie-banner__link">
-                  Cookie-Einstellungen
+                  Datenschutzerklärung
                 </a>.
               </p>
             </div>
