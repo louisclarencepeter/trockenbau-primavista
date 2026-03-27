@@ -1,6 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import './Chatbot.scss';
 import { MessageCircle, Send, X } from 'lucide-react';
+
+const createMessage = (role, content) => ({
+  id:
+    typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+      ? crypto.randomUUID()
+      : `${role}-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`,
+  role,
+  content,
+});
 
 function Chatbot() {
   const promptMessages = [
@@ -9,14 +18,19 @@ function Chatbot() {
     'Schnelle Hilfe zu Ihrem Projekt',
     'Infos zum Ablauf und zur Anfrage',
   ];
+
+  const panelId = useId();
+  const inputId = useId();
+  const messagesRef = useRef(null);
+  const inputRef = useRef(null);
+
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hallo! Wie kann ich Ihnen helfen?' },
+    createMessage('assistant', 'Hallo! Wie kann ich Ihnen helfen?'),
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [promptIndex, setPromptIndex] = useState(0);
-  const messagesRef = useRef(null);
 
   useEffect(() => {
     const container = messagesRef.current;
@@ -25,6 +39,18 @@ function Chatbot() {
       container.scrollTop = container.scrollHeight;
     }
   }, [messages, isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+
+    const timer = window.setTimeout(() => {
+      inputRef.current?.focus();
+    }, 120);
+
+    return () => window.clearTimeout(timer);
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -39,10 +65,16 @@ function Chatbot() {
   }, [isOpen, promptMessages.length]);
 
   const sendMessage = async () => {
-    if (!input.trim() || loading) return;
+    const trimmedInput = input.trim();
 
-    const userMessage = { role: 'user', content: input };
-    setMessages((prev) => [...prev, userMessage]);
+    if (!trimmedInput || loading) {
+      return;
+    }
+
+    const userMessage = createMessage('user', trimmedInput);
+    const nextMessages = [...messages, userMessage];
+
+    setMessages(nextMessages);
     setInput('');
     setLoading(true);
 
@@ -50,38 +82,54 @@ function Chatbot() {
       const res = await fetch('/.netlify/functions/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [...messages, userMessage] }),
+        body: JSON.stringify({
+          messages: nextMessages.map(({ role, content }) => ({ role, content })),
+        }),
       });
 
       if (!res.ok) {
-        throw new Error('Request failed');
+        throw new Error(`Request failed with status ${res.status}`);
       }
 
       const data = await res.json();
+      const reply =
+        typeof data?.reply === 'string' && data.reply.trim()
+          ? data.reply.trim()
+          : 'Keine Antwort erhalten. Bitte später erneut versuchen.';
 
-      setMessages((prev) => [
-        ...prev,
-        { role: 'assistant', content: data.reply },
-      ]);
+      setMessages((prev) => [...prev, createMessage('assistant', reply)]);
     } catch {
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: 'Fehler. Bitte später erneut versuchen.' },
+        createMessage('assistant', 'Fehler. Bitte später erneut versuchen.'),
       ]);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    setLoading(false);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await sendMessage();
+  };
+
+  const toggleChat = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const closeChat = () => {
+    setIsOpen(false);
   };
 
   return (
     <div className={`chatbot${isOpen ? ' chatbot--open' : ''}`}>
       <button
         className="chatbot__toggle"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={toggleChat}
         type="button"
         aria-expanded={isOpen}
-        aria-controls="chatbot-panel"
-        aria-label="Chat öffnen"
+        aria-controls={panelId}
+        aria-label={isOpen ? 'Chat schließen' : 'Chat öffnen'}
       >
         {!isOpen ? (
           <span className="chatbot__teaser" aria-hidden="true">
@@ -93,54 +141,87 @@ function Chatbot() {
             </span>
           </span>
         ) : null}
+
         <span className="chatbot__toggle-icon">
           <MessageCircle size={26} strokeWidth={2.2} />
         </span>
       </button>
 
-      <div className="chatbot__panel" aria-hidden={!isOpen} id="chatbot-panel">
-        <div className="chatbot__header">
-          <div className="chatbot__header-copy">
-            <span className="chatbot__eyebrow">Prima Vista Support</span>
-            <strong>Wie können wir helfen?</strong>
-            <span>Schnelle Hilfe zu Leistungen, Ablauf und Ihrer Anfrage.</span>
+      {isOpen ? (
+        <div
+          className="chatbot__panel"
+          id={panelId}
+          role="dialog"
+          aria-modal="false"
+          aria-labelledby={`${panelId}-title`}
+        >
+          <div className="chatbot__header">
+            <div className="chatbot__header-copy">
+              <span className="chatbot__eyebrow">Prima Vista Support</span>
+              <strong id={`${panelId}-title`}>Wie können wir helfen?</strong>
+              <span>Schnelle Hilfe zu Leistungen, Ablauf und Ihrer Anfrage.</span>
+            </div>
+
+            <button
+              className="chatbot__close"
+              onClick={closeChat}
+              type="button"
+              aria-label="Chat schließen"
+            >
+              <X size={18} strokeWidth={2.4} />
+            </button>
           </div>
 
-          <button
-            className="chatbot__close"
-            onClick={() => setIsOpen(false)}
-            type="button"
-            aria-label="Chat schließen"
+          <div
+            className="chatbot__messages"
+            ref={messagesRef}
+            aria-live="polite"
+            aria-label="Chatverlauf"
           >
-            <X size={18} strokeWidth={2.4} />
-          </button>
-        </div>
+            {messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`chatbot__message chatbot__message--${msg.role}`}
+              >
+                {msg.content}
+              </div>
+            ))}
 
-        <div className="chatbot__messages" ref={messagesRef}>
-          {messages.map((msg, i) => (
-            <div key={i} className={`chatbot__message chatbot__message--${msg.role}`}>
-              {msg.content}
-            </div>
-          ))}
-        </div>
+            {loading ? (
+              <div className="chatbot__message chatbot__message--assistant chatbot__message--typing">
+                <span className="chatbot__typing" aria-label="Antwort wird geladen">
+                  <span />
+                  <span />
+                  <span />
+                </span>
+              </div>
+            ) : null}
+          </div>
 
-        <div className="chatbot__input">
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') {
-                event.preventDefault();
-                sendMessage();
-              }
-            }}
-            placeholder="Nachricht schreiben..."
-          />
-          <button onClick={sendMessage} disabled={loading} type="button">
-            {loading ? '...' : <Send size={16} strokeWidth={2.4} />}
-          </button>
+          <form className="chatbot__input" onSubmit={handleSubmit}>
+            <label className="chatbot__sr-only" htmlFor={inputId}>
+              Nachricht schreiben
+            </label>
+
+            <input
+              id={inputId}
+              ref={inputRef}
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              placeholder="Nachricht schreiben..."
+              autoComplete="off"
+            />
+
+            <button
+              disabled={loading || !input.trim()}
+              type="submit"
+              aria-label="Nachricht senden"
+            >
+              <Send size={16} strokeWidth={2.4} />
+            </button>
+          </form>
         </div>
-      </div>
+      ) : null}
     </div>
   );
 }
