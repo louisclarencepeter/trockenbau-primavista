@@ -35,7 +35,7 @@ function Footer() {
                 mit Fokus auf Qualität, Präzision und saubere Ausführung.
               </p>
 
-              <div className="footer__socials" aria-label="Social Media">
+              <div className="footer__socials">
                 {socialLinks.map((socialLink) => (
                   <span
                     key={socialLink.label}
