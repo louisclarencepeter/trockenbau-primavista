@@ -1,9 +1,17 @@
+@use '../../styles/z-index' as z;
+
+.cookie-banner,
+.cookie-banner__trigger {
+  --floating-trigger-offset: 24px;
+  --floating-trigger-offset-mobile: max(16px, env(safe-area-inset-bottom));
+}
+
 .cookie-banner {
   position: fixed;
   left: max(20px, calc((100vw - 1240px) / 2));
   right: max(20px, calc((100vw - 1240px) / 2));
-  bottom: 24px;
-  z-index: 1200;
+  bottom: var(--floating-trigger-offset);
+  z-index: z.$z-cookie-banner;
   display: flex;
   justify-content: center;
   pointer-events: none;
@@ -12,8 +20,8 @@
 .cookie-banner__trigger {
   position: fixed;
   left: max(20px, calc((100vw - 1240px) / 2));
-  bottom: 24px;
-  z-index: 1200;
+  bottom: var(--floating-trigger-offset);
+  z-index: z.$z-cookie-banner;
   display: inline-grid;
   place-items: center;
   width: 64px;
@@ -47,8 +55,8 @@
 }
 
 .cookie-banner__trigger-icon svg {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
 }
 
 .cookie-banner__content {
@@ -162,12 +170,12 @@
   .cookie-banner {
     left: 16px;
     right: 16px;
-    bottom: 16px;
+    bottom: var(--floating-trigger-offset-mobile);
   }
 
   .cookie-banner__trigger {
     left: 16px;
-    bottom: 16px;
+    bottom: var(--floating-trigger-offset-mobile);
     width: 58px;
     height: 58px;
   }

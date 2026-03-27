@@ -25,6 +25,7 @@ function Chatbot() {
   const inputRef = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const [messages, setMessages] = useState([
     createMessage('assistant', 'Hallo! Wie kann ich Ihnen helfen?'),
   ]);
@@ -38,7 +39,7 @@ function Chatbot() {
     if (container) {
       container.scrollTop = container.scrollHeight;
     }
-  }, [messages, isOpen]);
+  }, [messages, isOpen, loading]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -63,6 +64,36 @@ function Chatbot() {
 
     return () => window.clearInterval(intervalId);
   }, [isOpen, promptMessages.length]);
+
+  useEffect(() => {
+    const updateViewport = () => {
+      if (!window.visualViewport) {
+        document.documentElement.style.setProperty('--chatbot-vh', `${window.innerHeight}px`);
+        return;
+      }
+
+      const viewportHeight = window.visualViewport.height;
+      const layoutHeight = window.innerHeight;
+      const keyboardLikelyOpen = layoutHeight - viewportHeight > 120;
+
+      document.documentElement.style.setProperty('--chatbot-vh', `${viewportHeight}px`);
+      setIsKeyboardOpen(keyboardLikelyOpen);
+    };
+
+    updateViewport();
+
+    window.addEventListener('resize', updateViewport);
+    window.addEventListener('orientationchange', updateViewport);
+    window.visualViewport?.addEventListener('resize', updateViewport);
+    window.visualViewport?.addEventListener('scroll', updateViewport);
+
+    return () => {
+      window.removeEventListener('resize', updateViewport);
+      window.removeEventListener('orientationchange', updateViewport);
+      window.visualViewport?.removeEventListener('resize', updateViewport);
+      window.visualViewport?.removeEventListener('scroll', updateViewport);
+    };
+  }, []);
 
   const sendMessage = async () => {
     const trimmedInput = input.trim();
@@ -111,6 +142,10 @@ function Chatbot() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await sendMessage();
+
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   const toggleChat = () => {
@@ -119,10 +154,15 @@ function Chatbot() {
 
   const closeChat = () => {
     setIsOpen(false);
+    inputRef.current?.blur();
   };
 
   return (
-    <div className={`chatbot${isOpen ? ' chatbot--open' : ''}`}>
+    <div
+      className={`chatbot${isOpen ? ' chatbot--open' : ''}${
+        isKeyboardOpen ? ' chatbot--keyboard-open' : ''
+      }`}
+    >
       <button
         className="chatbot__toggle"
         onClick={toggleChat}
@@ -133,10 +173,7 @@ function Chatbot() {
       >
         {!isOpen ? (
           <span className="chatbot__teaser" aria-hidden="true">
-            <span
-              key={promptMessages[promptIndex]}
-              className="chatbot__teaser-text"
-            >
+            <span key={promptMessages[promptIndex]} className="chatbot__teaser-text">
               {promptMessages[promptIndex]}
             </span>
           </span>
@@ -210,6 +247,7 @@ function Chatbot() {
               onChange={(event) => setInput(event.target.value)}
               placeholder="Nachricht schreiben..."
               autoComplete="off"
+              enterKeyHint="send"
             />
 
             <button
