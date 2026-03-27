@@ -16,12 +16,14 @@ function App() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Services />
-      <Trust />
-      <Projects />
-      <Contact />
-      <Footer />
+      <main id="main-content">
+        <Hero />
+        <Services />
+        <Trust />
+        <Projects />
+        <Contact />
+        <Footer />
+      </main>
       <Chatbot />
       <CookieBanner />
     </>
