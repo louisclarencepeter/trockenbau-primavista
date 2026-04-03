@@ -35,6 +35,11 @@ function Contact() {
   });
   const [formStatus, setFormStatus] = useState('idle');
 
+  const getLinkProps = (href) =>
+    href.startsWith('http')
+      ? { target: '_blank', rel: 'noreferrer' }
+      : {};
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setFormStatus('submitting');
@@ -87,6 +92,7 @@ function Contact() {
                       key={item.label}
                       href={item.href}
                       className="contact__info-item contact__info-item--action contact__reveal"
+                      {...getLinkProps(item.href)}
                     >
                       <div className="contact__icon">
                         <Icon size={22} strokeWidth={2} />

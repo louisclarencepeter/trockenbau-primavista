@@ -7,14 +7,17 @@ function Footer() {
     {
       label: 'Facebook',
       iconClass: 'fa-brands fa-facebook-f',
+      href: 'https://www.facebook.com/PrimaVistaBauprojekte',
     },
     {
       label: 'Instagram',
       iconClass: 'fa-brands fa-instagram',
+      href: 'https://www.instagram.com/primavista.bauprojekte',
     },
     {
       label: 'YouTube',
       iconClass: 'fa-brands fa-youtube',
+      href: 'https://www.youtube.com/@PrimaVistaBauprojekte',
     },
   ];
 
@@ -38,14 +41,17 @@ function Footer() {
 
               <div className="footer__socials">
                 {socialLinks.map((socialLink) => (
-                  <span
+                  <a
                     key={socialLink.label}
+                    href={socialLink.href}
                     className="footer__social-link"
-                    aria-hidden="true"
-                    title={`${socialLink.label} folgt bald`}
+                    aria-label={socialLink.label}
+                    title={socialLink.label}
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     <i className={socialLink.iconClass} aria-hidden="true"></i>
-                  </span>
+                  </a>
                 ))}
               </div>
             </div>
