@@ -236,7 +236,7 @@
   margin-left: auto;
   border-bottom-right-radius: 6px;
   background: linear-gradient(135deg, #c8a96a 0%, #b89555 100%);
-  color: #ffffff;
+  color: #1a1a1a;
 }
 
 .chatbot__message--assistant {
@@ -329,7 +329,7 @@
   border: none;
   border-radius: 16px;
   background: #c8a96a;
-  color: #ffffff;
+  color: #1a1a1a;
   cursor: pointer;
   box-shadow: 0 12px 24px rgba(200, 169, 106, 0.24);
   transition: transform 0.25s ease, background-color 0.25s ease, opacity 0.25s ease;
