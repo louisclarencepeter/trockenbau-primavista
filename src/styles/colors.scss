@@ -1,55 +1,135 @@
-/* =========================
-   COLOR SYSTEM - PRIMAVISTA
-   ========================= */
+:root {
+  --color-accent: #c8a96a;
+  --color-accent-hover: #b89555;
+  --color-accent-soft: rgba(200, 169, 106, 0.12);
+  --color-accent-soft-strong: rgba(200, 169, 106, 0.16);
+  --color-accent-border: rgba(200, 169, 106, 0.18);
+  --color-accent-border-strong: rgba(200, 169, 106, 0.32);
+  --color-accent-glow: rgba(200, 169, 106, 0.24);
+  --color-page-bg: #ffffff;
+  --color-surface-base: #ffffff;
+  --color-surface-muted: #f2f2f2;
+  --color-surface-soft: #f6f6f6;
+  --color-surface-warm: #f7f4ed;
+  --color-surface-footer: #fafafa;
+  --color-surface-subtle: #f3f3f3;
+  --color-surface-placeholder: #e8e8e8;
+  --color-surface-card: rgba(255, 255, 255, 0.94);
+  --color-surface-card-soft: rgba(255, 255, 255, 0.92);
+  --color-surface-card-strong: rgba(255, 255, 255, 0.96);
+  --color-surface-translucent: rgba(255, 255, 255, 0.88);
+  --color-surface-glass: rgba(255, 255, 255, 0.78);
+  --color-text-primary: #111111;
+  --color-text-secondary: #444444;
+  --color-text-body: #545454;
+  --color-text-muted: #666666;
+  --color-text-soft: #5f5f5f;
+  --color-text-subtle: #777777;
+  --color-text-inverse: #ffffff;
+  --color-text-on-accent: #111111;
+  --color-border-soft: #e5e5e5;
+  --color-border-card: #ececec;
+  --color-border-strong: #dddddd;
+  --color-border-muted: #f0f0f0;
+  --color-border-contrast: rgba(17, 17, 17, 0.08);
+  --color-border-subtle: rgba(17, 17, 17, 0.06);
+  --color-border-input: rgba(17, 17, 17, 0.08);
+  --color-overlay-project: linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent);
+  --color-overlay-surface:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 245, 238, 0.9) 100%);
+  --color-shadow-xs: 0 10px 24px rgba(0, 0, 0, 0.05);
+  --color-shadow-sm: 0 16px 40px rgba(0, 0, 0, 0.05);
+  --color-shadow-md: 0 20px 50px rgba(0, 0, 0, 0.06);
+  --color-shadow-lg: 0 24px 60px rgba(17, 17, 17, 0.08);
+  --color-shadow-xl: 0 28px 70px rgba(17, 17, 17, 0.16);
+  --color-shadow-2xl: 0 28px 80px rgba(17, 17, 17, 0.18);
+  --color-shadow-hover: 0 24px 60px rgba(17, 17, 17, 0.1);
+  --color-focus-ring: 0 0 0 4px rgba(200, 169, 106, 0.12);
+  --glass-navbar: rgba(255, 255, 255, 0.92);
+  --glass-navbar-strong: rgba(255, 255, 255, 0.97);
+  --gradient-section: linear-gradient(180deg, var(--color-surface-base) 0%, var(--color-surface-muted) 100%);
+  --gradient-contact: linear-gradient(180deg, var(--color-surface-base) 0%, var(--color-surface-soft) 100%);
+  --gradient-about:
+    radial-gradient(circle at top left, rgba(200, 169, 106, 0.08), transparent 36%),
+    linear-gradient(180deg, var(--color-surface-base) 0%, var(--color-surface-warm) 100%);
+  --gradient-footer: linear-gradient(180deg, var(--color-surface-footer) 0%, var(--color-surface-subtle) 100%);
+  --gradient-chatbot-panel:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, #f8f5ee 100%);
+  --gradient-chatbot-header:
+    radial-gradient(circle at top left, rgba(200, 169, 106, 0.22), transparent 54%),
+    linear-gradient(135deg, #ffffff 0%, #f6efe0 100%);
+  --gradient-cookie:
+    radial-gradient(circle at top left, rgba(200, 169, 106, 0.14), transparent 42%),
+    rgba(255, 255, 255, 0.94);
+  --image-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 48%);
+  --image-shadow-overlay: linear-gradient(180deg, transparent 62%, rgba(17, 17, 17, 0.08) 100%);
+}
 
-/* Primary */
-$color-primary: #1A1A1A; // main brand (charcoal)
+:root[data-theme='dark'] {
+  --color-page-bg: #0b1015;
+  --color-surface-base: #10161d;
+  --color-surface-muted: #131a22;
+  --color-surface-soft: #151c24;
+  --color-surface-warm: #171f28;
+  --color-surface-footer: #0f151c;
+  --color-surface-subtle: #161d25;
+  --color-surface-placeholder: #202a33;
+  --color-surface-card: rgba(19, 25, 33, 0.94);
+  --color-surface-card-soft: rgba(18, 24, 31, 0.92);
+  --color-surface-card-strong: rgba(15, 21, 28, 0.96);
+  --color-surface-translucent: rgba(16, 22, 29, 0.88);
+  --color-surface-glass: rgba(16, 22, 29, 0.8);
+  --color-text-primary: #f4efe7;
+  --color-text-secondary: #ddd5c7;
+  --color-text-body: #c7c0b3;
+  --color-text-muted: #a8b1bc;
+  --color-text-soft: #bac3ce;
+  --color-text-subtle: #89929d;
+  --color-text-inverse: #ffffff;
+  --color-text-on-accent: #111111;
+  --color-border-soft: rgba(255, 255, 255, 0.08);
+  --color-border-card: rgba(200, 169, 106, 0.18);
+  --color-border-strong: rgba(255, 255, 255, 0.12);
+  --color-border-muted: rgba(255, 255, 255, 0.08);
+  --color-border-contrast: rgba(255, 255, 255, 0.12);
+  --color-border-subtle: rgba(255, 255, 255, 0.1);
+  --color-border-input: rgba(255, 255, 255, 0.12);
+  --color-overlay-project: linear-gradient(to top, rgba(5, 7, 10, 0.84), transparent);
+  --color-overlay-surface:
+    linear-gradient(180deg, rgba(15, 21, 28, 0.82) 0%, rgba(22, 29, 37, 0.94) 100%);
+  --color-shadow-xs: 0 12px 24px rgba(0, 0, 0, 0.28);
+  --color-shadow-sm: 0 18px 40px rgba(0, 0, 0, 0.3);
+  --color-shadow-md: 0 24px 52px rgba(0, 0, 0, 0.34);
+  --color-shadow-lg: 0 30px 70px rgba(0, 0, 0, 0.38);
+  --color-shadow-xl: 0 34px 80px rgba(0, 0, 0, 0.44);
+  --color-shadow-2xl: 0 36px 88px rgba(0, 0, 0, 0.5);
+  --color-shadow-hover: 0 28px 68px rgba(0, 0, 0, 0.42);
+  --color-focus-ring: 0 0 0 4px rgba(200, 169, 106, 0.18);
+  --glass-navbar: rgba(10, 15, 21, 0.82);
+  --glass-navbar-strong: rgba(11, 16, 21, 0.94);
+  --gradient-chatbot-panel:
+    linear-gradient(180deg, rgba(16, 22, 29, 0.98) 0%, rgba(26, 33, 43, 0.98) 100%);
+  --gradient-chatbot-header:
+    radial-gradient(circle at top left, rgba(200, 169, 106, 0.24), transparent 56%),
+    linear-gradient(135deg, #141b23 0%, #202937 100%);
+  --gradient-cookie:
+    radial-gradient(circle at top left, rgba(200, 169, 106, 0.2), transparent 42%),
+    rgba(14, 20, 27, 0.94);
+  --image-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 48%);
+  --image-shadow-overlay: linear-gradient(180deg, transparent 62%, rgba(5, 7, 10, 0.28) 100%);
+}
 
-/* Accent (premium gold) */
-$color-accent: #C8A96A;
-$color-accent-hover: #b89555;
-
-/* Backgrounds */
-$color-bg-main: #FFFFFF;
-$color-bg-section: #F5F5F5;
-$color-bg-dark: #111111;
-
-/* Text */
-$color-text-primary: #111111;
-$color-text-secondary: #555555;
-$color-text-muted: #888888;
-$color-text-light: #FFFFFF;
-
-/* Borders */
-$color-border-light: #E5E5E5;
-
-/* Shadows */
-$shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
-$shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.1);
-
-/* =========================
-   GLOBAL USAGE EXAMPLES
-   ========================= */
+html {
+  background: var(--color-page-bg);
+}
 
 body {
-  background-color: $color-bg-main;
-  color: $color-text-primary;
+  background-color: var(--color-page-bg);
+  color: var(--color-text-primary);
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
-.section {
-  background-color: $color-bg-section;
-}
-
-.button-primary {
-  background-color: $color-accent;
-  color: $color-text-light;
-  border-radius: 8px;
-  padding: 12px 24px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: $color-accent-hover;
-    box-shadow: $shadow-hover;
-  }
+::selection {
+  background: rgba(200, 169, 106, 0.28);
+  color: var(--color-text-primary);
 }

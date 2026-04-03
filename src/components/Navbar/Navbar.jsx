@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
+import { MoonStar, SunMedium } from 'lucide-react';
 import './Navbar.scss';
 import { logoSmall } from '../../assets/responsiveImages';
 import Button from '../Button/Button';
@@ -11,10 +12,16 @@ const navItems = [
   { id: 'kontakt', label: 'Kontakt' },
 ];
 
-function Navbar() {
+function Navbar({ theme = 'light', onToggleTheme }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isInstantClosing, setIsInstantClosing] = useState(false);
+  const ThemeIcon = theme === 'dark' ? SunMedium : MoonStar;
+  const themeLabel = theme === 'dark' ? 'Hell' : 'Dunkel';
+  const themeActionLabel =
+    theme === 'dark'
+      ? 'Zum hellen Modus wechseln'
+      : 'Zum dunklen Modus wechseln';
 
   const scrollToSection = (id) => {
     const target = document.getElementById(id);
@@ -132,6 +139,20 @@ function Navbar() {
     };
   }, [menuOpen]);
 
+  const renderThemeToggle = (modifierClass = '') => (
+    <button
+      className={`navbar__theme-toggle${modifierClass ? ` ${modifierClass}` : ''}`}
+      onClick={onToggleTheme}
+      type="button"
+      aria-label={themeActionLabel}
+      aria-pressed={theme === 'dark'}
+      title={themeActionLabel}
+    >
+      <ThemeIcon size={17} strokeWidth={2.2} />
+      <span className="navbar__theme-toggle-label">{themeLabel}</span>
+    </button>
+  );
+
   return (
     <header className="navbar">
       <div className="container navbar__container">
@@ -156,10 +177,13 @@ function Navbar() {
           ))}
         </nav>
 
-        <div className="navbar__cta">
-          <Button href="#kontakt" onClick={handleNavClick('kontakt')} variant="primary">
-            Jetzt anfragen
-          </Button>
+        <div className="navbar__utilities">
+          {renderThemeToggle()}
+          <div className="navbar__cta">
+            <Button href="#kontakt" onClick={handleNavClick('kontakt')} variant="primary">
+              Jetzt anfragen
+            </Button>
+          </div>
         </div>
 
         <button
@@ -187,6 +211,10 @@ function Navbar() {
               {item.label}
             </a>
           ))}
+
+          <div className="navbar__mobile-utility">
+            {renderThemeToggle('navbar__theme-toggle--mobile')}
+          </div>
 
           <div className="navbar__mobile-cta">
             <Button href="#kontakt" onClick={handleNavClick('kontakt')} variant="primary">

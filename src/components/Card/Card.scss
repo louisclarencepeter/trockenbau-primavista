@@ -1,15 +1,15 @@
 .card {
   height: 100%;
-  background: #ffffff;
+  background: var(--color-surface-base);
   padding: 28px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--color-shadow-xs);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--color-shadow-sm);
 }
 
 .card-title {
@@ -17,10 +17,10 @@
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 12px;
-  color: #111111;
+  color: var(--color-text-primary);
 }
 
 .card-text {
-  color: #666666;
+  color: var(--color-text-muted);
   line-height: 1.7;
 }

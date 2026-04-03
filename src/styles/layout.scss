@@ -10,7 +10,7 @@
 }
 
 .section-light {
-  background: #F5F5F5;
+  background: var(--color-surface-muted);
 }
 
 @media (max-width: 992px) {
