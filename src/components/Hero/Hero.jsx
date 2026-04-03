@@ -135,6 +135,7 @@ function Hero() {
                   key={slide.alt}
                   src={slide.image}
                   alt={slide.alt}
+                  loading={index === 0 ? 'eager' : 'lazy'}
                   className={`hero__photo hero__photo--main${
                     index === activeSlide ? ' hero__photo--active' : ''
                   }`}
@@ -155,6 +156,7 @@ function Hero() {
                     key={slide.alt}
                     src={slide.image}
                     alt={slide.alt}
+                    loading="lazy"
                     className={`hero__photo hero__photo--detail-slide${
                       index === activeSlide ? ' hero__photo--active' : ''
                     }`}
@@ -168,6 +170,7 @@ function Hero() {
                     key={slide.alt}
                     src={slide.image}
                     alt={slide.alt}
+                    loading="lazy"
                     className={`hero__photo hero__photo--detail-slide${
                       index === activeSlide ? ' hero__photo--active' : ''
                     }`}

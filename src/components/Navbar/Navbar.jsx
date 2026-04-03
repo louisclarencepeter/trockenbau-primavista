@@ -165,7 +165,7 @@ function Navbar() {
         <button
           className={`navbar__toggle ${menuOpen ? 'is-active' : ''}`}
           onClick={toggleMenu}
-          aria-label="Menü öffnen"
+          aria-label={menuOpen ? 'Menü schließen' : 'Menü öffnen'}
           aria-expanded={menuOpen}
           type="button"
         >

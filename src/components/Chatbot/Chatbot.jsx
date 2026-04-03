@@ -11,13 +11,14 @@ const createMessage = (role, content) => ({
   content,
 });
 
+const PROMPT_MESSAGES = [
+  'Haben Sie Fragen?',
+  'Wie können wir helfen?',
+  'Schnelle Hilfe zu Ihrem Projekt',
+  'Infos zum Ablauf und zur Anfrage',
+];
+
 function Chatbot() {
-  const promptMessages = [
-    'Haben Sie Fragen?',
-    'Wie können wir helfen?',
-    'Schnelle Hilfe zu Ihrem Projekt',
-    'Infos zum Ablauf und zur Anfrage',
-  ];
 
   const panelId = useId();
   const inputId = useId();
@@ -59,11 +60,11 @@ function Chatbot() {
     }
 
     const intervalId = window.setInterval(() => {
-      setPromptIndex((currentIndex) => (currentIndex + 1) % promptMessages.length);
+      setPromptIndex((currentIndex) => (currentIndex + 1) % PROMPT_MESSAGES.length);
     }, 4200);
 
     return () => window.clearInterval(intervalId);
-  }, [isOpen, promptMessages.length]);
+  }, [isOpen]);
 
   useEffect(() => {
     const updateViewport = () => {
@@ -173,8 +174,8 @@ function Chatbot() {
       >
         {!isOpen ? (
           <span className="chatbot__teaser" aria-hidden="true">
-            <span key={promptMessages[promptIndex]} className="chatbot__teaser-text">
-              {promptMessages[promptIndex]}
+            <span key={PROMPT_MESSAGES[promptIndex]} className="chatbot__teaser-text">
+              {PROMPT_MESSAGES[promptIndex]}
             </span>
           </span>
         ) : null}
