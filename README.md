@@ -131,7 +131,8 @@ Component-specific styles live next to their components in `src/components/*/*.s
 ## Assets
 
 - Local fonts are stored in `src/assets/fonts`
-- Project images are stored in `src/assets/images/projects`
+- Active content images are organized in `src/assets/images/about`, `src/assets/images/hero`, `src/assets/images/services`, and `src/assets/images/projects`
+- Reference photos are grouped by subject in `src/assets/images/reference/ceilings`, `src/assets/images/reference/framing`, `src/assets/images/reference/interiors`, and `src/assets/images/reference/windows`
 - The logo is stored in `src/assets/logo.png`
 
 ## Notes

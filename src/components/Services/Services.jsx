@@ -1,8 +1,8 @@
 import './Services.scss';
-import drywallImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 24.jpg';
-import renovationImage from '../../assets/images/projects/PHOTO-2026-03-07-08-04-24.jpg';
-import interiorImage from '../../assets/images/projects/PHOTO-2026-03-07-07-11-08 8.jpg';
-import windowImage from '../../assets/images/projects/PHOTO-2026-03-07-08-03-48.jpg';
+import drywallImage from '../../assets/images/services/service-drywall.jpg';
+import renovationImage from '../../assets/images/services/service-renovation.jpg';
+import interiorImage from '../../assets/images/services/service-interior.jpg';
+import windowImage from '../../assets/images/services/service-windows.jpg';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
 const services = [

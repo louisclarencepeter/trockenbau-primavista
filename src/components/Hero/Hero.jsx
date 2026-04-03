@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import './Hero.scss';
 import Button from '../Button/Button';
-import heroMainImageOne from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40.jpg';
-import heroMainImageTwo from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 24.jpg';
-import heroMainImageThree from '../../assets/images/projects/PHOTO-2026-03-12-15-08-39 5.jpg';
-import heroMainImageFour from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 18.jpg';
-import heroMainImageFive from '../../assets/images/projects/PHOTO-2026-03-07-07-11-08 8.jpg';
-import heroDetailTopOne from '../../assets/images/projects/PHOTO-2026-03-12-15-08-39 4.jpg';
-import heroDetailTopTwo from '../../assets/images/projects/PHOTO-2026-03-07-07-14-48.jpg';
-import heroDetailTopThree from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 18.jpg';
-import heroDetailBottomOne from '../../assets/images/projects/PHOTO-2026-03-07-07-11-08 8.jpg';
-import heroDetailBottomTwo from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 24.jpg';
-import heroDetailBottomThree from '../../assets/images/projects/PHOTO-2026-03-12-15-08-39 5.jpg';
-import heroDetailBottomFour from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 25.jpg';
-import heroDetailBottomFive from '../../assets/images/projects/PHOTO-2026-03-07-08-04-24.jpg';
+import heroMainImageOne from '../../assets/images/projects/project-featured-modernization.jpg';
+import heroMainImageTwo from '../../assets/images/services/service-drywall.jpg';
+import heroMainImageThree from '../../assets/images/hero/hero-detail-accent.jpg';
+import heroMainImageFour from '../../assets/images/projects/project-detail-ceiling.jpg';
+import heroMainImageFive from '../../assets/images/services/service-interior.jpg';
+import heroDetailTopOne from '../../assets/images/projects/project-ceiling-drywall.jpg';
+import heroDetailTopTwo from '../../assets/images/projects/project-existing-space-renovation.jpg';
+import heroDetailTopThree from '../../assets/images/projects/project-detail-ceiling.jpg';
+import heroDetailBottomOne from '../../assets/images/services/service-interior.jpg';
+import heroDetailBottomTwo from '../../assets/images/services/service-drywall.jpg';
+import heroDetailBottomThree from '../../assets/images/hero/hero-detail-accent.jpg';
+import heroDetailBottomFour from '../../assets/images/projects/project-finish.jpg';
+import heroDetailBottomFive from '../../assets/images/services/service-renovation.jpg';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
 const heroSlides = [

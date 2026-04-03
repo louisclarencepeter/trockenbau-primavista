@@ -1,7 +1,7 @@
 import './About.scss';
 import { CheckCircle2, Hammer, MessagesSquare, TimerReset } from 'lucide-react';
 import useScrollReveal from '../../hooks/useScrollReveal';
-import aboutImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 11.jpg';
+import aboutImage from '../../assets/images/about/about-interior-showcase.jpg';
 
 const highlights = [
   {

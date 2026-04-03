@@ -1,13 +1,13 @@
 import './Projects.scss';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
-import project1 from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40.jpg';
-import project2 from '../../assets/images/projects/PHOTO-2026-03-12-15-08-39 4.jpg';
-import project3 from '../../assets/images/projects/PHOTO-2026-03-07-07-14-48.jpg';
-import project4 from '../../assets/images/projects/PHOTO-2026-03-07-07-11-08 8.jpg';
-import project5 from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 18.jpg';
-import project6 from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 25.jpg';
-import project7 from '../../assets/images/projects/PHOTO-2026-03-07-08-04-24.jpg';
+import project1 from '../../assets/images/projects/project-featured-modernization.jpg';
+import project2 from '../../assets/images/projects/project-ceiling-drywall.jpg';
+import project3 from '../../assets/images/projects/project-existing-space-renovation.jpg';
+import project4 from '../../assets/images/services/service-interior.jpg';
+import project5 from '../../assets/images/projects/project-detail-ceiling.jpg';
+import project6 from '../../assets/images/projects/project-finish.jpg';
+import project7 from '../../assets/images/services/service-renovation.jpg';
 
 const supportingProjects = [
   {
