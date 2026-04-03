@@ -1,4 +1,4 @@
-import './UeberUns.scss';
+import './About.scss';
 import { CheckCircle2, Hammer, MessagesSquare, TimerReset } from 'lucide-react';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import aboutImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 11.jpg';
@@ -26,7 +26,7 @@ const highlights = [
   },
 ];
 
-function UeberUns() {
+function About() {
   const { sectionRef, isVisible } = useScrollReveal({
     once: false,
   });
@@ -47,8 +47,8 @@ function UeberUns() {
             <p className="ueber-uns__text ueber-uns__reveal">
               Trockenbau Prima Vista steht für saubere Ausführung, klare Kommunikation
               und zuverlässige Arbeit in den Bereichen Trockenbau, Sanierung und
-              Innenausbau. Unser Anspruch sind Lösungen, die funktional überzeugen
-              und optisch hochwertig umgesetzt werden.
+              Innenausbau. Unser Anspruch ist es, Lösungen zu schaffen, die
+              funktional überzeugen und optisch hochwertig wirken.
             </p>
 
             <div className="ueber-uns__image-wrap ueber-uns__reveal">
@@ -81,4 +81,4 @@ function UeberUns() {
   );
 }
 
-export default UeberUns;
+export default About;

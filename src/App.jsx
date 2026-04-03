@@ -5,7 +5,7 @@ import './styles/layout.scss';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import Services from './components/Services/Services';
-import UeberUns from './components/UeberUns/UeberUns';
+import About from './components/About/About';
 import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact';
 import Chatbot from './components/Chatbot/Chatbot';
@@ -19,7 +19,7 @@ function App() {
       <main id="main-content">
         <Hero />
         <Services />
-        <UeberUns />
+        <About />
         <Projects />
         <Contact />
         <Footer />

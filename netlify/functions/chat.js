@@ -24,7 +24,7 @@ export const handler = async (event) => {
       return {
         statusCode: 500,
         body: JSON.stringify({
-          reply: 'Der Chat ist momentan nicht verfuegbar. Bitte kontaktieren Sie uns direkt.',
+          reply: 'Der Chat ist momentan nicht verfügbar. Bitte kontaktieren Sie uns direkt.',
         }),
       };
     }
@@ -36,7 +36,7 @@ export const handler = async (event) => {
       return {
         statusCode: 400,
         body: JSON.stringify({
-          reply: 'Bitte senden Sie eine gueltige Nachricht.',
+          reply: 'Bitte senden Sie eine gültige Nachricht.',
         }),
       };
     }
@@ -54,7 +54,7 @@ export const handler = async (event) => {
       return {
         statusCode: 400,
         body: JSON.stringify({
-          reply: 'Bitte senden Sie eine gueltige Nachricht.',
+          reply: 'Bitte senden Sie eine gültige Nachricht.',
         }),
       };
     }
@@ -83,7 +83,7 @@ export const handler = async (event) => {
     return {
       statusCode: 500,
       body: JSON.stringify({
-        reply: 'Es gab einen Fehler. Bitte versuchen Sie es spaeter erneut.',
+        reply: 'Es gab einen Fehler. Bitte versuchen Sie es später erneut.',
       }),
     };
   }

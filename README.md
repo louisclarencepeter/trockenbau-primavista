@@ -1,6 +1,6 @@
 # Trockenbau Prima Vista
 
-Marketing website for **Trockenbau Prima Vista**, built with React and Vite. The site presents the company’s services, trust points, project references, contact details, cookie consent UI, and an AI-powered chatbot backed by a Netlify Function.
+Marketing website for **Trockenbau Prima Vista**, built with React and Vite. The site presents the company’s services, company profile, project references, contact details, a cookie consent UI, and an AI-powered chatbot backed by a Netlify Function.
 
 ## Stack
 
@@ -14,12 +14,12 @@ Marketing website for **Trockenbau Prima Vista**, built with React and Vite. The
 
 ## Site Structure
 
-The app is composed of these main sections in [src/App.jsx](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/src/App.jsx):
+The app is organized into these main sections in [src/App.jsx](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/src/App.jsx):
 
 - `Navbar`
 - `Hero`
 - `Services`
-- `Trust`
+- `About`
 - `Projects`
 - `Contact`
 - `Footer`
@@ -74,7 +74,7 @@ npm run build
 npm run preview
 ```
 
-### 5. Run linting
+### 5. Run the linter
 
 ```bash
 npm run lint
@@ -88,7 +88,7 @@ The chatbot function requires an OpenAI API key:
 OPENAI_API_KEY=your_api_key_here
 ```
 
-Store it in a local `.env` file for development and in Netlify environment variables for deployment.
+Store it in a local `.env` file during development and in Netlify environment variables for deployment.
 
 ## Chatbot
 
@@ -96,8 +96,8 @@ The chatbot UI lives in [src/components/Chatbot/Chatbot.jsx](/Users/louisclarenc
 
 Current behavior:
 
-- Answers in German
-- Uses the company context for Trockenbau, Sanierung, Renovierung, and Innenausbau
+- Replies in German
+- Uses company context for Trockenbau, Sanierung, Renovierung, and Innenausbau
 - Encourages visitors to get in touch for quotes and project inquiries
 - Sends requests to a Netlify Function that calls the OpenAI API
 
@@ -136,6 +136,6 @@ Component-specific styles live next to their components in `src/components/*/*.s
 
 ## Notes
 
-- The site is currently content-driven and mostly static apart from the chatbot and cookie consent state.
+- The site is currently content-driven and mostly static aside from the chatbot and cookie consent state.
 - Cookie consent is stored in `localStorage`.
 - The contact form is presentational at the moment and does not submit to a backend.
