@@ -71,9 +71,9 @@ function Footer() {
             <div className="footer__column">
               <h4 className="footer__heading">Kontakt</h4>
               <span className="footer__item">Frankfurt am Main</span>
-              <a href="tel:+490000000000" className="footer__link">+49 00 000000000</a>
-              <a href="mailto:info@trockenbau-primavista.ch" className="footer__link">
-                info@trockenbau-primavista.ch
+              <a href="tel:+4917648747554" className="footer__link">+49 176 48747554</a>
+              <a href="mailto:office@primavista-bauprojekte.com" className="footer__link">
+                office@primavista-bauprojekte.com
               </a>
             </div>
           </div>
