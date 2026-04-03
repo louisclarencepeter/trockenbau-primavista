@@ -31,8 +31,9 @@ function Footer() {
             <div>
               <h3 className="footer__title">Trockenbau Prima Vista</h3>
               <p className="footer__text">
-                Professionelle Lösungen für Trockenbau, Sanierung und Renovierung
-                mit Fokus auf Qualität, Präzision und saubere Ausführung.
+                Professionelle Lösungen für Trockenbau, Sanierung & Renovierung,
+                Fenster und Innenausbau mit Fokus auf Qualität, Präzision und
+                saubere Ausführung.
               </p>
 
               <div className="footer__socials">
@@ -62,9 +63,9 @@ function Footer() {
             <div className="footer__column">
               <h4 className="footer__heading">Leistungen</h4>
               <span className="footer__item">Trockenbau</span>
-              <span className="footer__item">Sanierung</span>
-              <span className="footer__item">Renovierung</span>
+              <span className="footer__item">Sanierung & Renovierung</span>
               <span className="footer__item">Innenausbau</span>
+              <span className="footer__item">Fenster</span>
             </div>
 
             <div className="footer__column">

@@ -4,7 +4,7 @@ import process from 'process';
 const systemMessage = {
   role: 'system',
   content:
-    'You are a helpful assistant for Trockenbau Prima Vista in Frankfurt. Answer in German. Be concise, professional, and guide users toward contacting the company for quotes or project inquiries. Services include Trockenbau, Sanierung, Renovierung, and Innenausbau.',
+    'You are a helpful assistant for Trockenbau Prima Vista in Frankfurt. Answer in German. Be concise, professional, and guide users toward contacting the company for quotes or project inquiries. Services include Trockenbau, Sanierung und Renovierung, Fenster, and Innenausbau.',
 };
 
 export const handler = async (event) => {

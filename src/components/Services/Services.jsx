@@ -2,7 +2,7 @@ import './Services.scss';
 import drywallImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 24.jpg';
 import renovationImage from '../../assets/images/projects/PHOTO-2026-03-07-08-04-24.jpg';
 import interiorImage from '../../assets/images/projects/PHOTO-2026-03-07-07-11-08 8.jpg';
-import finishingImage from '../../assets/images/projects/PHOTO-2026-03-12-15-08-40 25.jpg';
+import windowImage from '../../assets/images/projects/PHOTO-2026-03-07-08-03-48.jpg';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
 const services = [
@@ -13,22 +13,22 @@ const services = [
     alt: 'Trockenbau-Arbeiten in einem modernen Innenraum',
   },
   {
-    title: 'Sanierung',
-    text: 'Fachgerechte Sanierung bestehender Räume für neue Qualität und Funktionalität.',
+    title: 'Sanierung & Renovierung',
+    text: 'Fachgerechte Sanierungs- und Renovierungsarbeiten für bestehende Räume mit neuer Qualität und Funktionalität.',
     image: renovationImage,
-    alt: 'Sanierter Innenraum mit sauber ausgeführten Wand- und Deckenarbeiten',
-  },
-  {
-    title: 'Renovierung',
-    text: 'Effiziente Renovierungsarbeiten für private und gewerbliche Objekte.',
-    image: finishingImage,
-    alt: 'Renovierungsprojekt mit hochwertiger handwerklicher Ausführung',
+    alt: 'Sanierungs- und Renovierungsprojekt mit sauber ausgeführten Wand- und Deckenarbeiten',
   },
   {
     title: 'Innenausbau',
     text: 'Individuelle Gestaltung und Ausbau von Innenräumen nach hohen Standards.',
     image: interiorImage,
     alt: 'Innenausbau mit klaren Linien und hochwertigem Finish',
+  },
+  {
+    title: 'Fenster',
+    text: 'Saubere Lösungen rund um Fenster mit präziser Ausführung und passender Integration in den Innenausbau.',
+    image: windowImage,
+    alt: 'Fensterarbeiten in einem Innenausbau-Projekt mit sauberer Vorbereitung',
   },
 ];
 
@@ -48,8 +48,9 @@ function Services() {
           <span className="services__eyebrow services__reveal">WAS WIR ANBIETEN</span>
           <h2 className="services__title services__reveal">Unsere Leistungen</h2>
           <p className="services__text services__reveal">
-            Wir bieten professionelle Lösungen im Bereich Trockenbau, Sanierung
-            und Innenausbau – zuverlässig, präzise und termingerecht.
+            Wir bieten professionelle Lösungen in den Bereichen Trockenbau,
+            Sanierung & Renovierung, Fenster und Innenausbau - zuverlässig,
+            präzise und termingerecht.
           </p>
         </div>
 
