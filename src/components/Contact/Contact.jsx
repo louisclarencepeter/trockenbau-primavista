@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './Contact.scss';
 import { Mail, MapPin, Phone, MessageCircle } from 'lucide-react';
 import useScrollReveal from '../../hooks/useScrollReveal';
@@ -6,14 +7,14 @@ const contactItems = [
   {
     icon: Phone,
     label: 'Telefon',
-    value: '+49 00 000000000',
-    href: 'tel:+490000000000',
+    value: '+49 176 48747554',
+    href: 'tel:+4917648747554',
   },
   {
     icon: Mail,
     label: 'E-Mail',
-    value: 'info@trockenbau-primavista.ch',
-    href: 'mailto:info@trockenbau-primavista.ch',
+    value: 'office@primavista-bauprojekte.com',
+    href: 'mailto:office@primavista-bauprojekte.com',
   },
   {
     icon: MapPin,
@@ -24,7 +25,7 @@ const contactItems = [
     icon: MessageCircle,
     label: 'WhatsApp',
     value: 'Jetzt schreiben',
-    href: 'https://wa.me/490000000000',
+    href: 'https://wa.me/4917648747554',
   },
 ];
 
@@ -32,6 +33,32 @@ function Contact() {
   const { sectionRef: contactRef, isVisible } = useScrollReveal({
     once: false,
   });
+  const [formStatus, setFormStatus] = useState('idle');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setFormStatus('submitting');
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error('Submission failed');
+      }
+
+      setFormStatus('success');
+      form.reset();
+    } catch {
+      setFormStatus('error');
+    }
+  };
 
   return (
     <section
@@ -88,59 +115,98 @@ function Contact() {
           </div>
 
           <div className="contact__form-card contact__reveal">
-            <form className="contact__form">
-              <div className="contact__field">
-                <label htmlFor="name" className="contact__field-label">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  type="text"
-                  className="contact__input"
-                  placeholder="Ihr Name"
-                />
+            {formStatus === 'success' ? (
+              <div className="contact__form-success">
+                <strong>Vielen Dank!</strong>
+                <p>Ihre Anfrage wurde gesendet. Wir melden uns in Kürze bei Ihnen.</p>
+                <button
+                  type="button"
+                  className="contact__button"
+                  onClick={() => setFormStatus('idle')}
+                >
+                  Neue Anfrage
+                </button>
               </div>
+            ) : (
+              <form
+                className="contact__form"
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                onSubmit={handleSubmit}
+              >
+                <input type="hidden" name="form-name" value="contact" />
 
-              <div className="contact__field">
-                <label htmlFor="email" className="contact__field-label">
-                  E-Mail
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  className="contact__input"
-                  placeholder="Ihre E-Mail-Adresse"
-                />
-              </div>
+                <div className="contact__field">
+                  <label htmlFor="name" className="contact__field-label">
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    className="contact__input"
+                    placeholder="Ihr Name"
+                    required
+                  />
+                </div>
 
-              <div className="contact__field">
-                <label htmlFor="phone" className="contact__field-label">
-                  Telefonnummer
-                </label>
-                <input
-                  id="phone"
-                  type="tel"
-                  className="contact__input"
-                  placeholder="Ihre Telefonnummer"
-                />
-              </div>
+                <div className="contact__field">
+                  <label htmlFor="email" className="contact__field-label">
+                    E-Mail
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    className="contact__input"
+                    placeholder="Ihre E-Mail-Adresse"
+                    required
+                  />
+                </div>
 
-              <div className="contact__field">
-                <label htmlFor="message" className="contact__field-label">
-                  Nachricht
-                </label>
-                <textarea
-                  id="message"
-                  className="contact__textarea"
-                  placeholder="Beschreiben Sie kurz Ihr Projekt"
-                  rows="6"
-                ></textarea>
-              </div>
+                <div className="contact__field">
+                  <label htmlFor="phone" className="contact__field-label">
+                    Telefonnummer
+                  </label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    className="contact__input"
+                    placeholder="Ihre Telefonnummer"
+                  />
+                </div>
 
-              <button type="submit" className="contact__button">
-                Anfrage senden
-              </button>
-            </form>
+                <div className="contact__field">
+                  <label htmlFor="message" className="contact__field-label">
+                    Nachricht
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    className="contact__textarea"
+                    placeholder="Beschreiben Sie kurz Ihr Projekt"
+                    rows="6"
+                    required
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="contact__button"
+                  disabled={formStatus === 'submitting'}
+                >
+                  {formStatus === 'submitting' ? 'Wird gesendet...' : 'Anfrage senden'}
+                </button>
+
+                {formStatus === 'error' ? (
+                  <p className="contact__error">
+                    Fehler beim Senden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.
+                  </p>
+                ) : null}
+              </form>
+            )}
           </div>
         </div>
       </div>

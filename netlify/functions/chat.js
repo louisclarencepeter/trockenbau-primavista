@@ -9,9 +9,12 @@ const systemMessage = {
 
 export const handler = async (event) => {
   try {
+    const headers = { 'Content-Type': 'application/json' };
+
     if (event.httpMethod !== 'POST') {
       return {
         statusCode: 405,
+        headers,
         body: JSON.stringify({
           reply: 'Methode nicht erlaubt.',
         }),
@@ -23,6 +26,7 @@ export const handler = async (event) => {
 
       return {
         statusCode: 500,
+        headers,
         body: JSON.stringify({
           reply: 'Der Chat ist momentan nicht verfügbar. Bitte kontaktieren Sie uns direkt.',
         }),
@@ -35,6 +39,7 @@ export const handler = async (event) => {
     if (!messages || messages.length === 0) {
       return {
         statusCode: 400,
+        headers,
         body: JSON.stringify({
           reply: 'Bitte senden Sie eine gültige Nachricht.',
         }),
@@ -53,6 +58,7 @@ export const handler = async (event) => {
     if (sanitizedMessages.length === 0) {
       return {
         statusCode: 400,
+        headers,
         body: JSON.stringify({
           reply: 'Bitte senden Sie eine gültige Nachricht.',
         }),
@@ -73,6 +79,7 @@ export const handler = async (event) => {
 
     return {
       statusCode: 200,
+      headers,
       body: JSON.stringify({
         reply: completion.choices[0].message.content,
       }),
@@ -82,6 +89,7 @@ export const handler = async (event) => {
 
     return {
       statusCode: 500,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         reply: 'Es gab einen Fehler. Bitte versuchen Sie es später erneut.',
       }),

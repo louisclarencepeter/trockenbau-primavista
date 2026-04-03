@@ -60,7 +60,7 @@ function CookieBanner() {
                 Diese Website verwendet Cookies, um die Benutzererfahrung zu verbessern
                 und grundlegende Funktionen bereitzustellen. Sie können der Verwendung
                 zustimmen oder ablehnen. Weitere Informationen finden Sie in unserer{' '}
-                <a href="#datenschutz" className="cookie-banner__link">
+                <a href="/datenschutz" className="cookie-banner__link">
                   Datenschutzerklärung
                 </a>.
               </p>
