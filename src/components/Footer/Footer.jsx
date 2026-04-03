@@ -1,5 +1,5 @@
 import './Footer.scss';
-import logo from '../../assets/logo.png';
+import { logoSmall } from '../../assets/responsiveImages';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -27,7 +27,7 @@ function Footer() {
         <div className="footer__top">
           <div className="footer__brand">
             <img
-              src={logo}
+              src={logoSmall}
               alt="Trockenbau Prima Vista Logo"
               className="footer__logo"
             />

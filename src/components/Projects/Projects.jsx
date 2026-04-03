@@ -1,42 +1,44 @@
 import './Projects.scss';
 import useScrollReveal from '../../hooks/useScrollReveal';
-
-import project1 from '../../assets/images/projects/project-featured-modernization.jpg';
-import project2 from '../../assets/images/projects/project-ceiling-drywall.jpg';
-import project3 from '../../assets/images/projects/project-existing-space-renovation.jpg';
-import project4 from '../../assets/images/services/service-interior.jpg';
-import project5 from '../../assets/images/projects/project-detail-ceiling.jpg';
-import project6 from '../../assets/images/projects/project-finish.jpg';
-import project7 from '../../assets/images/services/service-renovation.jpg';
+import {
+  projectCeilingDrywallImage,
+  projectDetailCeilingImage,
+  projectExistingSpaceRenovationImage,
+  projectFeaturedModernizationImage,
+  projectFinishImage,
+  responsiveImageSizes,
+  serviceInteriorImage,
+  serviceRenovationImage,
+} from '../../assets/responsiveImages';
 
 const supportingProjects = [
   {
-    image: project2,
+    image: projectCeilingDrywallImage,
     title: 'Decken- und Trockenbau',
     alt: 'Trockenbau-Projekt mit sichtbarer Decken- und Leitungsstruktur',
   },
   {
-    image: project3,
+    image: projectExistingSpaceRenovationImage,
     title: 'Sanierung im Bestand',
     alt: 'Sanierungsprojekt mit vorbereiteten Wand- und Deckenflächen',
   },
   {
-    image: project4,
+    image: serviceInteriorImage,
     title: 'Moderner Innenausbau',
     alt: 'Innenausbau mit moderner Raumgestaltung und sauberer Ausführung',
   },
   {
-    image: project5,
+    image: projectDetailCeilingImage,
     title: 'Feine Detailarbeiten',
     alt: 'Ausbauprojekt mit präzise ausgeführten Decken- und Übergangsdetails',
   },
   {
-    image: project6,
+    image: projectFinishImage,
     title: 'Renovierung mit Finish',
     alt: 'Renovierungsprojekt mit hochwertigem Finish und sauberer Umsetzung',
   },
   {
-    image: project7,
+    image: serviceRenovationImage,
     title: 'Sanierte Wohnräume',
     alt: 'Heller sanierter Wohnraum mit hochwertiger Ausführung',
   },
@@ -66,8 +68,12 @@ function Projects() {
         <div className="projects__layout">
           <article className="projects__featured projects__reveal">
             <img
-              src={project1}
+              src={projectFeaturedModernizationImage.src}
+              srcSet={projectFeaturedModernizationImage.srcSet}
+              sizes={responsiveImageSizes.projectsFeatured}
               alt="Innenausbau-Projekt mit moderner Trockenbau-Ausführung"
+              loading="lazy"
+              decoding="async"
               className="projects__image"
             />
             <div className="projects__overlay projects__overlay--featured">
@@ -83,8 +89,12 @@ function Projects() {
             {supportingProjects.map((project) => (
               <article className="projects__item projects__reveal" key={project.title}>
                 <img
-                  src={project.image}
+                  src={project.image.src}
+                  srcSet={project.image.srcSet}
+                  sizes={responsiveImageSizes.projectsGrid}
                   alt={project.alt}
+                  loading="lazy"
+                  decoding="async"
                   className="projects__image"
                 />
                 <div className="projects__overlay">

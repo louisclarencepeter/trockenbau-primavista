@@ -1,33 +1,36 @@
 import './Services.scss';
-import drywallImage from '../../assets/images/services/service-drywall.jpg';
-import renovationImage from '../../assets/images/services/service-renovation.jpg';
-import interiorImage from '../../assets/images/services/service-interior.jpg';
-import windowImage from '../../assets/images/services/service-windows.jpg';
+import {
+  responsiveImageSizes,
+  serviceDrywallImage,
+  serviceInteriorImage,
+  serviceRenovationImage,
+  serviceWindowsImage,
+} from '../../assets/responsiveImages';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
 const services = [
   {
     title: 'Trockenbau',
     text: 'Moderne Innenausbau-Lösungen mit hoher Präzision und sauberer Ausführung.',
-    image: drywallImage,
+    image: serviceDrywallImage,
     alt: 'Trockenbau-Arbeiten in einem modernen Innenraum',
   },
   {
     title: 'Sanierung & Renovierung',
     text: 'Fachgerechte Sanierungs- und Renovierungsarbeiten für bestehende Räume mit neuer Qualität und Funktionalität.',
-    image: renovationImage,
+    image: serviceRenovationImage,
     alt: 'Sanierungs- und Renovierungsprojekt mit sauber ausgeführten Wand- und Deckenarbeiten',
   },
   {
     title: 'Innenausbau',
     text: 'Individuelle Gestaltung und Ausbau von Innenräumen nach hohen Standards.',
-    image: interiorImage,
+    image: serviceInteriorImage,
     alt: 'Innenausbau mit klaren Linien und hochwertigem Finish',
   },
   {
     title: 'Fenster',
     text: 'Saubere Lösungen rund um Fenster mit präziser Ausführung und passender Integration in den Innenausbau.',
-    image: windowImage,
+    image: serviceWindowsImage,
     alt: 'Fensterarbeiten in einem Innenausbau-Projekt mit sauberer Vorbereitung',
   },
 ];
@@ -59,8 +62,12 @@ function Services() {
             <article className="services__card services__reveal" key={service.title}>
               <div className="services__image-wrap">
                 <img
-                  src={service.image}
+                  src={service.image.src}
+                  srcSet={service.image.srcSet}
+                  sizes={responsiveImageSizes.services}
                   alt={service.alt}
+                  loading="lazy"
+                  decoding="async"
                   className="services__image"
                 />
               </div>

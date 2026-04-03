@@ -1,86 +1,85 @@
 import { useEffect, useState } from 'react';
 import './Hero.scss';
 import Button from '../Button/Button';
-import heroMainImageOne from '../../assets/images/projects/project-featured-modernization.jpg';
-import heroMainImageTwo from '../../assets/images/services/service-drywall.jpg';
-import heroMainImageThree from '../../assets/images/hero/hero-detail-accent.jpg';
-import heroMainImageFour from '../../assets/images/projects/project-detail-ceiling.jpg';
-import heroMainImageFive from '../../assets/images/services/service-interior.jpg';
-import heroDetailTopOne from '../../assets/images/projects/project-ceiling-drywall.jpg';
-import heroDetailTopTwo from '../../assets/images/projects/project-existing-space-renovation.jpg';
-import heroDetailTopThree from '../../assets/images/projects/project-detail-ceiling.jpg';
-import heroDetailBottomOne from '../../assets/images/services/service-interior.jpg';
-import heroDetailBottomTwo from '../../assets/images/services/service-drywall.jpg';
-import heroDetailBottomThree from '../../assets/images/hero/hero-detail-accent.jpg';
-import heroDetailBottomFour from '../../assets/images/projects/project-finish.jpg';
-import heroDetailBottomFive from '../../assets/images/services/service-renovation.jpg';
+import {
+  heroDetailAccentImage,
+  projectCeilingDrywallImage,
+  projectDetailCeilingImage,
+  projectExistingSpaceRenovationImage,
+  projectFeaturedModernizationImage,
+  projectFinishImage,
+  responsiveImageSizes,
+  serviceDrywallImage,
+  serviceInteriorImage,
+  serviceRenovationImage,
+} from '../../assets/responsiveImages';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
 const heroSlides = [
   {
-    image: heroMainImageOne,
+    image: projectFeaturedModernizationImage,
     alt: 'Innenausbau-Projekt mit präziser Trockenbau-Ausführung',
   },
   {
-    image: heroMainImageTwo,
+    image: serviceDrywallImage,
     alt: 'Trockenbau-Projekt mit sauber vorbereiteten Wand- und Deckenflächen',
   },
   {
-    image: heroMainImageThree,
+    image: heroDetailAccentImage,
     alt: 'Sanierungsprojekt mit hochwertiger handwerklicher Ausführung',
   },
   {
-    image: heroMainImageFour,
+    image: projectDetailCeilingImage,
     alt: 'Innenausbau mit präzise ausgeführten Deckenarbeiten',
   },
   {
-    image: heroMainImageFive,
+    image: serviceInteriorImage,
     alt: 'Modern ausgebauter Wohnraum mit sauberem Finish',
   },
 ];
 
 const heroDetailTopSlides = [
   {
-    image: heroDetailTopOne,
+    image: projectCeilingDrywallImage,
     alt: 'Detailansicht eines hochwertigen Innenausbau-Projekts',
   },
   {
-    image: heroDetailTopTwo,
+    image: projectExistingSpaceRenovationImage,
     alt: 'Modern sanierter Innenraum mit klaren Linien',
   },
   {
-    image: heroDetailTopThree,
+    image: projectDetailCeilingImage,
     alt: 'Innenausbau mit präzise ausgeführten Deckenarbeiten',
   },
   {
-    image: heroMainImageOne,
+    image: projectFeaturedModernizationImage,
     alt: 'Wohnraum-Modernisierung mit klarer Trockenbau-Struktur',
   },
   {
-    image: heroMainImageTwo,
+    image: serviceDrywallImage,
     alt: 'Trockenbau-Flächen mit sauberer handwerklicher Umsetzung',
   },
 ];
 
 const heroDetailBottomSlides = [
   {
-    image: heroDetailBottomOne,
+    image: serviceInteriorImage,
     alt: 'Innenausbau mit klaren Linien und hochwertigem Finish',
   },
   {
-    image: heroDetailBottomTwo,
+    image: serviceDrywallImage,
     alt: 'Trockenbau-Projekt mit sauber vorbereiteten Wandflächen',
   },
   {
-    image: heroDetailBottomThree,
+    image: heroDetailAccentImage,
     alt: 'Sanierungsprojekt mit hochwertiger Ausführung',
   },
   {
-    image: heroDetailBottomFour,
+    image: projectFinishImage,
     alt: 'Innenausbau mit vorbereiteten Wand- und Deckenflächen',
   },
   {
-    image: heroDetailBottomFive,
+    image: serviceRenovationImage,
     alt: 'Modern sanierter Innenraum mit heller Raumwirkung',
   },
 ];
@@ -133,9 +132,12 @@ function Hero() {
               {heroSlides.map((slide, index) => (
                 <img
                   key={slide.alt}
-                  src={slide.image}
+                  src={slide.image.src}
+                  srcSet={slide.image.srcSet}
+                  sizes={responsiveImageSizes.heroMain}
                   alt={slide.alt}
                   loading={index === 0 ? 'eager' : 'lazy'}
+                  decoding={index === 0 ? 'sync' : 'async'}
                   className={`hero__photo hero__photo--main${
                     index === activeSlide ? ' hero__photo--active' : ''
                   }`}
@@ -154,9 +156,12 @@ function Hero() {
                 {heroDetailTopSlides.map((slide, index) => (
                   <img
                     key={slide.alt}
-                    src={slide.image}
+                    src={slide.image.src}
+                    srcSet={slide.image.srcSet}
+                    sizes={responsiveImageSizes.heroDetail}
                     alt={slide.alt}
                     loading="lazy"
+                    decoding="async"
                     className={`hero__photo hero__photo--detail-slide${
                       index === activeSlide ? ' hero__photo--active' : ''
                     }`}
@@ -168,9 +173,12 @@ function Hero() {
                 {heroDetailBottomSlides.map((slide, index) => (
                   <img
                     key={slide.alt}
-                    src={slide.image}
+                    src={slide.image.src}
+                    srcSet={slide.image.srcSet}
+                    sizes={responsiveImageSizes.heroDetail}
                     alt={slide.alt}
                     loading="lazy"
+                    decoding="async"
                     className={`hero__photo hero__photo--detail-slide${
                       index === activeSlide ? ' hero__photo--active' : ''
                     }`}

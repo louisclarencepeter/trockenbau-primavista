@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
 import './Navbar.scss';
-import logo from '../../assets/logo.png';
+import { logoSmall } from '../../assets/responsiveImages';
 import Button from '../Button/Button';
 
 const navItems = [
@@ -136,7 +136,7 @@ function Navbar() {
     <header className="navbar">
       <div className="container navbar__container">
         <a href="#top" className="navbar__brand" onClick={handleNavClick('top')}>
-          <img src={logo} alt="Trockenbau Prima Vista Logo" className="navbar__logo" />
+          <img src={logoSmall} alt="Trockenbau Prima Vista Logo" className="navbar__logo" />
           <div className="navbar__brand-text">
             <span className="navbar__name">Trockenbau Prima Vista</span>
             <span className="navbar__tagline">Sanierung und Renovierung</span>

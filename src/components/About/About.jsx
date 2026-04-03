@@ -1,7 +1,10 @@
 import './About.scss';
 import { CheckCircle2, Hammer, MessagesSquare, TimerReset } from 'lucide-react';
 import useScrollReveal from '../../hooks/useScrollReveal';
-import aboutImage from '../../assets/images/about/about-interior-showcase.jpg';
+import {
+  aboutInteriorShowcaseImage,
+  responsiveImageSizes,
+} from '../../assets/responsiveImages';
 
 const highlights = [
   {
@@ -53,8 +56,12 @@ function About() {
 
             <div className="ueber-uns__image-wrap ueber-uns__reveal">
               <img
-                src={aboutImage}
+                src={aboutInteriorShowcaseImage.src}
+                srcSet={aboutInteriorShowcaseImage.srcSet}
+                sizes={responsiveImageSizes.about}
                 alt="Innenausbau-Projekt von Trockenbau Prima Vista"
+                loading="lazy"
+                decoding="async"
                 className="ueber-uns__image"
               />
             </div>
