@@ -57,7 +57,7 @@ function CookieBanner() {
               <span className="cookie-banner__eyebrow">Cookies</span>
               <h3 className="cookie-banner__title">Wir verwenden Cookies</h3>
               <p className="cookie-banner__text">
-                Diese Website verwendet Cookies, um die Benutzererfahrung zu verbessern
+                Diese Website verwendet Cookies, um die Benutzerfreundlichkeit zu verbessern
                 und grundlegende Funktionen bereitzustellen. Sie können der Verwendung
                 zustimmen oder ablehnen. Weitere Informationen finden Sie in unserer{' '}
                 <a href="/datenschutz" className="cookie-banner__link">

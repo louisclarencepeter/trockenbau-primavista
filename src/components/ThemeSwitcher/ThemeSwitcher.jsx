@@ -32,7 +32,7 @@ function ThemeSwitcher({ themePreference = 'system', resolvedTheme = 'light', on
           <span className="theme-switcher__status">{statusLabel}</span>
         </div>
 
-        <div className="theme-switcher__controls" role="group" aria-label="Theme auswählen">
+        <div className="theme-switcher__controls" role="group" aria-label="Darstellung auswählen">
           {themeOptions.map((option) => {
             const Icon = option.icon;
 

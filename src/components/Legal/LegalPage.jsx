@@ -12,7 +12,7 @@ const legalPageContent = {
     eyebrow: 'Rechtliches',
     title: 'Impressum',
     description:
-      'Alle Pflichtangaben zur Prima Vista B&G GmbH sowie die rechtlichen Hinweise zur Nutzung dieser Website.',
+      'Alle Pflichtangaben zur Prima Vista B&G GmbH sowie die rechtlichen Hinweise zur Nutzung dieser Webseite.',
     kicker: 'Pflichtangaben',
     component: Impressum,
   },
