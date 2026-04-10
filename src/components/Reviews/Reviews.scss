@@ -49,6 +49,7 @@
   align-items: center;
   gap: 14px;
   padding: 12px 24px;
+  max-width: 100%;
   border-radius: 100px;
   background: var(--color-surface-card-soft);
   border: 1px solid var(--color-border-card);
@@ -82,7 +83,7 @@
 
 .reviews__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
 }
 
@@ -154,12 +155,15 @@
   font-weight: 600;
   color: var(--color-text-primary);
   margin-bottom: 4px;
+  line-height: 1.45;
 }
 
 .reviews__author-meta {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
+  row-gap: 6px;
 }
 
 .reviews__stars {
@@ -175,6 +179,8 @@
 // --- CTA ---
 
 .reviews__cta {
+  display: flex;
+  justify-content: center;
   text-align: center;
   margin-top: 40px;
 }
@@ -182,12 +188,16 @@
 .reviews__link {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 14px 28px;
+  max-width: 100%;
   border-radius: 100px;
   font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
   color: var(--color-text-on-accent);
   background: var(--color-accent);
   text-decoration: none;
@@ -212,8 +222,44 @@
 }
 
 @media (max-width: 992px) {
+  .reviews__summary {
+    padding-inline: 20px;
+  }
+
   .reviews__grid {
-    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .reviews__header {
+    margin-bottom: 44px;
+  }
+
+  .reviews__summary {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border-radius: 26px;
+  }
+
+  .reviews__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reviews__card {
+    padding: 24px;
+  }
+
+  .reviews__author {
+    align-items: flex-start;
+  }
+
+  .reviews__link {
+    width: auto;
+    max-width: min(100%, 26rem);
+    padding-inline: 24px;
   }
 }
 
@@ -223,14 +269,7 @@
   }
 
   .reviews__summary {
-    flex-direction: column;
-    gap: 8px;
     padding: 14px 20px;
-  }
-
-  .reviews__grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
   }
 
   .reviews__card {
@@ -238,7 +277,7 @@
   }
 
   .reviews__link {
-    width: 100%;
-    justify-content: center;
+    max-width: 100%;
+    padding: 14px 20px;
   }
 }
