@@ -28,12 +28,14 @@ import projectFeaturedModernization480 from './images/projects/project-featured-
 import projectFeaturedModernization640 from './images/projects/project-featured-modernization-640.jpg';
 import projectFeaturedModernization800 from './images/projects/project-featured-modernization-800.jpg';
 import projectFeaturedModernization1200 from './images/projects/project-featured-modernization-1200.jpg';
+import projectFinish320 from './images/projects/project-finish-320.jpg';
 import projectFinish400 from './images/projects/project-finish-400.jpg';
 import projectFinish480 from './images/projects/project-finish-480.jpg';
 import projectFinish640 from './images/projects/project-finish-640.jpg';
 import projectFinish720 from './images/projects/project-finish-720.jpg';
 import projectFinish960 from './images/projects/project-finish-960.jpg';
 import serviceDrywall480 from './images/services/service-drywall-480.jpg';
+import serviceDrywall600 from './images/services/service-drywall-600.jpg';
 import serviceDrywall640 from './images/services/service-drywall-640.jpg';
 import serviceDrywall800 from './images/services/service-drywall-800.jpg';
 import serviceDrywall1200 from './images/services/service-drywall-1200.jpg';
@@ -41,12 +43,15 @@ import serviceInterior480 from './images/services/service-interior-480.jpg';
 import serviceInterior640 from './images/services/service-interior-640.jpg';
 import serviceInterior800 from './images/services/service-interior-800.jpg';
 import serviceInterior1200 from './images/services/service-interior-1200.jpg';
+import serviceRenovation320 from './images/services/service-renovation-320.jpg';
 import serviceRenovation480 from './images/services/service-renovation-480.jpg';
+import serviceRenovation600 from './images/services/service-renovation-600.jpg';
 import serviceRenovation640 from './images/services/service-renovation-640.jpg';
 import serviceRenovation720 from './images/services/service-renovation-720.jpg';
 import serviceRenovation800 from './images/services/service-renovation-800.jpg';
 import serviceRenovation960 from './images/services/service-renovation-960.jpg';
 import serviceWindows480 from './images/services/service-windows-480.jpg';
+import serviceWindows600 from './images/services/service-windows-600.jpg';
 import serviceWindows640 from './images/services/service-windows-640.jpg';
 import serviceWindows720 from './images/services/service-windows-720.jpg';
 import serviceWindows800 from './images/services/service-windows-800.jpg';
@@ -133,6 +138,7 @@ export const projectFeaturedModernizationImage = createResponsiveImage([
 ]);
 
 export const projectFinishImage = createResponsiveImage([
+  { src: projectFinish320, width: 320 },
   { src: projectFinish400, width: 400 },
   { src: projectFinish480, width: 480 },
   { src: projectFinish640, width: 640 },
@@ -142,6 +148,7 @@ export const projectFinishImage = createResponsiveImage([
 
 export const serviceDrywallImage = createResponsiveImage([
   { src: serviceDrywall480, width: 480 },
+  { src: serviceDrywall600, width: 600 },
   { src: serviceDrywall640, width: 640 },
   { src: serviceDrywall800, width: 800 },
   { src: serviceDrywall1200, width: 1200 },
@@ -155,7 +162,9 @@ export const serviceInteriorImage = createResponsiveImage([
 ]);
 
 export const serviceRenovationImage = createResponsiveImage([
+  { src: serviceRenovation320, width: 320 },
   { src: serviceRenovation480, width: 480 },
+  { src: serviceRenovation600, width: 600 },
   { src: serviceRenovation640, width: 640 },
   { src: serviceRenovation720, width: 720 },
   { src: serviceRenovation800, width: 800 },
@@ -164,6 +173,7 @@ export const serviceRenovationImage = createResponsiveImage([
 
 export const serviceWindowsImage = createResponsiveImage([
   { src: serviceWindows480, width: 480 },
+  { src: serviceWindows600, width: 600 },
   { src: serviceWindows640, width: 640 },
   { src: serviceWindows720, width: 720 },
   { src: serviceWindows800, width: 800 },

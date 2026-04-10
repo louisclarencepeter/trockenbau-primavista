@@ -167,9 +167,10 @@
 
 @media (max-width: 768px) {
   .cookie-banner {
-    left: 16px;
-    right: 16px;
+    left: 0;
+    right: 0;
     bottom: var(--floating-trigger-offset-mobile);
+    padding: 0 14px;
   }
 
   .cookie-banner__trigger {
@@ -180,15 +181,31 @@
   }
 
   .cookie-banner__content {
+    width: min(100%, 312px);
     flex-direction: column;
     align-items: stretch;
     gap: 18px;
-    padding: 18px;
+    padding: 16px;
     border-radius: 22px;
   }
 
+  .cookie-banner__text-wrap {
+    max-width: none;
+  }
+
+  .cookie-banner__eyebrow {
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
   .cookie-banner__title {
-    font-size: 19px;
+    margin-bottom: 8px;
+    font-size: 18px;
+  }
+
+  .cookie-banner__text {
+    font-size: 14px;
+    line-height: 1.55;
   }
 
   .cookie-banner__actions {
@@ -201,6 +218,7 @@
   .cookie-banner__button {
     width: 100%;
     min-width: 0;
-    padding: 13px 14px;
+    padding: 12px 14px;
+    font-size: 14px;
   }
 }
