@@ -2,6 +2,10 @@ export const THEME_STORAGE_KEY = 'primavista-theme';
 export const LIGHT_THEME_COLOR = '#f7f4ed';
 export const DARK_THEME_COLOR = '#0d1218';
 
+export const resolveThemePreference = (themePreference) => (
+  themePreference === 'system' ? getSystemTheme() : themePreference === 'dark' ? 'dark' : 'light'
+);
+
 export const getStoredTheme = () => {
   if (typeof window === 'undefined') {
     return null;
@@ -10,7 +14,9 @@ export const getStoredTheme = () => {
   try {
     const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
 
-    return storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : null;
+    return storedTheme === 'light' || storedTheme === 'dark' || storedTheme === 'system'
+      ? storedTheme
+      : null;
   } catch {
     return null;
   }
@@ -24,7 +30,7 @@ export const getSystemTheme = () => {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 };
 
-export const getInitialTheme = () => getStoredTheme() ?? getSystemTheme();
+export const getInitialTheme = () => resolveThemePreference(getStoredTheme() ?? 'system');
 
 export const applyTheme = (theme) => {
   if (typeof document === 'undefined') {

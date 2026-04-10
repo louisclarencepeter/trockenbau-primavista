@@ -7,25 +7,25 @@ const contactItems = [
   {
     icon: Phone,
     label: 'Telefon',
-    value: '+49 176 48747554',
-    href: 'tel:+4917648747554',
+    value: '+41 78 265 93 32',
+    href: 'tel:+41782659332',
   },
   {
     icon: Mail,
     label: 'E-Mail',
-    value: 'office@primavista-bauprojekte.com',
-    href: 'mailto:office@primavista-bauprojekte.com',
+    value: 'info@primavista-bauprojekte.ch',
+    href: 'mailto:info@primavista-bauprojekte.ch',
   },
   {
     icon: MapPin,
     label: 'Standort',
-    value: 'Frankfurt am Main',
+    value: 'Spinnereistrasse 5, 6020 Emmenbrücke, Schweiz',
   },
   {
     icon: MessageCircle,
     label: 'WhatsApp',
     value: 'Jetzt schreiben',
-    href: 'https://wa.me/4917648747554',
+    href: 'https://wa.me/41782659332',
   },
 ];
 

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { MoonStar, SunMedium } from 'lucide-react';
 import './Navbar.scss';
 import { logoSmall } from '../../assets/responsiveImages';
 import Button from '../Button/Button';
@@ -12,16 +11,10 @@ const navItems = [
   { id: 'kontakt', label: 'Kontakt' },
 ];
 
-function Navbar({ theme = 'light', onToggleTheme }) {
+function Navbar({ isHomePage = true }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isInstantClosing, setIsInstantClosing] = useState(false);
-  const ThemeIcon = theme === 'dark' ? SunMedium : MoonStar;
-  const themeLabel = theme === 'dark' ? 'Hell' : 'Dunkel';
-  const themeActionLabel =
-    theme === 'dark'
-      ? 'Zum hellen Modus wechseln'
-      : 'Zum dunklen Modus wechseln';
 
   const scrollToSection = (id) => {
     const target = document.getElementById(id);
@@ -56,6 +49,11 @@ function Navbar({ theme = 'light', onToggleTheme }) {
   };
 
   const handleNavClick = (id) => (event) => {
+    if (!isHomePage) {
+      closeMenu();
+      return;
+    }
+
     event.preventDefault();
     const shouldCloseInstantly = menuOpen;
 
@@ -81,7 +79,16 @@ function Navbar({ theme = 'light', onToggleTheme }) {
     }
   };
 
+  const getNavHref = (id) => (isHomePage ? `#${id}` : `/#${id}`);
+  const homeHref = isHomePage ? '#top' : '/';
+  const contactHref = isHomePage ? '#kontakt' : '/#kontakt';
+  const visibleActiveSection = isHomePage ? activeSection : '';
+
   useEffect(() => {
+    if (!isHomePage) {
+      return undefined;
+    }
+
     const sections = navItems
       .map(({ id }) => document.getElementById(id))
       .filter(Boolean);
@@ -137,26 +144,12 @@ function Navbar({ theme = 'light', onToggleTheme }) {
       window.removeEventListener('scroll', updateActiveSection);
       window.removeEventListener('resize', updateActiveSection);
     };
-  }, [menuOpen]);
-
-  const renderThemeToggle = (modifierClass = '') => (
-    <button
-      className={`navbar__theme-toggle${modifierClass ? ` ${modifierClass}` : ''}`}
-      onClick={onToggleTheme}
-      type="button"
-      aria-label={themeActionLabel}
-      aria-pressed={theme === 'dark'}
-      title={themeActionLabel}
-    >
-      <ThemeIcon size={17} strokeWidth={2.2} />
-      <span className="navbar__theme-toggle-label">{themeLabel}</span>
-    </button>
-  );
+  }, [isHomePage, menuOpen]);
 
   return (
     <header className="navbar">
       <div className="container navbar__container">
-        <a href="#top" className="navbar__brand" onClick={handleNavClick('top')}>
+        <a href={homeHref} className="navbar__brand" onClick={handleNavClick('top')}>
           <img src={logoSmall} alt="Trockenbau Prima Vista Logo" className="navbar__logo" />
           <div className="navbar__brand-text">
             <span className="navbar__name">Trockenbau Prima Vista</span>
@@ -168,8 +161,8 @@ function Navbar({ theme = 'light', onToggleTheme }) {
           {navItems.map((item) => (
             <a
               key={item.id}
-              href={`#${item.id}`}
-              className={`navbar__link${activeSection === item.id ? ' is-active' : ''}`}
+              href={getNavHref(item.id)}
+              className={`navbar__link${visibleActiveSection === item.id ? ' is-active' : ''}`}
               onClick={handleNavClick(item.id)}
             >
               {item.label}
@@ -178,9 +171,8 @@ function Navbar({ theme = 'light', onToggleTheme }) {
         </nav>
 
         <div className="navbar__utilities">
-          {renderThemeToggle()}
           <div className="navbar__cta">
-            <Button href="#kontakt" onClick={handleNavClick('kontakt')} variant="primary">
+            <Button href={contactHref} onClick={handleNavClick('kontakt')} variant="primary">
               Jetzt anfragen
             </Button>
           </div>
@@ -204,20 +196,16 @@ function Navbar({ theme = 'light', onToggleTheme }) {
           {navItems.map((item) => (
             <a
               key={item.id}
-              href={`#${item.id}`}
-              className={`navbar__mobile-link${activeSection === item.id ? ' is-active' : ''}`}
+              href={getNavHref(item.id)}
+              className={`navbar__mobile-link${visibleActiveSection === item.id ? ' is-active' : ''}`}
               onClick={handleNavClick(item.id)}
             >
               {item.label}
             </a>
           ))}
 
-          <div className="navbar__mobile-utility">
-            {renderThemeToggle('navbar__theme-toggle--mobile')}
-          </div>
-
           <div className="navbar__mobile-cta">
-            <Button href="#kontakt" onClick={handleNavClick('kontakt')} variant="primary">
+            <Button href={contactHref} onClick={handleNavClick('kontakt')} variant="primary">
               Jetzt anfragen
             </Button>
           </div>

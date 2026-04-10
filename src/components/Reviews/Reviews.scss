@@ -1,0 +1,233 @@
+.reviews {
+  background: var(--color-surface-muted);
+  position: relative;
+  box-shadow: inset 0 -1px 0 var(--color-border-soft);
+}
+
+// --- Scroll reveal ---
+
+.reviews__reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+  will-change: opacity, transform;
+}
+
+.reviews--visible .reviews__reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+// --- Header ---
+
+.reviews__header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 60px;
+}
+
+.reviews__eyebrow {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  transition-delay: 0.08s;
+}
+
+.reviews__title {
+  margin-bottom: 24px;
+  color: var(--color-text-primary);
+  transition-delay: 0.18s;
+}
+
+.reviews__summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 24px;
+  border-radius: 100px;
+  background: var(--color-surface-card-soft);
+  border: 1px solid var(--color-border-card);
+  box-shadow: var(--color-shadow-xs);
+  transition-delay: 0.28s;
+}
+
+.reviews__rating-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reviews__rating-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.reviews__rating-text {
+  font-size: 15px;
+  color: var(--color-text-muted);
+}
+
+// --- Grid ---
+
+.reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+// --- Card ---
+
+.reviews__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px;
+  border-radius: 22px;
+  background: var(--color-surface-card-soft);
+  border: 1px solid var(--color-border-card);
+  box-shadow: var(--color-shadow-xs);
+  transition: opacity 0.75s ease, transform 0.75s ease, box-shadow 0.3s ease;
+}
+
+.reviews__card:hover {
+  box-shadow: var(--color-shadow-md);
+}
+
+.reviews__quote-icon {
+  color: var(--color-accent);
+  opacity: 0.3;
+  flex-shrink: 0;
+}
+
+.reviews__review-text {
+  flex: 1;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--color-text-body);
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// --- Author ---
+
+.reviews__author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.reviews__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-border-card);
+}
+
+.reviews__author-name {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.reviews__author-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reviews__stars {
+  display: flex;
+  gap: 2px;
+}
+
+.reviews__time {
+  font-size: 13px;
+  color: var(--color-text-subtle);
+}
+
+// --- CTA ---
+
+.reviews__cta {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.reviews__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-on-accent);
+  background: var(--color-accent);
+  text-decoration: none;
+  box-shadow: 0 8px 24px var(--color-accent-glow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.reviews__link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px var(--color-accent-glow);
+}
+
+// --- Responsive ---
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews__reveal,
+  .reviews--visible .reviews__reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .reviews__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .reviews__header {
+    margin-bottom: 40px;
+  }
+
+  .reviews__summary {
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 20px;
+  }
+
+  .reviews__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .reviews__card {
+    padding: 22px;
+  }
+
+  .reviews__link {
+    width: 100%;
+    justify-content: center;
+  }
+}

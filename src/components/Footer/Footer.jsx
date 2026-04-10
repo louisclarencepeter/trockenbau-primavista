@@ -1,7 +1,13 @@
 import './Footer.scss';
 import { logoSmall } from '../../assets/responsiveImages';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 
-function Footer() {
+function Footer({
+  isHomePage = true,
+  themePreference = 'system',
+  resolvedTheme = 'light',
+  onThemeChange,
+}) {
   const currentYear = new Date().getFullYear();
   const socialLinks = [
     {
@@ -20,6 +26,7 @@ function Footer() {
       href: 'https://www.youtube.com/@PrimaVistaBauprojekte',
     },
   ];
+  const getSectionHref = (id) => (isHomePage ? `#${id}` : `/#${id}`);
 
   return (
     <footer className="footer">
@@ -60,10 +67,10 @@ function Footer() {
           <div className="footer__links">
             <div className="footer__column">
               <h4 className="footer__heading">Navigation</h4>
-              <a href="#leistungen" className="footer__link">Leistungen</a>
-              <a href="#referenzen" className="footer__link">Referenzen</a>
-              <a href="#ueber-uns" className="footer__link">Über uns</a>
-              <a href="#kontakt" className="footer__link">Kontakt</a>
+              <a href={getSectionHref('leistungen')} className="footer__link">Leistungen</a>
+              <a href={getSectionHref('referenzen')} className="footer__link">Referenzen</a>
+              <a href={getSectionHref('ueber-uns')} className="footer__link">Über uns</a>
+              <a href={getSectionHref('kontakt')} className="footer__link">Kontakt</a>
             </div>
 
             <div className="footer__column">
@@ -76,11 +83,19 @@ function Footer() {
 
             <div className="footer__column">
               <h4 className="footer__heading">Kontakt</h4>
-              <span className="footer__item">Frankfurt am Main</span>
-              <a href="tel:+4917648747554" className="footer__link">+49 176 48747554</a>
-              <a href="mailto:office@primavista-bauprojekte.com" className="footer__link">
-                office@primavista-bauprojekte.com
+              <span className="footer__item">Spinnereistrasse 5, 6020 Emmenbrücke, Schweiz</span>
+              <a href="tel:+41782659332" className="footer__link">+41 78 265 93 32</a>
+              <a href="mailto:info@primavista-bauprojekte.ch" className="footer__link">
+                info@primavista-bauprojekte.ch
               </a>
+            </div>
+
+            <div className="footer__theme">
+              <ThemeSwitcher
+                themePreference={themePreference}
+                resolvedTheme={resolvedTheme}
+                onChange={onThemeChange}
+              />
             </div>
           </div>
         </div>
@@ -91,10 +106,10 @@ function Footer() {
           </p>
 
           <div className="footer__legal">
-            <a href="#impressum" className="footer__link footer__link--legal" id="impressum">
+            <a href="/impressum" className="footer__link footer__link--legal">
               Impressum
             </a>
-            <a href="#datenschutz" className="footer__link footer__link--legal" id="datenschutz">
+            <a href="/datenschutz" className="footer__link footer__link--legal">
               Datenschutzerklärung
             </a>
           </div>
