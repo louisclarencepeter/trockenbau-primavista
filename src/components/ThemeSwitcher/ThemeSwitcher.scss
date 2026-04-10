@@ -1,10 +1,10 @@
 .theme-switcher {
   width: 100%;
+  min-width: 0;
 }
 
 .theme-switcher__content {
   min-width: 0;
-  width: 100%;
   display: grid;
   gap: 14px;
   padding: 14px;
@@ -87,20 +87,6 @@
   color: currentColor;
 }
 
-@media (max-width: 860px) {
-  .theme-switcher__status {
-    max-width: 28ch;
-  }
-
-  .theme-switcher__controls {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .theme-switcher__button:first-child {
-    grid-column: 1 / -1;
-  }
-}
-
 @media (max-width: 992px) {
   .theme-switcher__content {
     padding: 12px;
@@ -109,28 +95,19 @@
 
 @media (max-width: 576px) {
   .theme-switcher__content {
-    gap: 12px;
+    gap: 10px;
     padding: 12px;
     border-radius: 20px;
   }
 
   .theme-switcher__controls {
-    grid-template-columns: 1fr;
     gap: 6px;
   }
 
   .theme-switcher__button {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    min-height: 50px;
-    padding: 12px 14px;
-    border-radius: 16px;
+    min-height: 48px;
+    padding: 8px 6px;
+    border-radius: 14px;
     font-size: 11px;
-  }
-
-  .theme-switcher__button:first-child {
-    grid-column: auto;
   }
 }

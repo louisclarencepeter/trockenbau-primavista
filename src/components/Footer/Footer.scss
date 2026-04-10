@@ -165,6 +165,7 @@
 
   .footer__theme {
     grid-column: 1 / -1;
+    justify-self: center;
   }
 }
 
@@ -205,6 +206,7 @@
 
   .footer__theme {
     grid-column: auto;
+    justify-self: center;
   }
 
   .footer__bottom {
