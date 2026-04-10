@@ -48,6 +48,7 @@ function PrivacyPolicy() {
           <li>Telefonnummer</li>
           <li>Postanschrift, sofern für Bauprojekte oder Offerten relevant</li>
           <li>Technische Daten wie IP-Adresse und Browsertyp beim Besuch der Webseite</li>
+          <li>Inhalte von Nachrichten, die Sie freiwillig über unseren Website-Chatbot eingeben</li>
         </ul>
       </div>
 
@@ -73,6 +74,22 @@ function PrivacyPolicy() {
           Erbringung unserer Dienstleistung zwingend erforderlich ist, etwa an
           spezialisierte Subunternehmer oder Lieferanten im Rahmen eines
           Bauprojekts, oder wenn eine gesetzliche Verpflichtung besteht.
+        </p>
+        <p className="legal-page__paragraph">
+          Für den auf unserer Website angebotenen Chatbot nutzen wir technische
+          Dienste von OpenAI. Wenn Sie den Chatbot verwenden, werden die von Ihnen
+          eingegebenen Nachrichten an OpenAI übermittelt, damit eine passende
+          Antwort erzeugt werden kann. Wir empfehlen deshalb, im Chat keine
+          besonders sensiblen personenbezogenen Daten zu teilen. Der Chatbot dient
+          ausschliesslich der ersten Information und Unterstützung bei allgemeinen
+          Fragen zu unseren Leistungen.
+        </p>
+        <p className="legal-page__paragraph">
+          Zur Anzeige von Kundenbewertungen binden wir ausgewählte Bewertungsdaten
+          über Google ein. Dabei werden öffentlich verfügbare Angaben wie
+          Bewertungsinhalt, Sternbewertung, Anzeigename, Profilbild und relative
+          Zeitangabe verarbeitet, damit wir unsere Google-Bewertungen auf der
+          Website übersichtlich darstellen können.
         </p>
       </div>
 
@@ -103,6 +120,13 @@ function PrivacyPolicy() {
           speichern. Beim Besuch unserer Seite werden zudem Logfiles erstellt.
           Analyse- oder Tracking-Tools wie Google Analytics setzen wir derzeit
           nicht ein.
+        </p>
+        <p className="legal-page__paragraph">
+          Uns ist ein verantwortungsvoller und transparenter Umgang mit Ihren Daten
+          wichtig. Der Chatbot soll Ihnen den Kontakt erleichtern, und die
+          eingebundenen Google-Bewertungen sollen Ihnen einen ehrlichen Eindruck
+          unserer Arbeit vermitteln. Wir achten dabei darauf, nur die für diese
+          Funktionen erforderlichen Daten zu verwenden.
         </p>
       </div>
 
