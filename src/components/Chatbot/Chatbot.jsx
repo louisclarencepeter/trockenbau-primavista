@@ -11,15 +11,7 @@ const createMessage = (role, content) => ({
   content,
 });
 
-const PROMPT_MESSAGES = [
-  'Haben Sie Fragen?',
-  'Wie können wir helfen?',
-  'Schnelle Hilfe zu Ihrem Projekt',
-  'Infos zum Ablauf und zur Anfrage',
-];
-
 function Chatbot() {
-
   const panelId = useId();
   const inputId = useId();
   const messagesRef = useRef(null);
@@ -32,7 +24,6 @@ function Chatbot() {
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [promptIndex, setPromptIndex] = useState(0);
 
   useEffect(() => {
     const container = messagesRef.current;
@@ -52,18 +43,6 @@ function Chatbot() {
     }, 120);
 
     return () => window.clearTimeout(timer);
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (isOpen) {
-      return undefined;
-    }
-
-    const intervalId = window.setInterval(() => {
-      setPromptIndex((currentIndex) => (currentIndex + 1) % PROMPT_MESSAGES.length);
-    }, 4200);
-
-    return () => window.clearInterval(intervalId);
   }, [isOpen]);
 
   useEffect(() => {
@@ -172,14 +151,6 @@ function Chatbot() {
         aria-controls={panelId}
         aria-label={isOpen ? 'Chat schließen' : 'Chat öffnen'}
       >
-        {!isOpen ? (
-          <span className="chatbot__teaser" aria-hidden="true">
-            <span key={PROMPT_MESSAGES[promptIndex]} className="chatbot__teaser-text">
-              {PROMPT_MESSAGES[promptIndex]}
-            </span>
-          </span>
-        ) : null}
-
         <span className="chatbot__toggle-icon">
           <MessageCircle size={26} strokeWidth={2.2} />
         </span>
