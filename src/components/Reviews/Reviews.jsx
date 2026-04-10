@@ -5,12 +5,13 @@ import './Reviews.scss';
 
 function StarRating({ rating }) {
   return (
-    <div className="reviews__stars" aria-label={`${rating} von 5 Sternen`}>
+    <div className="reviews__stars" role="img" aria-label={`${rating} von 5 Sternen`}>
       {[1, 2, 3, 4, 5].map((i) => (
         <Star
           key={i}
           size={16}
           strokeWidth={0}
+          aria-hidden="true"
           fill={i <= rating ? 'var(--color-accent)' : 'var(--color-border-card)'}
         />
       ))}

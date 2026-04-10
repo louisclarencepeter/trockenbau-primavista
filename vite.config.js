@@ -54,7 +54,24 @@ const netlifyFunctionDevPlugin = () => ({
   name: 'netlify-function-dev-plugin',
   configureServer(server) {
     server.middlewares.use(async (req, res, next) => {
-      const pathname = new URL(req.url || '/', 'http://localhost').pathname
+      const requestUrl = new URL(req.url || '/', 'http://localhost')
+      const pathname = requestUrl.pathname
+
+      if (pathname === '/.netlify/images') {
+        const sourceUrl = requestUrl.searchParams.get('url')
+
+        if (!sourceUrl) {
+          res.statusCode = 400
+          res.setHeader('Content-Type', 'application/json')
+          res.end(JSON.stringify({ error: 'Missing image url parameter' }))
+          return
+        }
+
+        res.statusCode = 302
+        res.setHeader('Location', sourceUrl)
+        res.end()
+        return
+      }
 
       if (pathname !== '/api/reviews' && pathname !== '/api/chat') {
         next()

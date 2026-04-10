@@ -1,3 +1,4 @@
+import { Facebook, Instagram, Youtube } from 'lucide-react';
 import './Footer.scss';
 import { logoSmall } from '../../assets/responsiveImages';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
@@ -12,17 +13,17 @@ function Footer({
   const socialLinks = [
     {
       label: 'Facebook',
-      iconClass: 'fa-brands fa-facebook-f',
+      icon: Facebook,
       href: 'https://www.facebook.com/PrimaVistaBauprojekte',
     },
     {
       label: 'Instagram',
-      iconClass: 'fa-brands fa-instagram',
+      icon: Instagram,
       href: 'https://www.instagram.com/primavista.bauprojekte',
     },
     {
       label: 'YouTube',
-      iconClass: 'fa-brands fa-youtube',
+      icon: Youtube,
       href: 'https://www.youtube.com/@PrimaVistaBauprojekte',
     },
   ];
@@ -48,17 +49,23 @@ function Footer({
 
               <div className="footer__socials">
                 {socialLinks.map((socialLink) => (
-                  <a
-                    key={socialLink.label}
-                    href={socialLink.href}
-                    className="footer__social-link"
-                    aria-label={socialLink.label}
-                    title={socialLink.label}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <i className={socialLink.iconClass} aria-hidden="true"></i>
-                  </a>
+                  (() => {
+                    const Icon = socialLink.icon;
+
+                    return (
+                      <a
+                        key={socialLink.label}
+                        href={socialLink.href}
+                        className="footer__social-link"
+                        aria-label={socialLink.label}
+                        title={socialLink.label}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Icon size={18} strokeWidth={1.9} aria-hidden="true" />
+                      </a>
+                    );
+                  })()
                 ))}
               </div>
             </div>

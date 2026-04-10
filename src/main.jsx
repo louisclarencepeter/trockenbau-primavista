@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import { applyTheme, getInitialTheme } from './utils/theme';
 
 const initialTheme = getInitialTheme();
