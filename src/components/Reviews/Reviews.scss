@@ -56,6 +56,10 @@
   transition-delay: 0.28s;
 }
 
+.reviews__cta {
+  transition-delay: 0.82s;
+}
+
 .reviews__rating-badge {
   display: flex;
   align-items: center;
@@ -97,7 +101,14 @@
   transition: opacity 0.75s ease, transform 0.75s ease, box-shadow 0.3s ease;
 }
 
+@for $i from 1 through 4 {
+  .reviews__card:nth-child(#{$i}) {
+    transition-delay: 0.28s + ($i * 0.1s);
+  }
+}
+
 .reviews__card:hover {
+  transform: translateY(-4px);
   box-shadow: var(--color-shadow-md);
 }
 

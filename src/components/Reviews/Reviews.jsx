@@ -18,11 +18,10 @@ function StarRating({ rating }) {
   );
 }
 
-function ReviewCard({ review, index }) {
+function ReviewCard({ review }) {
   return (
     <article
       className="reviews__card reviews__reveal"
-      style={{ transitionDelay: `${0.3 + index * 0.1}s` }}
     >
       <Quote size={28} className="reviews__quote-icon" strokeWidth={1.5} />
       <p className="reviews__review-text">{review.text}</p>
@@ -51,7 +50,9 @@ function ReviewCard({ review, index }) {
 function Reviews() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
-  const { sectionRef, isVisible } = useScrollReveal({ once: false });
+  const { sectionRef, isVisible } = useScrollReveal({
+    once: false,
+  });
 
   useEffect(() => {
     fetch('/api/reviews')
@@ -95,12 +96,15 @@ function Reviews() {
         </div>
 
         <div className="reviews__grid">
-          {displayReviews.map((review, i) => (
-            <ReviewCard key={review.author} review={review} index={i} />
+          {displayReviews.map((review) => (
+            <ReviewCard
+              key={`${review.author}-${review.relativeTime}-${review.rating}`}
+              review={review}
+            />
           ))}
         </div>
 
-        <div className="reviews__cta reviews__reveal" style={{ transitionDelay: '0.8s' }}>
+        <div className="reviews__cta reviews__reveal">
           <a
             href={`https://search.google.com/local/reviews?placeid=${import.meta.env.VITE_GOOGLE_PLACE_ID || ''}`}
             target="_blank"

@@ -1,16 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 function useScrollReveal({
   threshold = 0.2,
   rootMargin = '0px 0px -10% 0px',
   once = true,
 } = {}) {
-  const sectionRef = useRef(null);
+  const [element, setElement] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useCallback((node) => {
+    setElement(node);
+  }, []);
 
   useEffect(() => {
-    const element = sectionRef.current;
-
     if (!element) {
       return undefined;
     }
@@ -39,7 +40,7 @@ function useScrollReveal({
     return () => {
       observer.disconnect();
     };
-  }, [once, rootMargin, threshold]);
+  }, [element, once, rootMargin, threshold]);
 
   return { sectionRef, isVisible };
 }
