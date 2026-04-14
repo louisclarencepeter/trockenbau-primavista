@@ -1,10 +1,12 @@
 import './About.scss';
 import { CheckCircle2, Hammer, MessagesSquare, TimerReset } from 'lucide-react';
+import ResponsiveVideo from '../ResponsiveVideo/ResponsiveVideo';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import {
   aboutInteriorShowcaseImage,
   responsiveImageSizes,
 } from '../../assets/responsiveImages';
+import { aboutSectionVideo } from '../../assets/videoManifest';
 
 const highlights = [
   {
@@ -55,14 +57,22 @@ function About() {
             </p>
 
             <div className="ueber-uns__image-wrap ueber-uns__reveal">
-              <img
-                src={aboutInteriorShowcaseImage.src}
-                srcSet={aboutInteriorShowcaseImage.srcSet}
-                sizes={responsiveImageSizes.about}
-                alt="Innenausbau-Projekt von Trockenbau Prima Vista"
-                loading="lazy"
-                decoding="async"
+              <ResponsiveVideo
+                media={aboutSectionVideo}
+                isActive={isVisible}
+                posterAlt="Innenausbau-Projekt von Trockenbau Prima Vista"
                 className="ueber-uns__image"
+                fallback={(
+                  <img
+                    src={aboutInteriorShowcaseImage.src}
+                    srcSet={aboutInteriorShowcaseImage.srcSet}
+                    sizes={responsiveImageSizes.about}
+                    alt="Innenausbau-Projekt von Trockenbau Prima Vista"
+                    loading="lazy"
+                    decoding="async"
+                    className="ueber-uns__image"
+                  />
+                )}
               />
             </div>
           </div>

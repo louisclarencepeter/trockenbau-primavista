@@ -86,6 +86,7 @@
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
+  object-position: center center;
   transform: scale(1.01);
   transition: transform 0.7s ease;
 }
@@ -213,6 +214,7 @@
 
   .ueber-uns__image {
     aspect-ratio: 16 / 9;
+    object-position: center 38%;
   }
 }
 

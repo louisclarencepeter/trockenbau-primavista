@@ -1,4 +1,4 @@
-const CACHE_NAME = 'primavista-shell-v1';
+const CACHE_NAME = 'primavista-shell-v2';
 const APP_SHELL_URLS = [
   '/',
   '/index.html',
@@ -43,6 +43,16 @@ self.addEventListener('fetch', (event) => {
   const requestUrl = new URL(event.request.url);
 
   if (requestUrl.origin !== self.location.origin) {
+    return;
+  }
+
+  const isVideoRequest =
+    event.request.destination === 'video' ||
+    event.request.headers.has('range') ||
+    requestUrl.pathname.startsWith('/videos/') ||
+    /\.(mp4|webm|ogg|mov|m4v)$/i.test(requestUrl.pathname);
+
+  if (isVideoRequest) {
     return;
   }
 

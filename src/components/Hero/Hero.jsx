@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './Hero.scss';
 import Button from '../Button/Button';
+import ResponsiveVideo from '../ResponsiveVideo/ResponsiveVideo';
 import {
   heroDetailAccentImage,
   projectCeilingDrywallImage,
@@ -13,6 +14,7 @@ import {
   serviceInteriorImage,
   serviceRenovationImage,
 } from '../../assets/responsiveImages';
+import { heroMainVideo } from '../../assets/videoManifest';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
 const heroSlides = [
@@ -129,20 +131,27 @@ function Hero() {
         <div className="hero__visual hero__reveal">
           <div className="hero__showcase">
             <div className="hero__photo-frame hero__photo-frame--main">
-              {heroSlides.map((slide, index) => (
-                <img
-                  key={slide.alt}
-                  src={slide.image.src}
-                  srcSet={slide.image.srcSet}
-                  sizes={responsiveImageSizes.heroMain}
-                  alt={slide.alt}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  decoding={index === 0 ? 'sync' : 'async'}
-                  className={`hero__photo hero__photo--main${
-                    index === activeSlide ? ' hero__photo--active' : ''
-                  }`}
-                />
-              ))}
+              <ResponsiveVideo
+                media={heroMainVideo}
+                posterAlt=""
+                isActive={isVisible}
+                className="hero__photo hero__photo--main hero__photo--active hero__photo--video"
+                posterClassName="hero__photo hero__photo--main hero__photo--active hero__photo--poster"
+                fallback={heroSlides.map((slide, index) => (
+                  <img
+                    key={`${slide.alt}-fallback`}
+                    src={slide.image.src}
+                    srcSet={slide.image.srcSet}
+                    sizes={responsiveImageSizes.heroMain}
+                    alt={slide.alt}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding={index === 0 ? 'sync' : 'async'}
+                    className={`hero__photo hero__photo--main${
+                      index === activeSlide ? ' hero__photo--active' : ''
+                    }`}
+                  />
+                ))}
+              />
 
               <div className="hero__overlay hero__overlay--quality hero__reveal">
                 <span className="hero__overlay-label">Prima Vista</span>
