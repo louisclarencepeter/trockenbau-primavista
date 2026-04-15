@@ -173,6 +173,30 @@
   line-height: 1.55;
 }
 
+.hero__detail-label {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 1;
+  display: inline-flex;
+  width: fit-content;
+  max-width: calc(100% - 24px);
+  padding: 7px 10px;
+  border: 1px solid var(--color-border-contrast);
+  border-radius: 8px;
+  background: var(--color-overlay-surface);
+  color: var(--color-accent);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  box-shadow: var(--color-shadow-xs);
+  backdrop-filter: blur(10px);
+}
+
 .hero__detail-stack .hero__photo-frame:nth-child(1) {
   transition-delay: 0.5s;
 }
@@ -306,5 +330,13 @@
 
   .hero__overlay strong {
     font-size: 20px;
+  }
+
+  .hero__detail-label {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    max-width: calc(100% - 16px);
+    font-size: 10px;
   }
 }

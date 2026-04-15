@@ -11,6 +11,19 @@ const getConnection = () => {
   return navigator.connection || navigator.mozConnection || navigator.webkitConnection || null;
 };
 
+const prepareInlineAutoplay = (videoElement) => {
+  if (!videoElement) {
+    return;
+  }
+
+  videoElement.muted = true;
+  videoElement.defaultMuted = true;
+  videoElement.playsInline = true;
+  videoElement.setAttribute('muted', '');
+  videoElement.setAttribute('playsinline', '');
+  videoElement.setAttribute('webkit-playsinline', '');
+};
+
 function ResponsiveVideo({
   media,
   fallback = null,
@@ -23,7 +36,7 @@ function ResponsiveVideo({
   const [isMobile, setIsMobile] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [saveData, setSaveData] = useState(false);
-  const [isVideoAvailable, setIsVideoAvailable] = useState(false);
+  const [failedSourcesKey, setFailedSourcesKey] = useState('');
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -58,41 +71,20 @@ function ResponsiveVideo({
     : media.desktopSources;
   const shouldUseStillMedia = prefersReducedMotion || saveData;
   const sourcesKey = selectedSources.map(({ src }) => src).join('|');
+  const hasVideoCandidate =
+    typeof window !== 'undefined' && !shouldUseStillMedia && selectedSources.length > 0;
+  const shouldRenderVideo = hasVideoCandidate && failedSourcesKey !== sourcesKey;
 
-  useEffect(() => {
-    if (typeof window === 'undefined' || shouldUseStillMedia || selectedSources.length === 0) {
-      setIsVideoAvailable(false);
-      return undefined;
+  const playVideo = () => {
+    const videoElement = videoRef.current;
+
+    if (!videoElement || !isActive || !shouldRenderVideo) {
+      return;
     }
 
-    let isMounted = true;
-
-    const checkAvailability = async () => {
-      const results = await Promise.allSettled(
-        selectedSources.map(({ src }) =>
-          fetch(src, { method: 'HEAD' }).then((response) => response.ok)
-        )
-      );
-
-      if (!isMounted) {
-        return;
-      }
-
-      setIsVideoAvailable(
-        results.some((result) => result.status === 'fulfilled' && result.value)
-      );
-    };
-
-    checkAvailability().catch(() => {
-      if (isMounted) {
-        setIsVideoAvailable(false);
-      }
-    });
-
-    return () => {
-      isMounted = false;
-    };
-  }, [selectedSources, shouldUseStillMedia]);
+    prepareInlineAutoplay(videoElement);
+    videoElement.play()?.catch(() => undefined);
+  };
 
   useEffect(() => {
     const videoElement = videoRef.current;
@@ -101,14 +93,16 @@ function ResponsiveVideo({
       return;
     }
 
-    if (!isActive || !isVideoAvailable || shouldUseStillMedia) {
+    prepareInlineAutoplay(videoElement);
+
+    if (!isActive || !shouldRenderVideo) {
       videoElement.pause();
       return;
     }
 
-    const playPromise = videoElement.play();
-    playPromise?.catch(() => undefined);
-  }, [isActive, isVideoAvailable, shouldUseStillMedia, sourcesKey]);
+    videoElement.load();
+    videoElement.play()?.catch(() => undefined);
+  }, [isActive, shouldRenderVideo, sourcesKey]);
 
   if (shouldUseStillMedia && media.poster) {
     return (
@@ -124,7 +118,7 @@ function ResponsiveVideo({
     );
   }
 
-  if (!isVideoAvailable) {
+  if (!shouldRenderVideo) {
     if (fallback) {
       return fallback;
     }
@@ -155,9 +149,14 @@ function ResponsiveVideo({
       autoPlay
       loop
       muted
+      defaultMuted
       playsInline
-      preload={isActive ? 'metadata' : 'none'}
+      preload={isActive ? 'auto' : 'metadata'}
       aria-hidden="true"
+      onCanPlay={playVideo}
+      onLoadedData={playVideo}
+      onLoadedMetadata={playVideo}
+      onError={() => setFailedSourcesKey(sourcesKey)}
     >
       {selectedSources.map(({ src, type }) => (
         <source key={src} src={src} type={type} />

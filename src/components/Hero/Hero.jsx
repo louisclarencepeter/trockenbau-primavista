@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Hero.scss';
 import Button from '../Button/Button';
-import ResponsiveVideo from '../ResponsiveVideo/ResponsiveVideo';
 import {
   heroDetailAccentImage,
   projectCeilingDrywallImage,
@@ -14,75 +13,71 @@ import {
   serviceInteriorImage,
   serviceRenovationImage,
 } from '../../assets/responsiveImages';
-import { heroMainVideo } from '../../assets/videoManifest';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
 const heroSlides = [
   {
     image: projectFeaturedModernizationImage,
     alt: 'Innenausbau-Projekt mit präziser Trockenbau-Ausführung',
+    label: 'Prima Vista',
+    title: 'Saubere Ergebnisse',
+    text: 'Präzise Ausführung und ein hochwertiges Finish bis ins Detail.',
   },
   {
     image: serviceDrywallImage,
     alt: 'Trockenbau-Projekt mit sauber vorbereiteten Wand- und Deckenflächen',
+    label: 'Trockenbau',
+    title: 'Klare Konstruktion',
+    text: 'Stabile Unterkonstruktionen, saubere Beplankung und durchdachte Anschlüsse.',
   },
   {
     image: heroDetailAccentImage,
     alt: 'Sanierungsprojekt mit hochwertiger handwerklicher Ausführung',
+    label: 'Sanierung',
+    title: 'Sorgfältige Modernisierung',
+    text: 'Bestehende Räume werden präzise vorbereitet und Schritt für Schritt erneuert.',
   },
   {
     image: projectDetailCeilingImage,
     alt: 'Innenausbau mit präzise ausgeführten Deckenarbeiten',
+    label: 'Deckenarbeiten',
+    title: 'Details mit Struktur',
+    text: 'Decken, Kanten und Übergänge werden sauber geplant und ausgeführt.',
   },
   {
     image: serviceInteriorImage,
     alt: 'Modern ausgebauter Wohnraum mit sauberem Finish',
+    label: 'Innenausbau',
+    title: 'Hochwertiges Finish',
+    text: 'Oberflächen und Raumwirkung bleiben bis zum Abschluss im Blick.',
   },
-];
-
-const heroDetailTopSlides = [
   {
     image: projectCeilingDrywallImage,
     alt: 'Detailansicht eines hochwertigen Innenausbau-Projekts',
+    label: 'Montage',
+    title: 'Exakte Ausführung',
+    text: 'Jeder Arbeitsschritt wird mit ruhiger Hand und fachlicher Routine umgesetzt.',
   },
   {
     image: projectExistingSpaceRenovationImage,
     alt: 'Modern sanierter Innenraum mit klaren Linien',
-  },
-  {
-    image: projectDetailCeilingImage,
-    alt: 'Innenausbau mit präzise ausgeführten Deckenarbeiten',
-  },
-  {
-    image: projectFeaturedModernizationImage,
-    alt: 'Wohnraum-Modernisierung mit klarer Trockenbau-Struktur',
-  },
-  {
-    image: serviceDrywallImage,
-    alt: 'Trockenbau-Flächen mit sauberer handwerklicher Umsetzung',
-  },
-];
-
-const heroDetailBottomSlides = [
-  {
-    image: serviceInteriorImage,
-    alt: 'Innenausbau mit klaren Linien und hochwertigem Finish',
-  },
-  {
-    image: serviceDrywallImage,
-    alt: 'Trockenbau-Projekt mit sauber vorbereiteten Wandflächen',
-  },
-  {
-    image: heroDetailAccentImage,
-    alt: 'Sanierungsprojekt mit hochwertiger Ausführung',
-  },
-  {
-    image: projectFinishImage,
-    alt: 'Innenausbau mit vorbereiteten Wand- und Deckenflächen',
+    label: 'Renovierung',
+    title: 'Neue Raumqualität',
+    text: 'Aus alten Flächen entstehen funktionale und hochwertige Innenräume.',
   },
   {
     image: serviceRenovationImage,
     alt: 'Modern sanierter Innenraum mit heller Raumwirkung',
+    label: 'Projektplanung',
+    title: 'Verlässlicher Ablauf',
+    text: 'Klare Absprachen und saubere Arbeit sorgen für planbare Ergebnisse.',
+  },
+  {
+    image: projectFinishImage,
+    alt: 'Innenausbau mit vorbereiteten Wand- und Deckenflächen',
+    label: 'Finish',
+    title: 'Bereit für den Abschluss',
+    text: 'Spachtelung, Vorbereitung und Übergänge werden sorgfältig fertiggestellt.',
   },
 ];
 
@@ -97,10 +92,16 @@ function Hero() {
   useEffect(() => {
     const intervalId = window.setInterval(() => {
       setActiveSlide((currentSlide) => (currentSlide + 1) % heroSlides.length);
-    }, 4800);
+    }, 4200);
 
     return () => window.clearInterval(intervalId);
   }, []);
+
+  const mainSlide = heroSlides[activeSlide];
+  const detailSlides = [
+    heroSlides[(activeSlide + 1) % heroSlides.length],
+    heroSlides[(activeSlide + 2) % heroSlides.length],
+  ];
 
   return (
     <section
@@ -131,69 +132,51 @@ function Hero() {
         <div className="hero__visual hero__reveal">
           <div className="hero__showcase">
             <div className="hero__photo-frame hero__photo-frame--main">
-              <ResponsiveVideo
-                media={heroMainVideo}
-                posterAlt=""
-                isActive={isVisible}
-                className="hero__photo hero__photo--main hero__photo--active hero__photo--video"
-                posterClassName="hero__photo hero__photo--main hero__photo--active hero__photo--poster"
-                fallback={heroSlides.map((slide, index) => (
-                  <img
-                    key={`${slide.alt}-fallback`}
-                    src={slide.image.src}
-                    srcSet={slide.image.srcSet}
-                    sizes={responsiveImageSizes.heroMain}
-                    alt={slide.alt}
-                    loading={index === 0 ? 'eager' : 'lazy'}
-                    decoding={index === 0 ? 'sync' : 'async'}
-                    className={`hero__photo hero__photo--main${
-                      index === activeSlide ? ' hero__photo--active' : ''
-                    }`}
-                  />
-                ))}
-              />
+              {heroSlides.map((slide, index) => (
+                <img
+                  key={`${slide.alt}-main`}
+                  src={slide.image.src}
+                  srcSet={slide.image.srcSet}
+                  sizes={responsiveImageSizes.heroMain}
+                  alt={slide.alt}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  decoding={index === 0 ? 'sync' : 'async'}
+                  className={`hero__photo hero__photo--main${
+                    index === activeSlide ? ' hero__photo--active' : ''
+                  }`}
+                />
+              ))}
 
               <div className="hero__overlay hero__overlay--quality hero__reveal">
-                <span className="hero__overlay-label">Prima Vista</span>
-                <strong>Saubere Ergebnisse</strong>
-                <span>Präzise Ausführung und ein hochwertiges Finish bis ins Detail.</span>
+                <span className="hero__overlay-label">{mainSlide.label}</span>
+                <strong>{mainSlide.title}</strong>
+                <span>{mainSlide.text}</span>
               </div>
             </div>
 
             <div className="hero__detail-stack">
-              <div className="hero__photo-frame hero__photo-frame--detail hero__reveal">
-                {heroDetailTopSlides.map((slide, index) => (
-                  <img
-                    key={slide.alt}
-                    src={slide.image.src}
-                    srcSet={slide.image.srcSet}
-                    sizes={responsiveImageSizes.heroDetail}
-                    alt={slide.alt}
-                    loading="lazy"
-                    decoding="async"
-                    className={`hero__photo hero__photo--detail-slide${
-                      index === activeSlide ? ' hero__photo--active' : ''
-                    }`}
-                  />
-                ))}
-              </div>
-
-              <div className="hero__photo-frame hero__photo-frame--detail hero__reveal">
-                {heroDetailBottomSlides.map((slide, index) => (
-                  <img
-                    key={slide.alt}
-                    src={slide.image.src}
-                    srcSet={slide.image.srcSet}
-                    sizes={responsiveImageSizes.heroDetail}
-                    alt={slide.alt}
-                    loading="lazy"
-                    decoding="async"
-                    className={`hero__photo hero__photo--detail-slide${
-                      index === activeSlide ? ' hero__photo--active' : ''
-                    }`}
-                  />
-                ))}
-              </div>
+              {detailSlides.map((detailSlide, detailIndex) => (
+                <div
+                  className="hero__photo-frame hero__photo-frame--detail hero__reveal"
+                  key={`detail-frame-${detailIndex}`}
+                >
+                  {heroSlides.map((slide) => (
+                    <img
+                      key={`${slide.alt}-detail-${detailIndex}`}
+                      src={slide.image.src}
+                      srcSet={slide.image.srcSet}
+                      sizes={responsiveImageSizes.heroDetail}
+                      alt={slide.alt}
+                      loading="lazy"
+                      decoding="async"
+                      className={`hero__photo hero__photo--detail-slide${
+                        slide === detailSlide ? ' hero__photo--active' : ''
+                      }`}
+                    />
+                  ))}
+                  <span className="hero__detail-label">{detailSlide.label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
