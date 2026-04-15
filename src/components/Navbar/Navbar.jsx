@@ -8,10 +8,11 @@ const navItems = [
   { id: 'leistungen', label: 'Leistungen' },
   { id: 'ueber-uns', label: 'Über uns' },
   { id: 'referenzen', label: 'Referenzen' },
+  { id: 'kalkulator', label: 'Kalkulator', href: '/kalkulator' },
   { id: 'kontakt', label: 'Kontakt' },
 ];
 
-function Navbar({ isHomePage = true }) {
+function Navbar({ isHomePage = true, currentPath = '/' }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isInstantClosing, setIsInstantClosing] = useState(false);
@@ -80,9 +81,11 @@ function Navbar({ isHomePage = true }) {
   };
 
   const getNavHref = (id) => (isHomePage ? `#${id}` : `/#${id}`);
+  const getItemHref = (item) => item.href ?? getNavHref(item.id);
   const homeHref = isHomePage ? '#top' : '/';
   const contactHref = isHomePage ? '#kontakt' : '/#kontakt';
   const visibleActiveSection = isHomePage ? activeSection : '';
+  const isPageItemActive = (item) => Boolean(item.href && currentPath === item.href);
 
   useEffect(() => {
     if (!isHomePage) {
@@ -161,9 +164,11 @@ function Navbar({ isHomePage = true }) {
           {navItems.map((item) => (
             <a
               key={item.id}
-              href={getNavHref(item.id)}
-              className={`navbar__link${visibleActiveSection === item.id ? ' is-active' : ''}`}
-              onClick={handleNavClick(item.id)}
+              href={getItemHref(item)}
+              className={`navbar__link${
+                visibleActiveSection === item.id || isPageItemActive(item) ? ' is-active' : ''
+              }`}
+              onClick={item.href ? closeMenu : handleNavClick(item.id)}
             >
               {item.label}
             </a>
@@ -196,9 +201,11 @@ function Navbar({ isHomePage = true }) {
           {navItems.map((item) => (
             <a
               key={item.id}
-              href={getNavHref(item.id)}
-              className={`navbar__mobile-link${visibleActiveSection === item.id ? ' is-active' : ''}`}
-              onClick={handleNavClick(item.id)}
+              href={getItemHref(item)}
+              className={`navbar__mobile-link${
+                visibleActiveSection === item.id || isPageItemActive(item) ? ' is-active' : ''
+              }`}
+              onClick={item.href ? closeMenu : handleNavClick(item.id)}
             >
               {item.label}
             </a>

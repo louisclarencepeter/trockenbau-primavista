@@ -77,6 +77,7 @@ function Footer({
               <a href={getSectionHref('leistungen')} className="footer__link">Leistungen</a>
               <a href={getSectionHref('referenzen')} className="footer__link">Referenzen</a>
               <a href={getSectionHref('ueber-uns')} className="footer__link">Über uns</a>
+              <a href="/kalkulator" className="footer__link">Kalkulator</a>
               <a href={getSectionHref('kontakt')} className="footer__link">Kontakt</a>
             </div>
 

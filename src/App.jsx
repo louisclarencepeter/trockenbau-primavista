@@ -11,6 +11,7 @@ import Projects from './components/Projects/Projects';
 import Reviews from './components/Reviews/Reviews';
 import Contact from './components/Contact/Contact';
 import LegalPage from './components/Legal/LegalPage';
+import CalculatorPage from './components/Calculator/Calculator';
 import Chatbot from './components/Chatbot/Chatbot';
 import CookieBanner from './components/CookieBanner/CookieBanner';
 import Footer from './components/Footer/Footer';
@@ -35,6 +36,7 @@ function App({ initialTheme = 'light' }) {
   const isHomePage = currentPath === '/';
   const isImpressumPage = currentPath === '/impressum';
   const isPrivacyPage = currentPath === '/datenschutz';
+  const isCalculatorPage = currentPath === '/kalkulator';
 
   useEffect(() => {
     applyTheme(theme);
@@ -43,6 +45,7 @@ function App({ initialTheme = 'light' }) {
   useEffect(() => {
     const titleByPath = {
       '/': 'Trockenbau Prima Vista | Trockenbau, Sanierung und Innenausbau',
+      '/kalkulator': 'Kalkulator | Prima Vista B&G GmbH',
       '/impressum': 'Impressum | Prima Vista B&G GmbH',
       '/datenschutz': 'Datenschutzerklärung | Prima Vista B&G GmbH',
     };
@@ -85,12 +88,14 @@ function App({ initialTheme = 'light' }) {
 
   return (
     <>
-      <Navbar isHomePage={isHomePage} />
+      <Navbar isHomePage={isHomePage} currentPath={currentPath} />
       <main id="main-content">
         {isImpressumPage ? (
           <LegalPage page="impressum" />
         ) : isPrivacyPage ? (
           <LegalPage page="datenschutz" />
+        ) : isCalculatorPage ? (
+          <CalculatorPage />
         ) : (
           <>
             <Hero />

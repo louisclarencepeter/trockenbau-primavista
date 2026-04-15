@@ -15,6 +15,19 @@
   display: flex;
   justify-content: center;
   pointer-events: none;
+  transform: translateY(calc(100% + var(--floating-trigger-offset) + 20px));
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.4s ease,
+    visibility 0.4s ease;
+}
+
+.cookie-banner--visible {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
 }
 
 .cookie-banner__trigger {
@@ -171,6 +184,11 @@
     right: 0;
     bottom: var(--floating-trigger-offset-mobile);
     padding: 0 14px;
+    transform: translateY(calc(100% + var(--floating-trigger-offset-mobile) + 20px));
+  }
+
+  .cookie-banner--visible {
+    transform: translateY(0);
   }
 
   .cookie-banner__trigger {
@@ -181,6 +199,7 @@
   }
 
   .cookie-banner__content {
+    box-sizing: border-box;
     width: min(100%, 312px);
     flex-direction: column;
     align-items: stretch;
