@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary.jsx';
 import { applyTheme, getInitialTheme } from './utils/theme';
 
 const initialTheme = getInitialTheme();
@@ -15,6 +16,8 @@ if (import.meta.env.PROD && 'serviceWorker' in navigator) {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App initialTheme={initialTheme} />
+    <ErrorBoundary>
+      <App initialTheme={initialTheme} />
+    </ErrorBoundary>
   </React.StrictMode>,
 );
