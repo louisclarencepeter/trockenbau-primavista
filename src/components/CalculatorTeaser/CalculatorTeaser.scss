@@ -78,9 +78,11 @@
 
 .calculator-teaser__button {
   display: inline-flex;
+  box-sizing: border-box;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  max-width: 100%;
   min-height: 52px;
   margin-top: 34px;
   padding: 0 24px;
@@ -240,6 +242,9 @@
 
   .calculator-teaser__button {
     width: 100%;
+    padding: 0 16px;
+    font-size: 15px;
+    gap: 8px;
   }
 
   .calculator-teaser__visual {

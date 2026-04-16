@@ -1076,6 +1076,16 @@
     grid-column: 1 / -1;
     grid-template-columns: 1fr;
   }
+
+  .calculator-request__content {
+    max-width: none;
+  }
+
+  .calculator-request__media {
+    width: min(100%, 720px);
+    margin-top: 40px;
+    aspect-ratio: 16 / 10;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1099,6 +1109,8 @@
 
   .calculator-request__media {
     margin-top: 32px;
+    width: 100%;
+    aspect-ratio: 4 / 3;
   }
 
   .calculator-offer__container,
@@ -1185,6 +1197,8 @@
   }
 
   .calculator-hero__media-main {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
     border-width: 8px;
   }
 
@@ -1268,5 +1282,104 @@
 
   .calculator-hero__media-stack {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 380px) and (max-height: 640px) {
+  .calculator-hero {
+    padding: 38px 0 26px;
+  }
+
+  .calculator-hero__container {
+    gap: 24px;
+  }
+
+  .calculator-hero__breadcrumb {
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+
+  .calculator-hero__eyebrow,
+  .calculator-config__eyebrow,
+  .calculator-request__eyebrow {
+    margin-bottom: 10px;
+    font-size: 11px;
+  }
+
+  .calculator-hero__title {
+    margin-bottom: 14px;
+    font-size: 24px;
+    line-height: 1.12;
+  }
+
+  .calculator-hero__text {
+    max-width: calc(100% - 44px);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .calculator-hero__benefits {
+    max-width: calc(100% - 44px);
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .calculator-hero__benefit {
+    gap: 8px;
+    font-size: 14px;
+  }
+
+  .calculator-hero__visual {
+    gap: 8px;
+  }
+
+  .calculator-hero__media-main {
+    aspect-ratio: 16 / 11;
+    border-width: 7px;
+  }
+
+  .calculator-hero__media-caption {
+    left: 12px;
+    top: 12px;
+    gap: 3px;
+    max-width: calc(100% - 24px);
+    padding: 10px 11px;
+  }
+
+  .calculator-hero__media-caption span,
+  .calculator-hero__stack-label {
+    font-size: 10px;
+  }
+
+  .calculator-hero__media-caption strong {
+    font-size: 15px;
+  }
+
+  .calculator-hero__stack-frame {
+    border-width: 5px;
+  }
+
+  .calculator-hero__stack-label {
+    left: 10px;
+    bottom: 10px;
+    max-width: calc(100% - 20px);
+    padding: 6px 8px;
+  }
+
+  .calculator-hero__price-card {
+    right: 12px;
+    bottom: 12px;
+    gap: 3px;
+    padding: 12px 13px;
+  }
+
+  .calculator-hero__price-card span,
+  .calculator-hero__price-card small {
+    font-size: 11px;
+  }
+
+  .calculator-hero__price-card strong {
+    font-size: 22px;
   }
 }

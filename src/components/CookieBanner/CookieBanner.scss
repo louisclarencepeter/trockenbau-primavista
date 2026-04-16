@@ -241,3 +241,67 @@
     font-size: 14px;
   }
 }
+
+@media (max-width: 380px) and (max-height: 640px) {
+  .cookie-banner {
+    left: 0;
+    right: 0;
+    justify-content: stretch;
+    padding: 0 8px;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    transform: translateY(calc(100% + max(8px, env(safe-area-inset-bottom)) + 12px));
+  }
+
+  .cookie-banner__trigger {
+    left: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    width: 46px;
+    height: 46px;
+  }
+
+  .cookie-banner__trigger-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .cookie-banner__trigger-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .cookie-banner__content {
+    width: 100%;
+    max-width: none;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 16px;
+    max-height: min(240px, calc(100dvh - 120px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .cookie-banner__eyebrow {
+    margin-bottom: 4px;
+    font-size: 10px;
+  }
+
+  .cookie-banner__title {
+    margin-bottom: 4px;
+    font-size: 16px;
+  }
+
+  .cookie-banner__text {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .cookie-banner__actions {
+    gap: 8px;
+  }
+
+  .cookie-banner__button {
+    min-height: 42px;
+    padding: 10px 10px;
+    font-size: 12px;
+  }
+}

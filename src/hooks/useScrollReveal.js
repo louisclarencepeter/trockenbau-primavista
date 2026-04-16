@@ -7,9 +7,30 @@ function useScrollReveal({
 } = {}) {
   const [element, setElement] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const getInitialVisibility = useCallback((node) => {
+    const rect = node.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+
+    if (visibleHeight <= 0) {
+      return false;
+    }
+
+    const measuredHeight = Math.min(rect.height || viewportHeight, viewportHeight);
+    const visibleRatio = visibleHeight / Math.max(measuredHeight, 1);
+
+    return visibleRatio >= threshold;
+  }, [threshold]);
+
   const sectionRef = useCallback((node) => {
     setElement(node);
-  }, []);
+
+    if (!node) {
+      return;
+    }
+
+    setIsVisible((current) => current || getInitialVisibility(node));
+  }, [getInitialVisibility]);
 
   useEffect(() => {
     if (!element) {

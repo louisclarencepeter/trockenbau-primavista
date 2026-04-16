@@ -124,6 +124,7 @@ html {
 }
 
 body {
+  margin: 0;
   background-color: var(--color-page-bg);
   color: var(--color-text-primary);
   transition: background-color 0.35s ease, color 0.35s ease;
