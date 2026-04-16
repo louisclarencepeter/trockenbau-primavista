@@ -8,7 +8,7 @@ const navItems = [
   { id: 'leistungen', label: 'Leistungen' },
   { id: 'ueber-uns', label: 'Über uns' },
   { id: 'referenzen', label: 'Referenzen' },
-  { id: 'kalkulator', label: 'Kalkulator', href: '/kalkulator' },
+  { id: 'kalkulator', label: 'Kalkulator', href: '/kalkulator', homeSectionId: 'kostenrechner' },
   { id: 'kontakt', label: 'Kontakt' },
 ];
 
@@ -83,7 +83,14 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
   const getNavHref = (id) => (isHomePage ? `#${id}` : `/#${id}`);
   const getItemHref = (item) => item.href ?? getNavHref(item.id);
   const homeHref = isHomePage ? '#top' : '/';
+  const isCalculatorPage = currentPath === '/kalkulator';
   const contactHref = isHomePage ? '#kontakt' : '/#kontakt';
+  const primaryCtaHref = isHomePage
+    ? '/kalkulator'
+    : isCalculatorPage
+      ? '#anfrage'
+      : contactHref;
+  const primaryCtaLabel = isHomePage ? 'Kosten kalkulieren' : 'Jetzt anfragen';
   const visibleActiveSection = isHomePage ? activeSection : '';
   const isPageItemActive = (item) => Boolean(item.href && currentPath === item.href);
 
@@ -93,7 +100,19 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
     }
 
     const sections = navItems
-      .map(({ id }) => document.getElementById(id))
+      .map((item) => {
+        const sectionId = item.homeSectionId ?? item.id;
+        const element = document.getElementById(sectionId);
+
+        if (!element) {
+          return null;
+        }
+
+        return {
+          navId: item.id,
+          element,
+        };
+      })
       .filter(Boolean);
 
     if (!sections.length) {
@@ -111,17 +130,17 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
       const probeY = Math.max(headerOffset + 24, viewportProbe);
 
       const activeMatch = sections.find((section) => {
-        const rect = section.getBoundingClientRect();
+        const rect = section.element.getBoundingClientRect();
 
         return rect.top <= probeY && rect.bottom > probeY;
       });
 
       if (activeMatch) {
-        setActiveSection(activeMatch.id);
+        setActiveSection(activeMatch.navId);
         return;
       }
 
-      const firstSection = sections[0];
+      const firstSection = sections[0]?.element;
 
       if (firstSection) {
         const activationOffset = 160;
@@ -134,8 +153,8 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
 
       const lastSection = sections[sections.length - 1];
 
-      if (lastSection) {
-        setActiveSection(lastSection.id);
+      if (lastSection?.navId) {
+        setActiveSection(lastSection.navId);
       }
     };
 
@@ -177,8 +196,12 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
 
         <div className="navbar__utilities">
           <div className="navbar__cta">
-            <Button href={contactHref} onClick={handleNavClick('kontakt')} variant="primary">
-              Jetzt anfragen
+            <Button
+              href={primaryCtaHref}
+              onClick={isHomePage ? undefined : handleNavClick('kontakt')}
+              variant="primary"
+            >
+              {primaryCtaLabel}
             </Button>
           </div>
         </div>
@@ -212,8 +235,12 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
           ))}
 
           <div className="navbar__mobile-cta">
-            <Button href={contactHref} onClick={handleNavClick('kontakt')} variant="primary">
-              Jetzt anfragen
+            <Button
+              href={primaryCtaHref}
+              onClick={isHomePage ? undefined : handleNavClick('kontakt')}
+              variant="primary"
+            >
+              {primaryCtaLabel}
             </Button>
           </div>
         </nav>

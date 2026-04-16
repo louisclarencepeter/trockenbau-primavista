@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Calculator as CalculatorIcon,
   Check,
@@ -11,12 +11,15 @@ import {
 } from 'lucide-react';
 import './Calculator.scss';
 import {
+  projectCeilingDrywallImage,
   projectDetailCeilingImage,
   projectExistingSpaceRenovationImage,
   projectFeaturedModernizationImage,
+  projectFinishImage,
   responsiveImageSizes,
   serviceInteriorImage,
 } from '../../assets/responsiveImages';
+import useScrollReveal from '../../hooks/useScrollReveal';
 
 const vatRate = 0.081;
 const minQuantity = 1;
@@ -24,33 +27,40 @@ const maxQuantity = 5;
 
 const packages = [
   {
-    id: 'bad-kompakt',
-    title: 'Badsanierung Kompakt',
-    description: 'Solide Modernisierung mit sauberem Ausbau, Abdichtung und Finish.',
+    id: 'trockenbau',
+    title: 'Trockenbau',
+    description: 'Wände, Decken und Vorwandarbeiten mit präziser Unterkonstruktion.',
+    price: 8600,
+    details: ['Unterkonstruktion & Beplankung', 'Spachtelarbeiten', 'Saubere Anschlüsse'],
+  },
+  {
+    id: 'sanierung-renovierung',
+    title: 'Sanierung & Renovierung',
+    description: 'Bestehende Räume fachgerecht erneuern, vorbereiten und hochwertig abschließen.',
     price: 12800,
-    details: ['Rückbau & Vorbereitung', 'Nassraumabdichtung', 'Saubere Anschlussarbeiten'],
+    details: ['Rückbau & Vorbereitung', 'Oberflächen erneuern', 'Koordinierter Ablauf'],
   },
   {
-    id: 'wanne-dusche',
-    title: 'Badewanne & Dusche',
-    description: 'Komplette Lösung für ein Bad mit Wanne, Dusche und hochwertigen Oberflächen.',
+    id: 'innenausbau',
+    title: 'Innenausbau',
+    description: 'Individuelle Innenräume mit sauberem Finish und stimmigen Details.',
     price: 16400,
-    details: ['Wanne und Duschbereich', 'Vorwand & Trockenbau', 'Koordinierter Ablauf'],
+    details: ['Raumgestaltung', 'Trockenbau & Finish', 'Materialkoordination'],
   },
   {
-    id: 'barrierearm',
-    title: 'Barrierearme Dusche',
-    description: 'Ebenerdige Dusche, sichere Details und präzise Vorwandarbeiten.',
-    price: 9800,
-    details: ['Ebenerdiger Einstieg', 'Gefälle & Abdichtung', 'Rutschhemmender Aufbau'],
+    id: 'fenster',
+    title: 'Fenster',
+    description: 'Fensterarbeiten sauber in Trockenbau, Renovierung und Innenausbau integrieren.',
+    price: 7400,
+    details: ['Laibungen & Anschlüsse', 'Innenausbau-Integration', 'Saubere Übergänge'],
   },
 ];
 
 const roomSizes = [
-  { id: 'small', label: 'bis 5 m2', helper: 'Gäste- oder Kompaktbad', multiplier: 0.86 },
-  { id: 'medium', label: '6-9 m2', helper: 'Standardbad', multiplier: 1 },
-  { id: 'large', label: '10-14 m2', helper: 'Großzügiges Bad', multiplier: 1.18 },
-  { id: 'xl', label: 'ab 15 m2', helper: 'Masterbad oder Wellnessbereich', multiplier: 1.35 },
+  { id: 'small', label: 'bis 5 m2', helper: 'Kleiner Raum oder Detailarbeit', multiplier: 0.86 },
+  { id: 'medium', label: '6-9 m2', helper: 'Standardraum', multiplier: 1 },
+  { id: 'large', label: '10-14 m2', helper: 'Großzügiger Raum', multiplier: 1.18 },
+  { id: 'xl', label: 'ab 15 m2', helper: 'Mehrere Flächen oder großer Ausbau', multiplier: 1.35 },
 ];
 
 const addOns = [
@@ -70,8 +80,8 @@ const addOns = [
   },
   {
     id: 'waterproofing',
-    title: 'Abdichtung',
-    description: 'Nassraumabdichtung für Wand- und Bodenflächen.',
+    title: 'Abdichtung & Schutz',
+    description: 'Schutz- und Abdichtungsarbeiten für beanspruchte Wand- und Bodenflächen.',
     price: 1800,
     defaultSelected: true,
   },
@@ -96,6 +106,13 @@ const addOns = [
     price: 950,
     defaultSelected: false,
   },
+  {
+    id: 'windows',
+    title: 'Fenster & Anschlussdetails',
+    description: 'Fensterlaibungen, Übergänge und saubere Integration in den Innenausbau.',
+    price: 1600,
+    defaultSelected: false,
+  },
 ];
 
 const benefits = [
@@ -106,16 +123,52 @@ const benefits = [
 
 const heroMedia = [
   {
+    id: 'montage',
+    label: 'Montage',
+    title: 'Vorwand & Trockenbau',
     image: projectFeaturedModernizationImage,
     alt: 'Modernisierung im Innenausbau mit vorbereiteten Wandflächen',
   },
   {
+    id: 'finish',
+    label: 'Finish',
+    title: 'Saubere Oberflächen',
     image: serviceInteriorImage,
     alt: 'Hochwertiger Innenausbau mit sauberem Finish',
   },
   {
+    id: 'sanierung',
+    label: 'Sanierung',
+    title: 'Geprüfte Umsetzung',
     image: projectExistingSpaceRenovationImage,
     alt: 'Sanierter Innenraum während der Ausbauphase',
+  },
+];
+
+const requestMedia = [
+  {
+    id: 'anschluesse',
+    label: 'Detailprüfung',
+    title: 'Saubere Anschlüsse',
+    text: 'Wir prüfen Übergänge, Kanten und vorbereitete Flächen vor dem verbindlichen Angebot.',
+    image: projectDetailCeilingImage,
+    alt: 'Detailansicht eines vorbereiteten Innenausbau-Projekts',
+  },
+  {
+    id: 'decken',
+    label: 'Ausführung',
+    title: 'Decken & Wände',
+    text: 'Trockenbau, Beplankung und Unterkonstruktion werden sauber nachvollziehbar geplant.',
+    image: projectCeilingDrywallImage,
+    alt: 'Trockenbau-Projekt mit Decken- und Wandflächen',
+  },
+  {
+    id: 'finish',
+    label: 'Finish',
+    title: 'Bereit für die Übergabe',
+    text: 'Zum Schluss geht es um klare Oberflächen, stimmige Details und ein gepflegtes Ergebnis.',
+    image: projectFinishImage,
+    alt: 'Innenausbau-Projekt mit vorbereiteten Oberflächen und Finish-Arbeiten',
   },
 ];
 
@@ -127,6 +180,26 @@ const formatCurrency = (value) =>
   }).format(value);
 
 function CalculatorPage() {
+  const { sectionRef: heroRef, isVisible: isHeroVisible } = useScrollReveal({
+    threshold: 0.22,
+    rootMargin: '0px 0px -10% 0px',
+    once: false,
+  });
+  const { sectionRef: offerRef, isVisible: isOfferVisible } = useScrollReveal({
+    threshold: 0.28,
+    rootMargin: '0px 0px -8% 0px',
+    once: false,
+  });
+  const { sectionRef: configRef, isVisible: isConfigVisible } = useScrollReveal({
+    threshold: 0.12,
+    rootMargin: '0px 0px -8% 0px',
+    once: false,
+  });
+  const { sectionRef: requestRef, isVisible: isRequestVisible } = useScrollReveal({
+    threshold: 0.18,
+    rootMargin: '0px 0px -8% 0px',
+    once: false,
+  });
   const [selectedPackageId, setSelectedPackageId] = useState(packages[1].id);
   const [selectedSizeId, setSelectedSizeId] = useState(roomSizes[1].id);
   const [quantity, setQuantity] = useState(1);
@@ -136,13 +209,33 @@ function CalculatorPage() {
       .map((addOn) => addOn.id),
   );
   const [formStatus, setFormStatus] = useState('idle');
+  const [activeMediaIndex, setActiveMediaIndex] = useState(0);
 
   const selectedPackage = packages.find((item) => item.id === selectedPackageId) ?? packages[0];
   const selectedSize = roomSizes.find((item) => item.id === selectedSizeId) ?? roomSizes[1];
+  const activeHeroMedia = heroMedia[activeMediaIndex];
+  const supportingHeroMedia = [
+    heroMedia[(activeMediaIndex + 1) % heroMedia.length],
+    heroMedia[(activeMediaIndex + 2) % heroMedia.length],
+  ];
+  const activeRequestMediaIndex = activeMediaIndex % requestMedia.length;
+  const activeRequestMedia = requestMedia[activeRequestMediaIndex];
   const selectedAddOnItems = useMemo(
     () => addOns.filter((addOn) => selectedAddOns.includes(addOn.id)),
     [selectedAddOns],
   );
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return undefined;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setActiveMediaIndex((currentIndex) => (currentIndex + 1) % heroMedia.length);
+    }, 4600);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
 
   const totals = useMemo(() => {
     const extras = selectedAddOnItems.reduce((sum, addOn) => sum + addOn.price, 0);
@@ -214,27 +307,30 @@ function CalculatorPage() {
 
   return (
     <div className="calculator-page">
-      <section className="calculator-hero">
+      <section
+        className={`calculator-hero${isHeroVisible ? ' calculator-hero--visible' : ''}`}
+        ref={heroRef}
+      >
         <div className="container calculator-hero__container">
           <div className="calculator-hero__content">
-            <nav className="calculator-hero__breadcrumb" aria-label="Breadcrumb">
+            <nav className="calculator-hero__breadcrumb calculator-hero__reveal" aria-label="Breadcrumb">
               <a href="/">Startseite</a>
               <ChevronRight size={18} strokeWidth={2.2} aria-hidden="true" />
               <span>Kalkulator</span>
             </nav>
 
-            <span className="calculator-hero__eyebrow">Prima Vista Blitz-Angebot</span>
-            <h1 className="calculator-hero__title">
-              <span>Badsanierung</span>
+            <span className="calculator-hero__eyebrow calculator-hero__reveal">Prima Vista Blitz-Angebot</span>
+            <h1 className="calculator-hero__title calculator-hero__reveal" aria-label="Projekt kalkulieren: Montage und Material">
+              <span>Projekt</span>
               <span>kalkulieren:</span>
               <span>Montage & Material</span>
             </h1>
-            <p className="calculator-hero__text">
+            <p className="calculator-hero__text calculator-hero__reveal">
               Wählen Sie Leistungspaket, Raumgröße und Zusatzarbeiten. Der Rechner
               zeigt direkt eine nachvollziehbare Kostenschätzung für Ihre Anfrage.
             </p>
 
-            <div className="calculator-hero__benefits" aria-label="Vorteile">
+            <div className="calculator-hero__benefits calculator-hero__reveal" aria-label="Vorteile">
               {benefits.map((benefit) => (
                 <span className="calculator-hero__benefit" key={benefit}>
                   <Check size={17} strokeWidth={2.3} aria-hidden="true" />
@@ -244,70 +340,90 @@ function CalculatorPage() {
             </div>
           </div>
 
-          <div className="calculator-hero__visual">
+          <div className="calculator-hero__visual calculator-hero__reveal">
             <div className="calculator-hero__media-main">
-              <img
-                src={heroMedia[0].image.src}
-                srcSet={heroMedia[0].image.srcSet}
-                sizes={responsiveImageSizes.projectsFeatured}
-                alt={heroMedia[0].alt}
-                className="calculator-hero__image"
-                loading="eager"
-                decoding="async"
-              />
+              {heroMedia.map((item, index) => (
+                <img
+                  key={item.id}
+                  src={item.image.src}
+                  srcSet={item.image.srcSet}
+                  sizes={responsiveImageSizes.projectsFeatured}
+                  alt={item.alt}
+                  className={`calculator-hero__image${
+                    index === activeMediaIndex ? ' is-active' : ''
+                  }`}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  decoding={index === 0 ? 'sync' : 'async'}
+                />
+              ))}
               <div className="calculator-hero__price-card" aria-label="Beispielhafte Kostenschätzung">
                 <span>Aktuelle Schätzung</span>
                 <strong>{formatCurrency(totals.gross)}</strong>
                 <small>{selectedPackage.title}</small>
               </div>
+              <div className="calculator-hero__media-caption">
+                <span>{activeHeroMedia.label}</span>
+                <strong>{activeHeroMedia.title}</strong>
+              </div>
             </div>
 
             <div className="calculator-hero__media-stack" aria-label="Weitere Projektansichten">
-              {heroMedia.slice(1).map((item) => (
-                <img
-                  key={item.alt}
-                  src={item.image.src}
-                  srcSet={item.image.srcSet}
-                  sizes={responsiveImageSizes.projectsGrid}
-                  alt={item.alt}
-                  className="calculator-hero__stack-image"
-                  loading="lazy"
-                  decoding="async"
-                />
+              {supportingHeroMedia.map((item, stackIndex) => (
+                <div className="calculator-hero__stack-frame" key={`${item.id}-${stackIndex}`}>
+                  {heroMedia.map((media) => (
+                    <img
+                      key={`${item.id}-${media.id}`}
+                      src={media.image.src}
+                      srcSet={media.image.srcSet}
+                      sizes={responsiveImageSizes.projectsGrid}
+                      alt={media.alt}
+                      className={`calculator-hero__stack-image${
+                        media.id === item.id ? ' is-active' : ''
+                      }`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ))}
+                  <span className="calculator-hero__stack-label">{item.label}</span>
+                </div>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="calculator-offer" aria-label="Aktuelle Kostenschätzung">
+      <section
+        className={`calculator-offer${isOfferVisible ? ' calculator-offer--visible' : ''}`}
+        aria-label="Aktuelle Kostenschätzung"
+        ref={offerRef}
+      >
         <div className="container calculator-offer__container">
-          <div className="calculator-offer__intro">
+          <div className="calculator-offer__intro calculator-offer__reveal">
             <span>Ihre aktuelle Schätzung</span>
             <strong>{formatCurrency(totals.gross)}</strong>
             <small>{formatCurrency(pricePerUnit)} pro Einheit, inkl. MwSt.</small>
           </div>
 
           <div className="calculator-offer__totals" aria-live="polite">
-            <div className="calculator-offer__line">
+            <div className="calculator-offer__line calculator-offer__reveal">
               <span>Material netto</span>
               <strong>{formatCurrency(totals.materialShare)}</strong>
             </div>
-            <div className="calculator-offer__line">
+            <div className="calculator-offer__line calculator-offer__reveal">
               <span>Montage netto</span>
               <strong>{formatCurrency(totals.montageShare)}</strong>
             </div>
-            <div className="calculator-offer__line">
+            <div className="calculator-offer__line calculator-offer__reveal">
               <span>zzgl. 8.1 % MwSt.</span>
               <strong>{formatCurrency(totals.vat)}</strong>
             </div>
-            <div className="calculator-offer__line calculator-offer__line--total">
+            <div className="calculator-offer__line calculator-offer__line--total calculator-offer__reveal">
               <span>Gesamtsumme</span>
               <strong>{formatCurrency(totals.gross)}</strong>
             </div>
           </div>
 
-          <div className="calculator-offer__actions">
+          <div className="calculator-offer__actions calculator-offer__reveal">
             <div className="calculator-offer__quantity" aria-label="Menge">
               <button
                 type="button"
@@ -336,10 +452,14 @@ function CalculatorPage() {
         </div>
       </section>
 
-      <section className="calculator-config section" id="kalkulator-konfiguration">
+      <section
+        className={`calculator-config section${isConfigVisible ? ' calculator-config--visible' : ''}`}
+        id="kalkulator-konfiguration"
+        ref={configRef}
+      >
         <div className="container calculator-config__container">
           <div className="calculator-config__main">
-            <div className="calculator-config__header">
+            <div className="calculator-config__header calculator-config__reveal">
               <span className="calculator-config__eyebrow">Kalkulation</span>
               <h2>Projekt konfigurieren</h2>
               <p>
@@ -348,7 +468,7 @@ function CalculatorPage() {
               </p>
             </div>
 
-            <fieldset className="calculator-config__group">
+            <fieldset className="calculator-config__group calculator-config__reveal">
               <legend>Leistungspaket</legend>
               <div className="calculator-config__cards">
                 {packages.map((item) => (
@@ -384,7 +504,7 @@ function CalculatorPage() {
               </div>
             </fieldset>
 
-            <fieldset className="calculator-config__group">
+            <fieldset className="calculator-config__group calculator-config__reveal">
               <legend>Raumgröße</legend>
               <div className="calculator-config__segments">
                 {roomSizes.map((item) => (
@@ -404,7 +524,7 @@ function CalculatorPage() {
               </div>
             </fieldset>
 
-            <fieldset className="calculator-config__group">
+            <fieldset className="calculator-config__group calculator-config__reveal">
               <legend>Zusatzleistungen</legend>
               <div className="calculator-config__addons">
                 {addOns.map((item) => (
@@ -435,7 +555,7 @@ function CalculatorPage() {
             </fieldset>
           </div>
 
-          <aside className="calculator-summary" aria-label="Zusammenfassung">
+          <aside className="calculator-summary calculator-config__reveal" aria-label="Zusammenfassung">
             <div className="calculator-summary__header">
               <span className="calculator-summary__icon">
                 <CalculatorIcon size={23} strokeWidth={2.1} aria-hidden="true" />
@@ -485,29 +605,58 @@ function CalculatorPage() {
         </div>
       </section>
 
-      <section className="calculator-request section" id="anfrage">
+      <section
+        className={`calculator-request section${isRequestVisible ? ' calculator-request--visible' : ''}`}
+        id="anfrage"
+        ref={requestRef}
+      >
         <div className="container calculator-request__container">
           <div className="calculator-request__content">
-            <span className="calculator-request__eyebrow">Anfrage</span>
-            <h2>Kostenschätzung prüfen lassen</h2>
-            <p>
+            <span className="calculator-request__eyebrow calculator-request__reveal">Anfrage</span>
+            <h2 className="calculator-request__reveal">Kostenschätzung prüfen lassen</h2>
+            <p className="calculator-request__reveal">
               Senden Sie Ihre Konfiguration an Prima Vista. Wir melden uns mit
               einer fachlichen Einschätzung und den nächsten Schritten.
             </p>
 
-            <div className="calculator-request__media">
-              <img
-                src={projectDetailCeilingImage.src}
-                srcSet={projectDetailCeilingImage.srcSet}
-                sizes={responsiveImageSizes.projectsGrid}
-                alt="Hochwertig ausgeführtes Innenausbau-Projekt von Prima Vista"
-                loading="lazy"
-                decoding="async"
-              />
+            <div className="calculator-request__media calculator-request__reveal">
+              {requestMedia.map((item, index) => (
+                <img
+                  key={item.id}
+                  src={item.image.src}
+                  srcSet={item.image.srcSet}
+                  sizes={responsiveImageSizes.projectsGrid}
+                  alt={item.alt}
+                  className={`calculator-request__media-image${
+                    index === activeRequestMediaIndex ? ' is-active' : ''
+                  }`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ))}
+
+              <div className="calculator-request__media-panel">
+                <span>{activeRequestMedia.label}</span>
+                <strong>{activeRequestMedia.title}</strong>
+                <small>{activeRequestMedia.text}</small>
+              </div>
+
+              <div className="calculator-request__media-strip" aria-hidden="true">
+                {requestMedia.map((item, index) => (
+                  <span
+                    className={`calculator-request__media-dot${
+                      index === activeRequestMediaIndex ? ' is-active' : ''
+                    }`}
+                    key={item.id}
+                  >
+                    {item.label}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div className="calculator-request__form-wrap">
+          <div className="calculator-request__form-wrap calculator-request__reveal">
             {formStatus === 'success' ? (
               <div className="calculator-request__success">
                 <strong>Vielen Dank!</strong>
@@ -558,7 +707,7 @@ function CalculatorPage() {
                     id="calculator-message"
                     name="message"
                     rows="5"
-                    placeholder="Beschreiben Sie kurz Ihr Bad oder Innenausbau-Projekt."
+                    placeholder="Beschreiben Sie kurz Ihr Trockenbau-, Sanierungs- oder Innenausbau-Projekt."
                   ></textarea>
                 </label>
 

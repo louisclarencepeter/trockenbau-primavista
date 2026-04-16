@@ -6,6 +6,7 @@ import './styles/layout.scss';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import Services from './components/Services/Services';
+import CalculatorTeaser from './components/CalculatorTeaser/CalculatorTeaser';
 import About from './components/About/About';
 import Projects from './components/Projects/Projects';
 import Reviews from './components/Reviews/Reviews';
@@ -44,7 +45,7 @@ function App({ initialTheme = 'light' }) {
 
   useEffect(() => {
     const titleByPath = {
-      '/': 'Trockenbau Prima Vista | Trockenbau, Sanierung und Innenausbau',
+      '/': 'Trockenbau Prima Vista | Trockenbau, Sanierung, Fenster und Innenausbau',
       '/kalkulator': 'Kalkulator | Prima Vista B&G GmbH',
       '/impressum': 'Impressum | Prima Vista B&G GmbH',
       '/datenschutz': 'Datenschutzerklärung | Prima Vista B&G GmbH',
@@ -100,6 +101,7 @@ function App({ initialTheme = 'light' }) {
           <>
             <Hero />
             <Services />
+            <CalculatorTeaser />
             <About />
             <Projects />
             <Reviews />
