@@ -1,3 +1,4 @@
+import { ArrowRight, Calculator } from 'lucide-react';
 import './Services.scss';
 import {
   responsiveImageSizes,
@@ -78,6 +79,17 @@ function Services() {
               </div>
             </article>
           ))}
+        </div>
+
+        <div className="services__footer services__reveal">
+          <span className="services__footer-text">
+            Sie möchten eine erste Kostenspanne für Ihr Projekt sehen?
+          </span>
+          <a className="services__footer-link" href="/kalkulator">
+            <Calculator size={18} strokeWidth={2.1} aria-hidden="true" />
+            Mehr erfahren im Kalkulator
+            <ArrowRight size={18} strokeWidth={2.1} aria-hidden="true" />
+          </a>
         </div>
       </div>
     </section>

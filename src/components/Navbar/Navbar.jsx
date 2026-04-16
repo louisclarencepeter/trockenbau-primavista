@@ -8,10 +8,11 @@ const navItems = [
   { id: 'leistungen', label: 'Leistungen' },
   { id: 'ueber-uns', label: 'Über uns' },
   { id: 'referenzen', label: 'Referenzen' },
+  { id: 'kalkulator', label: 'Kalkulator', href: '/kalkulator', homeSectionId: 'kostenrechner' },
   { id: 'kontakt', label: 'Kontakt' },
 ];
 
-function Navbar({ isHomePage = true }) {
+function Navbar({ isHomePage = true, currentPath = '/' }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isInstantClosing, setIsInstantClosing] = useState(false);
@@ -80,9 +81,18 @@ function Navbar({ isHomePage = true }) {
   };
 
   const getNavHref = (id) => (isHomePage ? `#${id}` : `/#${id}`);
+  const getItemHref = (item) => item.href ?? getNavHref(item.id);
   const homeHref = isHomePage ? '#top' : '/';
+  const isCalculatorPage = currentPath === '/kalkulator';
   const contactHref = isHomePage ? '#kontakt' : '/#kontakt';
+  const primaryCtaHref = isHomePage
+    ? '/kalkulator'
+    : isCalculatorPage
+      ? '#anfrage'
+      : contactHref;
+  const primaryCtaLabel = isHomePage ? 'Kosten kalkulieren' : 'Jetzt anfragen';
   const visibleActiveSection = isHomePage ? activeSection : '';
+  const isPageItemActive = (item) => Boolean(item.href && currentPath === item.href);
 
   useEffect(() => {
     if (!isHomePage) {
@@ -90,7 +100,19 @@ function Navbar({ isHomePage = true }) {
     }
 
     const sections = navItems
-      .map(({ id }) => document.getElementById(id))
+      .map((item) => {
+        const sectionId = item.homeSectionId ?? item.id;
+        const element = document.getElementById(sectionId);
+
+        if (!element) {
+          return null;
+        }
+
+        return {
+          navId: item.id,
+          element,
+        };
+      })
       .filter(Boolean);
 
     if (!sections.length) {
@@ -108,17 +130,17 @@ function Navbar({ isHomePage = true }) {
       const probeY = Math.max(headerOffset + 24, viewportProbe);
 
       const activeMatch = sections.find((section) => {
-        const rect = section.getBoundingClientRect();
+        const rect = section.element.getBoundingClientRect();
 
         return rect.top <= probeY && rect.bottom > probeY;
       });
 
       if (activeMatch) {
-        setActiveSection(activeMatch.id);
+        setActiveSection(activeMatch.navId);
         return;
       }
 
-      const firstSection = sections[0];
+      const firstSection = sections[0]?.element;
 
       if (firstSection) {
         const activationOffset = 160;
@@ -131,8 +153,8 @@ function Navbar({ isHomePage = true }) {
 
       const lastSection = sections[sections.length - 1];
 
-      if (lastSection) {
-        setActiveSection(lastSection.id);
+      if (lastSection?.navId) {
+        setActiveSection(lastSection.navId);
       }
     };
 
@@ -161,9 +183,11 @@ function Navbar({ isHomePage = true }) {
           {navItems.map((item) => (
             <a
               key={item.id}
-              href={getNavHref(item.id)}
-              className={`navbar__link${visibleActiveSection === item.id ? ' is-active' : ''}`}
-              onClick={handleNavClick(item.id)}
+              href={getItemHref(item)}
+              className={`navbar__link${
+                visibleActiveSection === item.id || isPageItemActive(item) ? ' is-active' : ''
+              }`}
+              onClick={item.href ? closeMenu : handleNavClick(item.id)}
             >
               {item.label}
             </a>
@@ -172,8 +196,12 @@ function Navbar({ isHomePage = true }) {
 
         <div className="navbar__utilities">
           <div className="navbar__cta">
-            <Button href={contactHref} onClick={handleNavClick('kontakt')} variant="primary">
-              Jetzt anfragen
+            <Button
+              href={primaryCtaHref}
+              onClick={isHomePage ? undefined : handleNavClick('kontakt')}
+              variant="primary"
+            >
+              {primaryCtaLabel}
             </Button>
           </div>
         </div>
@@ -196,17 +224,23 @@ function Navbar({ isHomePage = true }) {
           {navItems.map((item) => (
             <a
               key={item.id}
-              href={getNavHref(item.id)}
-              className={`navbar__mobile-link${visibleActiveSection === item.id ? ' is-active' : ''}`}
-              onClick={handleNavClick(item.id)}
+              href={getItemHref(item)}
+              className={`navbar__mobile-link${
+                visibleActiveSection === item.id || isPageItemActive(item) ? ' is-active' : ''
+              }`}
+              onClick={item.href ? closeMenu : handleNavClick(item.id)}
             >
               {item.label}
             </a>
           ))}
 
           <div className="navbar__mobile-cta">
-            <Button href={contactHref} onClick={handleNavClick('kontakt')} variant="primary">
-              Jetzt anfragen
+            <Button
+              href={primaryCtaHref}
+              onClick={isHomePage ? undefined : handleNavClick('kontakt')}
+              variant="primary"
+            >
+              {primaryCtaLabel}
             </Button>
           </div>
         </nav>
