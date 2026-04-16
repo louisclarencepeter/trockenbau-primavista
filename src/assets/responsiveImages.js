@@ -58,35 +58,81 @@ import serviceWindows800 from './images/services/service-windows-800.jpg';
 import serviceWindows960 from './images/services/service-windows-960.jpg';
 import logo192 from './logo-192.png';
 
+const DEFAULT_PRODUCTION_WIDTHS = [240, 320, 360, 400, 480, 560, 640, 720, 768, 800, 880, 960, 1024, 1200];
+
 const createNetlifyImageUrl = (sourceUrl, width, quality = 76) =>
   `/.netlify/images?url=${encodeURIComponent(sourceUrl)}&w=${width}&q=${quality}`;
 
-const createResponsiveImage = (variants, { quality = 76 } = {}) => {
+const normalizeProductionWidths = (widths, maxWidth) => {
+  const uniqueWidths = new Set(
+    widths.filter((width) => Number.isFinite(width) && width > 0 && width <= maxWidth),
+  );
+
+  return [...uniqueWidths].sort((left, right) => left - right);
+};
+
+const findVariantAtOrAboveWidth = (variants, targetWidth) =>
+  variants.find(({ width }) => width >= targetWidth) ?? variants[variants.length - 1];
+
+const getFallbackWidth = (widths, maxWidth, preferredWidth) => {
+  if (preferredWidth) {
+    return widths.find((width) => width >= preferredWidth) ?? maxWidth;
+  }
+
+  if (maxWidth >= 1200) {
+    return widths.find((width) => width >= 960) ?? maxWidth;
+  }
+
+  if (maxWidth >= 960) {
+    return widths.find((width) => width >= 768) ?? maxWidth;
+  }
+
+  if (maxWidth >= 800) {
+    return widths.find((width) => width >= 640) ?? maxWidth;
+  }
+
+  return maxWidth;
+};
+
+const createResponsiveImage = (
+  variants,
+  { quality = 76, widths = DEFAULT_PRODUCTION_WIDTHS, fallbackWidth } = {},
+) => {
   const largestVariant = variants[variants.length - 1];
   const useNetlifyImageCdn = import.meta.env.PROD;
+  const variantWidths = variants.map(({ width }) => width);
+  const productionWidths = normalizeProductionWidths(widths, largestVariant.width);
+  const responsiveWidths = productionWidths.length ? productionWidths : variantWidths;
+  const resolvedFallbackWidth = getFallbackWidth(
+    responsiveWidths,
+    largestVariant.width,
+    fallbackWidth,
+  );
 
   if (!useNetlifyImageCdn) {
+    const fallbackVariant = findVariantAtOrAboveWidth(variants, resolvedFallbackWidth);
+
     return {
-      src: largestVariant.src,
+      src: fallbackVariant.src,
       srcSet: variants.map(({ src, width }) => `${src} ${width}w`).join(', '),
     };
   }
 
   return {
-    src: createNetlifyImageUrl(largestVariant.src, largestVariant.width, quality),
-    srcSet: variants
-      .map(({ width }) => `${createNetlifyImageUrl(largestVariant.src, width, quality)} ${width}w`)
+    src: createNetlifyImageUrl(largestVariant.src, resolvedFallbackWidth, quality),
+    srcSet: responsiveWidths
+      .map((width) => `${createNetlifyImageUrl(largestVariant.src, width, quality)} ${width}w`)
       .join(', '),
   };
 };
 
 export const responsiveImageSizes = {
-  about: '(max-width: 992px) calc(100vw - 40px), 552px',
-  heroDetail: '(max-width: 768px) calc((100vw - 58px) / 2), 144px',
+  about: '(max-width: 992px) calc(100vw - 40px), 532px',
+  heroDetail: '(max-width: 576px) calc((100vw - 52px) / 2), (max-width: 768px) calc((100vw - 56px) / 2), 144px',
   heroMain: '(max-width: 768px) calc(100vw - 40px), (max-width: 992px) 458px, 358px',
   projectsFeatured: '(max-width: 1200px) calc(100vw - 40px), 1160px',
   projectsGrid: '(max-width: 576px) calc(100vw - 40px), (max-width: 992px) calc((100vw - 64px) / 2), 371px',
-  services: '(max-width: 576px) calc(100vw - 58px), (max-width: 992px) calc((100vw - 64px) / 2), 272px',
+  services: '(max-width: 576px) calc(100vw - 40px), (max-width: 992px) calc((100vw - 64px) / 2), 272px',
 };
 
 export const aboutInteriorShowcaseImage = createResponsiveImage([
