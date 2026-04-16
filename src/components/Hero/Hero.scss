@@ -18,15 +18,15 @@
 }
 
 .hero__reveal {
-  opacity: 0;
-  transform: translateY(36px);
-  transition: opacity 0.75s ease, transform 0.75s ease;
-  will-change: opacity, transform;
+  opacity: 1;
+  transform: none;
+  transition: none;
+  will-change: auto;
 }
 
 .hero--visible .hero__reveal {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 .hero__eyebrow {

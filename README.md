@@ -1,6 +1,15 @@
 # Trockenbau Prima Vista
 
-Marketing website for **Trockenbau Prima Vista**, built with React and Vite. The site presents the company’s services, company profile, project references, contact details, a cookie consent UI, and an AI-powered chatbot backed by a Netlify Function.
+Marketing website for **Trockenbau Prima Vista**, built with React and Vite.  
+The current site is centered on the company’s Trockenbau offer:
+
+- `Decken abhängen`
+- `Wände stellen`
+- `Estrich-Boden`
+- `Dachschrägen`
+- `Sonstiges`
+
+It includes a homepage, a dedicated calculator page, project references, reviews, contact forms, cookie consent, and an AI-powered chatbot backed by a Netlify Function.
 
 ## Stack
 
@@ -12,19 +21,29 @@ Marketing website for **Trockenbau Prima Vista**, built with React and Vite. The
 - Netlify Functions
 - OpenAI API
 
-## Site Structure
+## Main Experience
 
-The app is organized into these main sections in [src/App.jsx](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/src/App.jsx):
+The app is organized from [src/App.jsx](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/src/App.jsx).
+
+### Homepage
 
 - `Navbar`
 - `Hero`
 - `Services`
+- `CalculatorTeaser`
 - `About`
 - `Projects`
+- `Reviews`
 - `Contact`
 - `Footer`
 - `Chatbot`
 - `CookieBanner`
+
+### Additional Pages
+
+- `/kalkulator` -> interactive Trockenbau calculator
+- `/impressum` -> legal page
+- `/datenschutz` -> privacy page
 
 ## Project Structure
 
@@ -34,11 +53,13 @@ The app is organized into these main sections in [src/App.jsx](/Users/louisclare
 │   └── functions/
 │       └── chat.js
 ├── public/
+│   └── videos/
 ├── src/
 │   ├── assets/
 │   ├── components/
 │   ├── hooks/
 │   ├── styles/
+│   ├── utils/
 │   ├── App.jsx
 │   └── main.jsx
 ├── netlify.toml
@@ -60,7 +81,7 @@ npm install
 npm run dev
 ```
 
-Vite runs on `http://localhost:5173` and is configured to open the browser automatically.
+Vite runs on `http://localhost:5173`.
 
 ### 3. Build for production
 
@@ -90,16 +111,46 @@ OPENAI_API_KEY=your_api_key_here
 
 Store it in a local `.env` file during development and in Netlify environment variables for deployment.
 
+## Calculator
+
+The calculator page lives in [src/components/Calculator/Calculator.jsx](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/src/components/Calculator/Calculator.jsx).
+
+It currently supports the site’s main Trockenbau categories:
+
+- `Decken abhängen`
+- `Wände stellen`
+- `Estrich-Boden`
+- `Dachschrägen`
+- `Sonstiges`
+
+The calculator includes:
+
+- package selection
+- room size selection
+- add-on selection
+- live cost estimate
+- Netlify-backed inquiry form
+- rotating project media in the hero and request areas
+
+## Forms
+
+Two forms are currently set up for Netlify form handling:
+
+- `contact`
+- `calculator`
+
+Both submit from the frontend using standard form encoding.
+
 ## Chatbot
 
 The chatbot UI lives in [src/components/Chatbot/Chatbot.jsx](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/src/components/Chatbot/Chatbot.jsx) and the backend handler lives in [netlify/functions/chat.js](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/netlify/functions/chat.js).
 
 Current behavior:
 
-- Replies in German
-- Uses company context for Trockenbau, Sanierung, Renovierung, and Innenausbau
-- Encourages visitors to get in touch for quotes and project inquiries
-- Sends requests to a Netlify Function that calls the OpenAI API
+- replies in German
+- uses company context for Trockenbau-related questions
+- encourages visitors to contact the business for quotes and project inquiries
+- sends requests to a Netlify Function that calls the OpenAI API
 
 ## Netlify
 
@@ -109,7 +160,7 @@ This project includes [netlify.toml](/Users/louisclarencepetersgmail.com/Project
 - functions directory set to `netlify/functions`
 - redirect from `/api/chat` to `/.netlify/functions/chat`
 
-If you want to test the chatbot locally through the Netlify function layer, use Netlify Dev instead of plain Vite:
+If you want to test the chatbot through the Netlify function layer, use:
 
 ```bash
 netlify dev
@@ -131,12 +182,25 @@ Component-specific styles live next to their components in `src/components/*/*.s
 ## Assets
 
 - Local fonts are stored in `src/assets/fonts`
-- Active content images are organized in `src/assets/images/about`, `src/assets/images/hero`, `src/assets/images/services`, and `src/assets/images/projects`
-- Reference photos are grouped by subject in `src/assets/images/reference/ceilings`, `src/assets/images/reference/framing`, `src/assets/images/reference/interiors`, and `src/assets/images/reference/windows`
-- The logo is stored in `src/assets/logo.png`
+- Responsive images and image manifests live under `src/assets`
+- Service, hero, about, and project visuals are managed through `responsiveImages`
+- Video references are organized under [public/videos](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/public/videos)
+
+### Current Video Folder Convention
+
+Service video placeholders are currently kept only for the active service offer:
+
+- `/public/videos/leistungen/decken-abhaengen`
+- `/public/videos/leistungen/waende-stellen`
+- `/public/videos/leistungen/estrich-boden`
+- `/public/videos/leistungen/dachschraegen`
+- `/public/videos/leistungen/sonstiges`
+
+There is no longer a separate `desktop` / `mobil` split in that placeholder structure.
 
 ## Notes
 
-- The site is currently content-driven and mostly static aside from the chatbot and cookie consent state.
+- The site uses simple pathname-based page switching inside the React app.
 - Cookie consent is stored in `localStorage`.
-- The contact form is presentational at the moment and does not submit to a backend.
+- The theme preference is stored in `localStorage`.
+- The about section already has a real local video file referenced through [src/assets/videoManifest.js](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/src/assets/videoManifest.js).
