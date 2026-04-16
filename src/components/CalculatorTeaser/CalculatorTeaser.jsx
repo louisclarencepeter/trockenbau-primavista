@@ -8,9 +8,9 @@ import {
 import useScrollReveal from '../../hooks/useScrollReveal';
 
 const calculatorBenefits = [
-  'Leistungspaket auswählen',
-  'Material und Montage sehen',
-  'Anfrage direkt senden',
+  'Leistungen wie Decken, Wände oder Dämmung kombinieren',
+  'Transparente Baupreise für Material und Montage',
+  'Angebot online anfordern und direkt starten',
 ];
 
 function CalculatorTeaser() {
@@ -33,9 +33,9 @@ function CalculatorTeaser() {
             Schnell eine erste Kostenschätzung erhalten
           </h2>
           <p className="calculator-teaser__text calculator-teaser__reveal">
-            Für Trockenbau, Sanierung, Innenausbau und Fenster können Sie Ihr
-            Projekt grob konfigurieren und die wichtigsten Kostenpunkte direkt
-            nachvollziehen.
+            Decken abhängen, Wände stellen, Dämmung, Fenster, Bad oder Brandschutz –
+            stellen Sie Ihr Trockenbau-Projekt individuell zusammen und erhalten
+            Sie transparente Baupreise für Material und Montage.
           </p>
 
           <div className="calculator-teaser__benefits calculator-teaser__reveal">
