@@ -20,6 +20,7 @@ import {
   serviceInteriorImage,
 } from '../../assets/responsiveImages';
 import useScrollReveal from '../../hooks/useScrollReveal';
+import { submitNetlifyForm } from '../../utils/formSubmission';
 
 const vatRate = 0.081;
 const minQuantity = 1;
@@ -313,18 +314,12 @@ function CalculatorPage() {
     setFormStatus('submitting');
 
     const form = event.target;
-    const formData = new FormData(form);
 
     try {
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString(),
+      await submitNetlifyForm({
+        form,
+        formName: 'calculator',
       });
-
-      if (!response.ok) {
-        throw new Error('Submission failed');
-      }
 
       setFormStatus('success');
       form.reset();
@@ -701,10 +696,15 @@ function CalculatorPage() {
                 name="calculator"
                 method="POST"
                 data-netlify="true"
+                netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
               >
                 <input type="hidden" name="form-name" value="calculator" />
                 <input type="hidden" name="bot-field" />
+                <input type="hidden" name="subject" value="Neue Kalkulator-Anfrage über die Website" />
+                <input type="hidden" name="submission_type" value="Kalkulator-Anfrage" />
+                <input type="hidden" name="confirmation_requested" value="yes" />
+                <input type="hidden" name="confirmation_request_id" value="" />
                 <input type="hidden" name="package" value={selectedPackage.title} />
                 <input type="hidden" name="room_size" value={selectedSize.label} />
                 <input type="hidden" name="quantity" value={quantity} />

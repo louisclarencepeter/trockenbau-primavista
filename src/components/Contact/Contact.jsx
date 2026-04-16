@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './Contact.scss';
 import { Mail, MapPin, Phone, MessageCircle } from 'lucide-react';
 import useScrollReveal from '../../hooks/useScrollReveal';
+import { submitNetlifyForm } from '../../utils/formSubmission';
 
 const contactItems = [
   {
@@ -45,18 +46,12 @@ function Contact() {
     setFormStatus('submitting');
 
     const form = event.target;
-    const formData = new FormData(form);
 
     try {
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString(),
+      await submitNetlifyForm({
+        form,
+        formName: 'contact',
       });
-
-      if (!response.ok) {
-        throw new Error('Submission failed');
-      }
 
       setFormStatus('success');
       form.reset();
@@ -140,9 +135,15 @@ function Contact() {
                 name="contact"
                 method="POST"
                 data-netlify="true"
+                netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
               >
                 <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="bot-field" />
+                <input type="hidden" name="subject" value="Neue Kontaktanfrage über die Website" />
+                <input type="hidden" name="submission_type" value="Kontaktformular" />
+                <input type="hidden" name="confirmation_requested" value="yes" />
+                <input type="hidden" name="confirmation_request_id" value="" />
 
                 <div className="contact__field">
                   <label htmlFor="name" className="contact__field-label">

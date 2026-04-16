@@ -25,6 +25,11 @@
 
   <!-- Netlify Forms: hidden HTML form for bot detection -->
   <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="bot-field" />
+    <input type="text" name="subject" />
+    <input type="text" name="submission_type" />
+    <input type="text" name="confirmation_requested" />
+    <input type="text" name="confirmation_request_id" />
     <input type="text" name="name" />
     <input type="email" name="email" />
     <input type="tel" name="phone" />
@@ -33,6 +38,10 @@
 
   <form name="calculator" netlify netlify-honeypot="bot-field" hidden>
     <input type="text" name="bot-field" />
+    <input type="text" name="subject" />
+    <input type="text" name="submission_type" />
+    <input type="text" name="confirmation_requested" />
+    <input type="text" name="confirmation_request_id" />
     <input type="text" name="name" />
     <input type="email" name="email" />
     <input type="tel" name="phone" />

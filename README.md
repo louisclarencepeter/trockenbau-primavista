@@ -141,6 +141,40 @@ Two forms are currently set up for Netlify form handling:
 
 Both submit from the frontend using standard form encoding.
 
+They are now also prepared for transactional email confirmations:
+
+- submissions still go to Netlify Forms
+- a separate Netlify Function at `/api/confirmations` can send a confirmation email to the client
+- the same function can optionally send an internal notification copy to the business inbox
+- if email configuration is missing, submissions still succeed and the email step is skipped safely
+
+### Email Confirmation Configuration
+
+The confirmation function is designed for `Resend` and is controlled through environment variables:
+
+```bash
+EMAIL_CONFIRMATIONS_ENABLED=true
+EMAIL_PROVIDER=resend
+EMAIL_FROM="Trockenbau Prima Vista <noreply@your-domain.tld>"
+EMAIL_REPLY_TO=info@primavista-bauprojekte.ch
+EMAIL_NOTIFICATION_TO=info@primavista-bauprojekte.ch
+EMAIL_NOTIFICATION_BCC=
+RESEND_API_KEY=re_your_resend_api_key
+```
+
+Recommended setup:
+
+1. Verify a sending domain in Resend.
+2. Set `EMAIL_FROM` to a verified sender on that domain.
+3. Add the variables above in Netlify environment settings.
+4. Keep `EMAIL_CONFIRMATIONS_ENABLED=false` until the sender domain is ready.
+
+After that:
+
+- `contact` submissions send a receipt email to the visitor
+- `calculator` submissions send a receipt email including the project summary
+- optional internal notifications go to `EMAIL_NOTIFICATION_TO`
+
 ## Chatbot
 
 The chatbot UI lives in [src/components/Chatbot/Chatbot.jsx](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/src/components/Chatbot/Chatbot.jsx) and the backend handler lives in [netlify/functions/chat.js](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/netlify/functions/chat.js).
@@ -159,6 +193,7 @@ This project includes [netlify.toml](/Users/louisclarencepetersgmail.com/Project
 - build output set to `dist`
 - functions directory set to `netlify/functions`
 - redirect from `/api/chat` to `/.netlify/functions/chat`
+- custom function path `/api/confirmations` for email confirmations
 
 If you want to test the chatbot through the Netlify function layer, use:
 
@@ -167,6 +202,12 @@ netlify dev
 ```
 
 Plain `npm run dev` starts the Vite frontend only.
+
+To test form submissions plus confirmation emails locally, prefer:
+
+```bash
+netlify dev
+```
 
 ## Styling
 
