@@ -175,7 +175,7 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
           <img src={logoSmall} alt="Trockenbau Prima Vista Logo" className="navbar__logo" />
           <div className="navbar__brand-text">
             <span className="navbar__name">Trockenbau Prima Vista</span>
-            <span className="navbar__tagline">Sanierung und Renovierung</span>
+            <span className="navbar__tagline">Decken, Wände und Ausbau</span>
           </div>
         </a>
 

@@ -18,66 +18,66 @@ import useScrollReveal from '../../hooks/useScrollReveal';
 const heroSlides = [
   {
     image: projectFeaturedModernizationImage,
-    alt: 'Innenausbau-Projekt mit präziser Trockenbau-Ausführung',
+    alt: 'Trockenbau-Projekt mit moderner Unterkonstruktion und sauberer Ausführung',
     label: 'Prima Vista',
-    title: 'Saubere Ergebnisse',
-    text: 'Präzise Ausführung und ein hochwertiges Finish bis ins Detail.',
+    title: 'Trockenbau mit System',
+    text: 'Von der ersten Konstruktion bis zur sauberen Oberfläche bleibt der Ablauf klar kalkulierbar.',
   },
   {
     image: serviceDrywallImage,
     alt: 'Trockenbau-Projekt mit sauber vorbereiteten Wand- und Deckenflächen',
-    label: 'Trockenbau',
-    title: 'Klare Konstruktion',
-    text: 'Stabile Unterkonstruktionen, saubere Beplankung und durchdachte Anschlüsse.',
+    label: 'Wände',
+    title: 'Wände stellen und verkleiden',
+    text: 'Trennwände, Vorsatzschalen und Beplankungen werden passgenau aufgebaut und vorbereitet.',
   },
   {
     image: heroDetailAccentImage,
-    alt: 'Sanierungsprojekt mit hochwertiger handwerklicher Ausführung',
-    label: 'Sanierung',
-    title: 'Sorgfältige Modernisierung',
-    text: 'Bestehende Räume werden präzise vorbereitet und Schritt für Schritt erneuert.',
+    alt: 'Ausbau-Detail mit präziser handwerklicher Ausführung',
+    label: 'Details',
+    title: 'Saubere Anschlüsse',
+    text: 'Kanten, Übergänge und Anschlüsse werden ordentlich vorbereitet und fachgerecht geschlossen.',
   },
   {
     image: projectDetailCeilingImage,
-    alt: 'Innenausbau mit präzise ausgeführten Deckenarbeiten',
-    label: 'Deckenarbeiten',
-    title: 'Details mit Struktur',
-    text: 'Decken, Kanten und Übergänge werden sauber geplant und ausgeführt.',
+    alt: 'Trockenbau mit präzise ausgeführten Deckenarbeiten',
+    label: 'Decken',
+    title: 'Decken abhängen',
+    text: 'Abgehängte Decken schaffen Platz für Licht, Akustik, Technik und einen ruhigen Abschluss.',
   },
   {
     image: serviceInteriorImage,
-    alt: 'Modern ausgebauter Wohnraum mit sauberem Finish',
-    label: 'Innenausbau',
-    title: 'Hochwertiges Finish',
-    text: 'Oberflächen und Raumwirkung bleiben bis zum Abschluss im Blick.',
+    alt: 'Ausgebauter Innenraum mit sauberem Finish',
+    label: 'Ausbau',
+    title: 'Dachschrägen und Flächen',
+    text: 'Auch schwierige Geometrien unter dem Dach lassen sich sauber ausbauen und sinnvoll nutzen.',
   },
   {
     image: projectCeilingDrywallImage,
-    alt: 'Detailansicht eines hochwertigen Innenausbau-Projekts',
+    alt: 'Trockenbau-Projekt mit Decken- und Wandmontage',
     label: 'Montage',
     title: 'Exakte Ausführung',
-    text: 'Jeder Arbeitsschritt wird mit ruhiger Hand und fachlicher Routine umgesetzt.',
+    text: 'Unterkonstruktion, Beplankung und Ausbau werden sauber aufeinander abgestimmt.',
   },
   {
     image: projectExistingSpaceRenovationImage,
-    alt: 'Modern sanierter Innenraum mit klaren Linien',
-    label: 'Renovierung',
-    title: 'Neue Raumqualität',
-    text: 'Aus alten Flächen entstehen funktionale und hochwertige Innenräume.',
+    alt: 'Bestandsraum in der Trockenbau-Modernisierung',
+    label: 'Bestand',
+    title: 'Ausbau im Bestand',
+    text: 'Bestehende Räume lassen sich mit Trockenbau schnell an neue Nutzungen anpassen.',
   },
   {
     image: serviceRenovationImage,
-    alt: 'Modern sanierter Innenraum mit heller Raumwirkung',
-    label: 'Projektplanung',
-    title: 'Verlässlicher Ablauf',
-    text: 'Klare Absprachen und saubere Arbeit sorgen für planbare Ergebnisse.',
+    alt: 'Trockenbau-Projekt mit heller Raumwirkung',
+    label: 'Boden',
+    title: 'Estrich und Bodenaufbau',
+    text: 'Trockene Systeme schaffen ebene Flächen und eine gute Basis für den weiteren Ausbau.',
   },
   {
     image: projectFinishImage,
-    alt: 'Innenausbau mit vorbereiteten Wand- und Deckenflächen',
+    alt: 'Trockenbau-Projekt mit vorbereiteten Wand- und Deckenflächen',
     label: 'Finish',
     title: 'Bereit für den Abschluss',
-    text: 'Spachtelung, Vorbereitung und Übergänge werden sorgfältig fertiggestellt.',
+    text: 'Spachtelung, Feinbearbeitung und letzte Details machen aus Konstruktion eine fertige Fläche.',
   },
 ];
 
@@ -115,16 +115,16 @@ function Hero() {
     >
       <div className="container hero__container">
         <div className="hero__content">
-          <span className="hero__eyebrow hero__reveal">SANIERUNG UND RENOVIERUNG</span>
+          <span className="hero__eyebrow hero__reveal">TROCKENBAU FÜR DECKEN & WÄNDE</span>
 
           <h1 className="hero__title hero__reveal">
-            Präziser Trockenbau für hochwertige Innenräume
+            Trockenbau für Decken, Wände und Dachschrägen
           </h1>
 
           <p className="hero__text hero__reveal">
-            Professionelle Lösungen für Trockenbau, Sanierung und Renovierung.
-            Saubere Ausführung, klare Kommunikation und zuverlässige Ergebnisse
-            für Privat- und Geschäftskunden.
+            Wir planen und realisieren abgehängte Decken, Trennwände,
+            Estrich-Boden, Dachschrägen und Sonderlösungen sauber,
+            nachvollziehbar und mit direkter Anfrageoption über den Kalkulator.
           </p>
 
           <div className="hero__actions hero__reveal">

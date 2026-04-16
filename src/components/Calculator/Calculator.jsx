@@ -27,61 +27,68 @@ const maxQuantity = 5;
 
 const packages = [
   {
-    id: 'trockenbau',
-    title: 'Trockenbau',
-    description: 'Flexible Raumgestaltung mit Metallprofilen und Gipskarton – schnell, sauber, langlebig.',
+    id: 'decken',
+    title: 'Decken abhängen',
+    description: 'Abgehängte Decken für Licht, Akustik, Technik und eine saubere Raumwirkung.',
     price: 8600,
-    details: ['Flexible Unterkonstruktion', 'Gute Schall- und Wärmedämmung', 'Saubere Oberflächen'],
+    details: ['Unterkonstruktion für Decken', 'Platz für Spots und Leitungen', 'Sauberer Abschluss'],
   },
   {
-    id: 'sanierung-renovierung',
-    title: 'Sanierung & Renovierung',
-    description: 'Bestehende Räume modernisieren mit transparenten Baupreisen und fachgerechter Ausführung.',
-    price: 12800,
-    details: ['Rückbau & Vorbereitung', 'Neue Oberflächen', 'Koordinierter Ablauf'],
+    id: 'waende',
+    title: 'Wände stellen',
+    description: 'Trennwände, Vorsatzschalen und Verkleidungen für flexible Raumaufteilungen.',
+    price: 11200,
+    details: ['Metallständer und Beplankung', 'Raumteilung und Verkleidung', 'Saubere Anschlüsse'],
   },
   {
-    id: 'innenausbau',
-    title: 'Innenausbau',
-    description: 'Individuelle Raumgestaltung nach Ihren Wünschen – vom Konzept bis zum Finish.',
-    price: 16400,
-    details: ['Maßgeschneiderte Lösungen', 'Hochwertige Materialien', 'Stimmige Details'],
+    id: 'estrich-boden',
+    title: 'Estrich-Boden',
+    description: 'Trockene Bodenaufbauten für ebene Flächen und einen schnellen weiteren Ausbau.',
+    price: 9800,
+    details: ['Trockenestrich-Systeme', 'Ebenheit und Lastverteilung', 'Gute Basis für Folgegewerke'],
   },
   {
-    id: 'fenster',
-    title: 'Fenster',
-    description: 'Saubere Integration von Fensteröffnungen in Trockenbauwände für mehr Licht und Luft.',
-    price: 7400,
-    details: ['Wandöffnungen fachgerecht', 'Laibungen & Anschlüsse', 'Bessere Raumtemperatur'],
+    id: 'dachschraegen',
+    title: 'Dachschrägen',
+    description: 'Dachschrägen sauber verkleiden und für Wohn- oder Arbeitsräume nutzbar machen.',
+    price: 12400,
+    details: ['Passgenaue Flächen', 'Dämmung integrierbar', 'Maximale Raumausnutzung'],
+  },
+  {
+    id: 'sonstiges',
+    title: 'Sonstiges',
+    description: 'Weitere Trockenbauarbeiten wie Sonderdetails, Verkleidungen oder individuelle Lösungen.',
+    price: 7600,
+    details: ['Sonderkonstruktionen', 'Individuelle Anschlüsse', 'Flexible Ausführung'],
   },
 ];
 
 const roomSizes = [
-  { id: 'small', label: 'bis 5 m2', helper: 'Kleiner Raum oder Detailarbeit', multiplier: 0.86 },
-  { id: 'medium', label: '6-9 m2', helper: 'Standardraum', multiplier: 1 },
-  { id: 'large', label: '10-14 m2', helper: 'Großzügiger Raum', multiplier: 1.18 },
-  { id: 'xl', label: 'ab 15 m2', helper: 'Mehrere Flächen oder großer Ausbau', multiplier: 1.35 },
+  { id: 'small', label: 'bis 5 m²', helper: 'Kleiner Raum oder Detailarbeit', multiplier: 0.86 },
+  { id: 'medium', label: '6-9 m²', helper: 'Standardraum', multiplier: 1 },
+  { id: 'large', label: '10-14 m²', helper: 'Großzügiger Raum', multiplier: 1.18 },
+  { id: 'xl', label: 'ab 15 m²', helper: 'Mehrere Flächen oder großer Ausbau', multiplier: 1.35 },
 ];
 
 const addOns = [
   {
     id: 'decken',
     title: 'Decken abhängen',
-    description: 'Flexible Deckengestaltung mit Gipskarton oder Metalldecken – inklusive Beleuchtung und Lüftung.',
+    description: 'Zusatzflächen, Deckenfelder oder Abkästungen für Licht und Technik.',
     price: 2400,
-    defaultSelected: true,
+    defaultSelected: false,
   },
   {
     id: 'waende',
-    title: 'Wände stellen & verkleiden',
-    description: 'Trennwände und Innenwände mit integrierbaren Elementen für flexible Raumaufteilung.',
+    title: 'Wände verkleiden',
+    description: 'Vorsatzschalen, Beplankungen oder Verkleidungen für Bestandswände.',
     price: 2800,
-    defaultSelected: true,
+    defaultSelected: false,
   },
   {
     id: 'estrich',
     title: 'Estrich-Boden',
-    description: 'Trockenestrich für eine stabile, ebene Bodenbasis – ideal für Fußbodenheizungen.',
+    description: 'Trockenestrich für eine stabile, ebene Bodenbasis.',
     price: 3200,
     defaultSelected: false,
   },
@@ -95,74 +102,74 @@ const addOns = [
   {
     id: 'daemmung',
     title: 'Dämmung',
-    description: 'Wärmeverlust senken, Schall dämpfen und Energiekosten spürbar reduzieren.',
+    description: 'Wärmeverlust senken, Schall dämpfen und Flächen funktional verbessern.',
     price: 1900,
     defaultSelected: true,
   },
   {
-    id: 'fenster-einbau',
-    title: 'Fenster integrieren',
-    description: 'Wandöffnungen schaffen und Fenster sauber in Trockenbauwände einpassen.',
-    price: 1600,
-    defaultSelected: false,
-  },
-  {
     id: 'tueren',
     title: 'Türen einbauen',
-    description: 'Türöffnungen mit Zarge, Türblatt und Beschlägen – schnell und platzsparend.',
+    description: 'Türöffnungen mit Zarge, Türblatt und passenden Beschlägen vorbereiten.',
     price: 1350,
-    defaultSelected: false,
-  },
-  {
-    id: 'bad',
-    title: 'Bad gestalten',
-    description: 'Feuchtigkeitsbeständige Wände und Decken für individuelle Badgestaltung.',
-    price: 3400,
     defaultSelected: false,
   },
   {
     id: 'elektro',
     title: 'Elektroleitungen integrieren',
-    description: 'Leitungen unsichtbar in Trockenbauwänden verlegen – sicher und wartungsfreundlich.',
+    description: 'Leitungen, Dosen und Anschlüsse unsichtbar in Trockenbauflächen führen.',
     price: 1150,
     defaultSelected: false,
   },
   {
     id: 'brandschutz',
     title: 'Brandschutz',
-    description: 'Spezielle Gipsplatten mit erhöhter Feuerbeständigkeit für mehr Gebäudesicherheit.',
+    description: 'Spezielle Beplankungen für Bereiche mit höheren Brandschutzanforderungen.',
     price: 1700,
+    defaultSelected: false,
+  },
+  {
+    id: 'spachteln',
+    title: 'Spachtelarbeiten',
+    description: 'Oberflächen für Anstrich, Tapete oder weitere Ausbauarbeiten vorbereiten.',
+    price: 1450,
+    defaultSelected: true,
+  },
+  {
+    id: 'abbruch',
+    title: 'Abbruch & Entsorgung',
+    description: 'Rückbau bestehender Verkleidungen und fachgerechte Entsorgung vor dem Neuaufbau.',
+    price: 1650,
     defaultSelected: false,
   },
 ];
 
 const benefits = [
-  'Schnelle Orientierung für Ihr Budget',
+  'Decken, Wände, Boden und Dachschrägen in einem Rechner',
   'Material und Montage getrennt nachvollziehbar',
-  'Persönliche Prüfung vor dem verbindlichen Angebot',
+  'Anfrage online senden und fachlich prüfen lassen',
 ];
 
 const heroMedia = [
   {
     id: 'montage',
-    label: 'Montage',
-    title: 'Vorwand & Trockenbau',
+    label: 'Wände',
+    title: 'Wände und Unterkonstruktion',
     image: projectFeaturedModernizationImage,
-    alt: 'Modernisierung im Innenausbau mit vorbereiteten Wandflächen',
+    alt: 'Trockenbauprojekt mit vorbereiteten Wandflächen',
   },
   {
     id: 'finish',
-    label: 'Finish',
+    label: 'Ausbau',
     title: 'Saubere Oberflächen',
     image: serviceInteriorImage,
-    alt: 'Hochwertiger Innenausbau mit sauberem Finish',
+    alt: 'Trockenbau-Ausbau mit sauberem Finish',
   },
   {
     id: 'sanierung',
-    label: 'Sanierung',
-    title: 'Geprüfte Umsetzung',
+    label: 'Bestand',
+    title: 'Trockenbau im Bestand',
     image: projectExistingSpaceRenovationImage,
-    alt: 'Sanierter Innenraum während der Ausbauphase',
+    alt: 'Bestandsraum während der Trockenbauphase',
   },
 ];
 
@@ -173,23 +180,23 @@ const requestMedia = [
     title: 'Saubere Anschlüsse',
     text: 'Wir prüfen Übergänge, Kanten und vorbereitete Flächen vor dem verbindlichen Angebot.',
     image: projectDetailCeilingImage,
-    alt: 'Detailansicht eines vorbereiteten Innenausbau-Projekts',
+    alt: 'Detailansicht eines vorbereiteten Trockenbau-Projekts',
   },
   {
     id: 'decken',
     label: 'Ausführung',
     title: 'Decken & Wände',
-    text: 'Trockenbau, Beplankung und Unterkonstruktion werden sauber nachvollziehbar geplant.',
+    text: 'Decken, Wände, Beplankung und Unterkonstruktion werden sauber nachvollziehbar geplant.',
     image: projectCeilingDrywallImage,
     alt: 'Trockenbau-Projekt mit Decken- und Wandflächen',
   },
   {
     id: 'finish',
     label: 'Finish',
-    title: 'Bereit für die Übergabe',
+    title: 'Bereit für den Abschluss',
     text: 'Zum Schluss geht es um klare Oberflächen, stimmige Details und ein gepflegtes Ergebnis.',
     image: projectFinishImage,
-    alt: 'Innenausbau-Projekt mit vorbereiteten Oberflächen und Finish-Arbeiten',
+    alt: 'Trockenbau-Projekt mit vorbereiteten Oberflächen und Finish-Arbeiten',
   },
 ];
 
@@ -221,7 +228,7 @@ function CalculatorPage() {
     rootMargin: '0px 0px -8% 0px',
     once: false,
   });
-  const [selectedPackageId, setSelectedPackageId] = useState(packages[1].id);
+  const [selectedPackageId, setSelectedPackageId] = useState(packages[0].id);
   const [selectedSizeId, setSelectedSizeId] = useState(roomSizes[1].id);
   const [quantity, setQuantity] = useState(1);
   const [selectedAddOns, setSelectedAddOns] = useState(() =>
@@ -340,15 +347,16 @@ function CalculatorPage() {
               <span>Kalkulator</span>
             </nav>
 
-            <span className="calculator-hero__eyebrow calculator-hero__reveal">Prima Vista Blitz-Angebot</span>
-            <h1 className="calculator-hero__title calculator-hero__reveal" aria-label="Projekt kalkulieren: Montage und Material">
-              <span>Projekt</span>
+            <span className="calculator-hero__eyebrow calculator-hero__reveal">Trockenbau Kalkulator</span>
+            <h1 className="calculator-hero__title calculator-hero__reveal" aria-label="Trockenbau kalkulieren: Decken, Wände und Ausbau">
+              <span>Trockenbau</span>
               <span>kalkulieren:</span>
-              <span>Montage & Material</span>
+              <span>Decken, Wände & Dachschrägen</span>
             </h1>
             <p className="calculator-hero__text calculator-hero__reveal">
-              Wählen Sie Leistungspaket, Raumgröße und Zusatzarbeiten. Der Rechner
-              zeigt direkt eine nachvollziehbare Kostenschätzung für Ihre Anfrage.
+              Wählen Sie Decken, Wände, Estrich-Boden, Dachschrägen oder
+              sonstige Trockenbauarbeiten. Der Rechner zeigt Ihnen direkt
+              eine nachvollziehbare Kostenschätzung für Ihre Anfrage.
             </p>
 
             <div className="calculator-hero__benefits calculator-hero__reveal" aria-label="Vorteile">
@@ -484,8 +492,9 @@ function CalculatorPage() {
               <span className="calculator-config__eyebrow">Kalkulation</span>
               <h2>Projekt konfigurieren</h2>
               <p>
-                Die Werte sind Richtpreise für die erste Planung. Details wie
-                Untergrund, Materialwahl und Leitungsführung werden im Anschluss geprüft.
+                Die Werte sind Richtpreise für Ihre erste Trockenbau-Planung.
+                Details wie Untergrund, Materialwahl, Anschlussdetails und
+                Leitungsführung werden im Anschluss geprüft.
               </p>
             </div>
 
@@ -583,7 +592,7 @@ function CalculatorPage() {
               </span>
               <div>
                 <h2>Kostenschätzung</h2>
-                <p>Unverbindliche Orientierung</p>
+                <p>Unverbindliche Erstorientierung</p>
               </div>
             </div>
 
@@ -637,7 +646,7 @@ function CalculatorPage() {
             <h2 className="calculator-request__reveal">Kostenschätzung prüfen lassen</h2>
             <p className="calculator-request__reveal">
               Senden Sie Ihre Konfiguration an Prima Vista. Wir melden uns mit
-              einer fachlichen Einschätzung und den nächsten Schritten.
+              einer fachlichen Einschätzung, offenen Punkten und den nächsten Schritten.
             </p>
 
             <div className="calculator-request__media calculator-request__reveal">
@@ -728,7 +737,7 @@ function CalculatorPage() {
                     id="calculator-message"
                     name="message"
                     rows="5"
-                    placeholder="Beschreiben Sie kurz Ihr Trockenbau-, Sanierungs- oder Innenausbau-Projekt."
+                    placeholder="Beschreiben Sie kurz Ihre Trockenbau-Leistung, z. B. Decken, Wände, Estrich oder Dachschrägen."
                   ></textarea>
                 </label>
 

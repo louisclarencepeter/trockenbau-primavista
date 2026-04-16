@@ -1,0 +1,10 @@
+Bereich: Leistungen
+Leistung: Dachschrägen
+
+Benötigtes Video:
+- Ausbau oder Verkleidung einer Dachschräge
+- sichtbare Geometrie unter dem Dach
+- ruhige, klare Aufnahme
+
+Empfohlener Dateiname:
+- scene.mp4

@@ -1,16 +1,16 @@
 import { ArrowRight, Calculator, CheckCircle2 } from 'lucide-react';
 import './CalculatorTeaser.scss';
 import {
+  projectDetailCeilingImage,
   projectFeaturedModernizationImage,
   responsiveImageSizes,
-  serviceWindowsImage,
 } from '../../assets/responsiveImages';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
 const calculatorBenefits = [
-  'Leistungen wie Decken, Wände oder Dämmung kombinieren',
+  'Decken, Wände, Boden und Dachschrägen kombinieren',
   'Transparente Baupreise für Material und Montage',
-  'Angebot online anfordern und direkt starten',
+  'Angebot online anfragen und direkt weiterplanen',
 ];
 
 function CalculatorTeaser() {
@@ -30,12 +30,13 @@ function CalculatorTeaser() {
             Kostenrechner
           </span>
           <h2 className="calculator-teaser__title calculator-teaser__reveal">
-            Schnell eine erste Kostenschätzung erhalten
+            Erste Trockenbau-Kosten direkt einschätzen
           </h2>
           <p className="calculator-teaser__text calculator-teaser__reveal">
-            Decken abhängen, Wände stellen, Dämmung, Fenster, Bad oder Brandschutz –
-            stellen Sie Ihr Trockenbau-Projekt individuell zusammen und erhalten
-            Sie transparente Baupreise für Material und Montage.
+            Decken abhängen, Wände stellen, Estrich-Boden vorbereiten,
+            Dachschrägen ausbauen oder Sonderleistungen anfragen:
+            stellen Sie Ihr Trockenbau-Projekt individuell zusammen und
+            erhalten Sie transparente Baupreise für Material und Montage.
           </p>
 
           <div className="calculator-teaser__benefits calculator-teaser__reveal">
@@ -60,7 +61,7 @@ function CalculatorTeaser() {
               src={projectFeaturedModernizationImage.src}
               srcSet={projectFeaturedModernizationImage.srcSet}
               sizes={responsiveImageSizes.projectsGrid}
-              alt="Innenausbau-Projekt mit vorbereiteter Trockenbau-Struktur"
+              alt="Trockenbau-Projekt mit vorbereiteter Wand- und Deckenstruktur"
               className="calculator-teaser__image"
               loading="lazy"
               decoding="async"
@@ -70,15 +71,15 @@ function CalculatorTeaser() {
           <div className="calculator-teaser__estimate" aria-label="Beispielhafte Kostenschätzung">
             <span>Beispiel-Schätzung</span>
             <strong>CHF 12'800</strong>
-            <small>Sanierung & Renovierung</small>
+            <small>Wände stellen</small>
           </div>
 
           <div className="calculator-teaser__mini-frame">
             <img
-              src={serviceWindowsImage.src}
-              srcSet={serviceWindowsImage.srcSet}
+              src={projectDetailCeilingImage.src}
+              srcSet={projectDetailCeilingImage.srcSet}
               sizes={responsiveImageSizes.heroDetail}
-              alt="Fensterarbeiten mit sauberer Integration in den Innenausbau"
+              alt="Detailansicht einer Trockenbau-Ausführung"
               className="calculator-teaser__image"
               loading="lazy"
               decoding="async"

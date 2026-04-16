@@ -490,6 +490,8 @@
 }
 
 .calculator-config__card {
+  --card-offset-x: 0px;
+  --card-offset-y: 0px;
   position: relative;
   display: grid;
   gap: 12px;
@@ -500,12 +502,14 @@
   background: var(--color-surface-card);
   box-shadow: var(--color-shadow-sm);
   cursor: pointer;
+  transform: translate(var(--card-offset-x), var(--card-offset-y));
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 @container (min-width: 696px) and (max-width: 933px) {
-  .calculator-config__card:last-child:nth-child(4) {
-    grid-column: 2;
+  .calculator-config__card:nth-child(4):nth-last-child(2),
+  .calculator-config__card:nth-child(5):last-child {
+    --card-offset-x: calc(50% + 9px);
   }
 }
 
@@ -513,7 +517,7 @@
 .calculator-config__card.is-selected {
   border-color: var(--color-accent-border-strong);
   box-shadow: var(--color-shadow-hover);
-  transform: translateY(-2px);
+  --card-offset-y: -2px;
 }
 
 .calculator-config__card input,

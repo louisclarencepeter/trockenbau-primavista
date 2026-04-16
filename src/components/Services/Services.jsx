@@ -11,28 +11,34 @@ import useScrollReveal from '../../hooks/useScrollReveal';
 
 const services = [
   {
-    title: 'Trockenbau',
-    text: 'Moderne Innenausbau-Lösungen mit hoher Präzision und sauberer Ausführung.',
+    title: 'Decken abhängen',
+    text: 'Abgehängte Decken für Licht, Akustik, Installationen und eine saubere Raumwirkung.',
     image: serviceDrywallImage,
-    alt: 'Trockenbau-Arbeiten in einem modernen Innenraum',
+    alt: 'Trockenbau-Arbeiten an einer abgehängten Decke',
   },
   {
-    title: 'Sanierung & Renovierung',
-    text: 'Fachgerechte Sanierungs- und Renovierungsarbeiten für bestehende Räume mit neuer Qualität und Funktionalität.',
+    title: 'Wände stellen',
+    text: 'Trennwände, Vorsatzschalen und Verkleidungen für flexible Grundrisse und klare Anschlüsse.',
     image: serviceRenovationImage,
-    alt: 'Sanierungs- und Renovierungsprojekt mit sauber ausgeführten Wand- und Deckenarbeiten',
+    alt: 'Trockenbau-Projekt mit sauber ausgeführten Wand- und Deckenarbeiten',
   },
   {
-    title: 'Innenausbau',
-    text: 'Individuelle Gestaltung und Ausbau von Innenräumen nach hohen Standards.',
+    title: 'Estrich-Boden',
+    text: 'Trockene Bodenaufbauten und ebene Flächen als solide Basis für den weiteren Ausbau.',
     image: serviceInteriorImage,
-    alt: 'Innenausbau mit klaren Linien und hochwertigem Finish',
+    alt: 'Trockenbau-Projekt mit vorbereitetem Boden- und Flächenaufbau',
   },
   {
-    title: 'Fenster',
-    text: 'Saubere Lösungen rund um Fenster mit präziser Ausführung und passender Integration in den Innenausbau.',
+    title: 'Dachschrägen',
+    text: 'Dachschrägen verkleiden und ausbauen, damit ungenutzte Flächen sauber nutzbar werden.',
     image: serviceWindowsImage,
-    alt: 'Fensterarbeiten in einem Innenausbau-Projekt mit sauberer Vorbereitung',
+    alt: 'Ausbauarbeit an einer geneigten Innenraumfläche',
+  },
+  {
+    title: 'Sonstiges',
+    text: 'Dämmung, Brandschutz, Türen, Leitungen und weitere Trockenbauleistungen auf Anfrage.',
+    image: serviceDrywallImage,
+    alt: 'Trockenbau-Leistungen für Sonderarbeiten und Detailausbau',
   },
 ];
 
@@ -52,9 +58,9 @@ function Services() {
           <span className="services__eyebrow services__reveal">WAS WIR ANBIETEN</span>
           <h2 className="services__title services__reveal">Unsere Leistungen</h2>
           <p className="services__text services__reveal">
-            Wir bieten professionelle Lösungen in den Bereichen Trockenbau,
-            Sanierung & Renovierung, Fenster und Innenausbau - zuverlässig,
-            präzise und termingerecht.
+            Unser Fokus liegt auf den zentralen Trockenbau-Leistungen:
+            Decken abhängen, Wände stellen, Estrich-Boden, Dachschrägen
+            und weitere Sonderarbeiten, sauber geplant und fachgerecht umgesetzt.
           </p>
         </div>
 

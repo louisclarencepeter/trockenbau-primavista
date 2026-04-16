@@ -14,33 +14,33 @@ import {
 const supportingProjects = [
   {
     image: projectCeilingDrywallImage,
-    title: 'Decken- und Trockenbau',
+    title: 'Decken abhängen',
     alt: 'Trockenbau-Projekt mit sichtbarer Decken- und Leitungsstruktur',
   },
   {
     image: projectExistingSpaceRenovationImage,
-    title: 'Sanierung im Bestand',
-    alt: 'Sanierungsprojekt mit vorbereiteten Wand- und Deckenflächen',
+    title: 'Wände im Bestand',
+    alt: 'Trockenbau-Projekt mit vorbereiteten Wand- und Deckenflächen',
   },
   {
     image: serviceInteriorImage,
-    title: 'Moderner Innenausbau',
-    alt: 'Innenausbau mit moderner Raumgestaltung und sauberer Ausführung',
+    title: 'Estrich-Boden',
+    alt: 'Trockenbau-Projekt mit vorbereitetem Boden- und Flächenaufbau',
   },
   {
     image: projectDetailCeilingImage,
-    title: 'Feine Detailarbeiten',
+    title: 'Saubere Anschlüsse',
     alt: 'Ausbauprojekt mit präzise ausgeführten Decken- und Übergangsdetails',
   },
   {
     image: projectFinishImage,
-    title: 'Renovierung mit Finish',
-    alt: 'Renovierungsprojekt mit hochwertigem Finish und sauberer Umsetzung',
+    title: 'Dachschrägen ausbauen',
+    alt: 'Trockenbau-Projekt mit hochwertigem Finish und sauberer Umsetzung',
   },
   {
     image: serviceRenovationImage,
-    title: 'Sanierte Wohnräume',
-    alt: 'Heller sanierter Wohnraum mit hochwertiger Ausführung',
+    title: 'Sonstige Leistungen',
+    alt: 'Trockenbau-Projekt für weitere Ausbau- und Sonderleistungen',
   },
 ];
 
@@ -60,8 +60,8 @@ function Projects() {
           <span className="projects__eyebrow projects__reveal">REFERENZEN</span>
           <h2 className="projects__title projects__reveal">Ausgewählte Projekte</h2>
           <p className="projects__text projects__reveal">
-            Ein Einblick in unsere bisherigen Arbeiten im Bereich Trockenbau,
-            Sanierung und Innenausbau.
+            Ein Einblick in unsere bisherigen Arbeiten rund um Decken, Wände,
+            Bodenaufbau, Dachschrägen und saubere Trockenbau-Details.
           </p>
         </div>
 
@@ -71,16 +71,15 @@ function Projects() {
               src={projectFeaturedModernizationImage.src}
               srcSet={projectFeaturedModernizationImage.srcSet}
               sizes={responsiveImageSizes.projectsFeatured}
-              alt="Innenausbau-Projekt mit moderner Trockenbau-Ausführung"
+              alt="Trockenbau-Projekt mit moderner Ausführung"
               loading="lazy"
               decoding="async"
               className="projects__image"
             />
             <div className="projects__overlay projects__overlay--featured">
-              <h3 className="projects__featured-title">Wohnraum-Modernisierung</h3>
+              <h3 className="projects__featured-title">Trockenbau aus einer Hand</h3>
               <p className="projects__featured-text">
-                Hochwertiger Innenausbau mit klarer Linienführung und sauberer
-                handwerklicher Ausführung.
+                Decken, Wände und Anschlussdetails sauber geplant und fachgerecht umgesetzt.
               </p>
             </div>
           </article>

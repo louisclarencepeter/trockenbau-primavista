@@ -59,8 +59,8 @@ function PrivacyPolicy() {
         </p>
         <ul className="legal-page__list">
           <li>
-            Ihre Anfragen zu unseren Dienstleistungen wie Sanierung, Innenausbau
-            oder HORECA-Projekten zu bearbeiten
+            Ihre Anfragen zu unseren Dienstleistungen wie Trockenbau,
+            Decken, Wänden, Estrich-Boden oder Dachschrägen zu bearbeiten
           </li>
           <li>Offerten zu erstellen und Verträge abzuwickeln</li>
           <li>Den Betrieb und die Sicherheit unserer Webseite zu gewährleisten</li>

@@ -11,12 +11,12 @@ import { aboutSectionVideo } from '../../assets/videoManifest';
 const highlights = [
   {
     title: 'Saubere Ausführung',
-    text: 'Wir arbeiten präzise, ordentlich und mit einem hohen Anspruch an jedes Detail.',
+    text: 'Von der Unterkonstruktion bis zur letzten Spachtelung arbeiten wir präzise und sauber.',
     icon: CheckCircle2,
   },
   {
     title: 'Zuverlässige Planung',
-    text: 'Klare Abläufe und realistische Terminabsprachen sorgen für einen reibungslosen Projektverlauf.',
+    text: 'Decken, Wände, Bodenaufbauten und Dachschrägen werden nachvollziehbar geplant und abgestimmt.',
     icon: TimerReset,
   },
   {
@@ -26,7 +26,7 @@ const highlights = [
   },
   {
     title: 'Handwerk mit Anspruch',
-    text: 'Trockenbau, Sanierung und Innenausbau setzen wir fachgerecht und mit Blick auf langlebige Qualität um.',
+    text: 'Unser Schwerpunkt liegt auf Trockenbau-Leistungen, die funktional stark und dauerhaft sauber ausgeführt sind.',
     icon: Hammer,
   },
 ];
@@ -47,27 +47,28 @@ function About() {
           <div className="ueber-uns__intro">
             <span className="ueber-uns__eyebrow ueber-uns__reveal">ÜBER UNS</span>
             <h2 className="ueber-uns__title ueber-uns__reveal">
-              Verlässliches Handwerk für hochwertige Innenräume
+              Trockenbau mit klarer Planung und sauberer Ausführung
             </h2>
             <p className="ueber-uns__text ueber-uns__reveal">
-              Trockenbau Prima Vista steht für saubere Ausführung, klare Kommunikation
-              und zuverlässige Arbeit in den Bereichen Trockenbau, Sanierung und
-              Innenausbau. Unser Anspruch ist es, Lösungen zu schaffen, die
-              funktional überzeugen und optisch hochwertig wirken.
+              Trockenbau Prima Vista steht für klare Kommunikation, saubere
+              Ausführung und nachvollziehbare Angebote im Bereich Trockenbau.
+              Ob Decken, Wände, Estrich-Boden, Dachschrägen oder Sonderleistungen:
+              wir schaffen funktionale Lösungen, die fachgerecht umgesetzt
+              und sauber abgeschlossen werden.
             </p>
 
             <div className="ueber-uns__image-wrap ueber-uns__reveal">
               <ResponsiveVideo
                 media={aboutSectionVideo}
                 isActive={isVisible}
-                posterAlt="Innenausbau-Projekt von Trockenbau Prima Vista"
+                posterAlt="Trockenbau-Projekt von Trockenbau Prima Vista"
                 className="ueber-uns__image"
                 fallback={(
                   <img
                     src={aboutInteriorShowcaseImage.src}
                     srcSet={aboutInteriorShowcaseImage.srcSet}
                     sizes={responsiveImageSizes.about}
-                    alt="Innenausbau-Projekt von Trockenbau Prima Vista"
+                    alt="Trockenbau-Projekt von Trockenbau Prima Vista"
                     loading="lazy"
                     decoding="async"
                     className="ueber-uns__image"

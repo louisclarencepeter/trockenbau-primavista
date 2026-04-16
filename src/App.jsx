@@ -45,8 +45,8 @@ function App({ initialTheme = 'light' }) {
 
   useEffect(() => {
     const titleByPath = {
-      '/': 'Trockenbau Prima Vista | Trockenbau, Sanierung, Fenster und Innenausbau',
-      '/kalkulator': 'Kalkulator | Prima Vista B&G GmbH',
+      '/': 'Trockenbau Prima Vista | Decken, Wände, Boden und Dachschrägen',
+      '/kalkulator': 'Trockenbau Kalkulator | Prima Vista B&G GmbH',
       '/impressum': 'Impressum | Prima Vista B&G GmbH',
       '/datenschutz': 'Datenschutzerklärung | Prima Vista B&G GmbH',
     };
