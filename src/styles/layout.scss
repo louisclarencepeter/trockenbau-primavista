@@ -18,3 +18,20 @@
     scroll-margin-top: 96px;
   }
 }
+
+@supports (content-visibility: auto) {
+  .services,
+  .calculator-teaser,
+  .ueber-uns,
+  .projects,
+  .reviews,
+  .contact {
+    content-visibility: auto;
+    contain-intrinsic-size: 960px;
+  }
+
+  .footer {
+    content-visibility: auto;
+    contain-intrinsic-size: 420px;
+  }
+}

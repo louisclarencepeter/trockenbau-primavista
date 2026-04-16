@@ -137,20 +137,17 @@ function Hero() {
         <div className="hero__visual hero__reveal">
           <div className="hero__showcase">
             <div className="hero__photo-frame hero__photo-frame--main">
-              {heroSlides.map((slide, index) => (
-                <img
-                  key={`${slide.alt}-main`}
-                  src={slide.image.src}
-                  srcSet={slide.image.srcSet}
-                  sizes={responsiveImageSizes.heroMain}
-                  alt={slide.alt}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  decoding={index === 0 ? 'sync' : 'async'}
-                  className={`hero__photo hero__photo--main${
-                    index === activeSlide ? ' hero__photo--active' : ''
-                  }`}
-                />
-              ))}
+              <img
+                key={`${mainSlide.alt}-main`}
+                src={mainSlide.image.src}
+                srcSet={mainSlide.image.srcSet}
+                sizes={responsiveImageSizes.heroMain}
+                alt={mainSlide.alt}
+                loading="eager"
+                decoding="sync"
+                fetchPriority="high"
+                className="hero__photo hero__photo--main hero__photo--active"
+              />
 
               <div className="hero__overlay hero__overlay--quality hero__reveal">
                 <span className="hero__overlay-label">{mainSlide.label}</span>
@@ -165,20 +162,16 @@ function Hero() {
                   className="hero__photo-frame hero__photo-frame--detail hero__reveal"
                   key={`detail-frame-${detailIndex}`}
                 >
-                  {heroSlides.map((slide) => (
-                    <img
-                      key={`${slide.alt}-detail-${detailIndex}`}
-                      src={slide.image.src}
-                      srcSet={slide.image.srcSet}
-                      sizes={responsiveImageSizes.heroDetail}
-                      alt={slide.alt}
-                      loading="lazy"
-                      decoding="async"
-                      className={`hero__photo hero__photo--detail-slide${
-                        slide === detailSlide ? ' hero__photo--active' : ''
-                      }`}
-                    />
-                  ))}
+                  <img
+                    key={`${detailSlide.alt}-detail-${detailIndex}`}
+                    src={detailSlide.image.src}
+                    srcSet={detailSlide.image.srcSet}
+                    sizes={responsiveImageSizes.heroDetail}
+                    alt={detailSlide.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="hero__photo hero__photo--detail-slide hero__photo--active"
+                  />
                   <span className="hero__detail-label">{detailSlide.label}</span>
                 </div>
               ))}
