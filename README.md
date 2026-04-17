@@ -157,7 +157,7 @@ EMAIL_CONFIRMATIONS_ENABLED=true
 EMAIL_PROVIDER=resend
 EMAIL_FROM="Trockenbau Prima Vista <noreply@your-domain.tld>"
 EMAIL_REPLY_TO=info@trockenbau-primavista.ch
-EMAIL_NOTIFICATION_TO=info@trockenbau-primavista.ch
+EMAIL_NOTIFICATION_TO=
 EMAIL_NOTIFICATION_BCC=
 RESEND_API_KEY=re_your_resend_api_key
 ```
@@ -174,6 +174,7 @@ After that:
 - `contact` submissions send a receipt email to the visitor
 - `calculator` submissions send a receipt email including the project summary
 - optional internal notifications go to `EMAIL_NOTIFICATION_TO`
+- self-sends are skipped automatically if `EMAIL_NOTIFICATION_TO` matches `EMAIL_FROM`
 
 ## Chatbot
 

@@ -45,6 +45,15 @@ const readText = (submission, key) => {
   return typeof value === 'string' ? value.trim() : '';
 };
 
+const normalizeEmailAddress = (value) => {
+  const input = String(value ?? '').trim();
+
+  if (!input) return '';
+
+  const match = input.match(/<([^>]+)>/);
+  return (match?.[1] ?? input).trim().toLowerCase();
+};
+
 const buildContactSummary = (submission) => {
   const message = readText(submission, 'message') || 'Keine Nachricht angegeben.';
 
@@ -412,6 +421,12 @@ export default async (req) => {
   };
 
   const clientReplyTo = readText(submission, 'email') || customerReplyTo;
+  const normalizedSenderEmail = normalizeEmailAddress(customerFrom);
+  const normalizedNotificationRecipient = normalizeEmailAddress(notificationRecipient);
+  const shouldSendInternalNotification = Boolean(
+    normalizedNotificationRecipient
+    && normalizedNotificationRecipient !== normalizedSenderEmail,
+  );
 
   console.log('[confirmations] Processing submission', {
     formName,
@@ -438,7 +453,7 @@ export default async (req) => {
     recipientEmail,
   });
 
-  if (notificationRecipient) {
+  if (shouldSendInternalNotification) {
     console.log('[confirmations] Sending internal notification', {
       formName,
       notificationRecipient,
@@ -473,6 +488,18 @@ export default async (req) => {
         error: getErrorMessage(error),
       });
     }
+  } else if (notificationRecipient) {
+    result.internalNotification = {
+      status: 'skipped',
+      reason: 'EMAIL_NOTIFICATION_TO matches EMAIL_FROM.',
+      recipient: notificationRecipient,
+    };
+
+    console.warn('[confirmations] Internal notification skipped because it would send from and to the same mailbox', {
+      formName,
+      notificationRecipient,
+      customerFrom,
+    });
   } else {
     console.warn('[confirmations] Internal notification skipped because EMAIL_NOTIFICATION_TO is empty', {
       formName,
