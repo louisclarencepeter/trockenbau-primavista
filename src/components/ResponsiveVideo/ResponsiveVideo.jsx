@@ -149,7 +149,6 @@ function ResponsiveVideo({
       autoPlay
       loop
       muted
-      defaultMuted
       playsInline
       preload={isActive ? 'auto' : 'metadata'}
       aria-hidden="true"

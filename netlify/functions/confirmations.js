@@ -8,18 +8,20 @@ const COMPANY_WEBSITE = 'https://trockenbau-primavista.ch';
 const getEnv = (name) => {
   const netlifyValue = globalThis.Netlify?.env?.get?.(name);
 
-  if (typeof netlifyValue === 'string' && netlifyValue.length > 0) {
-    return netlifyValue;
+  if (typeof netlifyValue === 'string') {
+    return netlifyValue.trim();
   }
 
   if (typeof process !== 'undefined' && typeof process.env?.[name] === 'string') {
-    return process.env[name];
+    return process.env[name].trim();
   }
 
   return '';
 };
 
 const isTruthy = (value) => ['1', 'true', 'yes', 'on'].includes(value.trim().toLowerCase());
+
+const getErrorMessage = (error) => (error instanceof Error ? error.message : String(error));
 
 const jsonResponse = (body, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -411,6 +413,14 @@ export default async (req) => {
 
   const clientReplyTo = readText(submission, 'email') || customerReplyTo;
 
+  console.log('[confirmations] Processing submission', {
+    formName,
+    provider,
+    recipientEmail,
+    notificationRecipient: notificationRecipient || null,
+    hasNotificationBcc: Boolean(notificationBcc),
+  });
+
   result.confirmation = await sendEmail({
     provider,
     apiKey: providerApiKey,
@@ -423,16 +433,49 @@ export default async (req) => {
     bcc: notificationBcc ? [notificationBcc] : undefined,
   });
 
+  console.log('[confirmations] Customer confirmation sent', {
+    formName,
+    recipientEmail,
+  });
+
   if (notificationRecipient) {
-    result.internalNotification = await sendEmail({
-      provider,
-      apiKey: providerApiKey,
-      from: customerFrom,
-      to: [notificationRecipient],
-      subject: internal.subject,
-      html: internal.html,
-      text: internal.text,
-      replyTo: clientReplyTo,
+    console.log('[confirmations] Sending internal notification', {
+      formName,
+      notificationRecipient,
+    });
+
+    try {
+      result.internalNotification = await sendEmail({
+        provider,
+        apiKey: providerApiKey,
+        from: customerFrom,
+        to: [notificationRecipient],
+        subject: internal.subject,
+        html: internal.html,
+        text: internal.text,
+        replyTo: clientReplyTo,
+      });
+
+      console.log('[confirmations] Internal notification sent', {
+        formName,
+        notificationRecipient,
+      });
+    } catch (error) {
+      result.status = 'partial';
+      result.internalNotification = {
+        status: 'failed',
+        recipient: notificationRecipient,
+      };
+
+      console.error('[confirmations] Internal notification failed', {
+        formName,
+        notificationRecipient,
+        error: getErrorMessage(error),
+      });
+    }
+  } else {
+    console.warn('[confirmations] Internal notification skipped because EMAIL_NOTIFICATION_TO is empty', {
+      formName,
     });
   }
 
