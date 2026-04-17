@@ -156,8 +156,8 @@ The confirmation function is designed for `Resend` and is controlled through env
 EMAIL_CONFIRMATIONS_ENABLED=true
 EMAIL_PROVIDER=resend
 EMAIL_FROM="Trockenbau Prima Vista <noreply@your-domain.tld>"
-EMAIL_REPLY_TO=info@primavista-bauprojekte.ch
-EMAIL_NOTIFICATION_TO=info@primavista-bauprojekte.ch
+EMAIL_REPLY_TO=info@trockenbau-primavista.ch
+EMAIL_NOTIFICATION_TO=info@trockenbau-primavista.ch
 EMAIL_NOTIFICATION_BCC=
 RESEND_API_KEY=re_your_resend_api_key
 ```

@@ -83,14 +83,6 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
   const getNavHref = (id) => (isHomePage ? `#${id}` : `/#${id}`);
   const getItemHref = (item) => item.href ?? getNavHref(item.id);
   const homeHref = isHomePage ? '#top' : '/';
-  const isCalculatorPage = currentPath === '/kalkulator';
-  const contactHref = isHomePage ? '#kontakt' : '/#kontakt';
-  const primaryCtaHref = isHomePage
-    ? '/kalkulator'
-    : isCalculatorPage
-      ? '#anfrage'
-      : contactHref;
-  const primaryCtaLabel = isHomePage ? 'Kosten kalkulieren' : 'Jetzt anfragen';
   const visibleActiveSection = isHomePage ? activeSection : '';
   const isPageItemActive = (item) => Boolean(item.href && currentPath === item.href);
 
@@ -196,12 +188,8 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
 
         <div className="navbar__utilities">
           <div className="navbar__cta">
-            <Button
-              href={primaryCtaHref}
-              onClick={isHomePage ? undefined : handleNavClick('kontakt')}
-              variant="primary"
-            >
-              {primaryCtaLabel}
+            <Button href="/anfrage" variant="primary">
+              Jetzt Anfrage stellen
             </Button>
           </div>
         </div>
@@ -235,12 +223,8 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
           ))}
 
           <div className="navbar__mobile-cta">
-            <Button
-              href={primaryCtaHref}
-              onClick={isHomePage ? undefined : handleNavClick('kontakt')}
-              variant="primary"
-            >
-              {primaryCtaLabel}
+            <Button href="/anfrage" variant="primary">
+              Jetzt Anfrage stellen
             </Button>
           </div>
         </nav>

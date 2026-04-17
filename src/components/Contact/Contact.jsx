@@ -14,8 +14,8 @@ const contactItems = [
   {
     icon: Mail,
     label: 'E-Mail',
-    value: 'info@primavista-bauprojekte.ch',
-    href: 'mailto:info@primavista-bauprojekte.ch',
+    value: 'info@trockenbau-primavista.ch',
+    href: 'mailto:info@trockenbau-primavista.ch',
   },
   {
     icon: MapPin,

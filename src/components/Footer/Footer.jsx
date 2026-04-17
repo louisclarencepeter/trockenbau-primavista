@@ -94,8 +94,8 @@ function Footer({
               <h4 className="footer__heading">Kontakt</h4>
               <span className="footer__item">Spinnereistrasse 5, 6020 Emmenbrücke, Schweiz</span>
               <a href="tel:+41782659332" className="footer__link">+41 78 265 93 32</a>
-              <a href="mailto:info@primavista-bauprojekte.ch" className="footer__link">
-                info@primavista-bauprojekte.ch
+              <a href="mailto:info@trockenbau-primavista.ch" className="footer__link">
+                info@trockenbau-primavista.ch
               </a>
             </div>
 

@@ -70,8 +70,8 @@ function LegalPage({ page = 'impressum' }) {
               <br />
               6020 Emmenbrücke, Schweiz
             </p>
-            <a href="mailto:info@primavista-bauprojekte.ch" className="legal-page__summary-link">
-              info@primavista-bauprojekte.ch
+            <a href="mailto:info@trockenbau-primavista.ch" className="legal-page__summary-link">
+              info@trockenbau-primavista.ch
             </a>
             <a href="tel:+41782659332" className="legal-page__summary-link">
               +41 78 265 93 32

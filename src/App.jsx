@@ -14,6 +14,7 @@ import { applyTheme, getStoredTheme, THEME_STORAGE_KEY } from './utils/theme';
 
 const LegalPage = lazy(() => import('./components/Legal/LegalPage'));
 const CalculatorPage = lazy(() => import('./components/Calculator/Calculator'));
+const AnfragePage = lazy(() => import('./components/Anfrage/Anfrage'));
 const Reviews = lazy(() => import('./components/Reviews/Reviews'));
 const Chatbot = lazy(() => import('./components/Chatbot/Chatbot'));
 const CookieBanner = lazy(() => import('./components/CookieBanner/CookieBanner'));
@@ -34,6 +35,7 @@ function App({ initialTheme = 'light' }) {
   const isImpressumPage = currentPath === '/impressum';
   const isPrivacyPage = currentPath === '/datenschutz';
   const isCalculatorPage = currentPath === '/kalkulator';
+  const isAnfragePage = currentPath === '/anfrage';
   const [themePreference, setThemePreference] = useState(() => getStoredTheme() ?? 'system');
   const [systemTheme, setSystemTheme] = useState(() => (
     initialTheme === 'dark' ? 'dark' : 'light'
@@ -51,6 +53,7 @@ function App({ initialTheme = 'light' }) {
     const titleByPath = {
       '/': 'Trockenbau Prima Vista | Decken, Wände, Boden und Dachschrägen',
       '/kalkulator': 'Trockenbau Kalkulator | Prima Vista B&G GmbH',
+      '/anfrage': 'Anfrage stellen | Prima Vista B&G GmbH',
       '/impressum': 'Impressum | Prima Vista B&G GmbH',
       '/datenschutz': 'Datenschutzerklärung | Prima Vista B&G GmbH',
     };
@@ -239,6 +242,10 @@ function App({ initialTheme = 'light' }) {
         ) : isCalculatorPage ? (
           <Suspense fallback={null}>
             <CalculatorPage />
+          </Suspense>
+        ) : isAnfragePage ? (
+          <Suspense fallback={null}>
+            <AnfragePage />
           </Suspense>
         ) : (
           <>

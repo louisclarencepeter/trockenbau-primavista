@@ -1,9 +1,9 @@
 import process from 'process';
 
 const COMPANY_NAME = 'Trockenbau Prima Vista';
-const COMPANY_EMAIL = 'info@primavista-bauprojekte.ch';
+const COMPANY_EMAIL = 'info@trockenbau-primavista.ch';
 const COMPANY_PHONE = '+41 78 265 93 32';
-const COMPANY_WEBSITE = 'https://primavista-bauprojekte.ch';
+const COMPANY_WEBSITE = 'https://trockenbau-primavista.ch';
 
 const getEnv = (name) => {
   const netlifyValue = globalThis.Netlify?.env?.get?.(name);
@@ -54,6 +54,23 @@ const buildContactSummary = (submission) => {
   ];
 };
 
+const buildAnfrageSummary = (submission) => {
+  const addOns = readText(submission, 'add_ons') || 'keine';
+  const message = readText(submission, 'message') || 'Keine zusätzliche Nachricht angegeben.';
+
+  return [
+    ['Name', readText(submission, 'name')],
+    ['E-Mail', readText(submission, 'email')],
+    ['Telefon', readText(submission, 'phone') || 'Nicht angegeben'],
+    ['Postleitzahl', readText(submission, 'plz') || 'Nicht angegeben'],
+    ['Leistung', readText(submission, 'service')],
+    ['Extras', addOns],
+    ['Raumgröße', readText(submission, 'room_size')],
+    ['Zeitplan', readText(submission, 'zeitplan')],
+    ['Nachricht', message],
+  ];
+};
+
 const buildCalculatorSummary = (submission) => {
   const addOns = readText(submission, 'add_ons') || 'keine';
   const message = readText(submission, 'message') || 'Keine zusätzliche Nachricht angegeben.';
@@ -93,6 +110,54 @@ const buildSummaryText = (rows) =>
 
 const getTemplates = (formName, submission) => {
   const customerName = readText(submission, 'name') || 'Guten Tag';
+
+  if (formName === 'anfrage') {
+    const summary = buildAnfrageSummary(submission);
+
+    return {
+      confirmation: {
+        subject: 'Ihre Anfrage bei Trockenbau Prima Vista',
+        html: `
+          <div style="font-family:Arial,sans-serif;line-height:1.6;color:#1d232b;">
+            <p>Hallo ${escapeHtml(customerName)},</p>
+            <p>vielen Dank fuer Ihre Anfrage an ${COMPANY_NAME}. Ihre Angaben sind bei uns eingegangen.</p>
+            <p>Wir pruefen Ihr Projekt und melden uns so schnell wie moeglich persoenlich bei Ihnen.</p>
+            <table style="border-collapse:collapse;margin:24px 0;width:100%;max-width:680px;">
+              ${buildSummaryMarkup(summary)}
+            </table>
+            <p>Bei Rueckfragen antworten Sie einfach auf diese E-Mail oder rufen Sie uns an: <a href="tel:${COMPANY_PHONE.replaceAll(' ', '')}">${COMPANY_PHONE}</a>.</p>
+            <p>Freundliche Gruesse<br>${COMPANY_NAME}</p>
+          </div>
+        `,
+        text: [
+          `Hallo ${customerName},`,
+          '',
+          `vielen Dank fuer Ihre Anfrage an ${COMPANY_NAME}. Ihre Angaben sind bei uns eingegangen.`,
+          'Wir pruefen Ihr Projekt und melden uns so schnell wie moeglich persoenlich bei Ihnen.',
+          '',
+          buildSummaryText(summary),
+          '',
+          `Rueckfragen: ${COMPANY_EMAIL} | ${COMPANY_PHONE}`,
+        ].join('\n'),
+      },
+      internal: {
+        subject: `Neue Anfrage (Assistent) von ${readText(submission, 'name') || readText(submission, 'email')}`,
+        html: `
+          <div style="font-family:Arial,sans-serif;line-height:1.6;color:#1d232b;">
+            <p>Es ist eine neue Anfrage ueber den Anfrageassistenten eingegangen.</p>
+            <table style="border-collapse:collapse;margin:24px 0;width:100%;max-width:680px;">
+              ${buildSummaryMarkup(summary)}
+            </table>
+          </div>
+        `,
+        text: [
+          'Neue Anfrage ueber den Anfrageassistenten',
+          '',
+          buildSummaryText(summary),
+        ].join('\n'),
+      },
+    };
+  }
 
   if (formName === 'contact') {
     const summary = buildContactSummary(submission);
@@ -225,6 +290,55 @@ const sendWithResend = async ({
   return response.json();
 };
 
+const sendWithBrevo = async ({
+  apiKey,
+  from,
+  to,
+  subject,
+  html,
+  text,
+  replyTo,
+  bcc,
+}) => {
+  const body = {
+    sender: { email: from },
+    to: to.map((email) => ({ email })),
+    subject,
+    htmlContent: html,
+    textContent: text,
+  };
+
+  if (replyTo) {
+    body.replyTo = { email: replyTo };
+  }
+
+  if (bcc && bcc.length > 0) {
+    body.bcc = bcc.map((email) => ({ email }));
+  }
+
+  const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+    method: 'POST',
+    headers: {
+      'api-key': apiKey,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Brevo email send failed: ${response.status} ${errorText}`);
+  }
+
+  return response.json();
+};
+
+const sendEmail = ({ provider, apiKey, ...rest }) => {
+  if (provider === 'brevo') return sendWithBrevo({ apiKey, ...rest });
+  if (provider === 'resend') return sendWithResend({ apiKey, ...rest });
+  throw new Error(`Unsupported provider: ${provider}`);
+};
+
 export default async (req) => {
   if (req.method !== 'POST') {
     return jsonResponse({ error: 'Method not allowed.' }, 405);
@@ -250,7 +364,7 @@ export default async (req) => {
     ? payload.submission
     : null;
 
-  if (!submission || (formName !== 'contact' && formName !== 'calculator')) {
+  if (!submission || (formName !== 'contact' && formName !== 'calculator' && formName !== 'anfrage')) {
     return jsonResponse({ error: 'Invalid submission payload.' }, 400);
   }
 
@@ -271,19 +385,20 @@ export default async (req) => {
     }, 202);
   }
 
-  if (provider !== 'resend') {
+  if (provider !== 'resend' && provider !== 'brevo') {
     return jsonResponse({
       status: 'skipped',
       reason: `Unsupported provider: ${provider}`,
     }, 202);
   }
 
-  const resendApiKey = getEnv('RESEND_API_KEY');
+  const apiKeyEnvVar = provider === 'brevo' ? 'BREVO_API_KEY' : 'RESEND_API_KEY';
+  const providerApiKey = getEnv(apiKeyEnvVar);
 
-  if (!resendApiKey) {
+  if (!providerApiKey) {
     return jsonResponse({
       status: 'skipped',
-      reason: 'RESEND_API_KEY is missing.',
+      reason: `${apiKeyEnvVar} is missing.`,
     }, 202);
   }
 
@@ -296,8 +411,9 @@ export default async (req) => {
 
   const clientReplyTo = readText(submission, 'email') || customerReplyTo;
 
-  result.confirmation = await sendWithResend({
-    apiKey: resendApiKey,
+  result.confirmation = await sendEmail({
+    provider,
+    apiKey: providerApiKey,
     from: customerFrom,
     to: [recipientEmail],
     subject: confirmation.subject,
@@ -308,8 +424,9 @@ export default async (req) => {
   });
 
   if (notificationRecipient) {
-    result.internalNotification = await sendWithResend({
-      apiKey: resendApiKey,
+    result.internalNotification = await sendEmail({
+      provider,
+      apiKey: providerApiKey,
       from: customerFrom,
       to: [notificationRecipient],
       subject: internal.subject,

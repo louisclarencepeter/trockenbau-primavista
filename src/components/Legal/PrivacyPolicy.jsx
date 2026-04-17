@@ -29,8 +29,8 @@ function PrivacyPolicy() {
         </address>
         <p className="legal-page__paragraph">
           E-Mail:{' '}
-          <a href="mailto:info@primavista-bauprojekte.ch" className="legal-page__link">
-            info@primavista-bauprojekte.ch
+          <a href="mailto:info@trockenbau-primavista.ch" className="legal-page__link">
+            info@trockenbau-primavista.ch
           </a>
         </p>
       </div>

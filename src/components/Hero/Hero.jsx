@@ -128,8 +128,8 @@ function Hero() {
           </p>
 
           <div className="hero__actions hero__reveal">
-            <Button href="/kalkulator" variant="primary">Kosten kalkulieren</Button>
-            <Button href="#kontakt" variant="secondary">Kontakt aufnehmen</Button>
+            <Button href="/anfrage" variant="primary">Jetzt Anfrage stellen</Button>
+            <Button href="/kalkulator" variant="secondary">Kosten kalkulieren</Button>
             <Button href="#leistungen" variant="secondary">Unsere Leistungen</Button>
           </div>
         </div>
