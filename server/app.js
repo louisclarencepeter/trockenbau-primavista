@@ -13,10 +13,46 @@ import { getGoogleReviews, ReviewsRequestError } from './lib/reviews.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const distDir = path.resolve(__dirname, '../client/dist');
+const DEFAULT_ALLOWED_ORIGINS = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://localhost:5174',
+  'http://127.0.0.1:5174',
+  'https://trockenbau-primavista.ch',
+  'https://www.trockenbau-primavista.ch',
+];
 
 const app = express();
 
 app.disable('x-powered-by');
+
+const getAllowedOrigins = () => {
+  const configuredOrigins = String(process.env.CORS_ALLOWED_ORIGINS || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+  return new Set([...DEFAULT_ALLOWED_ORIGINS, ...configuredOrigins]);
+};
+
+app.use('/api', (req, res, next) => {
+  const origin = req.headers.origin;
+
+  if (origin && getAllowedOrigins().has(origin)) {
+    res.set('Access-Control-Allow-Origin', origin);
+    res.append('Vary', 'Origin');
+    res.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+  }
+
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(204);
+    return;
+  }
+
+  next();
+});
+
 app.use(express.json({ limit: '1mb' }));
 
 const sendJsonError = (res, status, message, extra = {}) => {

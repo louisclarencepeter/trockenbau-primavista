@@ -11,6 +11,8 @@ services:
         sync: false
       - key: GOOGLE_PLACES_API_KEY
         sync: false
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://www.trockenbau-primavista.ch
       - key: OPENAI_API_KEY
         sync: false
       - key: EMAIL_CONFIRMATIONS_ENABLED
