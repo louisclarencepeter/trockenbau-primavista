@@ -1,4 +1,6 @@
-const FORM_SUBMISSION_ENDPOINT = '/api/forms/submit';
+import { getApiUrl } from './api';
+
+const FORM_SUBMISSION_ENDPOINT = getApiUrl('/api/forms/submit');
 
 const createConfirmationRequestId = () => {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {

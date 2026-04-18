@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import './Chatbot.scss';
 import { MessageCircle, Send, X } from 'lucide-react';
+import { getApiUrl } from '../../utils/api';
 
 const createMessage = (role, content) => ({
   id:
@@ -90,7 +91,7 @@ function Chatbot() {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/chat', {
+      const res = await fetch(getApiUrl('/api/chat'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

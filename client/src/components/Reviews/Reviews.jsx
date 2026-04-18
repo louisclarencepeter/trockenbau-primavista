@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Star, Quote } from 'lucide-react';
 import useScrollReveal from '../../hooks/useScrollReveal';
+import { getApiUrl } from '../../utils/api';
 import './Reviews.scss';
 
 function StarRating({ rating }) {
@@ -56,7 +57,7 @@ function Reviews() {
   });
 
   useEffect(() => {
-    fetch('/api/reviews', { cache: 'no-store' })
+    fetch(getApiUrl('/api/reviews'), { cache: 'no-store' })
       .then((res) => {
         if (!res.ok) throw new Error();
         return res.json();
