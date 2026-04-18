@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import './CookieBanner.scss';
 
@@ -59,9 +60,9 @@ function CookieBanner() {
               Diese Website verwendet Cookies, um die Benutzerfreundlichkeit zu verbessern
               und grundlegende Funktionen bereitzustellen. Sie können der Verwendung
               zustimmen oder ablehnen. Weitere Informationen finden Sie in unserer{' '}
-              <a href="/datenschutz" className="cookie-banner__link">
+              <Link to="/datenschutz" className="cookie-banner__link">
                 Datenschutzerklärung
-              </a>.
+              </Link>.
             </p>
           </div>
 

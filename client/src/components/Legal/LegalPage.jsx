@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Legal.scss';
 import Impressum from './Impressum';
 import PrivacyPolicy from './PrivacyPolicy';
@@ -35,9 +36,9 @@ function LegalPage({ page = 'impressum' }) {
       <div className="container legal-page__container">
         <div className="legal-page__hero-grid">
           <div className="legal-page__hero">
-            <a href="/" className="legal-page__back-link">
+            <Link to="/" className="legal-page__back-link">
               Zur Startseite
-            </a>
+            </Link>
             <span className="legal-page__eyebrow">{content.eyebrow}</span>
             <div className="legal-page__headline-row">
               <span className="legal-page__kicker">{content.kicker}</span>
@@ -49,14 +50,14 @@ function LegalPage({ page = 'impressum' }) {
 
             <nav className="legal-page__switcher" aria-label="Rechtliche Seiten">
               {legalPages.map((item) => (
-                <a
+                <Link
                   key={item.key}
-                  href={item.href}
+                  to={item.href}
                   className={`legal-page__switch-link${page === item.key ? ' is-active' : ''}`}
                   aria-current={page === item.key ? 'page' : undefined}
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>

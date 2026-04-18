@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
+import { Link } from 'react-router-dom';
 import './Navbar.scss';
 import { logoSmall } from '../../assets/responsiveImages';
 import Button from '../Button/Button';
@@ -172,18 +173,35 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
         </a>
 
         <nav className="navbar__nav">
-          {navItems.map((item) => (
-            <a
-              key={item.id}
-              href={getItemHref(item)}
-              className={`navbar__link${
-                visibleActiveSection === item.id || isPageItemActive(item) ? ' is-active' : ''
-              }`}
-              onClick={item.href ? closeMenu : handleNavClick(item.id)}
-            >
-              {item.label}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const className = `navbar__link${
+              visibleActiveSection === item.id || isPageItemActive(item) ? ' is-active' : ''
+            }`;
+
+            if (item.href) {
+              return (
+                <Link
+                  key={item.id}
+                  to={item.href}
+                  className={className}
+                  onClick={closeMenu}
+                >
+                  {item.label}
+                </Link>
+              );
+            }
+
+            return (
+              <a
+                key={item.id}
+                href={getItemHref(item)}
+                className={className}
+                onClick={handleNavClick(item.id)}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
         <div className="navbar__utilities">
@@ -209,18 +227,35 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
 
       <div className={`navbar__mobile ${menuOpen ? 'is-open' : ''}${isInstantClosing ? ' is-instant' : ''}`}>
         <nav className="navbar__mobile-nav">
-          {navItems.map((item) => (
-            <a
-              key={item.id}
-              href={getItemHref(item)}
-              className={`navbar__mobile-link${
-                visibleActiveSection === item.id || isPageItemActive(item) ? ' is-active' : ''
-              }`}
-              onClick={item.href ? closeMenu : handleNavClick(item.id)}
-            >
-              {item.label}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const className = `navbar__mobile-link${
+              visibleActiveSection === item.id || isPageItemActive(item) ? ' is-active' : ''
+            }`;
+
+            if (item.href) {
+              return (
+                <Link
+                  key={item.id}
+                  to={item.href}
+                  className={className}
+                  onClick={closeMenu}
+                >
+                  {item.label}
+                </Link>
+              );
+            }
+
+            return (
+              <a
+                key={item.id}
+                href={getItemHref(item)}
+                className={className}
+                onClick={handleNavClick(item.id)}
+              >
+                {item.label}
+              </a>
+            );
+          })}
 
           <div className="navbar__mobile-cta">
             <Button href="/anfrage" variant="primary">

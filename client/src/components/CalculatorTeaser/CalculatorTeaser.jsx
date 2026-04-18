@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ArrowRight, Calculator, CheckCircle2 } from 'lucide-react';
 import './CalculatorTeaser.scss';
 import {
@@ -48,11 +49,11 @@ function CalculatorTeaser() {
             ))}
           </div>
 
-          <a className="calculator-teaser__button calculator-teaser__reveal" href="/kalkulator">
+          <Link className="calculator-teaser__button calculator-teaser__reveal" to="/kalkulator">
             <Calculator size={19} strokeWidth={2.1} aria-hidden="true" />
             Zum Kalkulator
             <ArrowRight size={18} strokeWidth={2.1} aria-hidden="true" />
-          </a>
+          </Link>
         </div>
 
         <div className="calculator-teaser__visual calculator-teaser__reveal">

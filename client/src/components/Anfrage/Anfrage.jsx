@@ -197,7 +197,7 @@ function Anfrage() {
           {summaryText && (
             <div className="anfrage__success-summary">{summaryText}</div>
           )}
-          <a className="anfrage__success-back" href="/">Zurück zur Startseite</a>
+          <Link className="anfrage__success-back" to="/">Zurück zur Startseite</Link>
         </div>
       </div>
     );
@@ -220,7 +220,7 @@ function Anfrage() {
 
       <div className="anfrage__container">
         <nav className="anfrage__breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Startseite</a>
+          <Link to="/">Startseite</Link>
           <ChevronRight size={15} strokeWidth={2.2} aria-hidden="true" />
           <span>Anfrage</span>
         </nav>
@@ -492,3 +492,4 @@ function Anfrage() {
 }
 
 export default Anfrage;
+import { Link } from 'react-router-dom';

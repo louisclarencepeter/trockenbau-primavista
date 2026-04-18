@@ -1,5 +1,6 @@
 import { Monitor, MoonStar, SunMedium } from 'lucide-react';
 import './ThemeSwitcher.scss';
+import { useTheme } from '../../hooks/useTheme';
 
 const themeOptions = [
   {
@@ -19,7 +20,8 @@ const themeOptions = [
   },
 ];
 
-function ThemeSwitcher({ themePreference = 'system', resolvedTheme = 'light', onChange }) {
+function ThemeSwitcher() {
+  const { themePreference, resolvedTheme, setThemePreference } = useTheme();
   const statusLabel = themePreference === 'system'
     ? `Automatisch · folgt ${resolvedTheme === 'dark' ? 'Dunkel' : 'Hell'}`
     : `Manuell · ${themePreference === 'dark' ? 'Dunkel' : 'Hell'}`;
@@ -41,7 +43,7 @@ function ThemeSwitcher({ themePreference = 'system', resolvedTheme = 'light', on
                 key={option.value}
                 type="button"
                 className={`theme-switcher__button${themePreference === option.value ? ' is-active' : ''}`}
-                onClick={() => onChange(option.value)}
+                onClick={() => setThemePreference(option.value)}
                 aria-pressed={themePreference === option.value}
                 title={option.label}
               >

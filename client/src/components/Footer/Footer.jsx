@@ -1,14 +1,10 @@
+import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
 import './Footer.scss';
 import { logoSmall } from '../../assets/responsiveImages';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 
-function Footer({
-  isHomePage = true,
-  themePreference = 'system',
-  resolvedTheme = 'light',
-  onThemeChange,
-}) {
+function Footer({ isHomePage = true }) {
   const currentYear = new Date().getFullYear();
   const socialLinks = [
     {
@@ -77,7 +73,7 @@ function Footer({
               <a href={getSectionHref('leistungen')} className="footer__link">Leistungen</a>
               <a href={getSectionHref('referenzen')} className="footer__link">Referenzen</a>
               <a href={getSectionHref('ueber-uns')} className="footer__link">Über uns</a>
-              <a href="/kalkulator" className="footer__link">Kalkulator</a>
+              <Link to="/kalkulator" className="footer__link">Kalkulator</Link>
               <a href={getSectionHref('kontakt')} className="footer__link">Kontakt</a>
             </div>
 
@@ -100,11 +96,7 @@ function Footer({
             </div>
 
             <div className="footer__theme">
-              <ThemeSwitcher
-                themePreference={themePreference}
-                resolvedTheme={resolvedTheme}
-                onChange={onThemeChange}
-              />
+              <ThemeSwitcher />
             </div>
           </div>
         </div>
@@ -115,12 +107,12 @@ function Footer({
           </p>
 
           <div className="footer__legal">
-            <a href="/impressum" className="footer__link footer__link--legal">
+            <Link to="/impressum" className="footer__link footer__link--legal">
               Impressum
-            </a>
-            <a href="/datenschutz" className="footer__link footer__link--legal">
+            </Link>
+            <Link to="/datenschutz" className="footer__link footer__link--legal">
               Datenschutzerklärung
-            </a>
+            </Link>
           </div>
         </div>
       </div>

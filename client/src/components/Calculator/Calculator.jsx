@@ -337,7 +337,7 @@ function CalculatorPage() {
         <div className="container calculator-hero__container">
           <div className="calculator-hero__content">
             <nav className="calculator-hero__breadcrumb calculator-hero__reveal" aria-label="Breadcrumb">
-              <a href="/">Startseite</a>
+              <Link to="/">Startseite</Link>
               <ChevronRight size={18} strokeWidth={2.2} aria-hidden="true" />
               <span>Kalkulator</span>
             </nav>
@@ -766,3 +766,4 @@ function CalculatorPage() {
 }
 
 export default CalculatorPage;
+import { Link } from 'react-router-dom';
