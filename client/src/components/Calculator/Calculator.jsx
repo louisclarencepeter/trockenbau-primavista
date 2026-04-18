@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Calculator as CalculatorIcon,
   Check,
@@ -19,8 +20,11 @@ import {
   responsiveImageSizes,
   serviceInteriorImage,
 } from '../../assets/responsiveImages';
+import useReturnToForm from '../../hooks/useReturnToForm';
 import useScrollReveal from '../../hooks/useScrollReveal';
+import useSuccessView from '../../hooks/useSuccessView';
 import { submitProjectForm } from '../../utils/formSubmission';
+import HashLink from '../HashLink/HashLink';
 
 const vatRate = 0.081;
 const minQuantity = 1;
@@ -239,6 +243,8 @@ function CalculatorPage() {
   );
   const [formStatus, setFormStatus] = useState('idle');
   const [activeMediaIndex, setActiveMediaIndex] = useState(0);
+  const successRef = useSuccessView(formStatus === 'success');
+  const { formContainerRef, formRef, prepareReturnToForm } = useReturnToForm(formStatus);
 
   const selectedPackage = packages.find((item) => item.id === selectedPackageId) ?? packages[0];
   const selectedSize = roomSizes.find((item) => item.id === selectedSizeId) ?? roomSizes[1];
@@ -468,10 +474,10 @@ function CalculatorPage() {
               </button>
             </div>
 
-            <a className="calculator-offer__button" href="#anfrage">
+            <HashLink className="calculator-offer__button" to="#anfrage">
               <Send size={18} strokeWidth={2.2} aria-hidden="true" />
               Anfrage starten
-            </a>
+            </HashLink>
           </div>
         </div>
       </section>
@@ -616,10 +622,10 @@ function CalculatorPage() {
               <small>{formatCurrency(totals.net)} netto</small>
             </div>
 
-            <a className="calculator-summary__button" href="#anfrage">
+            <HashLink className="calculator-summary__button" to="#anfrage">
               <ClipboardList size={18} strokeWidth={2.2} aria-hidden="true" />
               Angebot anfragen
-            </a>
+            </HashLink>
 
             <div className="calculator-summary__note">
               <ShieldCheck size={18} strokeWidth={2.2} aria-hidden="true" />
@@ -681,17 +687,33 @@ function CalculatorPage() {
             </div>
           </div>
 
-          <div className="calculator-request__form-wrap calculator-request__reveal">
+          <div
+            className="calculator-request__form-wrap calculator-request__reveal"
+            ref={formContainerRef}
+          >
             {formStatus === 'success' ? (
-              <div className="calculator-request__success">
+              <div
+                ref={successRef}
+                className="calculator-request__success"
+                role="status"
+                aria-live="polite"
+                tabIndex={-1}
+              >
                 <strong>Vielen Dank!</strong>
                 <p>Ihre Kalkulator-Anfrage wurde gesendet. Wir melden uns in Kürze bei Ihnen.</p>
-                <button type="button" onClick={() => setFormStatus('idle')}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    prepareReturnToForm();
+                    setFormStatus('idle');
+                  }}
+                >
                   Neue Anfrage senden
                 </button>
               </div>
             ) : (
               <form
+                ref={formRef}
                 className="calculator-request__form"
                 name="calculator"
                 onSubmit={handleSubmit}
@@ -766,4 +788,3 @@ function CalculatorPage() {
 }
 
 export default CalculatorPage;
-import { Link } from 'react-router-dom';

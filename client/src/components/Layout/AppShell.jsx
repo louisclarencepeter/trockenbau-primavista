@@ -1,7 +1,8 @@
-import { Suspense, lazy, startTransition, useEffect, useState } from 'react';
+import { Suspense, lazy, startTransition, useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import { useDocumentTitle } from '../../hooks/useDocumentTitle';
+import { scrollToHashTarget } from '../../utils/hashNavigation';
 
 const Chatbot = lazy(() => import('../Chatbot/Chatbot'));
 const CookieBanner = lazy(() => import('../CookieBanner/CookieBanner'));
@@ -13,8 +14,81 @@ function AppShell() {
   const isHomePage = currentPath === '/';
   const [showDeferredUi, setShowDeferredUi] = useState(() => !isHomePage);
   const [showFooter, setShowFooter] = useState(() => !isHomePage);
+  const previousRouteRef = useRef(`${location.pathname}${location.search}`);
 
   useDocumentTitle(currentPath);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || location.hash) {
+      previousRouteRef.current = `${location.pathname}${location.search}`;
+      return undefined;
+    }
+
+    const nextRoute = `${location.pathname}${location.search}`;
+    const didRouteChange = previousRouteRef.current !== nextRoute;
+
+    previousRouteRef.current = nextRoute;
+
+    if (!didRouteChange) {
+      return undefined;
+    }
+
+    let animationFrameId;
+    let timeoutId;
+
+    const scrollToPageTop = () => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'auto',
+      });
+    };
+
+    animationFrameId = window.requestAnimationFrame(scrollToPageTop);
+    timeoutId = window.setTimeout(scrollToPageTop, 80);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+      window.clearTimeout(timeoutId);
+    };
+  }, [location.hash, location.pathname, location.search]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !isHomePage || !location.hash) {
+      return undefined;
+    }
+
+    let attempts = 0;
+    let timeoutId;
+    let animationFrameId;
+
+    const tryScrollToHash = () => {
+      if (scrollToHashTarget(location.hash, { behavior: attempts === 0 ? 'smooth' : 'auto' })) {
+        return;
+      }
+
+      if (attempts >= 10) {
+        return;
+      }
+
+      attempts += 1;
+      timeoutId = window.setTimeout(() => {
+        animationFrameId = window.requestAnimationFrame(tryScrollToHash);
+      }, 60);
+    };
+
+    animationFrameId = window.requestAnimationFrame(tryScrollToHash);
+
+    return () => {
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [isHomePage, location.hash, location.pathname]);
 
   useEffect(() => {
     if (typeof window === 'undefined') {

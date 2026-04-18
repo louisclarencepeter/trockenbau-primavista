@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
 import './Button.scss';
+import HashLink from '../HashLink/HashLink';
+import PageLink from '../PageLink/PageLink';
 
 const Button = ({
   children,
@@ -11,11 +12,19 @@ const Button = ({
   const className = `button button-${variant}`;
 
   if (href) {
+    if (href.startsWith('#') || href.startsWith('/#')) {
+      return (
+        <HashLink to={href} className={className} onClick={onClick}>
+          {children}
+        </HashLink>
+      );
+    }
+
     if (href.startsWith('/')) {
       return (
-        <Link to={href} className={className} onClick={onClick}>
+        <PageLink to={href} className={className} onClick={onClick}>
           {children}
-        </Link>
+        </PageLink>
       );
     }
 

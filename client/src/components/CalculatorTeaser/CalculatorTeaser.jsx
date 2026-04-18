@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { ArrowRight, Calculator, CheckCircle2 } from 'lucide-react';
 import './CalculatorTeaser.scss';
 import {
@@ -7,6 +6,7 @@ import {
   responsiveImageSizes,
 } from '../../assets/responsiveImages';
 import useScrollReveal from '../../hooks/useScrollReveal';
+import PageLink from '../PageLink/PageLink';
 
 const calculatorBenefits = [
   'Decken, Wände, Boden und Dachschrägen kombinieren',
@@ -49,11 +49,11 @@ function CalculatorTeaser() {
             ))}
           </div>
 
-          <Link className="calculator-teaser__button calculator-teaser__reveal" to="/kalkulator">
+          <PageLink className="calculator-teaser__button calculator-teaser__reveal" to="/kalkulator">
             <Calculator size={19} strokeWidth={2.1} aria-hidden="true" />
             Zum Kalkulator
             <ArrowRight size={18} strokeWidth={2.1} aria-hidden="true" />
-          </Link>
+          </PageLink>
         </div>
 
         <div className="calculator-teaser__visual calculator-teaser__reveal">

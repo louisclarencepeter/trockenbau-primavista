@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './Contact.scss';
 import { Mail, MapPin, Phone, MessageCircle } from 'lucide-react';
 import useScrollReveal from '../../hooks/useScrollReveal';
+import useReturnToForm from '../../hooks/useReturnToForm';
+import useSuccessView from '../../hooks/useSuccessView';
 import { submitProjectForm } from '../../utils/formSubmission';
 
 const contactItems = [
@@ -35,6 +37,8 @@ function Contact() {
     once: false,
   });
   const [formStatus, setFormStatus] = useState('idle');
+  const successRef = useSuccessView(formStatus === 'success');
+  const { formContainerRef, formRef, prepareReturnToForm } = useReturnToForm(formStatus);
 
   const getLinkProps = (href) =>
     href.startsWith('http')
@@ -116,21 +120,31 @@ function Contact() {
             </div>
           </div>
 
-          <div className="contact__form-card contact__reveal">
+          <div className="contact__form-card contact__reveal" ref={formContainerRef}>
             {formStatus === 'success' ? (
-              <div className="contact__form-success">
+              <div
+                ref={successRef}
+                className="contact__form-success"
+                role="status"
+                aria-live="polite"
+                tabIndex={-1}
+              >
                 <strong>Vielen Dank!</strong>
                 <p>Ihre Anfrage wurde gesendet. Wir melden uns in Kürze bei Ihnen.</p>
                 <button
                   type="button"
                   className="contact__button"
-                  onClick={() => setFormStatus('idle')}
+                  onClick={() => {
+                    prepareReturnToForm();
+                    setFormStatus('idle');
+                  }}
                 >
                   Neue Anfrage
                 </button>
               </div>
             ) : (
               <form
+                ref={formRef}
                 className="contact__form"
                 name="contact"
                 onSubmit={handleSubmit}

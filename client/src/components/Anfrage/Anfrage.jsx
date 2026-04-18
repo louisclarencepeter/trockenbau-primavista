@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   ArrowLeft,
   Calendar,
@@ -20,6 +21,7 @@ import {
   Zap,
 } from 'lucide-react';
 import './Anfrage.scss';
+import useSuccessView from '../../hooks/useSuccessView';
 import { submitProjectForm } from '../../utils/formSubmission';
 
 const services = [
@@ -89,6 +91,7 @@ function Anfrage() {
   const [timeline, setTimeline] = useState('');
   const [formStatus, setFormStatus] = useState('idle');
   const pendingAdvanceRef = useRef(null);
+  const successRef = useSuccessView(formStatus === 'success');
 
   const clearPendingAdvance = () => {
     if (pendingAdvanceRef.current) {
@@ -185,7 +188,13 @@ function Anfrage() {
   if (formStatus === 'success') {
     return (
       <div className="anfrage">
-        <div className="anfrage__success">
+        <div
+          ref={successRef}
+          className="anfrage__success"
+          role="status"
+          aria-live="polite"
+          tabIndex={-1}
+        >
           <span className="anfrage__success-icon">
             <Check size={28} strokeWidth={2.4} />
           </span>
@@ -492,4 +501,3 @@ function Anfrage() {
 }
 
 export default Anfrage;
-import { Link } from 'react-router-dom';

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { ArrowRight, Calculator } from 'lucide-react';
 import './Services.scss';
 import {
@@ -9,6 +8,7 @@ import {
   serviceWindowsImage,
 } from '../../assets/responsiveImages';
 import useScrollReveal from '../../hooks/useScrollReveal';
+import PageLink from '../PageLink/PageLink';
 
 const services = [
   {
@@ -92,11 +92,11 @@ function Services() {
           <span className="services__footer-text">
             Sie möchten eine erste Kostenspanne für Ihr Projekt sehen?
           </span>
-          <Link className="services__footer-link" to="/kalkulator">
+          <PageLink className="services__footer-link" to="/kalkulator">
             <Calculator size={18} strokeWidth={2.1} aria-hidden="true" />
             Mehr erfahren im Kalkulator
             <ArrowRight size={18} strokeWidth={2.1} aria-hidden="true" />
-          </Link>
+          </PageLink>
         </div>
       </div>
     </section>

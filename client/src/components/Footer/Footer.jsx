@@ -3,6 +3,8 @@ import { Facebook, Instagram, Youtube } from 'lucide-react';
 import './Footer.scss';
 import { logoSmall } from '../../assets/responsiveImages';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
+import HashLink from '../HashLink/HashLink';
+import PageLink from '../PageLink/PageLink';
 
 function Footer({ isHomePage = true }) {
   const currentYear = new Date().getFullYear();
@@ -70,11 +72,11 @@ function Footer({ isHomePage = true }) {
           <div className="footer__links">
             <div className="footer__column">
               <h4 className="footer__heading">Navigation</h4>
-              <a href={getSectionHref('leistungen')} className="footer__link">Leistungen</a>
-              <a href={getSectionHref('referenzen')} className="footer__link">Referenzen</a>
-              <a href={getSectionHref('ueber-uns')} className="footer__link">Über uns</a>
-              <Link to="/kalkulator" className="footer__link">Kalkulator</Link>
-              <a href={getSectionHref('kontakt')} className="footer__link">Kontakt</a>
+              <HashLink to={getSectionHref('leistungen')} className="footer__link">Leistungen</HashLink>
+              <HashLink to={getSectionHref('referenzen')} className="footer__link">Referenzen</HashLink>
+              <HashLink to={getSectionHref('ueber-uns')} className="footer__link">Über uns</HashLink>
+              <PageLink to="/kalkulator" className="footer__link">Kalkulator</PageLink>
+              <HashLink to={getSectionHref('kontakt')} className="footer__link">Kontakt</HashLink>
             </div>
 
             <div className="footer__column">

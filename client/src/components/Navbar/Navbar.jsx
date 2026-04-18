@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { Link } from 'react-router-dom';
 import './Navbar.scss';
 import { logoSmall } from '../../assets/responsiveImages';
 import Button from '../Button/Button';
+import HashLink from '../HashLink/HashLink';
+import { getScrollBehavior, scrollToHashTarget } from '../../utils/hashNavigation';
 
 const navItems = [
   { id: 'leistungen', label: 'Leistungen' },
+  { id: 'kostenrechner', label: 'Kalkulator', pagePath: '/kalkulator' },
   { id: 'ueber-uns', label: 'Über uns' },
   { id: 'referenzen', label: 'Referenzen' },
-  { id: 'kalkulator', label: 'Kalkulator', href: '/kalkulator', homeSectionId: 'kostenrechner' },
   { id: 'kontakt', label: 'Kontakt' },
 ];
 
@@ -17,28 +18,6 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isInstantClosing, setIsInstantClosing] = useState(false);
-
-  const scrollToSection = (id) => {
-    const target = document.getElementById(id);
-
-    if (!target) {
-      return;
-    }
-
-    target.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
-
-    window.history.replaceState(null, '', `#${id}`);
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
 
   const toggleMenu = () => {
     setIsInstantClosing(false);
@@ -51,12 +30,6 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
   };
 
   const handleNavClick = (id) => (event) => {
-    if (!isHomePage) {
-      closeMenu();
-      return;
-    }
-
-    event.preventDefault();
     const shouldCloseInstantly = menuOpen;
 
     if (shouldCloseInstantly) {
@@ -68,10 +41,18 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
       closeMenu();
     }
 
-    if (id === 'top') {
-      scrollToTop();
-    } else {
-      scrollToSection(id);
+    if (
+      isHomePage &&
+      event.button === 0 &&
+      !event.metaKey &&
+      !event.altKey &&
+      !event.ctrlKey &&
+      !event.shiftKey
+    ) {
+      event.preventDefault();
+      scrollToHashTarget(`#${id}`, {
+        behavior: getScrollBehavior(),
+      });
     }
 
     if (shouldCloseInstantly) {
@@ -82,10 +63,16 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
   };
 
   const getNavHref = (id) => (isHomePage ? `#${id}` : `/#${id}`);
-  const getItemHref = (item) => item.href ?? getNavHref(item.id);
-  const homeHref = isHomePage ? '#top' : '/';
+  const getItemHref = (item) => {
+    if (item.pagePath && !isHomePage) {
+      return item.pagePath;
+    }
+
+    return item.href ?? getNavHref(item.id);
+  };
+  const homeHref = '/';
   const visibleActiveSection = isHomePage ? activeSection : '';
-  const isPageItemActive = (item) => Boolean(item.href && currentPath === item.href);
+  const isPageItemActive = (item) => Boolean(item.pagePath && currentPath === item.pagePath);
 
   useEffect(() => {
     if (!isHomePage) {
@@ -94,8 +81,7 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
 
     const sections = navItems
       .map((item) => {
-        const sectionId = item.homeSectionId ?? item.id;
-        const element = document.getElementById(sectionId);
+        const element = document.getElementById(item.id);
 
         if (!element) {
           return null;
@@ -164,13 +150,13 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
   return (
     <header className="navbar">
       <div className="container navbar__container">
-        <a href={homeHref} className="navbar__brand" onClick={handleNavClick('top')}>
+        <HashLink to={homeHref} className="navbar__brand" onClick={handleNavClick('top')}>
           <img src={logoSmall} alt="Trockenbau Prima Vista Logo" className="navbar__logo" />
           <div className="navbar__brand-text">
             <span className="navbar__name">Trockenbau Prima Vista</span>
             <span className="navbar__tagline">Decken, Wände und Ausbau</span>
           </div>
-        </a>
+        </HashLink>
 
         <nav className="navbar__nav">
           {navItems.map((item) => {
@@ -178,28 +164,15 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
               visibleActiveSection === item.id || isPageItemActive(item) ? ' is-active' : ''
             }`;
 
-            if (item.href) {
-              return (
-                <Link
-                  key={item.id}
-                  to={item.href}
-                  className={className}
-                  onClick={closeMenu}
-                >
-                  {item.label}
-                </Link>
-              );
-            }
-
             return (
-              <a
+              <HashLink
                 key={item.id}
-                href={getItemHref(item)}
+                to={getItemHref(item)}
                 className={className}
                 onClick={handleNavClick(item.id)}
               >
                 {item.label}
-              </a>
+              </HashLink>
             );
           })}
         </nav>
@@ -232,28 +205,15 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
               visibleActiveSection === item.id || isPageItemActive(item) ? ' is-active' : ''
             }`;
 
-            if (item.href) {
-              return (
-                <Link
-                  key={item.id}
-                  to={item.href}
-                  className={className}
-                  onClick={closeMenu}
-                >
-                  {item.label}
-                </Link>
-              );
-            }
-
             return (
-              <a
+              <HashLink
                 key={item.id}
-                href={getItemHref(item)}
+                to={getItemHref(item)}
                 className={className}
                 onClick={handleNavClick(item.id)}
               >
                 {item.label}
-              </a>
+              </HashLink>
             );
           })}
 
