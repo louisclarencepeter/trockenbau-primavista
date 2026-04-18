@@ -494,8 +494,7 @@ export const processConfirmationRequest = async ({ formName, submission }) => {
       && normalizedNotificationRecipient
       && normalizedNotificationRecipient !== normalizedSenderEmail,
   );
-  const shouldBccInternalNotification = shouldSendCustomerConfirmation && canDeliverInternalCopy;
-  const shouldSendInternalNotification = canDeliverInternalCopy && !shouldBccInternalNotification;
+  const shouldSendInternalNotification = canDeliverInternalCopy;
 
   const result = {
     status: 'skipped',
@@ -556,24 +555,12 @@ export const processConfirmationRequest = async ({ formName, submission }) => {
         html: confirmation.html,
         text: confirmation.text,
         replyTo: mailConfig.customerReplyTo,
-        bcc: [
-          ...(mailConfig.notificationBcc ? [mailConfig.notificationBcc] : []),
-          ...(shouldBccInternalNotification ? [mailConfig.notificationRecipient] : []),
-        ],
       });
 
       result.confirmation = {
         status: 'sent',
         recipient: recipientEmail,
       };
-
-      if (shouldBccInternalNotification) {
-        result.internalNotification = {
-          status: 'sent',
-          recipient: mailConfig.notificationRecipient,
-          reason: 'Delivered as BCC on the customer confirmation email.',
-        };
-      }
 
       sentCount += 1;
     } catch (error) {
@@ -583,14 +570,6 @@ export const processConfirmationRequest = async ({ formName, submission }) => {
         recipient: recipientEmail,
         reason: getErrorMessage(error),
       };
-
-      if (shouldBccInternalNotification) {
-        result.internalNotification = {
-          status: 'failed',
-          recipient: mailConfig.notificationRecipient,
-          reason: `Customer confirmation with BCC failed: ${getErrorMessage(error)}`,
-        };
-      }
 
       console.error('[confirmations] Customer confirmation failed', {
         formName: normalizedFormName,
@@ -615,15 +594,19 @@ export const processConfirmationRequest = async ({ formName, submission }) => {
         apiKey: mailConfig.apiKey,
         from: mailConfig.customerFrom,
         to: [mailConfig.notificationRecipient],
-        subject: internal.subject,
-        html: internal.html,
-        text: internal.text,
+        subject: shouldSendCustomerConfirmation ? confirmation.subject : internal.subject,
+        html: shouldSendCustomerConfirmation ? confirmation.html : internal.html,
+        text: shouldSendCustomerConfirmation ? confirmation.text : internal.text,
         replyTo: clientReplyTo,
+        bcc: mailConfig.notificationBcc ? [mailConfig.notificationBcc] : [],
       });
 
       result.internalNotification = {
         status: 'sent',
         recipient: mailConfig.notificationRecipient,
+        reason: shouldSendCustomerConfirmation
+          ? 'Delivered as a direct copy with the customer email in Reply-To.'
+          : undefined,
       };
       sentCount += 1;
     } catch (error) {
@@ -640,8 +623,6 @@ export const processConfirmationRequest = async ({ formName, submission }) => {
         error: getErrorMessage(error),
       });
     }
-  } else if (shouldBccInternalNotification && result.internalNotification) {
-    // The business inbox already received the exact customer copy as BCC.
   } else if (mailConfig.notificationRecipient) {
     result.internalNotification = {
       status: 'skipped',
