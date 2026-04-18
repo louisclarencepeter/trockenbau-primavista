@@ -58,19 +58,6 @@ import serviceWindows800 from './images/services/service-windows-800.jpg';
 import serviceWindows960 from './images/services/service-windows-960.jpg';
 import logo192 from './logo-192.png';
 
-const DEFAULT_PRODUCTION_WIDTHS = [240, 320, 360, 400, 480, 560, 640, 720, 768, 800, 880, 960, 1024, 1200];
-
-const createNetlifyImageUrl = (sourceUrl, width, quality = 76) =>
-  `/.netlify/images?url=${encodeURIComponent(sourceUrl)}&w=${width}&q=${quality}`;
-
-const normalizeProductionWidths = (widths, maxWidth) => {
-  const uniqueWidths = new Set(
-    widths.filter((width) => Number.isFinite(width) && width > 0 && width <= maxWidth),
-  );
-
-  return [...uniqueWidths].sort((left, right) => left - right);
-};
-
 const findVariantAtOrAboveWidth = (variants, targetWidth) =>
   variants.find(({ width }) => width >= targetWidth) ?? variants[variants.length - 1];
 
@@ -94,35 +81,15 @@ const getFallbackWidth = (widths, maxWidth, preferredWidth) => {
   return maxWidth;
 };
 
-const createResponsiveImage = (
-  variants,
-  { quality = 76, widths = DEFAULT_PRODUCTION_WIDTHS, fallbackWidth } = {},
-) => {
+const createResponsiveImage = (variants, { fallbackWidth } = {}) => {
   const largestVariant = variants[variants.length - 1];
-  const useNetlifyImageCdn = import.meta.env.PROD;
   const variantWidths = variants.map(({ width }) => width);
-  const productionWidths = normalizeProductionWidths(widths, largestVariant.width);
-  const responsiveWidths = productionWidths.length ? productionWidths : variantWidths;
-  const resolvedFallbackWidth = getFallbackWidth(
-    responsiveWidths,
-    largestVariant.width,
-    fallbackWidth,
-  );
-
-  if (!useNetlifyImageCdn) {
-    const fallbackVariant = findVariantAtOrAboveWidth(variants, resolvedFallbackWidth);
-
-    return {
-      src: fallbackVariant.src,
-      srcSet: variants.map(({ src, width }) => `${src} ${width}w`).join(', '),
-    };
-  }
+  const resolvedFallbackWidth = getFallbackWidth(variantWidths, largestVariant.width, fallbackWidth);
+  const fallbackVariant = findVariantAtOrAboveWidth(variants, resolvedFallbackWidth);
 
   return {
-    src: createNetlifyImageUrl(largestVariant.src, resolvedFallbackWidth, quality),
-    srcSet: responsiveWidths
-      .map((width) => `${createNetlifyImageUrl(largestVariant.src, width, quality)} ${width}w`)
-      .join(', '),
+    src: fallbackVariant.src,
+    srcSet: variants.map(({ src, width }) => `${src} ${width}w`).join(', '),
   };
 };
 

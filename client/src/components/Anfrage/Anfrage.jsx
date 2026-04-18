@@ -20,7 +20,7 @@ import {
   Zap,
 } from 'lucide-react';
 import './Anfrage.scss';
-import { submitNetlifyForm } from '../../utils/formSubmission';
+import { submitProjectForm } from '../../utils/formSubmission';
 
 const services = [
   {
@@ -159,7 +159,7 @@ function Anfrage() {
     setFormStatus('submitting');
 
     try {
-      await submitNetlifyForm({ form: event.target, formName: 'anfrage' });
+      await submitProjectForm({ form: event.target, formName: 'anfrage' });
       setFormStatus('success');
     } catch {
       setFormStatus('error');
@@ -383,12 +383,8 @@ function Anfrage() {
               <form
                 className="anfrage__form"
                 name="anfrage"
-                method="POST"
-                data-netlify="true"
-                netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
               >
-                <input type="hidden" name="form-name" value="anfrage" />
                 <input type="hidden" name="bot-field" />
                 <input type="hidden" name="subject" value="Neue Anfrage über den Anfrageassistenten" />
                 <input type="hidden" name="submission_type" value="Anfrageassistent" />

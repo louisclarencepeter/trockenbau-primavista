@@ -20,7 +20,7 @@ import {
   serviceInteriorImage,
 } from '../../assets/responsiveImages';
 import useScrollReveal from '../../hooks/useScrollReveal';
-import { submitNetlifyForm } from '../../utils/formSubmission';
+import { submitProjectForm } from '../../utils/formSubmission';
 
 const vatRate = 0.081;
 const minQuantity = 1;
@@ -316,7 +316,7 @@ function CalculatorPage() {
     const form = event.target;
 
     try {
-      await submitNetlifyForm({
+      await submitProjectForm({
         form,
         formName: 'calculator',
       });
@@ -694,12 +694,8 @@ function CalculatorPage() {
               <form
                 className="calculator-request__form"
                 name="calculator"
-                method="POST"
-                data-netlify="true"
-                netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
               >
-                <input type="hidden" name="form-name" value="calculator" />
                 <input type="hidden" name="bot-field" />
                 <input type="hidden" name="subject" value="Neue Kalkulator-Anfrage über die Website" />
                 <input type="hidden" name="submission_type" value="Kalkulator-Anfrage" />

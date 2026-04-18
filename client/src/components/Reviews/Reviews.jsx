@@ -56,7 +56,7 @@ function Reviews() {
   });
 
   useEffect(() => {
-    fetch('/api/reviews')
+    fetch('/api/reviews', { cache: 'no-store' })
       .then((res) => {
         if (!res.ok) throw new Error();
         return res.json();

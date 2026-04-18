@@ -9,7 +9,7 @@ The current site is centered on the company’s Trockenbau offer:
 - `Dachschrägen`
 - `Sonstiges`
 
-It includes a homepage, a dedicated calculator page, project references, reviews, contact forms, cookie consent, and an AI-powered chatbot backed by a Netlify Function.
+It includes a homepage, a dedicated calculator page, project references, reviews, contact forms, cookie consent, and an AI-powered chatbot backed by a Node server for Render.
 
 ## Stack
 
@@ -18,12 +18,12 @@ It includes a homepage, a dedicated calculator page, project references, reviews
 - Sass
 - Lucide React
 - Font Awesome
-- Netlify Functions
+- Express
 - OpenAI API
 
 ## Main Experience
 
-The app is organized from [src/App.jsx](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/src/App.jsx).
+The frontend entrypoint lives at [client/src/App.jsx](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/client/src/App.jsx).
 
 ### Homepage
 
@@ -49,22 +49,26 @@ The app is organized from [src/App.jsx](/Users/louisclarencepetersgmail.com/Proj
 
 ```text
 .
-├── netlify/
-│   └── functions/
-│       └── chat.js
-├── public/
-│   └── videos/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── hooks/
-│   ├── styles/
-│   ├── utils/
-│   ├── App.jsx
-│   └── main.jsx
-├── netlify.toml
+├── client/
+│   ├── public/
+│   │   └── videos/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── styles/
+│   │   ├── utils/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── package.json
+│   ├── render.yaml
+│   └── vite.config.js
+├── server/
+│   ├── app.js
+│   └── lib/
 ├── package.json
-└── vite.config.js
+├── render.yaml
+└── README.md
 ```
 
 ## Getting Started
@@ -72,30 +76,36 @@ The app is organized from [src/App.jsx](/Users/louisclarencepetersgmail.com/Proj
 ### 1. Install dependencies
 
 ```bash
-npm install
+npm run install:all
 ```
 
-### 2. Start the frontend
+### 2. Start the server
+
+```bash
+npm run dev:server
+```
+
+### 3. Start the frontend
 
 ```bash
 npm run dev
 ```
 
-Vite runs on `http://localhost:5173`.
+Vite runs on `http://localhost:5173` and proxies API requests to `http://localhost:8787`.
 
-### 3. Build for production
+### 4. Build for production
 
 ```bash
 npm run build
 ```
 
-### 4. Preview the production build
+### 5. Start the production server locally
 
 ```bash
-npm run preview
+npm run start
 ```
 
-### 5. Run the linter
+### 6. Run the linter
 
 ```bash
 npm run lint
@@ -109,11 +119,11 @@ The chatbot function requires an OpenAI API key:
 OPENAI_API_KEY=your_api_key_here
 ```
 
-Store it in a local `.env` file during development and in Netlify environment variables for deployment.
+Store it in a local `.env` file during development and in Render environment variables for deployment.
 
 ## Calculator
 
-The calculator page lives in [src/components/Calculator/Calculator.jsx](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/src/components/Calculator/Calculator.jsx).
+The calculator page lives in [client/src/components/Calculator/Calculator.jsx](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/client/src/components/Calculator/Calculator.jsx).
 
 It currently supports the site’s main Trockenbau categories:
 
@@ -129,114 +139,134 @@ The calculator includes:
 - room size selection
 - add-on selection
 - live cost estimate
-- Netlify-backed inquiry form
+- server-backed inquiry forms
+- Render-ready API server for chat, reviews, forms, and emails
 - rotating project media in the hero and request areas
 
 ## Forms
 
-Two forms are currently set up for Netlify form handling:
+Three forms submit directly to the app server:
 
 - `contact`
 - `calculator`
+- `anfrage`
 
-Both submit from the frontend using standard form encoding.
+All three post JSON to `/api/forms/submit`.
 
-They are now also prepared for transactional email confirmations:
+Current behavior:
 
-- submissions still go to Netlify Forms
-- a separate Netlify Function at `/api/confirmations` can send a confirmation email to the client
-- the same function can optionally send an internal notification copy to the business inbox
-- if email configuration is missing, submissions still succeed and the email step is skipped safely
+- the Render server receives the form submission directly
+- the same request sends the internal business notification email
+- optional customer confirmation emails are controlled by `EMAIL_CONFIRMATIONS_ENABLED`
+- if internal delivery is not configured, the form request fails instead of silently dropping leads
 
 ### Email Confirmation Configuration
 
-The confirmation function is designed for `Resend` and is controlled through environment variables:
+The server supports both `Brevo` and `Resend` for notifications and confirmations:
 
 ```bash
-EMAIL_CONFIRMATIONS_ENABLED=true
-EMAIL_PROVIDER=resend
+PORT=8787
+EMAIL_CONFIRMATIONS_ENABLED=false
+EMAIL_PROVIDER=brevo
 EMAIL_FROM="Trockenbau Prima Vista <noreply@your-domain.tld>"
 EMAIL_REPLY_TO=info@trockenbau-primavista.ch
-EMAIL_NOTIFICATION_TO=
+EMAIL_NOTIFICATION_TO=info@trockenbau-primavista.ch
 EMAIL_NOTIFICATION_BCC=
+BREVO_API_KEY=your-brevo-api-key
 RESEND_API_KEY=re_your_resend_api_key
 ```
 
 Recommended setup:
 
-1. Verify a sending domain in Resend.
+1. Verify a sending domain with Brevo or Resend.
 2. Set `EMAIL_FROM` to a verified sender on that domain.
-3. Add the variables above in Netlify environment settings.
-4. Keep `EMAIL_CONFIRMATIONS_ENABLED=false` until the sender domain is ready.
+3. Set `EMAIL_NOTIFICATION_TO` to the inbox that should receive website leads.
+4. Add the variables above in Render environment settings.
+5. Keep `EMAIL_CONFIRMATIONS_ENABLED=false` until the sender domain is ready.
 
 After that:
 
-- `contact` submissions send a receipt email to the visitor
-- `calculator` submissions send a receipt email including the project summary
-- optional internal notifications go to `EMAIL_NOTIFICATION_TO`
+- `contact`, `calculator`, and `anfrage` send a customer receipt email when `EMAIL_CONFIRMATIONS_ENABLED=true`
+- the same customer receipt is BCCed to `EMAIL_NOTIFICATION_TO`
+- if no customer receipt is being sent, the server falls back to a separate internal notification email
 - self-sends are skipped automatically if `EMAIL_NOTIFICATION_TO` matches `EMAIL_FROM`
 
 ## Chatbot
 
-The chatbot UI lives in [src/components/Chatbot/Chatbot.jsx](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/src/components/Chatbot/Chatbot.jsx) and the backend handler lives in [netlify/functions/chat.js](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/netlify/functions/chat.js).
+The chatbot UI lives in [client/src/components/Chatbot/Chatbot.jsx](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/client/src/components/Chatbot/Chatbot.jsx) and the backend logic now runs through [server/lib/chat.js](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/server/lib/chat.js).
 
 Current behavior:
 
 - replies in German
 - uses company context for Trockenbau-related questions
 - encourages visitors to contact the business for quotes and project inquiries
-- sends requests to a Netlify Function that calls the OpenAI API
+- sends requests to the Render server at `/api/chat`
 
-## Netlify
+## Server & Render
 
-This project includes [netlify.toml](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/netlify.toml) with:
+The app server entrypoint is [server/index.js](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/server/index.js) and the Express app lives in [server/app.js](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/server/app.js).
 
-- build output set to `dist`
-- functions directory set to `netlify/functions`
-- redirect from `/api/chat` to `/.netlify/functions/chat`
-- custom function path `/api/confirmations` for email confirmations
+Available routes:
 
-If you want to test the chatbot through the Netlify function layer, use:
+- `POST /api/chat`
+- `GET /api/reviews`
+- `POST /api/confirmations`
+- `POST /api/forms/submit`
+- `GET /api/health`
 
-```bash
-netlify dev
-```
-
-Plain `npm run dev` starts the Vite frontend only.
-
-To test form submissions plus confirmation emails locally, prefer:
+Local development:
 
 ```bash
-netlify dev
+npm run dev:server
 ```
+
+In a second terminal:
+
+```bash
+npm run dev
+```
+
+`npm run dev` starts Vite on `5173` and proxies `/api/*` to the Node server on `8787`.
+
+Production start:
+
+```bash
+npm run build
+npm run start
+```
+
+Render deployment can use [render.yaml](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/render.yaml) or these commands directly:
+
+- Build command: `npm run install:all && npm run build`
+- Start command: `npm run start`
 
 ## Styling
 
-Global styles are organized under [src/styles](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/src/styles):
+Global styles are organized under [client/src/styles](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/client/src/styles):
 
 - `colors.scss`
 - `fonts.scss`
 - `layout.scss`
 - `z-index.scss`
 
-Component-specific styles live next to their components in `src/components/*/*.scss`.
+Component-specific styles live next to their components in `client/src/components/*/*.scss`.
 
 ## Assets
 
-- Local fonts are stored in `src/assets/fonts`
-- Responsive images and image manifests live under `src/assets`
+- Local fonts are stored in `client/src/assets/fonts`
+- Responsive images and image manifests live under `client/src/assets`
 - Service, hero, about, and project visuals are managed through `responsiveImages`
-- Video references are organized under [public/videos](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/public/videos)
+- Video references are organized under [client/public/videos](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/client/public/videos)
 
 ### Current Video Folder Convention
 
 Service video placeholders are currently kept only for the active service offer:
 
-- `/public/videos/leistungen/decken-abhaengen`
-- `/public/videos/leistungen/waende-stellen`
-- `/public/videos/leistungen/estrich-boden`
-- `/public/videos/leistungen/dachschraegen`
-- `/public/videos/leistungen/sonstiges`
+- `/client/public/videos/leistungen/decken-abhaengen`
+- `/client/public/videos/leistungen/waende-stellen`
+- `/client/public/videos/leistungen/estrich-boden`
+- `/client/public/videos/leistungen/dachschraegen`
+- `/client/public/videos/leistungen/sonstiges`
 
 There is no longer a separate `desktop` / `mobil` split in that placeholder structure.
 
@@ -245,4 +275,4 @@ There is no longer a separate `desktop` / `mobil` split in that placeholder stru
 - The site uses simple pathname-based page switching inside the React app.
 - Cookie consent is stored in `localStorage`.
 - The theme preference is stored in `localStorage`.
-- The about section already has a real local video file referenced through [src/assets/videoManifest.js](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/src/assets/videoManifest.js).
+- The about section already has a real local video file referenced through [client/src/assets/videoManifest.js](/Users/louisclarencepetersgmail.com/Projects/trockenbau-primavista/client/src/assets/videoManifest.js).

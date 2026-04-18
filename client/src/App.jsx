@@ -40,7 +40,6 @@ function App({ initialTheme = 'light' }) {
   const [systemTheme, setSystemTheme] = useState(() => (
     initialTheme === 'dark' ? 'dark' : 'light'
   ));
-  const [showDeferredSections, setShowDeferredSections] = useState(() => !isHomePage);
   const [showDeferredUi, setShowDeferredUi] = useState(() => !isHomePage);
   const [showFooter, setShowFooter] = useState(() => !isHomePage);
   const theme = themePreference === 'system' ? systemTheme : themePreference;
@@ -101,7 +100,6 @@ function App({ initialTheme = 'light' }) {
 
     if (!isHomePage) {
       startTransition(() => {
-        setShowDeferredSections(true);
         setShowDeferredUi(true);
         setShowFooter(true);
       });
@@ -174,59 +172,6 @@ function App({ initialTheme = 'light' }) {
     };
   }, [isHomePage, showDeferredUi, showFooter]);
 
-  useEffect(() => {
-    if (typeof window === 'undefined' || !isHomePage || showDeferredSections) {
-      return undefined;
-    }
-
-    let timeoutId;
-    let idleId;
-    let hasRevealedDeferredSection = false;
-
-    const revealDeferredSection = () => {
-      if (hasRevealedDeferredSection) {
-        return;
-      }
-
-      hasRevealedDeferredSection = true;
-      startTransition(() => {
-        setShowDeferredSections(true);
-      });
-    };
-
-    const maybeRevealDeferredSection = () => {
-      const revealThreshold = Math.max(window.innerHeight * 1.75, 1800);
-      const scrollProgress = window.scrollY + window.innerHeight;
-
-      if (scrollProgress >= revealThreshold) {
-        revealDeferredSection();
-      }
-    };
-
-    maybeRevealDeferredSection();
-    window.addEventListener('scroll', maybeRevealDeferredSection, { passive: true });
-    window.addEventListener('resize', maybeRevealDeferredSection);
-
-    if ('requestIdleCallback' in window) {
-      idleId = window.requestIdleCallback(revealDeferredSection, { timeout: 6500 });
-    } else {
-      timeoutId = window.setTimeout(revealDeferredSection, 6500);
-    }
-
-    return () => {
-      if (typeof idleId === 'number' && 'cancelIdleCallback' in window) {
-        window.cancelIdleCallback(idleId);
-      }
-
-      if (timeoutId) {
-        window.clearTimeout(timeoutId);
-      }
-
-      window.removeEventListener('scroll', maybeRevealDeferredSection);
-      window.removeEventListener('resize', maybeRevealDeferredSection);
-    };
-  }, [isHomePage, showDeferredSections]);
-
   return (
     <>
       <Navbar isHomePage={isHomePage} currentPath={currentPath} />
@@ -254,11 +199,9 @@ function App({ initialTheme = 'light' }) {
             <CalculatorTeaser />
             <About />
             <Projects />
-            {showDeferredSections ? (
-              <Suspense fallback={null}>
-                <Reviews />
-              </Suspense>
-            ) : null}
+            <Suspense fallback={null}>
+              <Reviews />
+            </Suspense>
             <Contact />
           </>
         )}

@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: trockenbau-primavista
+    runtime: node
+    buildCommand: npm run install:all && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GOOGLE_PLACE_ID
+        sync: false
+      - key: VITE_GOOGLE_PLACE_ID
+        sync: false
+      - key: GOOGLE_PLACES_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: EMAIL_CONFIRMATIONS_ENABLED
+        value: true
+      - key: EMAIL_PROVIDER
+        value: brevo
+      - key: EMAIL_FROM
+        sync: false
+      - key: EMAIL_REPLY_TO
+        sync: false
+      - key: EMAIL_NOTIFICATION_TO
+        sync: false
+      - key: EMAIL_NOTIFICATION_BCC
+        value: ""
+      - key: BREVO_API_KEY
+        sync: false
