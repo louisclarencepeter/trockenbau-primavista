@@ -44,6 +44,7 @@ export const getGoogleReviews = async () => {
   const data = {
     rating,
     totalReviews: user_ratings_total,
+    reviewsUrl: `https://search.google.com/local/reviews?placeid=${placeId}`,
     reviews: (reviews || []).map((review) => ({
       author: review.author_name,
       rating: review.rating,

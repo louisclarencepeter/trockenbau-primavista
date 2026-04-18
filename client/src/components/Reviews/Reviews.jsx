@@ -106,14 +106,16 @@ function Reviews() {
         </div>
 
         <div className="reviews__cta reviews__reveal">
-          <a
-            href={`https://search.google.com/local/reviews?placeid=${import.meta.env.VITE_GOOGLE_PLACE_ID || ''}`}
-            target="_blank"
-            rel="noreferrer"
-            className="reviews__link"
-          >
-            Alle Bewertungen auf Google ansehen
-          </a>
+          {data.reviewsUrl ? (
+            <a
+              href={data.reviewsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="reviews__link"
+            >
+              Alle Bewertungen auf Google ansehen
+            </a>
+          ) : null}
         </div>
       </div>
     </section>

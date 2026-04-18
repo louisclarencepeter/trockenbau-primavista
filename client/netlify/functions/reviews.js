@@ -47,6 +47,7 @@ export const handler = async (event) => {
     const data = {
       rating,
       totalReviews: user_ratings_total,
+      reviewsUrl: `https://search.google.com/local/reviews?placeid=${placeId}`,
       reviews: (reviews || []).map((r) => ({
         author: r.author_name,
         rating: r.rating,
