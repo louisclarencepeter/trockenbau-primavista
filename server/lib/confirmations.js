@@ -97,6 +97,24 @@ const formatEmailIdentity = (value, fallbackName = '') => {
   return `${name} <${email}>`;
 };
 
+const FORM_LABELS = {
+  contact: 'Kontakt',
+  calculator: 'Kalkulator',
+  anfrage: 'Anfrage',
+};
+
+const buildInternalFrom = (baseFrom, customerName, formName) => {
+  const { email } = parseEmailIdentity(baseFrom);
+  const cleanName = String(customerName ?? '').replace(/["<>]/g, '').trim();
+
+  if (!email || !cleanName) return baseFrom;
+
+  const formLabel = FORM_LABELS[formName];
+  const displayName = formLabel ? `${cleanName} via ${formLabel}` : cleanName;
+
+  return `${displayName} <${email}>`;
+};
+
 const buildContactSummary = (submission) => {
   const message = readText(submission, 'message') || 'Keine Nachricht angegeben.';
 
@@ -592,7 +610,11 @@ export const processConfirmationRequest = async ({ formName, submission }) => {
       await sendEmail({
         provider: mailConfig.provider,
         apiKey: mailConfig.apiKey,
-        from: mailConfig.customerFrom,
+        from: buildInternalFrom(
+          mailConfig.customerFrom,
+          readText(normalizedSubmission, 'name'),
+          normalizedFormName,
+        ),
         to: [mailConfig.notificationRecipient],
         subject: shouldSendCustomerConfirmation ? confirmation.subject : internal.subject,
         html: shouldSendCustomerConfirmation ? confirmation.html : internal.html,
