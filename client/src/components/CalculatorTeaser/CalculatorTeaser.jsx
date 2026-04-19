@@ -63,6 +63,8 @@ function CalculatorTeaser() {
               srcSet={projectFeaturedModernizationImage.srcSet}
               sizes={responsiveImageSizes.projectsGrid}
               alt="Trockenbau-Projekt mit vorbereiteter Wand- und Deckenstruktur"
+              width={projectFeaturedModernizationImage.width}
+              height={projectFeaturedModernizationImage.height}
               className="calculator-teaser__image"
               loading="lazy"
               decoding="async"
@@ -81,6 +83,8 @@ function CalculatorTeaser() {
               srcSet={projectDetailCeilingImage.srcSet}
               sizes={responsiveImageSizes.heroDetail}
               alt="Detailansicht einer Trockenbau-Ausführung"
+              width={projectDetailCeilingImage.width}
+              height={projectDetailCeilingImage.height}
               className="calculator-teaser__image"
               loading="lazy"
               decoding="async"

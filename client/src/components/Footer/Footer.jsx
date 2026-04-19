@@ -35,6 +35,8 @@ function Footer({ isHomePage = true }) {
             <img
               src={logoSmall}
               alt="Trockenbau Prima Vista Logo"
+              width="192"
+              height="192"
               className="footer__logo"
             />
             <div>

@@ -72,6 +72,8 @@ function Projects() {
               srcSet={projectFeaturedModernizationImage.srcSet}
               sizes={responsiveImageSizes.projectsFeatured}
               alt="Trockenbau-Projekt mit moderner Ausführung"
+              width={projectFeaturedModernizationImage.width}
+              height={projectFeaturedModernizationImage.height}
               loading="lazy"
               decoding="async"
               className="projects__image"
@@ -92,6 +94,8 @@ function Projects() {
                   srcSet={project.image.srcSet}
                   sizes={responsiveImageSizes.projectsGrid}
                   alt={project.alt}
+                  width={project.image.width}
+                  height={project.image.height}
                   loading="lazy"
                   decoding="async"
                   className="projects__image"

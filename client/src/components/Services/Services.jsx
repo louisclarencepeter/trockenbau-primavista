@@ -74,6 +74,8 @@ function Services() {
                   srcSet={service.image.srcSet}
                   sizes={responsiveImageSizes.services}
                   alt={service.alt}
+                  width={service.image.width}
+                  height={service.image.height}
                   loading="lazy"
                   decoding="async"
                   className="services__image"

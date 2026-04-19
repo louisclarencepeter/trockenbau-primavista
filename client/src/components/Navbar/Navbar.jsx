@@ -151,7 +151,7 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
     <header className="navbar">
       <div className="container navbar__container">
         <HashLink to={homeHref} className="navbar__brand" onClick={handleNavClick('top')}>
-          <img src={logoSmall} alt="Trockenbau Prima Vista Logo" className="navbar__logo" />
+          <img src={logoSmall} alt="Trockenbau Prima Vista Logo" width="192" height="192" className="navbar__logo" />
           <div className="navbar__brand-text">
             <span className="navbar__name">Trockenbau Prima Vista</span>
             <span className="navbar__tagline">Decken, Wände und Ausbau</span>

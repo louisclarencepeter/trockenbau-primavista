@@ -143,6 +143,8 @@ function Hero() {
                 srcSet={mainSlide.image.srcSet}
                 sizes={responsiveImageSizes.heroMain}
                 alt={mainSlide.alt}
+                width={mainSlide.image.width}
+                height={mainSlide.image.height}
                 loading="eager"
                 decoding="sync"
                 fetchPriority="high"
@@ -168,6 +170,8 @@ function Hero() {
                     srcSet={detailSlide.image.srcSet}
                     sizes={responsiveImageSizes.heroDetail}
                     alt={detailSlide.alt}
+                    width={detailSlide.image.width}
+                    height={detailSlide.image.height}
                     loading="lazy"
                     decoding="async"
                     className="hero__photo hero__photo--detail-slide hero__photo--active"

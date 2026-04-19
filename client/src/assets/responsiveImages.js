@@ -90,6 +90,8 @@ const createResponsiveImage = (variants, { fallbackWidth } = {}) => {
   return {
     src: fallbackVariant.src,
     srcSet: variants.map(({ src, width }) => `${src} ${width}w`).join(', '),
+    width: largestVariant.width,
+    height: largestVariant.height,
   };
 };
 
@@ -103,94 +105,94 @@ export const responsiveImageSizes = {
 };
 
 export const aboutInteriorShowcaseImage = createResponsiveImage([
-  { src: aboutInteriorShowcase400, width: 400 },
-  { src: aboutInteriorShowcase480, width: 480 },
-  { src: aboutInteriorShowcase640, width: 640 },
-  { src: aboutInteriorShowcase800, width: 800 },
-  { src: aboutInteriorShowcase1200, width: 1200 },
+  { src: aboutInteriorShowcase400, width: 400, height: 300 },
+  { src: aboutInteriorShowcase480, width: 480, height: 360 },
+  { src: aboutInteriorShowcase640, width: 640, height: 480 },
+  { src: aboutInteriorShowcase800, width: 800, height: 600 },
+  { src: aboutInteriorShowcase1200, width: 1200, height: 900 },
 ]);
 
 export const heroDetailAccentImage = createResponsiveImage([
-  { src: heroDetailAccent400, width: 400 },
-  { src: heroDetailAccent480, width: 480 },
-  { src: heroDetailAccent640, width: 640 },
-  { src: heroDetailAccent800, width: 800 },
-  { src: heroDetailAccent1200, width: 1200 },
+  { src: heroDetailAccent400, width: 400, height: 300 },
+  { src: heroDetailAccent480, width: 480, height: 360 },
+  { src: heroDetailAccent640, width: 640, height: 480 },
+  { src: heroDetailAccent800, width: 800, height: 600 },
+  { src: heroDetailAccent1200, width: 1200, height: 900 },
 ]);
 
 export const projectCeilingDrywallImage = createResponsiveImage([
-  { src: projectCeilingDrywall400, width: 400 },
-  { src: projectCeilingDrywall480, width: 480 },
-  { src: projectCeilingDrywall640, width: 640 },
-  { src: projectCeilingDrywall800, width: 800 },
-  { src: projectCeilingDrywall1200, width: 1200 },
+  { src: projectCeilingDrywall400, width: 400, height: 300 },
+  { src: projectCeilingDrywall480, width: 480, height: 360 },
+  { src: projectCeilingDrywall640, width: 640, height: 480 },
+  { src: projectCeilingDrywall800, width: 800, height: 600 },
+  { src: projectCeilingDrywall1200, width: 1200, height: 900 },
 ]);
 
 export const projectDetailCeilingImage = createResponsiveImage([
-  { src: projectDetailCeiling400, width: 400 },
-  { src: projectDetailCeiling480, width: 480 },
-  { src: projectDetailCeiling640, width: 640 },
-  { src: projectDetailCeiling800, width: 800 },
-  { src: projectDetailCeiling1200, width: 1200 },
+  { src: projectDetailCeiling400, width: 400, height: 300 },
+  { src: projectDetailCeiling480, width: 480, height: 360 },
+  { src: projectDetailCeiling640, width: 640, height: 480 },
+  { src: projectDetailCeiling800, width: 800, height: 600 },
+  { src: projectDetailCeiling1200, width: 1200, height: 900 },
 ]);
 
 export const projectExistingSpaceRenovationImage = createResponsiveImage([
-  { src: projectExistingSpaceRenovation400, width: 400 },
-  { src: projectExistingSpaceRenovation480, width: 480 },
-  { src: projectExistingSpaceRenovation640, width: 640 },
-  { src: projectExistingSpaceRenovation800, width: 800 },
-  { src: projectExistingSpaceRenovation1200, width: 1200 },
+  { src: projectExistingSpaceRenovation400, width: 400, height: 300 },
+  { src: projectExistingSpaceRenovation480, width: 480, height: 360 },
+  { src: projectExistingSpaceRenovation640, width: 640, height: 480 },
+  { src: projectExistingSpaceRenovation800, width: 800, height: 600 },
+  { src: projectExistingSpaceRenovation1200, width: 1200, height: 900 },
 ]);
 
 export const projectFeaturedModernizationImage = createResponsiveImage([
-  { src: projectFeaturedModernization400, width: 400 },
-  { src: projectFeaturedModernization480, width: 480 },
-  { src: projectFeaturedModernization640, width: 640 },
-  { src: projectFeaturedModernization800, width: 800 },
-  { src: projectFeaturedModernization1200, width: 1200 },
+  { src: projectFeaturedModernization400, width: 400, height: 300 },
+  { src: projectFeaturedModernization480, width: 480, height: 360 },
+  { src: projectFeaturedModernization640, width: 640, height: 480 },
+  { src: projectFeaturedModernization800, width: 800, height: 600 },
+  { src: projectFeaturedModernization1200, width: 1200, height: 900 },
 ]);
 
 export const projectFinishImage = createResponsiveImage([
-  { src: projectFinish320, width: 320 },
-  { src: projectFinish400, width: 400 },
-  { src: projectFinish480, width: 480 },
-  { src: projectFinish640, width: 640 },
-  { src: projectFinish720, width: 720 },
-  { src: projectFinish960, width: 960 },
+  { src: projectFinish320, width: 320, height: 426 },
+  { src: projectFinish400, width: 400, height: 533 },
+  { src: projectFinish480, width: 480, height: 640 },
+  { src: projectFinish640, width: 640, height: 853 },
+  { src: projectFinish720, width: 720, height: 960 },
+  { src: projectFinish960, width: 960, height: 1280 },
 ]);
 
 export const serviceDrywallImage = createResponsiveImage([
-  { src: serviceDrywall480, width: 480 },
-  { src: serviceDrywall600, width: 600 },
-  { src: serviceDrywall640, width: 640 },
-  { src: serviceDrywall800, width: 800 },
-  { src: serviceDrywall1200, width: 1200 },
+  { src: serviceDrywall480, width: 480, height: 360 },
+  { src: serviceDrywall600, width: 600, height: 450 },
+  { src: serviceDrywall640, width: 640, height: 480 },
+  { src: serviceDrywall800, width: 800, height: 600 },
+  { src: serviceDrywall1200, width: 1200, height: 900 },
 ]);
 
 export const serviceInteriorImage = createResponsiveImage([
-  { src: serviceInterior480, width: 480 },
-  { src: serviceInterior640, width: 640 },
-  { src: serviceInterior800, width: 800 },
-  { src: serviceInterior1200, width: 1200 },
+  { src: serviceInterior480, width: 480, height: 360 },
+  { src: serviceInterior640, width: 640, height: 480 },
+  { src: serviceInterior800, width: 800, height: 600 },
+  { src: serviceInterior1200, width: 1200, height: 900 },
 ]);
 
 export const serviceRenovationImage = createResponsiveImage([
-  { src: serviceRenovation320, width: 320 },
-  { src: serviceRenovation480, width: 480 },
-  { src: serviceRenovation600, width: 600 },
-  { src: serviceRenovation640, width: 640 },
-  { src: serviceRenovation720, width: 720 },
-  { src: serviceRenovation800, width: 800 },
-  { src: serviceRenovation960, width: 960 },
+  { src: serviceRenovation320, width: 320, height: 426 },
+  { src: serviceRenovation480, width: 480, height: 640 },
+  { src: serviceRenovation600, width: 600, height: 800 },
+  { src: serviceRenovation640, width: 640, height: 853 },
+  { src: serviceRenovation720, width: 720, height: 960 },
+  { src: serviceRenovation800, width: 800, height: 1066 },
+  { src: serviceRenovation960, width: 960, height: 1280 },
 ]);
 
 export const serviceWindowsImage = createResponsiveImage([
-  { src: serviceWindows480, width: 480 },
-  { src: serviceWindows600, width: 600 },
-  { src: serviceWindows640, width: 640 },
-  { src: serviceWindows720, width: 720 },
-  { src: serviceWindows800, width: 800 },
-  { src: serviceWindows960, width: 960 },
+  { src: serviceWindows480, width: 480, height: 640 },
+  { src: serviceWindows600, width: 600, height: 800 },
+  { src: serviceWindows640, width: 640, height: 853 },
+  { src: serviceWindows720, width: 720, height: 960 },
+  { src: serviceWindows800, width: 800, height: 1066 },
+  { src: serviceWindows960, width: 960, height: 1280 },
 ]);
 
 export const logoSmall = logo192;

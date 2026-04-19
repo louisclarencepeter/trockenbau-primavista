@@ -69,6 +69,8 @@ function About() {
                     srcSet={aboutInteriorShowcaseImage.srcSet}
                     sizes={responsiveImageSizes.about}
                     alt="Trockenbau-Projekt von Trockenbau Prima Vista"
+                    width={aboutInteriorShowcaseImage.width}
+                    height={aboutInteriorShowcaseImage.height}
                     loading="lazy"
                     decoding="async"
                     className="ueber-uns__image"
