@@ -15,9 +15,7 @@ const calculatorBenefits = [
 ];
 
 function CalculatorTeaser() {
-  const { sectionRef, isVisible } = useScrollReveal({
-    once: false,
-  });
+  const { sectionRef, isVisible } = useScrollReveal();
 
   return (
     <section

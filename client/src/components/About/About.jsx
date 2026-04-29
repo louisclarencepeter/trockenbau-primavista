@@ -32,9 +32,7 @@ const highlights = [
 ];
 
 function About() {
-  const { sectionRef, isVisible } = useScrollReveal({
-    once: false,
-  });
+  const { sectionRef, isVisible } = useScrollReveal();
 
   return (
     <section

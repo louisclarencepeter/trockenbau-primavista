@@ -52,9 +52,7 @@ function ReviewCard({ review }) {
 function Reviews() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
-  const { sectionRef, isVisible } = useScrollReveal({
-    once: false,
-  });
+  const { sectionRef, isVisible } = useScrollReveal();
 
   useEffect(() => {
     fetch(getApiUrl('/api/reviews'), { cache: 'no-store' })

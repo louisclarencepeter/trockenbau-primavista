@@ -33,9 +33,7 @@ const contactItems = [
 ];
 
 function Contact() {
-  const { sectionRef: contactRef, isVisible } = useScrollReveal({
-    once: false,
-  });
+  const { sectionRef: contactRef, isVisible } = useScrollReveal();
   const [formStatus, setFormStatus] = useState('idle');
   const successRef = useSuccessView(formStatus === 'success');
   const { formContainerRef, formRef, prepareReturnToForm } = useReturnToForm(formStatus);

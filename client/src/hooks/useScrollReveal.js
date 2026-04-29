@@ -1,11 +1,34 @@
 import { useCallback, useEffect, useState } from 'react';
 
+const revealedSections = new Set();
+
+const getRevealKey = (node) => {
+  if (!node) {
+    return null;
+  }
+
+  if (node.dataset.scrollRevealId) {
+    return node.dataset.scrollRevealId;
+  }
+
+  if (node.id) {
+    return `id:${node.id}`;
+  }
+
+  const firstClassName = String(node.className)
+    .split(/\s+/)
+    .find(Boolean);
+
+  return firstClassName ? `class:${firstClassName}` : null;
+};
+
 function useScrollReveal({
   threshold = 0.2,
   rootMargin = '0px 0px -10% 0px',
   once = true,
 } = {}) {
   const [element, setElement] = useState(null);
+  const [revealKey, setRevealKey] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const getInitialVisibility = useCallback((node) => {
     const rect = node.getBoundingClientRect();
@@ -26,11 +49,25 @@ function useScrollReveal({
     setElement(node);
 
     if (!node) {
+      setRevealKey(null);
       return;
     }
 
-    setIsVisible((current) => current || getInitialVisibility(node));
-  }, [getInitialVisibility]);
+    const nextRevealKey = getRevealKey(node);
+    const isAlreadyRevealed = once && nextRevealKey && revealedSections.has(nextRevealKey);
+    const isInitiallyVisible = getInitialVisibility(node);
+    setRevealKey(nextRevealKey);
+
+    if (once && nextRevealKey && isInitiallyVisible) {
+      revealedSections.add(nextRevealKey);
+    }
+
+    setIsVisible((current) => (
+      current
+      || isAlreadyRevealed
+      || isInitiallyVisible
+    ));
+  }, [getInitialVisibility, once]);
 
   useEffect(() => {
     if (!element) {
@@ -41,6 +78,10 @@ function useScrollReveal({
       ([entry]) => {
         if (once) {
           if (entry.isIntersecting) {
+            if (revealKey) {
+              revealedSections.add(revealKey);
+            }
+
             setIsVisible(true);
             observer.unobserve(entry.target);
           }
@@ -56,12 +97,19 @@ function useScrollReveal({
       }
     );
 
+    if (once && revealKey && revealedSections.has(revealKey)) {
+      setIsVisible(true);
+      return () => {
+        observer.disconnect();
+      };
+    }
+
     observer.observe(element);
 
     return () => {
       observer.disconnect();
     };
-  }, [element, once, rootMargin, threshold]);
+  }, [element, once, revealKey, rootMargin, threshold]);
 
   return { sectionRef, isVisible };
 }

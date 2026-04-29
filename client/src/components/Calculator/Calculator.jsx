@@ -16,17 +16,14 @@ function CalculatorPage() {
   const { sectionRef: heroRef, isVisible: isHeroVisible } = useScrollReveal({
     threshold: 0.22,
     rootMargin: '0px 0px -10% 0px',
-    once: false,
   });
   const { sectionRef: configRef, isVisible: isConfigVisible } = useScrollReveal({
     threshold: 0.12,
     rootMargin: '0px 0px -8% 0px',
-    once: false,
   });
   const { sectionRef: requestRef, isVisible: isRequestVisible } = useScrollReveal({
     threshold: 0.18,
     rootMargin: '0px 0px -8% 0px',
-    once: false,
   });
 
   const calculator = useCalculatorState();

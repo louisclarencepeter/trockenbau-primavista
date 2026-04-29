@@ -105,10 +105,13 @@
 .calculator-summary__positions-head,
 .calculator-summary__position {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) 70px 70px 76px;
-  gap: 8px;
-  align-items: center;
+  gap: 6px 12px;
   padding: 10px 12px;
+}
+
+.calculator-summary__positions-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
 }
 
 .calculator-summary__positions-head {
@@ -119,7 +122,21 @@
   background: var(--color-surface-muted);
 }
 
+.calculator-summary__positions-head span:nth-child(2),
+.calculator-summary__positions-head span:nth-child(3) {
+  display: none;
+}
+
+.calculator-summary__positions-head span:last-child {
+  text-align: right;
+}
+
 .calculator-summary__position {
+  grid-template-columns: minmax(0, 1fr) max-content;
+  grid-template-areas:
+    'title total'
+    'quantity price';
+  align-items: start;
   border-top: 1px solid var(--color-border-soft);
   color: var(--color-text-secondary);
   font-size: 13px;
@@ -127,12 +144,22 @@
 }
 
 .calculator-summary__position span:first-child {
+  grid-area: title;
   color: var(--color-text-primary);
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
-.calculator-summary__position span:nth-child(n + 2),
+.calculator-summary__position span:nth-child(2) {
+  grid-area: quantity;
+}
+
+.calculator-summary__position span:nth-child(3) {
+  grid-area: price;
+}
+
 .calculator-summary__position strong {
+  grid-area: total;
   text-align: right;
 }
 

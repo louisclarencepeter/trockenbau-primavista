@@ -4,6 +4,8 @@ export const parsePositiveNumber = (value, fallback = 0) => {
   return Number.isFinite(parsedValue) && parsedValue >= 0 ? parsedValue : fallback;
 };
 
+export const roundCurrency = (value) => Math.round(value * 100) / 100;
+
 export const createPriceMap = (items) =>
   items.reduce((priceMap, item) => ({
     ...priceMap,
@@ -186,23 +188,23 @@ export const getCalculatorTotals = ({
   const packageNet = packageLines.reduce((sum, line) => sum + line.net, 0);
   const addOnsNet = addOnLines.reduce((sum, line) => sum + line.net, 0);
   const rawNet = packageNet + addOnsNet;
-  const net = Math.round(rawNet);
-  const materialShare = Math.round(
+  const net = roundCurrency(rawNet);
+  const materialShare = roundCurrency(
     packageLines.reduce((sum, line) => sum + line.net * line.materialRatio, 0)
     + addOnLines.reduce((sum, line) => sum + line.net * line.materialRatio, 0),
   );
-  const montageShare = net - materialShare;
-  const vat = Math.round(net * vatRate);
+  const montageShare = roundCurrency(net - materialShare);
+  const vat = roundCurrency(net * vatRate);
 
   return {
     packageLines,
     addOnLines,
-    packageNet: Math.round(packageNet),
-    addOnsNet: Math.round(addOnsNet),
+    packageNet: roundCurrency(packageNet),
+    addOnsNet: roundCurrency(addOnsNet),
     materialShare,
     montageShare,
     net,
     vat,
-    gross: net + vat,
+    gross: roundCurrency(net + vat),
   };
 };

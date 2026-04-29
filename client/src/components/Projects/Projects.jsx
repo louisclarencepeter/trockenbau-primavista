@@ -45,9 +45,7 @@ const supportingProjects = [
 ];
 
 function Projects() {
-  const { sectionRef: projectsRef, isVisible } = useScrollReveal({
-    once: false,
-  });
+  const { sectionRef: projectsRef, isVisible } = useScrollReveal();
 
   return (
     <section

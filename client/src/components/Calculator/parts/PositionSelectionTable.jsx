@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import {
   Check,
   CopyPlus,
@@ -260,10 +261,10 @@ const renderPositionGroup = ({ title, children }) => {
   }
 
   return (
-    <>
+    <Fragment key={title}>
       <h3 className="calculator-config__positions-group">{title}</h3>
       {rows}
-    </>
+    </Fragment>
   );
 };
 
@@ -343,6 +344,7 @@ function PositionRow({
           type="checkbox"
           checked={isSelected}
           disabled={isLocked}
+          aria-label={`${title} ${isSelected ? 'abwählen' : 'auswählen'}`}
           onChange={onToggle}
         />
         <span className="calculator-config__position-check">

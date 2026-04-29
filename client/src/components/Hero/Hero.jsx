@@ -85,7 +85,6 @@ function Hero() {
   const { sectionRef: heroRef, isVisible } = useScrollReveal({
     threshold: 0.25,
     rootMargin: '0px 0px -10% 0px',
-    once: false,
   });
   const [activeSlide, setActiveSlide] = useState(0);
 

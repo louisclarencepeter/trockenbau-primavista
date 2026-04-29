@@ -45,9 +45,7 @@ const services = [
 ];
 
 function Services() {
-  const { sectionRef: servicesRef, isVisible } = useScrollReveal({
-    once: false,
-  });
+  const { sectionRef: servicesRef, isVisible } = useScrollReveal();
 
   return (
     <section

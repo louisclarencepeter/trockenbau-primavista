@@ -1,7 +1,7 @@
 .footer {
   background: var(--gradient-footer);
   color: var(--color-text-primary);
-  padding: 72px 0 132px;
+  padding: 72px 0 96px;
   border-top: 1px solid var(--color-border-soft);
 }
 
@@ -179,7 +179,7 @@
 
 @media (max-width: 992px) {
   .footer {
-    padding: 64px 0 112px;
+    padding: 64px 0 96px;
   }
 
   .footer__top {
@@ -194,7 +194,7 @@
 
 @media (max-width: 576px) {
   .footer {
-    padding: 56px 0 112px;
+    padding: 56px 0 92px;
   }
 
   .footer__brand {

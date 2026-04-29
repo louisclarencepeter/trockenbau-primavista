@@ -16,6 +16,8 @@ function SummaryPanel({
   selectedAddOnCount,
   totals,
 }) {
+  const hasPositionLines = positionLines.length > 0;
+
   return (
     <aside className="calculator-summary calculator-config__reveal" aria-label="Zusammenfassung">
       <div className="calculator-summary__header">
@@ -47,22 +49,24 @@ function SummaryPanel({
         </div>
       </dl>
 
-      <div className="calculator-summary__positions">
-        <div className="calculator-summary__positions-head">
-          <span>Position</span>
-          <span>Menge</span>
-          <span>Preis</span>
-          <span>Total</span>
-        </div>
-        {positionLines.map((line) => (
-          <div className="calculator-summary__position" key={line.id}>
-            <span>{line.title}</span>
-            <span>{formatNumber(line.quantity)} {line.unit}</span>
-            <span>{formatCurrency(line.unitPrice)}</span>
-            <strong>{formatCurrency(line.net)}</strong>
+      {hasPositionLines ? (
+        <div className="calculator-summary__positions">
+          <div className="calculator-summary__positions-head">
+            <span>Position</span>
+            <span>Menge</span>
+            <span>Preis</span>
+            <span>Total</span>
           </div>
-        ))}
-      </div>
+          {positionLines.map((line) => (
+            <div className="calculator-summary__position" key={line.id}>
+              <span>{line.title}</span>
+              <span>{formatNumber(line.quantity)} {line.unit}</span>
+              <span>{formatCurrency(line.unitPrice)}</span>
+              <strong>{formatCurrency(line.net)}</strong>
+            </div>
+          ))}
+        </div>
+      ) : null}
 
       <div className="calculator-summary__price">
         <span>Gesamt inkl. MwSt.</span>
