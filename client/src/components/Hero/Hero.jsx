@@ -10,8 +10,8 @@ import {
   projectFinishImage,
   responsiveImageSizes,
   serviceDrywallImage,
-  serviceInteriorImage,
-  serviceRenovationImage,
+  serviceRoofDetailImage,
+  serviceWallsImage,
 } from '../../assets/responsiveImages';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
@@ -24,8 +24,8 @@ const heroSlides = [
     text: 'Von der ersten Konstruktion bis zur sauberen Oberfläche bleibt der Ablauf klar kalkulierbar.',
   },
   {
-    image: serviceDrywallImage,
-    alt: 'Trockenbau-Projekt mit sauber vorbereiteten Wand- und Deckenflächen',
+    image: serviceWallsImage,
+    alt: 'Metallständerwände im Aufbau mit Platten und Unterkonstruktion',
     label: 'Wände',
     title: 'Wände stellen und verkleiden',
     text: 'Trennwände, Vorsatzschalen und Beplankungen werden passgenau aufgebaut und vorbereitet.',
@@ -45,8 +45,8 @@ const heroSlides = [
     text: 'Abgehängte Decken schaffen Platz für Licht, Akustik, Technik und einen ruhigen Abschluss.',
   },
   {
-    image: serviceInteriorImage,
-    alt: 'Ausgebauter Innenraum mit sauberem Finish',
+    image: serviceRoofDetailImage,
+    alt: 'Ausbauarbeit an Dachschrägen mit Trockenbauprofilen und Beplankung',
     label: 'Ausbau',
     title: 'Dachschrägen und Flächen',
     text: 'Auch schwierige Geometrien unter dem Dach lassen sich sauber ausbauen und sinnvoll nutzen.',
@@ -66,8 +66,8 @@ const heroSlides = [
     text: 'Bestehende Räume lassen sich mit Trockenbau schnell an neue Nutzungen anpassen.',
   },
   {
-    image: serviceRenovationImage,
-    alt: 'Trockenbau-Projekt mit heller Raumwirkung',
+    image: serviceDrywallImage,
+    alt: 'Rohbau-Innenraum mit vorbereitetem Boden für den weiteren Ausbau',
     label: 'Boden',
     title: 'Estrich und Bodenaufbau',
     text: 'Trockene Systeme schaffen ebene Flächen und eine gute Basis für den weiteren Ausbau.',

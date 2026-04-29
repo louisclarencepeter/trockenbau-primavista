@@ -5,10 +5,10 @@ import {
   projectDetailCeilingImage,
   projectExistingSpaceRenovationImage,
   projectFeaturedModernizationImage,
-  projectFinishImage,
   responsiveImageSizes,
-  serviceInteriorImage,
-  serviceRenovationImage,
+  serviceDrywallImage,
+  serviceRoofSlopeImage,
+  serviceSpecialImage,
 } from '../../assets/responsiveImages';
 
 const supportingProjects = [
@@ -23,9 +23,9 @@ const supportingProjects = [
     alt: 'Trockenbau-Projekt mit vorbereiteten Wand- und Deckenflächen',
   },
   {
-    image: serviceInteriorImage,
+    image: serviceDrywallImage,
     title: 'Estrich-Boden',
-    alt: 'Trockenbau-Projekt mit vorbereitetem Boden- und Flächenaufbau',
+    alt: 'Rohbau-Innenraum mit vorbereitetem Boden für den weiteren Ausbau',
   },
   {
     image: projectDetailCeilingImage,
@@ -33,14 +33,14 @@ const supportingProjects = [
     alt: 'Ausbauprojekt mit präzise ausgeführten Decken- und Übergangsdetails',
   },
   {
-    image: projectFinishImage,
+    image: serviceRoofSlopeImage,
     title: 'Dachschrägen ausbauen',
-    alt: 'Trockenbau-Projekt mit hochwertigem Finish und sauberer Umsetzung',
+    alt: 'Trockenbau-Ausbau an Dachschrägen mit Metallprofilen und Beplankung',
   },
   {
-    image: serviceRenovationImage,
+    image: serviceSpecialImage,
     title: 'Sonstige Leistungen',
-    alt: 'Trockenbau-Projekt für weitere Ausbau- und Sonderleistungen',
+    alt: 'Trockenbau-Sonderleistungen mit Dämmung und Installationen in einer Wand',
   },
 ];
 

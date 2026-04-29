@@ -1,13 +1,19 @@
 import { useEffect, useMemo, useState } from 'react';
 import ThemeContext from './ThemeContext';
-import { applyTheme, getStoredTheme, THEME_STORAGE_KEY } from '../utils/theme';
+import {
+  applyTheme,
+  getStoredTheme,
+  getSystemTheme,
+  resolveLocationTheme,
+  THEME_STORAGE_KEY,
+} from '../utils/theme';
 
 function ThemeProvider({ children, initialTheme = 'light' }) {
-  const [themePreference, setThemePreference] = useState(() => getStoredTheme() ?? 'system');
-  const [systemTheme, setSystemTheme] = useState(() => (
+  const [themePreference, setThemePreference] = useState(() => getStoredTheme() ?? null);
+  const [automaticTheme, setAutomaticTheme] = useState(() => (
     initialTheme === 'dark' ? 'dark' : 'light'
   ));
-  const resolvedTheme = themePreference === 'system' ? systemTheme : themePreference;
+  const resolvedTheme = themePreference ?? automaticTheme;
 
   useEffect(() => {
     applyTheme(resolvedTheme);
@@ -18,17 +24,34 @@ function ThemeProvider({ children, initialTheme = 'light' }) {
       return undefined;
     }
 
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (event) => {
-      setSystemTheme(event.matches ? 'dark' : 'light');
+    const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+    const handleChange = () => {
+      const systemTheme = getSystemTheme();
+
+      if (systemTheme) {
+        setAutomaticTheme(systemTheme);
+      }
     };
 
-    mediaQuery.addEventListener('change', handleChange);
+    darkQuery.addEventListener('change', handleChange);
+    lightQuery.addEventListener('change', handleChange);
 
     return () => {
-      mediaQuery.removeEventListener('change', handleChange);
+      darkQuery.removeEventListener('change', handleChange);
+      lightQuery.removeEventListener('change', handleChange);
     };
   }, []);
+
+  useEffect(() => {
+    if (themePreference) {
+      return undefined;
+    }
+
+    return resolveLocationTheme({
+      onResolve: setAutomaticTheme,
+    });
+  }, [themePreference]);
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -36,10 +59,10 @@ function ThemeProvider({ children, initialTheme = 'light' }) {
     }
 
     try {
-      if (themePreference === 'system') {
-        window.localStorage.removeItem(THEME_STORAGE_KEY);
-      } else {
+      if (themePreference) {
         window.localStorage.setItem(THEME_STORAGE_KEY, themePreference);
+      } else {
+        window.localStorage.removeItem(THEME_STORAGE_KEY);
       }
     } catch {
       // Ignore unavailable storage.

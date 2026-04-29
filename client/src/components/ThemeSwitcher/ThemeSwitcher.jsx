@@ -1,13 +1,8 @@
-import { Monitor, MoonStar, SunMedium } from 'lucide-react';
+import { MoonStar, SunMedium } from 'lucide-react';
 import './ThemeSwitcher.scss';
 import { useTheme } from '../../hooks/useTheme';
 
 const themeOptions = [
-  {
-    value: 'system',
-    label: 'Auto',
-    icon: Monitor,
-  },
   {
     value: 'light',
     label: 'Hell',
@@ -22,9 +17,9 @@ const themeOptions = [
 
 function ThemeSwitcher() {
   const { themePreference, resolvedTheme, setThemePreference } = useTheme();
-  const statusLabel = themePreference === 'system'
-    ? `Automatisch · folgt ${resolvedTheme === 'dark' ? 'Dunkel' : 'Hell'}`
-    : `Manuell · ${themePreference === 'dark' ? 'Dunkel' : 'Hell'}`;
+  const statusLabel = themePreference
+    ? `Manuell · ${themePreference === 'dark' ? 'Dunkel' : 'Hell'}`
+    : `Automatisch · ${resolvedTheme === 'dark' ? 'Dunkel' : 'Hell'}`;
 
   return (
     <aside className="theme-switcher" aria-label="Darstellungsmodus">
@@ -42,9 +37,11 @@ function ThemeSwitcher() {
               <button
                 key={option.value}
                 type="button"
-                className={`theme-switcher__button${themePreference === option.value ? ' is-active' : ''}`}
+                className={`theme-switcher__button${
+                  (themePreference ?? resolvedTheme) === option.value ? ' is-active' : ''
+                }`}
                 onClick={() => setThemePreference(option.value)}
-                aria-pressed={themePreference === option.value}
+                aria-pressed={(themePreference ?? resolvedTheme) === option.value}
                 title={option.label}
               >
                 <Icon size={16} strokeWidth={2.1} />

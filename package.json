@@ -5,9 +5,10 @@
   "scripts": {
     "install:all": "npm --prefix client install && npm --prefix server install",
     "postinstall": "npm run install:all",
-    "dev": "npm --prefix client run dev",
+    "dev": "node scripts/dev.cjs",
+    "dev:client": "npm --prefix client run dev",
     "dev:server": "npm --prefix server run dev",
-    "dev:all": "npm run dev:server & npm --prefix client run dev",
+    "dev:all": "npm run dev",
     "build": "npm --prefix client run build",
     "lint": "npm --prefix client run lint",
     "start": "npm --prefix server run start"

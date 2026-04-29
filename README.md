@@ -79,33 +79,34 @@ The frontend entrypoint lives at [client/src/App.jsx](/Users/louisclarencepeters
 npm run install:all
 ```
 
-### 2. Start the server
-
-```bash
-npm run dev:server
-```
-
-### 3. Start the frontend
+### 2. Start local development
 
 ```bash
 npm run dev
 ```
 
-Vite runs on `http://localhost:5173` and proxies API requests to `http://localhost:8787`.
+This starts both the Node API server on `http://localhost:8787` and Vite on `http://localhost:5173`. Vite proxies `/api/*` requests to the server.
 
-### 4. Build for production
+To run them separately, use:
+
+```bash
+npm run dev:server
+npm run dev:client
+```
+
+### 3. Build for production
 
 ```bash
 npm run build
 ```
 
-### 5. Start the production server locally
+### 4. Start the production server locally
 
 ```bash
 npm run start
 ```
 
-### 6. Run the linter
+### 5. Run the linter
 
 ```bash
 npm run lint
@@ -217,16 +218,10 @@ Available routes:
 Local development:
 
 ```bash
-npm run dev:server
-```
-
-In a second terminal:
-
-```bash
 npm run dev
 ```
 
-`npm run dev` starts Vite on `5173` and proxies `/api/*` to the Node server on `8787`.
+`npm run dev` starts the Node server on `8787` and Vite on `5173`; Vite proxies `/api/*` to the Node server.
 
 Production start:
 

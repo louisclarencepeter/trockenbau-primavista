@@ -39,6 +39,11 @@ import serviceDrywall600 from './images/services/service-drywall-600.jpg';
 import serviceDrywall640 from './images/services/service-drywall-640.jpg';
 import serviceDrywall800 from './images/services/service-drywall-800.jpg';
 import serviceDrywall1200 from './images/services/service-drywall-1200.jpg';
+import serviceCeiling480 from './images/services/service-ceiling-480.jpg';
+import serviceCeiling600 from './images/services/service-ceiling-600.jpg';
+import serviceCeiling640 from './images/services/service-ceiling-640.jpg';
+import serviceCeiling800 from './images/services/service-ceiling-800.jpg';
+import serviceCeiling1200 from './images/services/service-ceiling-1200.jpg';
 import serviceInterior480 from './images/services/service-interior-480.jpg';
 import serviceInterior640 from './images/services/service-interior-640.jpg';
 import serviceInterior800 from './images/services/service-interior-800.jpg';
@@ -56,6 +61,16 @@ import serviceWindows640 from './images/services/service-windows-640.jpg';
 import serviceWindows720 from './images/services/service-windows-720.jpg';
 import serviceWindows800 from './images/services/service-windows-800.jpg';
 import serviceWindows960 from './images/services/service-windows-960.jpg';
+import serviceSpecial480 from './images/services/service-special-480.jpg';
+import serviceSpecial600 from './images/services/service-special-600.jpg';
+import serviceSpecial640 from './images/services/service-special-640.jpg';
+import serviceSpecial800 from './images/services/service-special-800.jpg';
+import serviceSpecial1200 from './images/services/service-special-1200.jpg';
+import serviceWalls480 from './images/services/service-walls-480.jpg';
+import serviceWalls600 from './images/services/service-walls-600.jpg';
+import serviceWalls640 from './images/services/service-walls-640.jpg';
+import serviceWalls800 from './images/services/service-walls-800.jpg';
+import serviceWalls1200 from './images/services/service-walls-1200.jpg';
 import logo192 from './logo-192.png';
 
 const findVariantAtOrAboveWidth = (variants, targetWidth) =>
@@ -169,6 +184,14 @@ export const serviceDrywallImage = createResponsiveImage([
   { src: serviceDrywall1200, width: 1200, height: 900 },
 ]);
 
+export const serviceCeilingImage = createResponsiveImage([
+  { src: serviceCeiling480, width: 480, height: 360 },
+  { src: serviceCeiling600, width: 600, height: 450 },
+  { src: serviceCeiling640, width: 640, height: 480 },
+  { src: serviceCeiling800, width: 800, height: 600 },
+  { src: serviceCeiling1200, width: 1200, height: 900 },
+]);
+
 export const serviceInteriorImage = createResponsiveImage([
   { src: serviceInterior480, width: 480, height: 360 },
   { src: serviceInterior640, width: 640, height: 480 },
@@ -186,6 +209,8 @@ export const serviceRenovationImage = createResponsiveImage([
   { src: serviceRenovation960, width: 960, height: 1280 },
 ]);
 
+export const serviceRoofDetailImage = serviceRenovationImage;
+
 export const serviceWindowsImage = createResponsiveImage([
   { src: serviceWindows480, width: 480, height: 640 },
   { src: serviceWindows600, width: 600, height: 800 },
@@ -193,6 +218,24 @@ export const serviceWindowsImage = createResponsiveImage([
   { src: serviceWindows720, width: 720, height: 960 },
   { src: serviceWindows800, width: 800, height: 1066 },
   { src: serviceWindows960, width: 960, height: 1280 },
+]);
+
+export const serviceRoofSlopeImage = serviceWindowsImage;
+
+export const serviceSpecialImage = createResponsiveImage([
+  { src: serviceSpecial480, width: 480, height: 360 },
+  { src: serviceSpecial600, width: 600, height: 450 },
+  { src: serviceSpecial640, width: 640, height: 480 },
+  { src: serviceSpecial800, width: 800, height: 600 },
+  { src: serviceSpecial1200, width: 1200, height: 900 },
+]);
+
+export const serviceWallsImage = createResponsiveImage([
+  { src: serviceWalls480, width: 480, height: 360 },
+  { src: serviceWalls600, width: 600, height: 450 },
+  { src: serviceWalls640, width: 640, height: 480 },
+  { src: serviceWalls800, width: 800, height: 600 },
+  { src: serviceWalls1200, width: 1200, height: 900 },
 ]);
 
 export const logoSmall = logo192;

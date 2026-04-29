@@ -2,10 +2,11 @@ import { ArrowRight, Calculator } from 'lucide-react';
 import './Services.scss';
 import {
   responsiveImageSizes,
+  serviceCeilingImage,
   serviceDrywallImage,
-  serviceInteriorImage,
-  serviceRenovationImage,
-  serviceWindowsImage,
+  serviceRoofSlopeImage,
+  serviceSpecialImage,
+  serviceWallsImage,
 } from '../../assets/responsiveImages';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import PageLink from '../PageLink/PageLink';
@@ -14,32 +15,32 @@ const services = [
   {
     title: 'Decken abhängen',
     text: 'Abgehängte Decken für Licht, Akustik, Installationen und eine saubere Raumwirkung.',
-    image: serviceDrywallImage,
+    image: serviceCeilingImage,
     alt: 'Trockenbau-Arbeiten an einer abgehängten Decke',
   },
   {
     title: 'Wände stellen',
     text: 'Trennwände, Vorsatzschalen und Verkleidungen für flexible Grundrisse und klare Anschlüsse.',
-    image: serviceRenovationImage,
-    alt: 'Trockenbau-Projekt mit sauber ausgeführten Wand- und Deckenarbeiten',
+    image: serviceWallsImage,
+    alt: 'Metallständerwände im Aufbau mit Platten und Unterkonstruktion',
   },
   {
     title: 'Estrich-Boden',
     text: 'Trockene Bodenaufbauten und ebene Flächen als solide Basis für den weiteren Ausbau.',
-    image: serviceInteriorImage,
-    alt: 'Trockenbau-Projekt mit vorbereitetem Boden- und Flächenaufbau',
+    image: serviceDrywallImage,
+    alt: 'Rohbau-Innenraum mit vorbereitetem Boden für den weiteren Ausbau',
   },
   {
     title: 'Dachschrägen',
     text: 'Dachschrägen verkleiden und ausbauen, damit ungenutzte Flächen sauber nutzbar werden.',
-    image: serviceWindowsImage,
+    image: serviceRoofSlopeImage,
     alt: 'Ausbauarbeit an einer geneigten Innenraumfläche',
   },
   {
     title: 'Sonstiges',
     text: 'Dämmung, Brandschutz, Türen, Leitungen und weitere Trockenbauleistungen auf Anfrage.',
-    image: serviceDrywallImage,
-    alt: 'Trockenbau-Leistungen für Sonderarbeiten und Detailausbau',
+    image: serviceSpecialImage,
+    alt: 'Trockenbau-Sonderleistungen mit Dämmung und Installationen in einer Wand',
   },
 ];
 
