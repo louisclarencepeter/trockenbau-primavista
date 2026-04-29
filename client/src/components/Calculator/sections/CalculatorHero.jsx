@@ -25,6 +25,7 @@ function CalculatorHero({
   return (
     <section
       className={`calculator-hero${isVisible ? ' calculator-hero--visible' : ''}`}
+      id="kalkulator"
       ref={sectionRef}
     >
       <div className="container calculator-hero__container">

@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { scrollToHashTarget } from '../../utils/hashNavigation';
 
 const isModifiedEvent = (event) => (
   event.metaKey || event.altKey || event.ctrlKey || event.shiftKey
@@ -29,16 +30,19 @@ function PageLink({
     const targetUrl = new URL(to, window.location.origin);
     const targetPath = normalizePath(targetUrl.pathname);
     const currentPath = normalizePath(location.pathname);
-    const isSamePage =
-      currentPath === targetPath &&
-      location.search === targetUrl.search &&
-      !targetUrl.hash;
+    const isSamePage = currentPath === targetPath && location.search === targetUrl.search;
 
     if (!isSamePage) {
       return;
     }
 
     event.preventDefault();
+
+    if (targetUrl.hash) {
+      scrollToHashTarget(targetUrl.hash);
+      return;
+    }
+
     window.scrollTo({
       top: 0,
       left: 0,

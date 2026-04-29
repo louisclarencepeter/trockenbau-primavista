@@ -2,10 +2,14 @@ export const getScrollBehavior = () => (
   window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
 );
 
-const getAnchorOffset = () => {
+const flushStartTargets = new Set(['kalkulator', 'kalkulator-konfiguration']);
+
+const getAnchorOffset = (targetId) => {
   const navbar = document.querySelector('.navbar');
   const navbarHeight = navbar?.offsetHeight ?? 0;
-  const extraGap = window.innerWidth <= 992 ? 24 : 32;
+  const extraGap = flushStartTargets.has(targetId)
+    ? 0
+    : window.innerWidth <= 992 ? 24 : 32;
 
   return navbarHeight + extraGap;
 };
@@ -40,7 +44,7 @@ export const scrollToHashTarget = (hash, options = {}) => {
     return false;
   }
 
-  const targetTop = window.scrollY + target.getBoundingClientRect().top - getAnchorOffset();
+  const targetTop = window.scrollY + target.getBoundingClientRect().top - getAnchorOffset(targetId);
 
   window.scrollTo({
     top: Math.max(0, targetTop),

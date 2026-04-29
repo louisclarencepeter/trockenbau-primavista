@@ -8,7 +8,7 @@ import { getScrollBehavior, scrollToHashTarget } from '../../utils/hashNavigatio
 
 const navItems = [
   { id: 'leistungen', label: 'Leistungen' },
-  { id: 'kostenrechner', label: 'Kalkulator', pagePath: '/kalkulator' },
+  { id: 'kalkulator', label: 'Kalkulator', pagePath: '/kalkulator#kalkulator' },
   { id: 'ueber-uns', label: 'Über uns' },
   { id: 'referenzen', label: 'Referenzen' },
   { id: 'kontakt', label: 'Kontakt' },
@@ -29,7 +29,7 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
     setMenuOpen(false);
   };
 
-  const handleNavClick = (id) => (event) => {
+  const handleNavClick = (item) => (event) => {
     const shouldCloseInstantly = menuOpen;
 
     if (shouldCloseInstantly) {
@@ -43,6 +43,7 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
 
     if (
       isHomePage &&
+      !item.pagePath &&
       event.button === 0 &&
       !event.metaKey &&
       !event.altKey &&
@@ -50,7 +51,7 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
       !event.shiftKey
     ) {
       event.preventDefault();
-      scrollToHashTarget(`#${id}`, {
+      scrollToHashTarget(`#${item.id}`, {
         behavior: getScrollBehavior(),
       });
     }
@@ -63,16 +64,18 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
   };
 
   const getNavHref = (id) => (isHomePage ? `#${id}` : `/#${id}`);
-  const getItemHref = (item) => {
-    if (item.pagePath && !isHomePage) {
-      return item.pagePath;
-    }
-
-    return item.href ?? getNavHref(item.id);
-  };
+  const getItemHref = (item) => item.pagePath ?? item.href ?? getNavHref(item.id);
   const homeHref = '/';
   const visibleActiveSection = isHomePage ? activeSection : '';
-  const isPageItemActive = (item) => Boolean(item.pagePath && currentPath === item.pagePath);
+  const isPageItemActive = (item) => {
+    if (!item.pagePath) {
+      return false;
+    }
+
+    const itemPath = item.pagePath.split('#')[0].replace(/\/+$/, '') || '/';
+
+    return currentPath === itemPath;
+  };
 
   useEffect(() => {
     if (!isHomePage) {
@@ -150,7 +153,7 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
   return (
     <header className="navbar">
       <div className="container navbar__container">
-        <HashLink to={homeHref} className="navbar__brand" onClick={handleNavClick('top')}>
+        <HashLink to={homeHref} className="navbar__brand" onClick={handleNavClick({ id: 'top' })}>
           <img src={logoSmall} alt="Trockenbau Prima Vista Logo" width="192" height="192" className="navbar__logo" />
           <div className="navbar__brand-text">
             <span className="navbar__name">Trockenbau Prima Vista</span>
@@ -169,7 +172,7 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
                 key={item.id}
                 to={getItemHref(item)}
                 className={className}
-                onClick={handleNavClick(item.id)}
+                onClick={handleNavClick(item)}
               >
                 {item.label}
               </HashLink>
@@ -210,7 +213,7 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
                 key={item.id}
                 to={getItemHref(item)}
                 className={className}
-                onClick={handleNavClick(item.id)}
+                onClick={handleNavClick(item)}
               >
                 {item.label}
               </HashLink>

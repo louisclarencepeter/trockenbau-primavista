@@ -54,7 +54,7 @@ function AppShell() {
   }, [location.hash, location.pathname, location.search]);
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !isHomePage || !location.hash) {
+    if (typeof window === 'undefined' || !location.hash) {
       return undefined;
     }
 
@@ -88,7 +88,7 @@ function AppShell() {
         window.cancelAnimationFrame(animationFrameId);
       }
     };
-  }, [isHomePage, location.hash, location.pathname]);
+  }, [location.hash, location.pathname]);
 
   useEffect(() => {
     if (typeof window === 'undefined') {
