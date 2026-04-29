@@ -14,6 +14,10 @@
   box-shadow: var(--color-shadow-lg);
 }
 
+.calculator-selected-offer--main-only {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .calculator-selected-offer__main {
   display: grid;
   grid-template-rows: auto auto auto;

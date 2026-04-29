@@ -223,7 +223,14 @@
 .calculator-config__position-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 6px;
+  gap: 0;
+  width: fit-content;
+  margin-left: auto;
+  padding: 3px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: 8px;
+  background: var(--color-surface-base);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
 }
 
 .calculator-config__position-action {
@@ -231,34 +238,62 @@
   place-items: center;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 34px;
+  height: 34px;
   border: none;
-  border-radius: 50%;
-  color: #ffffff;
+  border-radius: 6px;
+  color: var(--color-text-muted);
+  background: transparent;
   cursor: pointer;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+
+.calculator-config__position-action + .calculator-config__position-action {
+  border-left: 1px solid var(--color-border-soft);
+  border-radius: 0 6px 6px 0;
+}
+
+.calculator-config__position-action:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.calculator-config__position-action:not(:first-child):not(:last-child) {
+  border-radius: 0;
 }
 
 .calculator-config__position-action--reset {
-  background: #23833b;
+  color: #54d17a;
 }
 
 .calculator-config__position-action--remove {
-  background: #c91d1d;
+  color: #ff6b6b;
 }
 
 .calculator-config__position-action--add {
-  background: #27b5ce;
+  color: #48cbe0;
 }
 
 .calculator-config__position-action:disabled {
-  opacity: 0.34;
+  opacity: 0.28;
   cursor: not-allowed;
 }
 
 .calculator-config__position-action:not(:disabled):hover {
-  transform: translateY(-2px);
+  color: var(--color-text-primary);
+  background: var(--color-surface-card-soft);
+  transform: translateY(-1px);
+}
+
+.calculator-config__position-action--reset:not(:disabled):hover {
+  background: rgba(84, 209, 122, 0.14);
+}
+
+.calculator-config__position-action--remove:not(:disabled):hover {
+  background: rgba(255, 107, 107, 0.14);
+}
+
+.calculator-config__position-action--add:not(:disabled):hover {
+  background: rgba(72, 203, 224, 0.14);
 }
 
 @media (max-width: 768px) {
@@ -331,5 +366,6 @@
   .calculator-config__position-actions {
     grid-area: actions;
     justify-content: flex-start;
+    margin-left: 0;
   }
 }
