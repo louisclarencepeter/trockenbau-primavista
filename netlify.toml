@@ -1,0 +1,22 @@
+[build]
+  command = "npm run build"
+  publish = "client/dist"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://trockenbau-primavista.onrender.com https://www.google-analytics.com https://*.google-analytics.com; img-src 'self' data: https:; media-src 'self'; style-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' https://trockenbau-primavista.onrender.com; upgrade-insecure-requests"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

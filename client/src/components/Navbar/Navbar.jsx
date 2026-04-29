@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
 import './Navbar.scss';
-import { logoSmall } from '../../assets/responsiveImages';
+import { logoImage } from '../../assets/responsiveImages';
 import Button from '../Button/Button';
 import HashLink from '../HashLink/HashLink';
+import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
 import { getScrollBehavior, scrollToHashTarget } from '../../utils/hashNavigation';
 
 const navItems = [
   { id: 'leistungen', label: 'Leistungen' },
-  { id: 'kalkulator', label: 'Kalkulator', pagePath: '/kalkulator#kalkulator' },
+  {
+    id: 'kalkulator',
+    label: 'Kalkulator',
+    pagePath: '/kalkulator#kalkulator',
+    sectionId: 'kostenrechner',
+  },
   { id: 'ueber-uns', label: 'Über uns' },
   { id: 'referenzen', label: 'Referenzen' },
   { id: 'kontakt', label: 'Kontakt' },
@@ -84,7 +90,7 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
 
     const sections = navItems
       .map((item) => {
-        const element = document.getElementById(item.id);
+        const element = document.getElementById(item.sectionId ?? item.id);
 
         if (!element) {
           return null;
@@ -154,7 +160,13 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
     <header className="navbar">
       <div className="container navbar__container">
         <HashLink to={homeHref} className="navbar__brand" onClick={handleNavClick({ id: 'top' })}>
-          <img src={logoSmall} alt="Trockenbau Prima Vista Logo" width="192" height="192" className="navbar__logo" />
+          <ResponsivePicture
+            image={logoImage}
+            alt="Trockenbau Prima Vista Logo"
+            loading="eager"
+            decoding="sync"
+            className="navbar__logo"
+          />
           <div className="navbar__brand-text">
             <span className="navbar__name">Trockenbau Prima Vista</span>
             <span className="navbar__tagline">Decken, Wände und Ausbau</span>

@@ -10,6 +10,7 @@ import {
   serviceRoofSlopeImage,
   serviceSpecialImage,
 } from '../../assets/responsiveImages';
+import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
 
 const supportingProjects = [
   {
@@ -65,13 +66,10 @@ function Projects() {
 
         <div className="projects__layout">
           <article className="projects__featured projects__reveal">
-            <img
-              src={projectFeaturedModernizationImage.src}
-              srcSet={projectFeaturedModernizationImage.srcSet}
+            <ResponsivePicture
+              image={projectFeaturedModernizationImage}
               sizes={responsiveImageSizes.projectsFeatured}
               alt="Trockenbau-Projekt mit moderner Ausführung"
-              width={projectFeaturedModernizationImage.width}
-              height={projectFeaturedModernizationImage.height}
               loading="lazy"
               decoding="async"
               className="projects__image"
@@ -87,13 +85,10 @@ function Projects() {
           <div className="projects__grid">
             {supportingProjects.map((project) => (
               <article className="projects__item projects__reveal" key={project.title}>
-                <img
-                  src={project.image.src}
-                  srcSet={project.image.srcSet}
+                <ResponsivePicture
+                  image={project.image}
                   sizes={responsiveImageSizes.projectsGrid}
                   alt={project.alt}
-                  width={project.image.width}
-                  height={project.image.height}
                   loading="lazy"
                   decoding="async"
                   className="projects__image"

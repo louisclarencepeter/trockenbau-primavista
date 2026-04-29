@@ -1,6 +1,7 @@
 import { Send } from 'lucide-react';
 import './RequestSection.scss';
 import { responsiveImageSizes } from '../../../assets/responsiveImages';
+import ResponsivePicture from '../../ResponsivePicture/ResponsivePicture';
 import { formatCurrency, formatSquareMeters } from '../utils/formatting';
 
 function RequestSection({
@@ -39,10 +40,9 @@ function RequestSection({
 
           <div className="calculator-request__media calculator-request__reveal">
             {requestMedia.map((item, index) => (
-              <img
+              <ResponsivePicture
                 key={item.id}
-                src={item.image.src}
-                srcSet={item.image.srcSet}
+                image={item.image}
                 sizes={responsiveImageSizes.projectsGrid}
                 alt={item.alt}
                 className={`calculator-request__media-image${

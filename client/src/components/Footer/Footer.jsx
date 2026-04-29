@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
 import './Footer.scss';
-import { logoSmall } from '../../assets/responsiveImages';
+import { logoImage } from '../../assets/responsiveImages';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import HashLink from '../HashLink/HashLink';
 import PageLink from '../PageLink/PageLink';
+import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
 
 function Footer({ isHomePage = true }) {
   const currentYear = new Date().getFullYear();
@@ -32,11 +33,11 @@ function Footer({ isHomePage = true }) {
       <div className="container footer__container">
         <div className="footer__top">
           <div className="footer__brand">
-            <img
-              src={logoSmall}
+            <ResponsivePicture
+              image={logoImage}
               alt="Trockenbau Prima Vista Logo"
-              width="192"
-              height="192"
+              loading="lazy"
+              decoding="async"
               className="footer__logo"
             />
             <div>

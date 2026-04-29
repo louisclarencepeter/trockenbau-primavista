@@ -98,7 +98,6 @@ function useScrollReveal({
     );
 
     if (once && revealKey && revealedSections.has(revealKey)) {
-      setIsVisible(true);
       return () => {
         observer.disconnect();
       };

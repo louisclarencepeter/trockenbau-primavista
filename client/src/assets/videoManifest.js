@@ -24,10 +24,8 @@ export const aboutSectionVideo = {
   sizes: responsiveImageSizes.about,
   desktopSources: [
     createVideoSource('/videos/ueber-uns/prima-vista-about.mp4', 'video/mp4'),
-    createVideoSource('/videos/ueber-uns/prima-vista-about.webm', 'video/webm'),
   ],
   mobileSources: [
     createVideoSource('/videos/ueber-uns/prima-vista-about.mp4', 'video/mp4'),
-    createVideoSource('/videos/ueber-uns/prima-vista-about.webm', 'video/webm'),
   ],
 };

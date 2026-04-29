@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
 
 const MOBILE_MEDIA_QUERY = '(max-width: 768px)';
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
@@ -106,9 +107,8 @@ function ResponsiveVideo({
 
   if (shouldUseStillMedia && media.poster) {
     return (
-      <img
-        src={media.poster.src}
-        srcSet={media.poster.srcSet}
+      <ResponsivePicture
+        image={media.poster}
         sizes={media.sizes}
         alt={posterAlt}
         loading="eager"
@@ -128,9 +128,8 @@ function ResponsiveVideo({
     }
 
     return (
-      <img
-        src={media.poster.src}
-        srcSet={media.poster.srcSet}
+      <ResponsivePicture
+        image={media.poster}
         sizes={media.sizes}
         alt={posterAlt}
         loading="eager"

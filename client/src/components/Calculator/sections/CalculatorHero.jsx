@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Check, ChevronRight } from 'lucide-react';
 import './CalculatorHero.scss';
 import { responsiveImageSizes } from '../../../assets/responsiveImages';
+import ResponsivePicture from '../../ResponsivePicture/ResponsivePicture';
 import { getScrollBehavior, scrollToHashTarget } from '../../../utils/hashNavigation';
 
 function CalculatorHero({
@@ -49,9 +50,8 @@ function CalculatorHero({
               key={choice.id}
               onClick={(event) => handleChoiceClick(event, choice)}
             >
-              <img
-                src={choice.image.src}
-                srcSet={choice.image.srcSet}
+              <ResponsivePicture
+                image={choice.image}
                 sizes={responsiveImageSizes.services}
                 alt={choice.alt}
                 className="calculator-hero__choice-image"

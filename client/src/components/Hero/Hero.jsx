@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './Hero.scss';
 import Button from '../Button/Button';
+import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
 import {
   heroDetailAccentImage,
   projectCeilingDrywallImage,
@@ -136,14 +137,11 @@ function Hero() {
         <div className="hero__visual hero__reveal">
           <div className="hero__showcase">
             <div className="hero__photo-frame hero__photo-frame--main">
-              <img
+              <ResponsivePicture
                 key={`${mainSlide.alt}-main`}
-                src={mainSlide.image.src}
-                srcSet={mainSlide.image.srcSet}
+                image={mainSlide.image}
                 sizes={responsiveImageSizes.heroMain}
                 alt={mainSlide.alt}
-                width={mainSlide.image.width}
-                height={mainSlide.image.height}
                 loading="eager"
                 decoding="sync"
                 fetchPriority="high"
@@ -163,14 +161,11 @@ function Hero() {
                   className="hero__photo-frame hero__photo-frame--detail hero__reveal"
                   key={`detail-frame-${detailIndex}`}
                 >
-                  <img
+                  <ResponsivePicture
                     key={`${detailSlide.alt}-detail-${detailIndex}`}
-                    src={detailSlide.image.src}
-                    srcSet={detailSlide.image.srcSet}
+                    image={detailSlide.image}
                     sizes={responsiveImageSizes.heroDetail}
                     alt={detailSlide.alt}
-                    width={detailSlide.image.width}
-                    height={detailSlide.image.height}
                     loading="lazy"
                     decoding="async"
                     className="hero__photo hero__photo--detail-slide hero__photo--active"

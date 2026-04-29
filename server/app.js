@@ -35,10 +35,28 @@ const getAllowedOrigins = () => {
   return new Set([...DEFAULT_ALLOWED_ORIGINS, ...configuredOrigins]);
 };
 
+const isAllowedCorsOrigin = (origin) => {
+  if (!origin) {
+    return false;
+  }
+
+  if (getAllowedOrigins().has(origin)) {
+    return true;
+  }
+
+  try {
+    const { hostname, protocol } = new URL(origin);
+
+    return protocol === 'https:' && hostname.endsWith('--trockenbau-primavista.netlify.app');
+  } catch {
+    return false;
+  }
+};
+
 app.use('/api', (req, res, next) => {
   const origin = req.headers.origin;
 
-  if (origin && getAllowedOrigins().has(origin)) {
+  if (isAllowedCorsOrigin(origin)) {
     res.set('Access-Control-Allow-Origin', origin);
     res.append('Vary', 'Origin');
     res.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');

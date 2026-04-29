@@ -7,6 +7,7 @@ import {
 } from '../../assets/responsiveImages';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import PageLink from '../PageLink/PageLink';
+import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
 
 const calculatorBenefits = [
   'Decken, Wände, Boden und Dachschrägen kombinieren',
@@ -56,13 +57,10 @@ function CalculatorTeaser() {
 
         <div className="calculator-teaser__visual calculator-teaser__reveal">
           <div className="calculator-teaser__image-frame calculator-teaser__image-frame--main">
-            <img
-              src={projectFeaturedModernizationImage.src}
-              srcSet={projectFeaturedModernizationImage.srcSet}
+            <ResponsivePicture
+              image={projectFeaturedModernizationImage}
               sizes={responsiveImageSizes.projectsGrid}
               alt="Trockenbau-Projekt mit vorbereiteter Wand- und Deckenstruktur"
-              width={projectFeaturedModernizationImage.width}
-              height={projectFeaturedModernizationImage.height}
               className="calculator-teaser__image"
               loading="lazy"
               decoding="async"
@@ -76,13 +74,10 @@ function CalculatorTeaser() {
           </div>
 
           <div className="calculator-teaser__mini-frame">
-            <img
-              src={projectDetailCeilingImage.src}
-              srcSet={projectDetailCeilingImage.srcSet}
+            <ResponsivePicture
+              image={projectDetailCeilingImage}
               sizes={responsiveImageSizes.heroDetail}
               alt="Detailansicht einer Trockenbau-Ausführung"
-              width={projectDetailCeilingImage.width}
-              height={projectDetailCeilingImage.height}
               className="calculator-teaser__image"
               loading="lazy"
               decoding="async"

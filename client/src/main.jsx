@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary.jsx';
+import { initializeAnalytics } from './utils/analytics';
 import { applyTheme, getInitialTheme } from './utils/theme';
 
 const initialTheme = getInitialTheme();
 
 applyTheme(initialTheme);
+initializeAnalytics();
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {

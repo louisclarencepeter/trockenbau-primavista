@@ -1,6 +1,7 @@
 import './About.scss';
 import { CheckCircle2, Hammer, MessagesSquare, TimerReset } from 'lucide-react';
 import ResponsiveVideo from '../ResponsiveVideo/ResponsiveVideo';
+import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import {
   aboutInteriorShowcaseImage,
@@ -62,13 +63,10 @@ function About() {
                 posterAlt="Trockenbau-Projekt von Trockenbau Prima Vista"
                 className="ueber-uns__image"
                 fallback={(
-                  <img
-                    src={aboutInteriorShowcaseImage.src}
-                    srcSet={aboutInteriorShowcaseImage.srcSet}
+                  <ResponsivePicture
+                    image={aboutInteriorShowcaseImage}
                     sizes={responsiveImageSizes.about}
                     alt="Trockenbau-Projekt von Trockenbau Prima Vista"
-                    width={aboutInteriorShowcaseImage.width}
-                    height={aboutInteriorShowcaseImage.height}
                     loading="lazy"
                     decoding="async"
                     className="ueber-uns__image"

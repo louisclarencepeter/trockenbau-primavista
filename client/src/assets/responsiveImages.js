@@ -1,77 +1,32 @@
-import aboutInteriorShowcase400 from './images/about/about-interior-showcase-400.jpg';
-import aboutInteriorShowcase480 from './images/about/about-interior-showcase-480.jpg';
-import aboutInteriorShowcase640 from './images/about/about-interior-showcase-640.jpg';
-import aboutInteriorShowcase800 from './images/about/about-interior-showcase-800.jpg';
-import aboutInteriorShowcase1200 from './images/about/about-interior-showcase-1200.jpg';
-import heroDetailAccent400 from './images/hero/hero-detail-accent-400.jpg';
-import heroDetailAccent480 from './images/hero/hero-detail-accent-480.jpg';
-import heroDetailAccent640 from './images/hero/hero-detail-accent-640.jpg';
-import heroDetailAccent800 from './images/hero/hero-detail-accent-800.jpg';
-import heroDetailAccent1200 from './images/hero/hero-detail-accent-1200.jpg';
-import projectCeilingDrywall400 from './images/projects/project-ceiling-drywall-400.jpg';
-import projectCeilingDrywall480 from './images/projects/project-ceiling-drywall-480.jpg';
-import projectCeilingDrywall640 from './images/projects/project-ceiling-drywall-640.jpg';
-import projectCeilingDrywall800 from './images/projects/project-ceiling-drywall-800.jpg';
-import projectCeilingDrywall1200 from './images/projects/project-ceiling-drywall-1200.jpg';
-import projectDetailCeiling400 from './images/projects/project-detail-ceiling-400.jpg';
-import projectDetailCeiling480 from './images/projects/project-detail-ceiling-480.jpg';
-import projectDetailCeiling640 from './images/projects/project-detail-ceiling-640.jpg';
-import projectDetailCeiling800 from './images/projects/project-detail-ceiling-800.jpg';
-import projectDetailCeiling1200 from './images/projects/project-detail-ceiling-1200.jpg';
-import projectExistingSpaceRenovation400 from './images/projects/project-existing-space-renovation-400.jpg';
-import projectExistingSpaceRenovation480 from './images/projects/project-existing-space-renovation-480.jpg';
-import projectExistingSpaceRenovation640 from './images/projects/project-existing-space-renovation-640.jpg';
-import projectExistingSpaceRenovation800 from './images/projects/project-existing-space-renovation-800.jpg';
-import projectExistingSpaceRenovation1200 from './images/projects/project-existing-space-renovation-1200.jpg';
-import projectFeaturedModernization400 from './images/projects/project-featured-modernization-400.jpg';
-import projectFeaturedModernization480 from './images/projects/project-featured-modernization-480.jpg';
-import projectFeaturedModernization640 from './images/projects/project-featured-modernization-640.jpg';
-import projectFeaturedModernization800 from './images/projects/project-featured-modernization-800.jpg';
-import projectFeaturedModernization1200 from './images/projects/project-featured-modernization-1200.jpg';
-import projectFinish320 from './images/projects/project-finish-320.jpg';
-import projectFinish400 from './images/projects/project-finish-400.jpg';
-import projectFinish480 from './images/projects/project-finish-480.jpg';
-import projectFinish640 from './images/projects/project-finish-640.jpg';
-import projectFinish720 from './images/projects/project-finish-720.jpg';
-import projectFinish960 from './images/projects/project-finish-960.jpg';
-import serviceDrywall480 from './images/services/service-drywall-480.jpg';
-import serviceDrywall600 from './images/services/service-drywall-600.jpg';
-import serviceDrywall640 from './images/services/service-drywall-640.jpg';
-import serviceDrywall800 from './images/services/service-drywall-800.jpg';
-import serviceDrywall1200 from './images/services/service-drywall-1200.jpg';
-import serviceCeiling480 from './images/services/service-ceiling-480.jpg';
-import serviceCeiling600 from './images/services/service-ceiling-600.jpg';
-import serviceCeiling640 from './images/services/service-ceiling-640.jpg';
-import serviceCeiling800 from './images/services/service-ceiling-800.jpg';
-import serviceCeiling1200 from './images/services/service-ceiling-1200.jpg';
-import serviceInterior480 from './images/services/service-interior-480.jpg';
-import serviceInterior640 from './images/services/service-interior-640.jpg';
-import serviceInterior800 from './images/services/service-interior-800.jpg';
-import serviceInterior1200 from './images/services/service-interior-1200.jpg';
-import serviceRenovation320 from './images/services/service-renovation-320.jpg';
-import serviceRenovation480 from './images/services/service-renovation-480.jpg';
-import serviceRenovation600 from './images/services/service-renovation-600.jpg';
-import serviceRenovation640 from './images/services/service-renovation-640.jpg';
-import serviceRenovation720 from './images/services/service-renovation-720.jpg';
-import serviceRenovation800 from './images/services/service-renovation-800.jpg';
-import serviceRenovation960 from './images/services/service-renovation-960.jpg';
-import serviceWindows480 from './images/services/service-windows-480.jpg';
-import serviceWindows600 from './images/services/service-windows-600.jpg';
-import serviceWindows640 from './images/services/service-windows-640.jpg';
-import serviceWindows720 from './images/services/service-windows-720.jpg';
-import serviceWindows800 from './images/services/service-windows-800.jpg';
-import serviceWindows960 from './images/services/service-windows-960.jpg';
-import serviceSpecial480 from './images/services/service-special-480.jpg';
-import serviceSpecial600 from './images/services/service-special-600.jpg';
-import serviceSpecial640 from './images/services/service-special-640.jpg';
-import serviceSpecial800 from './images/services/service-special-800.jpg';
-import serviceSpecial1200 from './images/services/service-special-1200.jpg';
-import serviceWalls480 from './images/services/service-walls-480.jpg';
-import serviceWalls600 from './images/services/service-walls-600.jpg';
-import serviceWalls640 from './images/services/service-walls-640.jpg';
-import serviceWalls800 from './images/services/service-walls-800.jpg';
-import serviceWalls1200 from './images/services/service-walls-1200.jpg';
-import logo192 from './logo-192.png';
+const imageAssetUrls = import.meta.glob('./images/*/*.{jpg,png,webp}', {
+  eager: true,
+  import: 'default',
+  query: '?url',
+});
+const assetUrls = {
+  ...imageAssetUrls,
+  './logo-96.png': new URL('./logo-96.png', import.meta.url).href,
+  './logo-96.webp': new URL('./logo-96.webp', import.meta.url).href,
+};
+
+const getAssetUrl = (path) => {
+  const assetUrl = assetUrls[`./${path}`];
+
+  if (!assetUrl) {
+    throw new Error(`Missing responsive asset: ${path}`);
+  }
+
+  return assetUrl;
+};
+
+const getWebpPath = (path) => path.replace(/\.(jpe?g|png)$/i, '.webp');
+
+const createVariant = (path, width, height) => ({
+  src: getAssetUrl(path),
+  webpSrc: assetUrls[`./${getWebpPath(path)}`],
+  width,
+  height,
+});
 
 const findVariantAtOrAboveWidth = (variants, targetWidth) =>
   variants.find(({ width }) => width >= targetWidth) ?? variants[variants.length - 1];
@@ -101,10 +56,12 @@ const createResponsiveImage = (variants, { fallbackWidth } = {}) => {
   const variantWidths = variants.map(({ width }) => width);
   const resolvedFallbackWidth = getFallbackWidth(variantWidths, largestVariant.width, fallbackWidth);
   const fallbackVariant = findVariantAtOrAboveWidth(variants, resolvedFallbackWidth);
+  const webpVariants = variants.filter(({ webpSrc }) => Boolean(webpSrc));
 
   return {
     src: fallbackVariant.src,
     srcSet: variants.map(({ src, width }) => `${src} ${width}w`).join(', '),
+    webpSrcSet: webpVariants.map(({ webpSrc, width }) => `${webpSrc} ${width}w`).join(', '),
     width: largestVariant.width,
     height: largestVariant.height,
   };
@@ -120,122 +77,126 @@ export const responsiveImageSizes = {
 };
 
 export const aboutInteriorShowcaseImage = createResponsiveImage([
-  { src: aboutInteriorShowcase400, width: 400, height: 300 },
-  { src: aboutInteriorShowcase480, width: 480, height: 360 },
-  { src: aboutInteriorShowcase640, width: 640, height: 480 },
-  { src: aboutInteriorShowcase800, width: 800, height: 600 },
-  { src: aboutInteriorShowcase1200, width: 1200, height: 900 },
+  createVariant('images/about/about-interior-showcase-400.jpg', 400, 300),
+  createVariant('images/about/about-interior-showcase-480.jpg', 480, 360),
+  createVariant('images/about/about-interior-showcase-640.jpg', 640, 480),
+  createVariant('images/about/about-interior-showcase-800.jpg', 800, 600),
+  createVariant('images/about/about-interior-showcase-1200.jpg', 1200, 900),
 ]);
 
 export const heroDetailAccentImage = createResponsiveImage([
-  { src: heroDetailAccent400, width: 400, height: 300 },
-  { src: heroDetailAccent480, width: 480, height: 360 },
-  { src: heroDetailAccent640, width: 640, height: 480 },
-  { src: heroDetailAccent800, width: 800, height: 600 },
-  { src: heroDetailAccent1200, width: 1200, height: 900 },
+  createVariant('images/hero/hero-detail-accent-400.jpg', 400, 300),
+  createVariant('images/hero/hero-detail-accent-480.jpg', 480, 360),
+  createVariant('images/hero/hero-detail-accent-640.jpg', 640, 480),
+  createVariant('images/hero/hero-detail-accent-800.jpg', 800, 600),
+  createVariant('images/hero/hero-detail-accent-1200.jpg', 1200, 900),
 ]);
 
 export const projectCeilingDrywallImage = createResponsiveImage([
-  { src: projectCeilingDrywall400, width: 400, height: 300 },
-  { src: projectCeilingDrywall480, width: 480, height: 360 },
-  { src: projectCeilingDrywall640, width: 640, height: 480 },
-  { src: projectCeilingDrywall800, width: 800, height: 600 },
-  { src: projectCeilingDrywall1200, width: 1200, height: 900 },
+  createVariant('images/projects/project-ceiling-drywall-400.jpg', 400, 300),
+  createVariant('images/projects/project-ceiling-drywall-480.jpg', 480, 360),
+  createVariant('images/projects/project-ceiling-drywall-640.jpg', 640, 480),
+  createVariant('images/projects/project-ceiling-drywall-800.jpg', 800, 600),
+  createVariant('images/projects/project-ceiling-drywall-1200.jpg', 1200, 900),
 ]);
 
 export const projectDetailCeilingImage = createResponsiveImage([
-  { src: projectDetailCeiling400, width: 400, height: 300 },
-  { src: projectDetailCeiling480, width: 480, height: 360 },
-  { src: projectDetailCeiling640, width: 640, height: 480 },
-  { src: projectDetailCeiling800, width: 800, height: 600 },
-  { src: projectDetailCeiling1200, width: 1200, height: 900 },
+  createVariant('images/projects/project-detail-ceiling-400.jpg', 400, 300),
+  createVariant('images/projects/project-detail-ceiling-480.jpg', 480, 360),
+  createVariant('images/projects/project-detail-ceiling-640.jpg', 640, 480),
+  createVariant('images/projects/project-detail-ceiling-800.jpg', 800, 600),
+  createVariant('images/projects/project-detail-ceiling-1200.jpg', 1200, 900),
 ]);
 
 export const projectExistingSpaceRenovationImage = createResponsiveImage([
-  { src: projectExistingSpaceRenovation400, width: 400, height: 300 },
-  { src: projectExistingSpaceRenovation480, width: 480, height: 360 },
-  { src: projectExistingSpaceRenovation640, width: 640, height: 480 },
-  { src: projectExistingSpaceRenovation800, width: 800, height: 600 },
-  { src: projectExistingSpaceRenovation1200, width: 1200, height: 900 },
+  createVariant('images/projects/project-existing-space-renovation-400.jpg', 400, 300),
+  createVariant('images/projects/project-existing-space-renovation-480.jpg', 480, 360),
+  createVariant('images/projects/project-existing-space-renovation-640.jpg', 640, 480),
+  createVariant('images/projects/project-existing-space-renovation-800.jpg', 800, 600),
+  createVariant('images/projects/project-existing-space-renovation-1200.jpg', 1200, 900),
 ]);
 
 export const projectFeaturedModernizationImage = createResponsiveImage([
-  { src: projectFeaturedModernization400, width: 400, height: 300 },
-  { src: projectFeaturedModernization480, width: 480, height: 360 },
-  { src: projectFeaturedModernization640, width: 640, height: 480 },
-  { src: projectFeaturedModernization800, width: 800, height: 600 },
-  { src: projectFeaturedModernization1200, width: 1200, height: 900 },
+  createVariant('images/projects/project-featured-modernization-400.jpg', 400, 300),
+  createVariant('images/projects/project-featured-modernization-480.jpg', 480, 360),
+  createVariant('images/projects/project-featured-modernization-640.jpg', 640, 480),
+  createVariant('images/projects/project-featured-modernization-800.jpg', 800, 600),
+  createVariant('images/projects/project-featured-modernization-1200.jpg', 1200, 900),
 ]);
 
 export const projectFinishImage = createResponsiveImage([
-  { src: projectFinish320, width: 320, height: 426 },
-  { src: projectFinish400, width: 400, height: 533 },
-  { src: projectFinish480, width: 480, height: 640 },
-  { src: projectFinish640, width: 640, height: 853 },
-  { src: projectFinish720, width: 720, height: 960 },
-  { src: projectFinish960, width: 960, height: 1280 },
+  createVariant('images/projects/project-finish-320.jpg', 320, 426),
+  createVariant('images/projects/project-finish-400.jpg', 400, 533),
+  createVariant('images/projects/project-finish-480.jpg', 480, 640),
+  createVariant('images/projects/project-finish-640.jpg', 640, 853),
+  createVariant('images/projects/project-finish-720.jpg', 720, 960),
+  createVariant('images/projects/project-finish-960.jpg', 960, 1280),
 ]);
 
 export const serviceDrywallImage = createResponsiveImage([
-  { src: serviceDrywall480, width: 480, height: 360 },
-  { src: serviceDrywall600, width: 600, height: 450 },
-  { src: serviceDrywall640, width: 640, height: 480 },
-  { src: serviceDrywall800, width: 800, height: 600 },
-  { src: serviceDrywall1200, width: 1200, height: 900 },
+  createVariant('images/services/service-drywall-480.jpg', 480, 360),
+  createVariant('images/services/service-drywall-600.jpg', 600, 450),
+  createVariant('images/services/service-drywall-640.jpg', 640, 480),
+  createVariant('images/services/service-drywall-800.jpg', 800, 600),
+  createVariant('images/services/service-drywall-1200.jpg', 1200, 900),
 ]);
 
 export const serviceCeilingImage = createResponsiveImage([
-  { src: serviceCeiling480, width: 480, height: 360 },
-  { src: serviceCeiling600, width: 600, height: 450 },
-  { src: serviceCeiling640, width: 640, height: 480 },
-  { src: serviceCeiling800, width: 800, height: 600 },
-  { src: serviceCeiling1200, width: 1200, height: 900 },
+  createVariant('images/services/service-ceiling-480.jpg', 480, 360),
+  createVariant('images/services/service-ceiling-600.jpg', 600, 450),
+  createVariant('images/services/service-ceiling-640.jpg', 640, 480),
+  createVariant('images/services/service-ceiling-800.jpg', 800, 600),
+  createVariant('images/services/service-ceiling-1200.jpg', 1200, 900),
 ]);
 
 export const serviceInteriorImage = createResponsiveImage([
-  { src: serviceInterior480, width: 480, height: 360 },
-  { src: serviceInterior640, width: 640, height: 480 },
-  { src: serviceInterior800, width: 800, height: 600 },
-  { src: serviceInterior1200, width: 1200, height: 900 },
+  createVariant('images/services/service-interior-480.jpg', 480, 360),
+  createVariant('images/services/service-interior-640.jpg', 640, 480),
+  createVariant('images/services/service-interior-800.jpg', 800, 600),
+  createVariant('images/services/service-interior-1200.jpg', 1200, 900),
 ]);
 
 export const serviceRenovationImage = createResponsiveImage([
-  { src: serviceRenovation320, width: 320, height: 426 },
-  { src: serviceRenovation480, width: 480, height: 640 },
-  { src: serviceRenovation600, width: 600, height: 800 },
-  { src: serviceRenovation640, width: 640, height: 853 },
-  { src: serviceRenovation720, width: 720, height: 960 },
-  { src: serviceRenovation800, width: 800, height: 1066 },
-  { src: serviceRenovation960, width: 960, height: 1280 },
+  createVariant('images/services/service-renovation-320.jpg', 320, 426),
+  createVariant('images/services/service-renovation-480.jpg', 480, 640),
+  createVariant('images/services/service-renovation-600.jpg', 600, 800),
+  createVariant('images/services/service-renovation-640.jpg', 640, 853),
+  createVariant('images/services/service-renovation-720.jpg', 720, 960),
+  createVariant('images/services/service-renovation-800.jpg', 800, 1066),
+  createVariant('images/services/service-renovation-960.jpg', 960, 1280),
 ]);
 
 export const serviceRoofDetailImage = serviceRenovationImage;
 
 export const serviceWindowsImage = createResponsiveImage([
-  { src: serviceWindows480, width: 480, height: 640 },
-  { src: serviceWindows600, width: 600, height: 800 },
-  { src: serviceWindows640, width: 640, height: 853 },
-  { src: serviceWindows720, width: 720, height: 960 },
-  { src: serviceWindows800, width: 800, height: 1066 },
-  { src: serviceWindows960, width: 960, height: 1280 },
+  createVariant('images/services/service-windows-480.jpg', 480, 640),
+  createVariant('images/services/service-windows-600.jpg', 600, 800),
+  createVariant('images/services/service-windows-640.jpg', 640, 853),
+  createVariant('images/services/service-windows-720.jpg', 720, 960),
+  createVariant('images/services/service-windows-800.jpg', 800, 1066),
+  createVariant('images/services/service-windows-960.jpg', 960, 1280),
 ]);
 
 export const serviceRoofSlopeImage = serviceWindowsImage;
 
 export const serviceSpecialImage = createResponsiveImage([
-  { src: serviceSpecial480, width: 480, height: 360 },
-  { src: serviceSpecial600, width: 600, height: 450 },
-  { src: serviceSpecial640, width: 640, height: 480 },
-  { src: serviceSpecial800, width: 800, height: 600 },
-  { src: serviceSpecial1200, width: 1200, height: 900 },
+  createVariant('images/services/service-special-480.jpg', 480, 360),
+  createVariant('images/services/service-special-600.jpg', 600, 450),
+  createVariant('images/services/service-special-640.jpg', 640, 480),
+  createVariant('images/services/service-special-800.jpg', 800, 600),
+  createVariant('images/services/service-special-1200.jpg', 1200, 900),
 ]);
 
 export const serviceWallsImage = createResponsiveImage([
-  { src: serviceWalls480, width: 480, height: 360 },
-  { src: serviceWalls600, width: 600, height: 450 },
-  { src: serviceWalls640, width: 640, height: 480 },
-  { src: serviceWalls800, width: 800, height: 600 },
-  { src: serviceWalls1200, width: 1200, height: 900 },
+  createVariant('images/services/service-walls-480.jpg', 480, 360),
+  createVariant('images/services/service-walls-600.jpg', 600, 450),
+  createVariant('images/services/service-walls-640.jpg', 640, 480),
+  createVariant('images/services/service-walls-800.jpg', 800, 600),
+  createVariant('images/services/service-walls-1200.jpg', 1200, 900),
 ]);
 
-export const logoSmall = logo192;
+export const logoImage = createResponsiveImage([
+  createVariant('logo-96.png', 96, 96),
+]);
+
+export const logoSmall = logoImage.src;

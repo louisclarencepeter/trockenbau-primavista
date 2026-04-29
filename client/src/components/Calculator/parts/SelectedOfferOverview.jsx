@@ -1,5 +1,7 @@
 import './SelectedOfferOverview.scss';
+import { responsiveImageSizes } from '../../../assets/responsiveImages';
 import HashLink from '../../HashLink/HashLink';
+import ResponsivePicture from '../../ResponsivePicture/ResponsivePicture';
 import { formatCurrency, formatSquareMeters } from '../utils/formatting';
 
 const getOfferTitle = ({ selectedChoice, activePackageTitle }) => {
@@ -36,9 +38,9 @@ function SelectedOfferOverview({
 
         <div className="calculator-selected-offer__media">
           {image ? (
-            <img
-              src={image.src}
-              srcSet={image.srcSet}
+            <ResponsivePicture
+              image={image}
+              sizes={responsiveImageSizes.projectsFeatured}
               alt={selectedChoice.alt}
               loading="eager"
               decoding="sync"

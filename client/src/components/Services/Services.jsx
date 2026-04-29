@@ -10,6 +10,7 @@ import {
 } from '../../assets/responsiveImages';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import PageLink from '../PageLink/PageLink';
+import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
 
 const services = [
   {
@@ -68,13 +69,10 @@ function Services() {
           {services.map((service) => (
             <article className="services__card services__reveal" key={service.title}>
               <div className="services__image-wrap">
-                <img
-                  src={service.image.src}
-                  srcSet={service.image.srcSet}
+                <ResponsivePicture
+                  image={service.image}
                   sizes={responsiveImageSizes.services}
                   alt={service.alt}
-                  width={service.image.width}
-                  height={service.image.height}
                   loading="lazy"
                   decoding="async"
                   className="services__image"
