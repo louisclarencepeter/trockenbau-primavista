@@ -253,6 +253,12 @@ const getDisplayConfig = ({ activePackageKey, item, type }) => {
   };
 };
 
+const normalizePositionTitle = (title) => title
+  .replace(/\s*🛠️\s*/gu, ' ')
+  .replace(/\s{2,}/g, ' ')
+  .replace(/\|\s+/g, '| ')
+  .trim();
+
 const renderPositionGroup = ({ title, children }) => {
   const rows = children.filter(Boolean);
 
@@ -326,6 +332,7 @@ function PositionRow({
   title,
   unit,
 }) {
+  const displayTitle = normalizePositionTitle(title);
   const handleAdd = () => {
     if (!isSelected) {
       onToggle();
@@ -344,7 +351,7 @@ function PositionRow({
           type="checkbox"
           checked={isSelected}
           disabled={isLocked}
-          aria-label={`${title} ${isSelected ? 'abwählen' : 'auswählen'}`}
+          aria-label={`${displayTitle} ${isSelected ? 'abwählen' : 'auswählen'}`}
           onChange={onToggle}
         />
         <span className="calculator-config__position-check">
@@ -363,7 +370,7 @@ function PositionRow({
           <Info size={18} strokeWidth={2.2} aria-hidden="true" />
         </span>
         <span>
-          <strong>{title}</strong>
+          <strong>{displayTitle}</strong>
           <em>{description}</em>
         </span>
       </span>
@@ -373,7 +380,7 @@ function PositionRow({
           min="0"
           step="0.1"
           value={quantity}
-          aria-label={`Menge für ${title}`}
+          aria-label={`Menge für ${displayTitle}`}
           onChange={(event) => onQuantityChange(event.target.value)}
         />
       </span>
@@ -384,7 +391,7 @@ function PositionRow({
           min="0"
           step="0.01"
           value={priceValue}
-          aria-label={`Preis für ${title}`}
+          aria-label={`Preis für ${displayTitle}`}
           onChange={(event) => onPriceChange(event.target.value)}
         />
       </span>

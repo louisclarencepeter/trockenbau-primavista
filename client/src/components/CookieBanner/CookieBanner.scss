@@ -192,10 +192,20 @@
   }
 
   .cookie-banner__trigger {
-    left: 16px;
+    left: 12px;
     bottom: var(--floating-trigger-offset-mobile);
-    width: 58px;
-    height: 58px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .cookie-banner__trigger-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .cookie-banner__trigger-icon svg {
+    width: 22px;
+    height: 22px;
   }
 
   .cookie-banner__content {

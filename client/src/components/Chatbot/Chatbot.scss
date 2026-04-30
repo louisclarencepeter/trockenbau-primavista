@@ -306,15 +306,25 @@
 
 @media (max-width: 576px) {
   .chatbot {
-    right: 16px;
+    right: 12px;
     bottom: var(--floating-trigger-offset-mobile);
     left: auto;
   }
 
   .chatbot__toggle {
-    width: 58px;
-    height: 58px;
+    width: 48px;
+    height: 48px;
     margin-left: 0;
+  }
+
+  .chatbot__toggle-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .chatbot__toggle-icon svg {
+    width: 22px;
+    height: 22px;
   }
 
   .chatbot__teaser {
