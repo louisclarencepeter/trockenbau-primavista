@@ -209,9 +209,73 @@
   }
 }
 
+@media (max-width: 768px) {
+  .calculator-summary {
+    gap: 18px;
+    padding: 22px;
+  }
+
+  .calculator-summary__header {
+    gap: 12px;
+  }
+
+  .calculator-summary__icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .calculator-summary__header h2 {
+    font-size: 22px;
+  }
+
+  .calculator-summary__list {
+    gap: 10px;
+  }
+
+  .calculator-summary__list div {
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+
+  .calculator-summary__positions {
+    max-height: 280px;
+    overflow: auto;
+  }
+
+  .calculator-summary__price {
+    padding: 18px;
+  }
+
+  .calculator-summary__button {
+    min-height: 50px;
+  }
+}
+
 @media (max-width: 520px) {
   .calculator-summary {
-    padding: 22px;
+    padding: 18px;
+  }
+
+  .calculator-summary__list div {
+    display: grid;
+    gap: 5px;
+  }
+
+  .calculator-summary__list dd {
+    text-align: left;
+  }
+
+  .calculator-summary__position {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'title'
+      'quantity'
+      'price'
+      'total';
+  }
+
+  .calculator-summary__position strong {
+    text-align: left;
   }
 
   .calculator-summary__price strong {
