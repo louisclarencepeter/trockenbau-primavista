@@ -3,10 +3,6 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { buildChatReply, ChatRequestError } from './lib/chat.js';
-import {
-  ConfirmationRequestError,
-  processConfirmationRequest,
-} from './lib/confirmations.js';
 import { submitForm, FormSubmissionError } from './lib/forms.js';
 import { getGoogleReviews, ReviewsRequestError } from './lib/reviews.js';
 
@@ -21,10 +17,13 @@ const DEFAULT_ALLOWED_ORIGINS = [
   'https://trockenbau-primavista.ch',
   'https://www.trockenbau-primavista.ch',
 ];
+const FORM_RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const FORM_RATE_LIMIT_MAX_REQUESTS = 5;
 
 const app = express();
 
 app.disable('x-powered-by');
+app.set('trust proxy', 1);
 
 const getAllowedOrigins = () => {
   const configuredOrigins = String(process.env.CORS_ALLOWED_ORIGINS || '')
@@ -80,6 +79,52 @@ const sendJsonError = (res, status, message, extra = {}) => {
   });
 };
 
+const formRateLimitBuckets = new Map();
+
+const getFormRateLimitKey = (req) =>
+  req.ip
+    || req.headers['x-forwarded-for']?.split(',')[0]?.trim()
+    || req.socket.remoteAddress
+    || 'unknown';
+
+const pruneExpiredFormRateLimitBuckets = (now) => {
+  for (const [key, bucket] of formRateLimitBuckets.entries()) {
+    if (bucket.resetAt <= now) {
+      formRateLimitBuckets.delete(key);
+    }
+  }
+};
+
+const formRateLimiter = (req, res, next) => {
+  const now = Date.now();
+
+  if (formRateLimitBuckets.size > 1000) {
+    pruneExpiredFormRateLimitBuckets(now);
+  }
+
+  const key = getFormRateLimitKey(req);
+  const currentBucket = formRateLimitBuckets.get(key);
+  const bucket = currentBucket && currentBucket.resetAt > now
+    ? currentBucket
+    : {
+        count: 0,
+        resetAt: now + FORM_RATE_LIMIT_WINDOW_MS,
+      };
+
+  bucket.count += 1;
+  formRateLimitBuckets.set(key, bucket);
+
+  if (bucket.count > FORM_RATE_LIMIT_MAX_REQUESTS) {
+    const retryAfterSeconds = Math.ceil((bucket.resetAt - now) / 1000);
+
+    res.set('Retry-After', String(retryAfterSeconds));
+    sendJsonError(res, 429, 'Zu viele Anfragen. Bitte versuchen Sie es später erneut.');
+    return;
+  }
+
+  next();
+};
+
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true });
 });
@@ -118,26 +163,7 @@ app.get('/api/reviews', async (_req, res) => {
   }
 });
 
-app.post('/api/confirmations', async (req, res) => {
-  try {
-    const result = await processConfirmationRequest({
-      formName: req.body?.formName,
-      submission: req.body?.submission,
-    });
-
-    res.json(result);
-  } catch (error) {
-    if (error instanceof ConfirmationRequestError) {
-      sendJsonError(res, error.status, error.message);
-      return;
-    }
-
-    console.error('[server] Confirmation request failed', error);
-    sendJsonError(res, 500, 'Confirmation request failed.');
-  }
-});
-
-app.post('/api/forms/submit', async (req, res) => {
+app.post('/api/forms/submit', formRateLimiter, async (req, res) => {
   try {
     const result = await submitForm({
       formName: req.body?.formName,

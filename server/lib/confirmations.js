@@ -616,9 +616,9 @@ export const processConfirmationRequest = async ({ formName, submission }) => {
           normalizedFormName,
         ),
         to: [mailConfig.notificationRecipient],
-        subject: shouldSendCustomerConfirmation ? confirmation.subject : internal.subject,
-        html: shouldSendCustomerConfirmation ? confirmation.html : internal.html,
-        text: shouldSendCustomerConfirmation ? confirmation.text : internal.text,
+        subject: internal.subject,
+        html: internal.html,
+        text: internal.text,
         replyTo: clientReplyTo,
         bcc: mailConfig.notificationBcc ? [mailConfig.notificationBcc] : [],
       });
@@ -627,7 +627,7 @@ export const processConfirmationRequest = async ({ formName, submission }) => {
         status: 'sent',
         recipient: mailConfig.notificationRecipient,
         reason: shouldSendCustomerConfirmation
-          ? 'Delivered as a direct copy with the customer email in Reply-To.'
+          ? 'Delivered as an internal notification with the customer email in Reply-To.'
           : undefined,
       };
       sentCount += 1;

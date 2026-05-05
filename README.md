@@ -188,8 +188,8 @@ Recommended setup:
 After that:
 
 - `contact`, `calculator`, and `anfrage` send a customer receipt email when `EMAIL_CONFIRMATIONS_ENABLED=true`
-- the same customer receipt is BCCed to `EMAIL_NOTIFICATION_TO`
-- if no customer receipt is being sent, the server falls back to a separate internal notification email
+- `EMAIL_NOTIFICATION_TO` receives a separate internal notification email for each lead
+- if no customer receipt is being sent, the internal notification still sends on its own
 - self-sends are skipped automatically if `EMAIL_NOTIFICATION_TO` matches `EMAIL_FROM`
 
 ## Chatbot
@@ -211,7 +211,6 @@ Available routes:
 
 - `POST /api/chat`
 - `GET /api/reviews`
-- `POST /api/confirmations`
 - `POST /api/forms/submit`
 - `GET /api/health`
 
