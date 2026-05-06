@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.primavista-bauprojekte.com/sitemap.xml
+Sitemap: https://www.trockenbau-primavista.ch/sitemap.xml

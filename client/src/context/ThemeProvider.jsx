@@ -4,7 +4,6 @@ import {
   applyTheme,
   getStoredTheme,
   getSystemTheme,
-  resolveLocationTheme,
   THEME_STORAGE_KEY,
 } from '../utils/theme';
 
@@ -42,16 +41,6 @@ function ThemeProvider({ children, initialTheme = 'light' }) {
       lightQuery.removeEventListener('change', handleChange);
     };
   }, []);
-
-  useEffect(() => {
-    if (themePreference) {
-      return undefined;
-    }
-
-    return resolveLocationTheme({
-      onResolve: setAutomaticTheme,
-    });
-  }, [themePreference]);
 
   useEffect(() => {
     if (typeof window === 'undefined') {

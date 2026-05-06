@@ -87,7 +87,9 @@ function Reviews() {
           <div className="reviews__summary reviews__reveal">
             <div className="reviews__rating-badge">
               <Star size={22} strokeWidth={0} fill="var(--color-accent)" />
-              <span className="reviews__rating-value">{data.rating.toFixed(1)}</span>
+              <span className="reviews__rating-value">
+                {Number.isFinite(data.rating) ? data.rating.toFixed(1) : '—'}
+              </span>
             </div>
             <p className="reviews__rating-text">
               Basierend auf {data.totalReviews} Google-Bewertungen

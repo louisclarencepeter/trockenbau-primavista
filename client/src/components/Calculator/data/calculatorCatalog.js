@@ -14,7 +14,6 @@ export const packages = [
   {
     id: 'decken',
     title: 'Decken abhängen',
-    description: 'Abgehängte Decken für Licht, Akustik, Technik und eine saubere Raumwirkung.',
     unitPrice: 49,
     unit: 'qm',
     materialRatio: 0.42,
@@ -27,7 +26,6 @@ export const packages = [
   {
     id: 'waende',
     title: 'Wände stellen',
-    description: 'Trennwände, Vorsatzschalen und Verkleidungen für flexible Raumaufteilungen.',
     unitPrice: 49,
     unit: 'qm',
     materialRatio: 0.46,
@@ -40,7 +38,6 @@ export const packages = [
   {
     id: 'estrich-boden',
     title: 'Estrich-Boden',
-    description: 'Trockene Bodenaufbauten für ebene Flächen und einen schnellen weiteren Ausbau.',
     unitPrice: 29,
     unit: 'qm',
     materialRatio: 0.58,
@@ -53,7 +50,6 @@ export const packages = [
   {
     id: 'dachschraegen',
     title: 'Dachschrägen',
-    description: 'Dachschrägen sauber verkleiden und für Wohn- oder Arbeitsräume nutzbar machen.',
     unitPrice: 79,
     unit: 'qm',
     materialRatio: 0.5,
@@ -66,7 +62,6 @@ export const packages = [
   {
     id: 'sonstiges',
     title: 'Sonstiges',
-    description: 'Weitere Trockenbauarbeiten wie Sonderdetails, Verkleidungen oder individuelle Lösungen.',
     unitPrice: 76,
     materialRatio: 0.44,
     included: [
@@ -81,7 +76,6 @@ export const addOns = [
   {
     id: 'decken',
     title: 'Decken abhängen',
-    description: 'Zusatzflächen, Deckenfelder oder Abkästungen für Licht und Technik.',
     unitPrice: 24,
     unit: 'm²',
     pricingMode: 'area',
@@ -92,7 +86,6 @@ export const addOns = [
   {
     id: 'waende',
     title: 'Wände verkleiden',
-    description: 'Vorsatzschalen, Beplankungen oder Verkleidungen für Bestandswände.',
     unitPrice: 49,
     unit: 'qm',
     pricingMode: 'flat',
@@ -104,7 +97,6 @@ export const addOns = [
   {
     id: 'estrich',
     title: 'Estrich-Boden',
-    description: 'Trockenestrich für eine stabile, ebene Bodenbasis.',
     unitPrice: 32,
     unit: 'm²',
     pricingMode: 'area',
@@ -115,7 +107,6 @@ export const addOns = [
   {
     id: 'dachschraegen',
     title: 'Dachschrägen verkleiden',
-    description: 'Saubere Verkleidung für maximale Raumausnutzung unter dem Dach.',
     unitPrice: 26,
     unit: 'm²',
     pricingMode: 'area',
@@ -126,7 +117,6 @@ export const addOns = [
   {
     id: 'daemmung',
     title: 'Dämmung',
-    description: 'Wärmeverlust senken, Schall dämpfen und Flächen funktional verbessern.',
     unitPrice: 19,
     unit: 'm²',
     pricingMode: 'area',
@@ -137,7 +127,6 @@ export const addOns = [
   {
     id: 'tueren',
     title: 'Türen einbauen',
-    description: 'Türöffnungen mit Zarge, Türblatt und passenden Beschlägen vorbereiten.',
     unitPrice: 1350,
     unit: 'Stk',
     pricingMode: 'flat',
@@ -148,7 +137,6 @@ export const addOns = [
   {
     id: 'elektro',
     title: 'Elektroleitungen integrieren',
-    description: 'Leitungen, Dosen und Anschlüsse unsichtbar in Trockenbauflächen führen.',
     unitPrice: 12,
     unit: 'm²',
     pricingMode: 'area',
@@ -159,7 +147,6 @@ export const addOns = [
   {
     id: 'brandschutz',
     title: 'Brandschutz',
-    description: 'Spezielle Beplankungen für Bereiche mit höheren Brandschutzanforderungen.',
     unitPrice: 17,
     unit: 'm²',
     pricingMode: 'area',
@@ -170,7 +157,6 @@ export const addOns = [
   {
     id: 'spachteln',
     title: 'Spachtelarbeiten',
-    description: 'Oberflächen für Anstrich, Tapete oder weitere Ausbauarbeiten vorbereiten.',
     unitPrice: 15,
     unit: 'm²',
     pricingMode: 'area',
@@ -181,7 +167,6 @@ export const addOns = [
   {
     id: 'abbruch',
     title: 'Abbruch & Entsorgung',
-    description: 'Rückbau bestehender Verkleidungen und fachgerechte Entsorgung vor dem Neuaufbau.',
     unitPrice: 17,
     unit: 'm²',
     pricingMode: 'area',
@@ -192,7 +177,6 @@ export const addOns = [
   {
     id: 'decken-verspachtlung',
     title: 'Verspachtlung streichfertig',
-    description: 'Fugen und Schraubstellen der Gipsplattenflächen streichfertig vorbereiten.',
     unitPrice: 22.82,
     unit: 'qm',
     pricingMode: 'area',
@@ -204,7 +188,6 @@ export const addOns = [
   {
     id: 'decken-eckausbildung',
     title: 'Eckausbildung für GK-Wände & -Decken',
-    description: 'Ecken und Übergänge zu Wänden sauber ausbilden.',
     unitPrice: 67.37,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -216,7 +199,6 @@ export const addOns = [
   {
     id: 'decken-rigips',
     title: 'Rigips Gipsplatte',
-    description: 'Standard-Rigipsplatten für abgehängte Deckenflächen.',
     unitPrice: 3.49,
     unit: 'qm',
     pricingMode: 'area',
@@ -229,7 +211,6 @@ export const addOns = [
   {
     id: 'decken-knauf-gkbi',
     title: 'Knauf GKBI imprägniert',
-    description: 'Imprägnierte Knauf-Platten für Feuchträume oder spezielle Anforderungen.',
     unitPrice: 8.9,
     unit: 'qm',
     pricingMode: 'area',
@@ -242,7 +223,6 @@ export const addOns = [
   {
     id: 'decken-parador-paneele',
     title: 'Parador Paneele Novara Esche Weiss',
-    description: 'Dekorative Paneele als Design-Option für die Deckenfläche.',
     unitPrice: 24.31,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -254,7 +234,6 @@ export const addOns = [
   {
     id: 'decken-parador-deckenleiste',
     title: 'Parador Deckenleiste DAL 2',
-    description: 'Dekorative Deckenleiste als ergänzende Design-Option.',
     unitPrice: 6.74,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -266,7 +245,6 @@ export const addOns = [
   {
     id: 'decken-innenausbau-varianten',
     title: 'Weitere Produkte Innenausbau',
-    description: 'Weitere Innenausbau-Produkte als Variante ohne Aufpreis.',
     unitPrice: 0,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -278,7 +256,6 @@ export const addOns = [
   {
     id: 'waende-verspachtlung',
     title: 'Verspachtlung streichfertig für Gipsplatten',
-    description: 'Fugen und Schraubstellen an Gipsplattenflächen für Anstrich oder Tapete vorbereiten.',
     unitPrice: 22.82,
     unit: 'qm',
     pricingMode: 'area',
@@ -290,7 +267,6 @@ export const addOns = [
   {
     id: 'waende-tuerloch',
     title: 'Türloch Herstellung für GK-Wände',
-    description: 'Türöffnung in GK-Wänden herstellen und für Zarge oder Türsystem vorbereiten.',
     unitPrice: 64.22,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -302,7 +278,6 @@ export const addOns = [
   {
     id: 'waende-eckausbildung',
     title: 'Eckausbildung für GK-Wände und Decken',
-    description: 'Kanten, Ecken und Anschlüsse mit Profilen sauber ausbilden.',
     unitPrice: 67.37,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -314,7 +289,6 @@ export const addOns = [
   {
     id: 'waende-rigips',
     title: 'Rigips Gipsplatte',
-    description: 'Gipsplatten als Standardmaterial für Trockenbauwände.',
     unitPrice: 3.49,
     unit: 'qm',
     pricingMode: 'area',
@@ -327,7 +301,6 @@ export const addOns = [
   {
     id: 'waende-knauf-gkbi',
     title: 'Knauf GKBI Sonderpalette imprägniert',
-    description: 'Spezielle imprägnierte Gipsplatten für Bereiche mit erhöhten Anforderungen.',
     unitPrice: 8.9,
     unit: 'qm',
     pricingMode: 'area',
@@ -340,7 +313,6 @@ export const addOns = [
   {
     id: 'waende-rohrkaesten-koffer',
     title: 'Rohrkästen & Koffer in Trockenbauweise',
-    description: 'Abkofferungen und Verkleidungen für Rohre, Leitungen und technische Einbauten.',
     unitPrice: 235.91,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -352,7 +324,6 @@ export const addOns = [
   {
     id: 'waende-durchgang-verschliessen',
     title: 'Durchgang verschließen in Trockenbauweise',
-    description: 'Bestehende Öffnungen mit Trockenbaukonstruktion fachgerecht schliessen.',
     unitPrice: 423.81,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -364,7 +335,6 @@ export const addOns = [
   {
     id: 'waende-eclisse-schiebetuerset',
     title: 'ECLISSE Innenwand-Schiebetürset',
-    description: 'Schiebetürset inklusive Holztürblatt für Trockenbauwände als Zusatzposition.',
     unitPrice: 927.65,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -376,7 +346,6 @@ export const addOns = [
   {
     id: 'waende-joka-akustikpaneel',
     title: 'JOKA PARO AKUSTIK Echtholzpaneel geprägt',
-    description: 'Dekorative Akustikpaneele als optionale Wandoberfläche.',
     unitPrice: 132.28,
     unit: 'qm',
     pricingMode: 'flat',
@@ -388,7 +357,6 @@ export const addOns = [
   {
     id: 'waende-ardesio-steinpaneel',
     title: 'ARDESIO Steinpaneel',
-    description: 'Steinpaneele als optionale Wandverkleidung für Akzentflächen.',
     unitPrice: 153.91,
     unit: 'qm',
     pricingMode: 'flat',
@@ -400,7 +368,6 @@ export const addOns = [
   {
     id: 'waende-verkleiden-ardesio',
     title: 'ARDESIO Steinpaneel',
-    description: 'Steinpaneele als Materialposition für Wandverkleidungen.',
     unitPrice: 153.91,
     unit: 'qm',
     pricingMode: 'area',
@@ -412,7 +379,6 @@ export const addOns = [
   {
     id: 'waende-verkleiden-joka-akustikpaneel',
     title: 'JOKA PARO AKUSTIK Echtholzpaneel geprägt',
-    description: 'Dekorative Akustikpaneele als optionale Wandoberfläche.',
     unitPrice: 132.28,
     unit: 'qm',
     pricingMode: 'flat',
@@ -424,7 +390,6 @@ export const addOns = [
   {
     id: 'waende-verkleiden-de-ryck-murok',
     title: 'De Ryck Steinriemchen Murok Sierra M47',
-    description: 'Steinriemchen als zusätzliche dekorative Wandverkleidung.',
     unitPrice: 90.42,
     unit: 'Stk',
     pricingMode: 'flat',
@@ -436,7 +401,6 @@ export const addOns = [
   {
     id: 'waende-verkleiden-botament-flexkleber',
     title: 'Botament M21 HP Premium-Flexkleber - 25Kg',
-    description: 'Flexkleber für Paneel- oder Steinriemchenverarbeitung.',
     unitPrice: 47.96,
     unit: 'Stk',
     pricingMode: 'flat',
@@ -449,7 +413,6 @@ export const addOns = [
   {
     id: 'waende-verkleiden-vorsatzwaende',
     title: 'Vorsatzwände Montage-Leistungspaket',
-    description: 'Zusätzliche Vorsatzwand-Leistung für die Wandverkleidung.',
     unitPrice: 49,
     unit: 'qm',
     pricingMode: 'flat',
@@ -461,7 +424,6 @@ export const addOns = [
   {
     id: 'waende-verkleiden-rigips',
     title: 'Rigips Gipsplatte',
-    description: 'Gipsplatte als Basis-Materialposition für Vorsatzwände.',
     unitPrice: 3.49,
     unit: 'qm',
     pricingMode: 'flat',
@@ -473,7 +435,6 @@ export const addOns = [
   {
     id: 'waende-verkleiden-knauf-gkbi',
     title: 'Knauf GKBI Sonderpalette imprägniert',
-    description: 'Imprägnierte Gipsplatte als ergänzende Materialposition.',
     unitPrice: 8.9,
     unit: 'qm',
     pricingMode: 'flat',
@@ -485,7 +446,6 @@ export const addOns = [
   {
     id: 'estrich-alt-demontage',
     title: 'ALT-ESTRICH Demontage & Entsorgung',
-    description: 'Bestehenden Estrich demontieren und fachgerecht entsorgen.',
     unitPrice: 45.89,
     unit: 'qm',
     pricingMode: 'flat',
@@ -497,7 +457,6 @@ export const addOns = [
   {
     id: 'estrich-fermacell-elemente',
     title: 'Fermacell Estrich-Elemente mit Mineralwolldämmung',
-    description: 'Fermacell Estrich-Elemente 1500x500 mm mit Mineralwolldämmung, Dicke 30 mm.',
     unitPrice: 26.39,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -510,7 +469,6 @@ export const addOns = [
   {
     id: 'estrich-fermacell-kleber',
     title: 'Fermacell Estrich-Kleber - 1 kg Flasche',
-    description: 'Kleber für Fermacell Estrich-Elemente.',
     unitPrice: 25.19,
     unit: 'Stk',
     pricingMode: 'flat',
@@ -523,7 +481,6 @@ export const addOns = [
   {
     id: 'estrich-fermacell-schrauben',
     title: 'Fermacell Schnellbauschrauben für Estrichelemente',
-    description: 'Schnellbauschrauben 3,9x19 mm, 1000 Stück.',
     unitPrice: 21.89,
     unit: 'Stk',
     pricingMode: 'flat',
@@ -536,7 +493,6 @@ export const addOns = [
   {
     id: 'estrich-ausgleichsschuettung',
     title: 'Ausgleichsschüttung herstellen bis 3 cm',
-    description: 'Ausgleichsschüttung zur Vorbereitung des Trockenestrich-Aufbaus.',
     unitPrice: 11.68,
     unit: 'qm',
     pricingMode: 'flat',
@@ -548,7 +504,6 @@ export const addOns = [
   {
     id: 'estrich-wabenschuettung',
     title: 'Fermacell Wabenschüttung - 15 Liter Sack',
-    description: 'Wabenschüttung als ergänzendes Material für Estrichaufbauten.',
     unitPrice: 9.24,
     unit: 'Stk',
     pricingMode: 'flat',
@@ -560,7 +515,6 @@ export const addOns = [
   {
     id: 'estrich-waermedaemmschuettung',
     title: 'Fermacell Wärmedämmschüttung - 100 Liter Sack',
-    description: 'Wärmedämmschüttung als ergänzende Schüttung im Bodenaufbau.',
     unitPrice: 25.85,
     unit: 'Stk',
     pricingMode: 'flat',
@@ -572,7 +526,6 @@ export const addOns = [
   {
     id: 'estrich-fermacell-wabe',
     title: 'Fermacell Estrich-Wabe 1.500x1.000 mm, Dicke 30 mm',
-    description: 'Estrich-Wabe für ergänzende Bodenaufbauten.',
     unitPrice: 15.84,
     unit: 'Stk',
     pricingMode: 'flat',
@@ -584,7 +537,6 @@ export const addOns = [
   {
     id: 'dachschraegen-verspachtlung',
     title: 'Verspachtlung streichfertig',
-    description: 'Streichfertige Verspachtlung der Dachschrägenflächen.',
     unitPrice: 24.9,
     unit: 'qm',
     pricingMode: 'area',
@@ -596,7 +548,6 @@ export const addOns = [
   {
     id: 'dachschraegen-daemmung-montage',
     title: 'Dämmung Montage-Leistung',
-    description: 'Montageleistung für Dämmarbeiten an Dachschrägen.',
     unitPrice: 29,
     unit: 'qm',
     pricingMode: 'flat',
@@ -608,7 +559,6 @@ export const addOns = [
   {
     id: 'dachschraegen-alt-daemmung',
     title: 'Alt-Dämmung Demontage & Entsorgung',
-    description: 'Alte Dämmung ausbauen und fachgerecht entsorgen.',
     unitPrice: 13.4,
     unit: 'qm',
     pricingMode: 'area',
@@ -620,7 +570,6 @@ export const addOns = [
   {
     id: 'dachschraegen-ursa-sf32',
     title: 'URSA SF 32 PLUS Klemmfilz 140 mm',
-    description: 'Klemmfilz-Dämmstoff für Dachschrägen im 140-mm-Aufbau.',
     unitPrice: 25.7,
     unit: 'qm',
     pricingMode: 'area',
@@ -632,7 +581,6 @@ export const addOns = [
   {
     id: 'dachschraegen-knauf-lds',
     title: 'Knauf LDS Flex Plus Dampfbremsbahn',
-    description: 'Dampfbremsbahn für den Dachschrägen-Ausbau.',
     unitPrice: 7.59,
     unit: 'qm',
     pricingMode: 'area',
@@ -644,7 +592,6 @@ export const addOns = [
   {
     id: 'dachschraegen-rigips',
     title: 'Rigips Gipsplatte',
-    description: 'Standard-Gipsplatten für die Beplankung der Dachschrägen.',
     unitPrice: 3.49,
     unit: 'qm',
     pricingMode: 'area',
@@ -657,7 +604,6 @@ export const addOns = [
   {
     id: 'dachschraegen-knauf-gkbi',
     title: 'Knauf GKBI imprägniert',
-    description: 'Imprägnierte Gipsplatten für Feuchtraum- oder Sonderbereiche.',
     unitPrice: 8.9,
     unit: 'qm',
     pricingMode: 'area',
@@ -670,7 +616,6 @@ export const addOns = [
   {
     id: 'dachschraegen-dachfenster-montage',
     title: 'Dachfenster Montage-Paket',
-    description: 'Montage-Paket für ein Dachfenster.',
     unitPrice: 795.9,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -682,7 +627,6 @@ export const addOns = [
   {
     id: 'dachschraegen-velux-solarfenster',
     title: 'Velux Solarfenster GGU Kunststoff',
-    description: 'Velux Solar-Kunststofffenster für den Dachschrägen-Ausbau.',
     unitPrice: 1147.8,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -694,7 +638,6 @@ export const addOns = [
   {
     id: 'dachschraegen-velux-rollo',
     title: 'Velux Rollo Verdunkelung manuell',
-    description: 'Manuelles Verdunkelungsrollo für Velux Dachfenster.',
     unitPrice: 83.72,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -706,7 +649,6 @@ export const addOns = [
   {
     id: 'dachschraegen-revisionsklappe',
     title: 'Revisionsklappe Knauf REVO BS90',
-    description: 'BS90 Revisionsklappe für Wartungszugänge.',
     unitPrice: 134.15,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -718,7 +660,6 @@ export const addOns = [
   {
     id: 'dachschraegen-parador-paneele',
     title: 'Parador Paneele Esche Weiss Dekor',
-    description: 'Dekorative Paneele als optionale Oberfläche.',
     unitPrice: 24.31,
     unit: 'Stk.',
     pricingMode: 'flat',
@@ -730,7 +671,6 @@ export const addOns = [
   {
     id: 'innenausbau-varianten',
     title: 'Weitere Innenausbau-Optionen auf Anfrage',
-    description: 'Zusätzliche Ausbauwünsche können für die finale Offerte mitgeprüft werden.',
     unitPrice: 0,
     unit: 'Stk',
     pricingMode: 'flat',
@@ -746,7 +686,6 @@ export const serviceComponents = {
       id: 'montage',
       catalogGroup: 'Trockenbau: Decken & Wände',
       title: 'DECKEN | Montage-Leistungspaket',
-      description: 'Art.-Nr. TROC-100-BASIS',
       unitPrice: 49,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -757,7 +696,6 @@ export const serviceComponents = {
       id: 'waende-montage',
       catalogGroup: 'Trockenbau: Decken & Wände',
       title: 'WÄNDE | Montage-Leistungspaket',
-      description: 'Art.-Nr. TROC-200-BASIS',
       unitPrice: 49,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -768,7 +706,6 @@ export const serviceComponents = {
       id: 'vorsatzwaende',
       catalogGroup: 'Trockenbau: Decken & Wände',
       title: 'VORSATZWÄNDE | Montage-Leistungspaket',
-      description: 'Art.-Nr. TROC-300-BASIS',
       unitPrice: 49,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -779,7 +716,6 @@ export const serviceComponents = {
       id: 'verspachtlung',
       catalogGroup: 'Trockenbau: Decken & Wände',
       title: 'VERSPACHTLUNG | streichfertig',
-      description: 'Art.-Nr. TROC-101-1-ZU',
       unitPrice: 22.82,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -792,7 +728,6 @@ export const serviceComponents = {
       id: 'tuerloch',
       catalogGroup: 'Trockenbau: Decken & Wände',
       title: 'TÜRLOCH | Herstellung',
-      description: 'Art.-Nr. TROC-201-1-ZU',
       unitPrice: 64.22,
       unit: 'Stück',
       pricingMode: 'catalog',
@@ -803,7 +738,6 @@ export const serviceComponents = {
       id: 'eckausbildung',
       catalogGroup: 'Trockenbau: Decken & Wände',
       title: 'ECKAUSBILDUNG',
-      description: 'Art.-Nr. TROC-201-2-ZU',
       unitPrice: 67.37,
       unit: 'Stück',
       pricingMode: 'catalog',
@@ -814,7 +748,6 @@ export const serviceComponents = {
       id: 'rohrkaesten-koffer',
       catalogGroup: 'Trockenbau: Decken & Wände',
       title: 'ROHRKÄSTEN & KOFFER',
-      description: 'Art.-Nr. TROC-401-ZU',
       unitPrice: 235.91,
       unit: 'Stück',
       pricingMode: 'catalog',
@@ -825,7 +758,6 @@ export const serviceComponents = {
       id: 'durchgang-verschliessen',
       catalogGroup: 'Trockenbau: Decken & Wände',
       title: 'DURCHGANG VERSCHLIESSEN',
-      description: 'Art.-Nr. TROC-501-ZU',
       unitPrice: 423.81,
       unit: 'Stück',
       pricingMode: 'catalog',
@@ -838,7 +770,6 @@ export const serviceComponents = {
       id: 'estrich-montage',
       catalogGroup: 'Estrich-Arbeiten',
       title: 'ESTRICH | Montage',
-      description: 'Art.-Nr. MON-10222',
       unitPrice: 29,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -849,7 +780,6 @@ export const serviceComponents = {
       id: 'alt-estrich',
       catalogGroup: 'Estrich-Arbeiten',
       title: 'ALT-ESTRICH | Demontage & Entsorgung',
-      description: 'Art.-Nr. ROHB-501-1-OP',
       unitPrice: 45.89,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -860,7 +790,6 @@ export const serviceComponents = {
       id: 'fermacell-estrich-elemente',
       catalogGroup: 'Estrich-Arbeiten',
       title: 'Fermacell Estrich-Elemente | 30 mm',
-      description: 'Art.-Nr. uv204-00032',
       unitPrice: 26.39,
       unit: 'Stk.',
       pricingMode: 'catalog',
@@ -871,7 +800,6 @@ export const serviceComponents = {
       id: 'ausgleichsschuettung',
       catalogGroup: 'Estrich-Arbeiten',
       title: 'Ausgleichsschüttung | herstellen',
-      description: 'Art.-Nr. ROHB-501-2-OP',
       unitPrice: 11.68,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -882,7 +810,6 @@ export const serviceComponents = {
       id: 'wabenschuettung',
       catalogGroup: 'Estrich-Arbeiten',
       title: 'Fermacell Wabenschüttung | 15 L',
-      description: 'Art.-Nr. 204-8',
       unitPrice: 9.24,
       unit: 'Sack',
       pricingMode: 'catalog',
@@ -895,7 +822,6 @@ export const serviceComponents = {
       id: 'dachausbau-montage',
       catalogGroup: 'Dachausbau & Dämmung',
       title: 'DACHAUSBAU | Montage-Leistungspaket',
-      description: 'Art.-Nr. DACH-600-BASIS',
       unitPrice: 79,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -906,7 +832,6 @@ export const serviceComponents = {
       id: 'daemmung',
       catalogGroup: 'Dachausbau & Dämmung',
       title: 'DÄMMUNG | Montage',
-      description: 'Art.-Nr. DACH-602-MON',
       unitPrice: 29,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -917,7 +842,6 @@ export const serviceComponents = {
       id: 'alt-daemmung',
       catalogGroup: 'Dachausbau & Dämmung',
       title: 'ALT-DÄMMUNG | Demontage & Entsorgung',
-      description: 'Art.-Nr. DACH-600-2-OP',
       unitPrice: 13.4,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -928,7 +852,6 @@ export const serviceComponents = {
       id: 'ursa-sf32',
       catalogGroup: 'Dachausbau & Dämmung',
       title: 'URSA SF 32 PLUS | Klemmfilz (140 mm)',
-      description: 'Art.-Nr. 609625',
       unitPrice: 25.7,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -939,7 +862,6 @@ export const serviceComponents = {
       id: 'knauf-dampfbremsbahn',
       catalogGroup: 'Dachausbau & Dämmung',
       title: 'Knauf Dampfbremsbahn | LDS Flex Plus',
-      description: 'Art.-Nr. 1010361',
       unitPrice: 7.59,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -952,7 +874,6 @@ export const serviceComponents = {
       id: 'dachfenster-montage',
       catalogGroup: 'Dachfenster & Sonderkomponenten',
       title: 'DACHFENSTER | Montage-Paket',
-      description: 'Art.-Nr. DACH-500-BASIS',
       unitPrice: 795.9,
       unit: 'Stück',
       pricingMode: 'catalog',
@@ -963,7 +884,6 @@ export const serviceComponents = {
       id: 'velux-solarfenster',
       catalogGroup: 'Dachfenster & Sonderkomponenten',
       title: 'Velux Solarfenster | GGU Kunststoff',
-      description: 'Art.-Nr. uv702-1369',
       unitPrice: 1147.8,
       unit: 'Stk.',
       pricingMode: 'catalog',
@@ -974,7 +894,6 @@ export const serviceComponents = {
       id: 'eclisse-schiebetuerset',
       catalogGroup: 'Dachfenster & Sonderkomponenten',
       title: 'ECLISSE Schiebetürset | inkl. Türblatt',
-      description: 'Art.-Nr. uv169-236',
       unitPrice: 927.65,
       unit: 'Stk.',
       pricingMode: 'catalog',
@@ -985,7 +904,6 @@ export const serviceComponents = {
       id: 'knauf-revo-revisionsklappe',
       catalogGroup: 'Dachfenster & Sonderkomponenten',
       title: 'Knauf REVO Revisionsklappe',
-      description: 'Art.-Nr. uv383-00605',
       unitPrice: 134.15,
       unit: 'Stk.',
       pricingMode: 'catalog',
@@ -996,7 +914,6 @@ export const serviceComponents = {
       id: 'joka-akustikpaneel',
       catalogGroup: 'Design & Akustik',
       title: 'JOKA Akustikpaneel | Echtholz',
-      description: 'Art.-Nr. AUSPAN2021_03',
       unitPrice: 132.28,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -1007,7 +924,6 @@ export const serviceComponents = {
       id: 'ardesio-steinpaneel',
       catalogGroup: 'Design & Akustik',
       title: 'ARDESIO Steinpaneel',
-      description: 'Art.-Nr. PLADIVER2_181',
       unitPrice: 153.91,
       unit: 'qm',
       pricingMode: 'catalog',
@@ -1018,7 +934,6 @@ export const serviceComponents = {
       id: 'de-ryck-steinriemchen',
       catalogGroup: 'Design & Akustik',
       title: 'De Ryck Steinriemchen | Murok Sierra',
-      description: 'Art.-Nr. 737-00336',
       unitPrice: 90.42,
       unit: '-',
       pricingMode: 'catalog',
@@ -1029,7 +944,6 @@ export const serviceComponents = {
       id: 'parador-paneele-novara',
       catalogGroup: 'Design & Akustik',
       title: 'Parador Paneele Novara | Esche Weiss',
-      description: 'Art.-Nr. 517-01445',
       unitPrice: 24.31,
       unit: '-',
       pricingMode: 'catalog',

@@ -9,13 +9,12 @@
     "images:generate": "node scripts/generate-responsive-images.mjs",
     "build": "vite build",
     "lint": "eslint .",
+    "test": "node --test \"test/**/*.test.js\"",
     "start": "npm --prefix ../server run start",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^7.2.0",
     "lucide-react": "^0.577.0",
-    "openai": "^6.33.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.14.1"

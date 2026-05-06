@@ -1,6 +1,16 @@
 import OpenAI from 'openai';
 import process from 'process';
 
+let openaiClient = null;
+
+const getOpenAIClient = () => {
+  if (!openaiClient) {
+    openaiClient = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  }
+
+  return openaiClient;
+};
+
 const systemMessage = {
   role: 'system',
   content:
@@ -45,12 +55,8 @@ export const buildChatReply = async (messages) => {
     );
   }
 
-  const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
-
   try {
-    const completion = await openai.chat.completions.create({
+    const completion = await getOpenAIClient().chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
         systemMessage,

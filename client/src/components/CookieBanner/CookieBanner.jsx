@@ -1,13 +1,21 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import {
+  COOKIE_CONSENT_ACCEPTED,
+  COOKIE_CONSENT_DECLINED,
+  getCookieConsent,
+  initializeAnalytics,
+  setCookieConsent,
+} from '../../utils/analytics';
 import './CookieBanner.scss';
 
 function CookieBanner() {
   const [bannerState, setBannerState] = useState(() => {
-    const cookieConsent = localStorage.getItem('cookie-consent');
+    const cookieConsent = getCookieConsent();
     return {
       isVisible: !cookieConsent,
       hasChoice: !!cookieConsent,
+      consent: cookieConsent,
     };
   });
 
@@ -15,13 +23,24 @@ function CookieBanner() {
   const hasChoice = bannerState.hasChoice;
 
   const handleAccept = () => {
-    localStorage.setItem('cookie-consent', 'accepted');
-    setBannerState({ isVisible: false, hasChoice: true });
+    const previousConsent = bannerState.consent;
+    setCookieConsent(COOKIE_CONSENT_ACCEPTED);
+    setBannerState({ isVisible: false, hasChoice: true, consent: COOKIE_CONSENT_ACCEPTED });
+    initializeAnalytics();
+
+    if (previousConsent === COOKIE_CONSENT_DECLINED) {
+      window.location.reload();
+    }
   };
 
   const handleDecline = () => {
-    localStorage.setItem('cookie-consent', 'declined');
-    setBannerState({ isVisible: false, hasChoice: true });
+    const previousConsent = bannerState.consent;
+    setCookieConsent(COOKIE_CONSENT_DECLINED);
+    setBannerState({ isVisible: false, hasChoice: true, consent: COOKIE_CONSENT_DECLINED });
+
+    if (previousConsent === COOKIE_CONSENT_ACCEPTED) {
+      window.location.reload();
+    }
   };
 
   return (

@@ -116,7 +116,6 @@ function ConfiguratorSection({
                         <div className="calculator-config__component" key={`${item.packageId}-${item.id}`}>
                           <span className="calculator-config__component-content">
                             <strong>{item.catalogGroup ? item.title : `${item.packageTitle}: ${item.title}`}</strong>
-                            <em>{item.description}</em>
                           </span>
                           <span className="calculator-config__addon-price">
                             <span>Preis / {getPriceUnitLabel(item)}</span>

@@ -14,6 +14,30 @@ const REQUIRED_FIELDS = {
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const FIELD_MAX_LENGTH = 1000;
+const LONG_FIELD_MAX_LENGTH = 5000;
+const LONG_FIELDS = new Set(['message', 'notes', 'details', 'description', 'comments']);
+
+const fieldExceedsLength = (key, value) => {
+  if (typeof value !== 'string') {
+    return false;
+  }
+
+  const limit = LONG_FIELDS.has(key) ? LONG_FIELD_MAX_LENGTH : FIELD_MAX_LENGTH;
+
+  return value.length > limit;
+};
+
+const findOversizedField = (submission) => {
+  for (const [key, value] of Object.entries(submission)) {
+    if (fieldExceedsLength(key, value)) {
+      return key;
+    }
+  }
+
+  return null;
+};
+
 export class FormSubmissionError extends Error {
   constructor(status, message) {
     super(message);
@@ -38,6 +62,12 @@ export const submitForm = async ({ formName, submission }) => {
 
   if (!normalizedSubmission || !ALLOWED_FORM_NAMES.includes(normalizedFormName)) {
     throw new FormSubmissionError(400, 'Invalid submission payload.');
+  }
+
+  const oversizedField = findOversizedField(normalizedSubmission);
+
+  if (oversizedField) {
+    throw new FormSubmissionError(413, `Field "${oversizedField}" exceeds the maximum allowed length.`);
   }
 
   if (readText(normalizedSubmission, 'bot-field')) {

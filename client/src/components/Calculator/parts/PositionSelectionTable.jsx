@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import {
   Check,
   CopyPlus,
-  Info,
+  Lock,
   PackageOpen,
   RefreshCw,
   Trash2,
@@ -318,7 +318,6 @@ function PositionActions({
 }
 
 function PositionRow({
-  description,
   icon,
   isLocked = false,
   isSelected,
@@ -346,32 +345,34 @@ function PositionRow({
 
   return (
     <div className={`calculator-config__position-row${isSelected ? ' is-selected' : ''}`}>
-      <label className="calculator-config__position-select">
-        <input
-          type="checkbox"
-          checked={isSelected}
-          disabled={isLocked}
-          aria-label={`${displayTitle} ${isSelected ? 'abwählen' : 'auswählen'}`}
-          onChange={onToggle}
-        />
-        <span className="calculator-config__position-check">
-          <Check size={15} strokeWidth={2.6} aria-hidden="true" />
+      {isLocked ? (
+        <span
+          className="calculator-config__position-select calculator-config__position-select--locked"
+          role="img"
+          aria-label={`${displayTitle} – fester Bestandteil`}
+          title="Fester Bestandteil"
+        >
+          <Lock size={14} strokeWidth={2.4} aria-hidden="true" />
         </span>
-      </label>
+      ) : (
+        <label className="calculator-config__position-select">
+          <input
+            type="checkbox"
+            checked={isSelected}
+            aria-label={`${displayTitle} ${isSelected ? 'abwählen' : 'auswählen'}`}
+            onChange={onToggle}
+          />
+          <span className="calculator-config__position-check">
+            <Check size={15} strokeWidth={2.6} aria-hidden="true" />
+          </span>
+        </label>
+      )}
       <span className="calculator-config__position-name">
         <span className="calculator-config__position-thumb" aria-hidden="true">
           {icon}
         </span>
-        <span
-          className="calculator-config__position-info"
-          title={description}
-          aria-label={`Info: ${description}`}
-        >
-          <Info size={18} strokeWidth={2.2} aria-hidden="true" />
-        </span>
         <span>
           <strong>{displayTitle}</strong>
-          <em>{description}</em>
         </span>
       </span>
       <span className="calculator-config__position-quantity">
@@ -433,7 +434,6 @@ function PositionSelectionTable({
       group: display.group,
       node: (
         <PositionRow
-          description={item.description}
           icon={<Wrench size={20} strokeWidth={2.2} />}
           isLocked
           isSelected
@@ -465,7 +465,6 @@ function PositionSelectionTable({
       group: display.group,
       node: (
         <PositionRow
-          description={item.description}
           icon={<PackageOpen size={20} strokeWidth={2.1} />}
           isSelected={isSelected}
           key={item.id}

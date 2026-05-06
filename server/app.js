@@ -17,8 +17,11 @@ const DEFAULT_ALLOWED_ORIGINS = [
   'https://trockenbau-primavista.ch',
   'https://www.trockenbau-primavista.ch',
 ];
+const NETLIFY_PREVIEW_HOSTNAME_PATTERN = /^(deploy-preview-\d+|[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)--trockenbau-primavista\.netlify\.app$/;
 const FORM_RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
 const FORM_RATE_LIMIT_MAX_REQUESTS = 5;
+const CHAT_RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const CHAT_RATE_LIMIT_MAX_REQUESTS = 20;
 
 const app = express();
 
@@ -46,7 +49,7 @@ const isAllowedCorsOrigin = (origin) => {
   try {
     const { hostname, protocol } = new URL(origin);
 
-    return protocol === 'https:' && hostname.endsWith('--trockenbau-primavista.netlify.app');
+    return protocol === 'https:' && NETLIFY_PREVIEW_HOSTNAME_PATTERN.test(hostname);
   } catch {
     return false;
   }
@@ -79,57 +82,68 @@ const sendJsonError = (res, status, message, extra = {}) => {
   });
 };
 
-const formRateLimitBuckets = new Map();
-
-const getFormRateLimitKey = (req) =>
+const getRateLimitKey = (req) =>
   req.ip
     || req.headers['x-forwarded-for']?.split(',')[0]?.trim()
     || req.socket.remoteAddress
     || 'unknown';
 
-const pruneExpiredFormRateLimitBuckets = (now) => {
-  for (const [key, bucket] of formRateLimitBuckets.entries()) {
-    if (bucket.resetAt <= now) {
-      formRateLimitBuckets.delete(key);
+const createRateLimiter = ({ windowMs, max, message }) => {
+  const buckets = new Map();
+
+  const pruneExpired = (now) => {
+    for (const [key, bucket] of buckets.entries()) {
+      if (bucket.resetAt <= now) {
+        buckets.delete(key);
+      }
     }
-  }
+  };
+
+  return (req, res, next) => {
+    const now = Date.now();
+
+    if (buckets.size > 1000) {
+      pruneExpired(now);
+    }
+
+    const key = getRateLimitKey(req);
+    const currentBucket = buckets.get(key);
+    const bucket = currentBucket && currentBucket.resetAt > now
+      ? currentBucket
+      : { count: 0, resetAt: now + windowMs };
+
+    bucket.count += 1;
+    buckets.set(key, bucket);
+
+    if (bucket.count > max) {
+      const retryAfterSeconds = Math.ceil((bucket.resetAt - now) / 1000);
+
+      res.set('Retry-After', String(retryAfterSeconds));
+      sendJsonError(res, 429, message);
+      return;
+    }
+
+    next();
+  };
 };
 
-const formRateLimiter = (req, res, next) => {
-  const now = Date.now();
+const formRateLimiter = createRateLimiter({
+  windowMs: FORM_RATE_LIMIT_WINDOW_MS,
+  max: FORM_RATE_LIMIT_MAX_REQUESTS,
+  message: 'Zu viele Anfragen. Bitte versuchen Sie es später erneut.',
+});
 
-  if (formRateLimitBuckets.size > 1000) {
-    pruneExpiredFormRateLimitBuckets(now);
-  }
-
-  const key = getFormRateLimitKey(req);
-  const currentBucket = formRateLimitBuckets.get(key);
-  const bucket = currentBucket && currentBucket.resetAt > now
-    ? currentBucket
-    : {
-        count: 0,
-        resetAt: now + FORM_RATE_LIMIT_WINDOW_MS,
-      };
-
-  bucket.count += 1;
-  formRateLimitBuckets.set(key, bucket);
-
-  if (bucket.count > FORM_RATE_LIMIT_MAX_REQUESTS) {
-    const retryAfterSeconds = Math.ceil((bucket.resetAt - now) / 1000);
-
-    res.set('Retry-After', String(retryAfterSeconds));
-    sendJsonError(res, 429, 'Zu viele Anfragen. Bitte versuchen Sie es später erneut.');
-    return;
-  }
-
-  next();
-};
+const chatRateLimiter = createRateLimiter({
+  windowMs: CHAT_RATE_LIMIT_WINDOW_MS,
+  max: CHAT_RATE_LIMIT_MAX_REQUESTS,
+  message: 'Zu viele Chat-Anfragen. Bitte versuchen Sie es später erneut.',
+});
 
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true });
 });
 
-app.post('/api/chat', async (req, res) => {
+app.post('/api/chat', chatRateLimiter, async (req, res) => {
   try {
     const reply = await buildChatReply(req.body?.messages);
     res.json({ reply });
@@ -199,9 +213,7 @@ if (fs.existsSync(distDir)) {
   });
 }
 
-app.use((error, _req, res, next) => {
-  void next;
-
+app.use((error, _req, res, _next) => {
   if (error instanceof SyntaxError && 'body' in error) {
     sendJsonError(res, 400, 'Invalid JSON body.');
     return;

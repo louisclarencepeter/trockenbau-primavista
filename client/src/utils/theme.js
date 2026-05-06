@@ -42,56 +42,11 @@ export const getLocalTimeTheme = (date = new Date()) => {
   return hour < 7 || hour >= 19 ? 'dark' : 'light';
 };
 
-export const getLocationTimeTheme = ({ longitude }, date = new Date()) => {
-  if (!Number.isFinite(longitude)) {
-    return getLocalTimeTheme(date);
-  }
-
-  const utcHour = date.getUTCHours() + (date.getUTCMinutes() / 60);
-  const solarHour = (utcHour + (longitude / 15) + 24) % 24;
-
-  return solarHour < 7 || solarHour >= 19 ? 'dark' : 'light';
-};
-
 export const resolveAutomaticTheme = () => (
   getSystemTheme() ?? getLocalTimeTheme()
 );
 
 export const getInitialTheme = () => getStoredTheme() ?? resolveAutomaticTheme();
-
-export const resolveLocationTheme = ({ onResolve } = {}) => {
-  if (typeof navigator === 'undefined' || !navigator.geolocation) {
-    return undefined;
-  }
-
-  const systemTheme = getSystemTheme();
-
-  if (systemTheme) {
-    return undefined;
-  }
-
-  let isCancelled = false;
-
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      if (isCancelled) return;
-      onResolve?.(getLocationTimeTheme(position.coords));
-    },
-    () => {
-      if (isCancelled) return;
-      onResolve?.(getLocalTimeTheme());
-    },
-    {
-      enableHighAccuracy: false,
-      maximumAge: 60 * 60 * 1000,
-      timeout: 2500,
-    },
-  );
-
-  return () => {
-    isCancelled = true;
-  };
-};
 
 export const applyTheme = (theme) => {
   if (typeof document === 'undefined') {

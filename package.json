@@ -11,6 +11,7 @@
     "dev:all": "npm run dev",
     "build": "npm --prefix client run build",
     "lint": "npm --prefix client run lint",
-    "start": "npm --prefix server run start"
+    "start": "npm --prefix server run start",
+    "test": "npm --prefix server test && npm --prefix client test"
   }
 }
