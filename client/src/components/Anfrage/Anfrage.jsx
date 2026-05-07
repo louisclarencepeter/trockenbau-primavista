@@ -2,69 +2,64 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowLeft,
+  Boxes,
   Calendar,
   CalendarClock,
   Check,
   ChevronRight,
   Clock,
-  DoorOpen,
   Home,
   LayoutGrid,
+  LayoutTemplate,
   Layers,
-  PaintBucket,
   PanelLeft,
   Send,
-  ShieldCheck,
-  Thermometer,
-  Trash2,
-  Wrench,
   Zap,
 } from 'lucide-react';
 import './Anfrage.scss';
 import useSuccessView from '../../hooks/useSuccessView';
 import { submitProjectForm } from '../../utils/formSubmission';
+import {
+  addOns as catalogAddOns,
+  calculatorChoices,
+} from '../Calculator/data/calculatorCatalog';
 
-const services = [
-  {
-    id: 'decken',
-    title: 'Decken abhängen',
+const SERVICE_META = {
+  decken: {
     icon: Layers,
     description: 'Abgehängte Decken für Licht, Akustik und Technik.',
   },
-  {
-    id: 'waende',
-    title: 'Wände stellen',
+  'waende-stellen': {
     icon: PanelLeft,
-    description: 'Trennwände, Vorsatzschalen und Verkleidungen.',
+    description: 'Trennwände, Vorsatzschalen und neue Wandflächen.',
   },
-  {
-    id: 'estrich-boden',
-    title: 'Estrich-Boden',
+  'waende-verkleiden': {
+    icon: LayoutTemplate,
+    description: 'Wandflächen mit Holz, Stein oder Akustikpaneelen veredeln.',
+  },
+  estrich: {
     icon: LayoutGrid,
     description: 'Trockene Bodenaufbauten für ebene Flächen.',
   },
-  {
-    id: 'dachschraegen',
-    title: 'Dachschrägen',
+  dachschraegen: {
     icon: Home,
     description: 'Dachschrägen verkleiden und nutzbar machen.',
   },
-  {
-    id: 'sonstiges',
-    title: 'Sonstiges / Mehreres',
-    icon: Wrench,
-    description: 'Weitere Trockenbauarbeiten oder kombinierte Leistungen.',
+  alles: {
+    icon: Boxes,
+    description: 'Größeres Projekt mit mehreren Gewerken in einem Auftrag.',
   },
-];
+};
 
-const addOns = [
-  { id: 'daemmung', title: 'Dämmung', icon: Thermometer },
-  { id: 'tueren', title: 'Türen einbauen', icon: DoorOpen },
-  { id: 'elektro', title: 'Elektroleitungen', icon: Zap },
-  { id: 'brandschutz', title: 'Brandschutz', icon: ShieldCheck },
-  { id: 'spachteln', title: 'Spachtelarbeiten', icon: PaintBucket },
-  { id: 'abbruch', title: 'Abbruch & Entsorgung', icon: Trash2 },
-];
+const services = calculatorChoices.map((choice) => ({
+  id: choice.id,
+  title: choice.title,
+  icon: SERVICE_META[choice.id]?.icon ?? Layers,
+  description: SERVICE_META[choice.id]?.description ?? '',
+  addOnIds: choice.addOnIds ?? [],
+}));
+
+const addOnsById = new Map(catalogAddOns.map((item) => [item.id, item]));
 
 const roomSizes = [
   { id: 'small', label: 'bis 5 m²', helper: 'Kleiner Raum oder Detailarbeit' },
@@ -157,6 +152,11 @@ function Anfrage() {
     );
   };
 
+  const selectedService = services.find((s) => s.id === service);
+  const availableAddOns = (selectedService?.addOnIds ?? [])
+    .map((id) => addOnsById.get(id))
+    .filter(Boolean);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setFormStatus('submitting');
@@ -169,10 +169,9 @@ function Anfrage() {
     }
   };
 
-  const selectedService = services.find((s) => s.id === service);
-  const selectedAddOnTitles = addOns
-    .filter((a) => selectedAddOns.includes(a.id))
-    .map((a) => a.title);
+  const selectedAddOnTitles = selectedAddOns
+    .map((id) => addOnsById.get(id)?.title)
+    .filter(Boolean);
   const selectedRoomSize = roomSizes.find((r) => r.id === roomSize);
   const selectedTimeline = timelines.find((t) => t.id === timeline);
 
@@ -270,33 +269,37 @@ function Anfrage() {
           {step === 1 && (
             <div className="anfrage__step-content">
               <span className="anfrage__eyebrow">Schritt 2 von {TOTAL_STEPS}</span>
-              <h1 className="anfrage__title">Welche Extras werden benötigt?</h1>
-              <p className="anfrage__subtitle">Mehrfachauswahl möglich – oder einfach überspringen.</p>
-              <div className="anfrage__cards anfrage__cards--addons">
-                {addOns.map((item) => {
-                  const Icon = item.icon;
-                  const isSelected = selectedAddOns.includes(item.id);
-                  return (
-                    <button
-                      key={item.id}
-                      type="button"
-                      className={`anfrage__card${isSelected ? ' is-selected' : ''}`}
-                      onClick={() => toggleAddOn(item.id)}
-                      aria-pressed={isSelected}
-                    >
-                      {isSelected && (
-                        <span className="anfrage__card-check" aria-hidden="true">
-                          <Check size={13} strokeWidth={2.8} />
-                        </span>
-                      )}
-                      <span className="anfrage__card-icon" aria-hidden="true">
-                        <Icon size={26} strokeWidth={1.6} />
-                      </span>
-                      <strong className="anfrage__card-title">{item.title}</strong>
-                    </button>
-                  );
-                })}
-              </div>
+              <h1 className="anfrage__title">Welche Zusatzleistungen werden benötigt?</h1>
+              {availableAddOns.length > 0 ? (
+                <>
+                  <p className="anfrage__subtitle">Mehrfachauswahl möglich – oder einfach überspringen.</p>
+                  <div className="anfrage__cards anfrage__cards--addons">
+                    {availableAddOns.map((item) => {
+                      const isSelected = selectedAddOns.includes(item.id);
+                      return (
+                        <button
+                          key={item.id}
+                          type="button"
+                          className={`anfrage__card${isSelected ? ' is-selected' : ''}`}
+                          onClick={() => toggleAddOn(item.id)}
+                          aria-pressed={isSelected}
+                        >
+                          {isSelected && (
+                            <span className="anfrage__card-check" aria-hidden="true">
+                              <Check size={13} strokeWidth={2.8} />
+                            </span>
+                          )}
+                          <strong className="anfrage__card-title">{item.title}</strong>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </>
+              ) : (
+                <p className="anfrage__subtitle">
+                  Für umfassende Trockenbau-Projekte besprechen wir die Details direkt mit Ihnen.
+                </p>
+              )}
               <div className="anfrage__nav">
                 <button type="button" className="anfrage__back" onClick={goBack}>
                   <ArrowLeft size={17} strokeWidth={2.2} aria-hidden="true" />
