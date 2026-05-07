@@ -27,6 +27,7 @@ function ConfiguratorSection({
   const {
     activePackages,
     activePackageTitle,
+    activePackageUnitLabel,
     activeServiceComponentEntries,
     areaSquareMeters,
     displayedPackageUnitPrice,
@@ -53,6 +54,7 @@ function ConfiguratorSection({
         <div className="calculator-config__content">
           <SelectedOfferOverview
             activePackageTitle={activePackageTitle}
+            activePackageUnitLabel={activePackageUnitLabel}
             areaInput={areaInput}
             areaSquareMeters={areaSquareMeters}
             displayedPackageUnitPrice={displayedPackageUnitPrice}
@@ -92,7 +94,7 @@ function ConfiguratorSection({
                     </span>
                   </label>
                   <div>
-                    <strong>{formatCurrency(displayedPackageUnitPrice)} / m²</strong>
+                    <strong>{formatCurrency(displayedPackageUnitPrice)} / {activePackageUnitLabel}</strong>
                     <small>
                       Wird mit {formatSquareMeters(areaSquareMeters)} multipliziert.
                       {isComponentBreakdownMode
@@ -153,6 +155,7 @@ function ConfiguratorSection({
 
         <SummaryPanel
           activePackageTitle={activePackageTitle}
+          activePackageUnitLabel={activePackageUnitLabel}
           areaSquareMeters={areaSquareMeters}
           displayedPackageUnitPrice={displayedPackageUnitPrice}
           isComponentBreakdownMode={isComponentBreakdownMode}

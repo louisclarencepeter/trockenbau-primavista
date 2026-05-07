@@ -227,6 +227,22 @@ const positionDisplayByPackage = {
       group: 'Optionen',
       title: 'Parador Paneele | Esche Weiss Dekor',
     },
+    'addon:dachschraegen-rockwool-masterrock': {
+      group: 'Dämmung',
+      title: 'Rockwool Masterrock 035 | Aufsparrendämmung',
+    },
+    'addon:dachschraegen-rigidur-dachbodenelement': {
+      group: 'Beplankung',
+      title: 'Rigidur Dachbodenelement 032 TF 85',
+    },
+    'addon:dachschraegen-parador-deckenleiste': {
+      group: 'Optionen',
+      title: 'Parador Deckenleiste DAL 2 | Esche Weiss',
+    },
+    'addon:dachschraegen-innenausbau-varianten': {
+      group: 'Optionen',
+      title: 'Weitere Produkte Innenausbau',
+    },
   },
 };
 

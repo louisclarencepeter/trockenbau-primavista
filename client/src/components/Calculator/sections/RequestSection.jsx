@@ -112,7 +112,7 @@ function RequestSection({
               <input type="hidden" name="package" value={selection.activePackageTitle} />
               <input type="hidden" name="area_sqm" value={formatSquareMeters(selection.areaSquareMeters)} />
               <input type="hidden" name="room_size" value={formatSquareMeters(selection.areaSquareMeters)} />
-              <input type="hidden" name="package_unit_price" value={`${formatCurrency(selection.displayedPackageUnitPrice)} / m²`} />
+              <input type="hidden" name="package_unit_price" value={`${formatCurrency(selection.displayedPackageUnitPrice)} / ${selection.activePackageUnitLabel}`} />
               <input type="hidden" name="add_ons" value={summary.selectedAddOnTitles.join(', ')} />
               <input type="hidden" name="line_items" value={summary.lineItemSummary} />
               <input type="hidden" name="material_net" value={formatCurrency(totals.materialShare)} />

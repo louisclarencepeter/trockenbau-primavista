@@ -25,6 +25,14 @@ export const createServiceComponentPriceMap = (componentGroups) =>
 
 export const getPriceUnitLabel = (item) => item.unit ?? (item.pricingMode === 'area' ? 'm²' : '');
 
+const getPackageUnitLabel = (packages) => {
+  if (packages.length !== 1) {
+    return 'm²';
+  }
+
+  return packages[0].unit === 'h' ? 'h' : 'm²';
+};
+
 export const getLineQuantity = (item, areaSquareMeters) => (
   item.pricingMode === 'catalog'
     ? 1
@@ -72,6 +80,7 @@ export const getCalculatorSelection = ({
   const selectedPackages = packages.filter((item) => selectedPackageIds.includes(item.id));
   const activePackages = selectedPackages.length > 0 ? selectedPackages : [packages[0]];
   const activePackageIds = activePackages.map((item) => item.id);
+  const activePackageUnitLabel = getPackageUnitLabel(activePackages);
   const activePackageTitles = activePackages.map((item) => item.title);
   const activePackageTitle = selectedChoiceId === 'alles'
     ? 'Trockenbau & Innenausbau'
@@ -111,6 +120,7 @@ export const getCalculatorSelection = ({
   return {
     activePackages,
     activePackageIds,
+    activePackageUnitLabel,
     activePackageTitle,
     activeServiceComponentEntries,
     areaSquareMeters,
@@ -161,7 +171,7 @@ export const getCalculatorTotals = ({
         id: `package-${packageItem.id}`,
         title: packageItem.title,
         quantity: areaSquareMeters,
-        unit: 'm²',
+        unit: packageItem.unit === 'h' ? 'h' : 'm²',
         unitPrice,
         materialRatio: packageItem.materialRatio,
         net: areaSquareMeters * unitPrice,

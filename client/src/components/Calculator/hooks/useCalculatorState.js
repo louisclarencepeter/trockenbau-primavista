@@ -92,7 +92,7 @@ function useCalculatorState() {
   const summaryText = [
     `Pakete: ${selection.activePackageTitle}`,
     `Fläche: ${formatSquareMeters(selection.areaSquareMeters)}`,
-    `Leistungspreis: ${formatCurrency(selection.displayedPackageUnitPrice)} / m²`,
+    `Leistungspreis: ${formatCurrency(selection.displayedPackageUnitPrice)} / ${selection.activePackageUnitLabel}`,
     `Optionen: ${selectedAddOnTitles.join(', ') || 'keine'}`,
     `Gesamtsumme: ${formatCurrency(totals.gross)}`,
   ].join(' | ');

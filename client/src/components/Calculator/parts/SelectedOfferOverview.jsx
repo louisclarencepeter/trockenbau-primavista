@@ -12,6 +12,7 @@ const getOfferTitle = ({ selectedChoice, activePackageTitle }) => {
 
 function SelectedOfferOverview({
   activePackageTitle,
+  activePackageUnitLabel,
   areaInput,
   areaSquareMeters,
   displayedPackageUnitPrice,
@@ -90,7 +91,7 @@ function SelectedOfferOverview({
 
           <p>
             Richtwert für {formatSquareMeters(areaSquareMeters)} mit {activePackageTitle}.
-            Aktueller Leistungspreis: {formatCurrency(displayedPackageUnitPrice)} / m².
+            Aktueller Leistungspreis: {formatCurrency(displayedPackageUnitPrice)} / {activePackageUnitLabel}.
           </p>
         </aside>
       ) : null}

@@ -9,6 +9,7 @@ import { formatCurrency, formatNumber, formatSquareMeters } from '../utils/forma
 
 function SummaryPanel({
   activePackageTitle,
+  activePackageUnitLabel,
   areaSquareMeters,
   displayedPackageUnitPrice,
   isComponentBreakdownMode,
@@ -40,8 +41,8 @@ function SummaryPanel({
           <dd>{formatSquareMeters(areaSquareMeters)}</dd>
         </div>
         <div>
-          <dt>Preis / m²</dt>
-          <dd>{formatCurrency(displayedPackageUnitPrice)} / m²</dd>
+          <dt>Preis / {activePackageUnitLabel}</dt>
+          <dd>{formatCurrency(displayedPackageUnitPrice)} / {activePackageUnitLabel}</dd>
         </div>
         <div>
           <dt>Zusatzleistungen</dt>
