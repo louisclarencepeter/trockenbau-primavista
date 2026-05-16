@@ -1,49 +1,9 @@
 import './Projects.scss';
 import useScrollReveal from '../../hooks/useScrollReveal';
-import {
-  projectCeilingDrywallImage,
-  projectDetailCeilingImage,
-  projectExistingSpaceRenovationImage,
-  projectFeaturedModernizationImage,
-  responsiveImageSizes,
-  serviceDrywallImage,
-  serviceRoofSlopeImage,
-  serviceSpecialImage,
-} from '../../assets/responsiveImages';
+import { responsiveImageSizes } from '../../assets/responsiveImages';
+import PageLink from '../PageLink/PageLink';
 import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
-
-const supportingProjects = [
-  {
-    image: projectCeilingDrywallImage,
-    title: 'Decken abhängen',
-    alt: 'Trockenbau-Projekt mit sichtbarer Decken- und Leitungsstruktur',
-  },
-  {
-    image: projectExistingSpaceRenovationImage,
-    title: 'Wände im Bestand',
-    alt: 'Trockenbau-Projekt mit vorbereiteten Wand- und Deckenflächen',
-  },
-  {
-    image: serviceDrywallImage,
-    title: 'Estrich-Boden',
-    alt: 'Rohbau-Innenraum mit vorbereitetem Boden für den weiteren Ausbau',
-  },
-  {
-    image: projectDetailCeilingImage,
-    title: 'Saubere Anschlüsse',
-    alt: 'Ausbauprojekt mit präzise ausgeführten Decken- und Übergangsdetails',
-  },
-  {
-    image: serviceRoofSlopeImage,
-    title: 'Dachschrägen ausbauen',
-    alt: 'Trockenbau-Ausbau an Dachschrägen mit Metallprofilen und Beplankung',
-  },
-  {
-    image: serviceSpecialImage,
-    title: 'Sonstige Leistungen',
-    alt: 'Trockenbau-Sonderleistungen mit Dämmung und Installationen in einer Wand',
-  },
-];
+import { featuredProject, supportingProjects } from './data/projectsCatalog';
 
 function Projects() {
   const { sectionRef: projectsRef, isVisible } = useScrollReveal();
@@ -65,26 +25,31 @@ function Projects() {
         </div>
 
         <div className="projects__layout">
-          <article className="projects__featured projects__reveal">
+          <PageLink
+            className="projects__featured projects__reveal"
+            to={`/referenzen/${featuredProject.slug}`}
+          >
             <ResponsivePicture
-              image={projectFeaturedModernizationImage}
+              image={featuredProject.image}
               sizes={responsiveImageSizes.projectsFeatured}
-              alt="Trockenbau-Projekt mit moderner Ausführung"
+              alt={featuredProject.alt}
               loading="lazy"
               decoding="async"
               className="projects__image"
             />
             <div className="projects__overlay projects__overlay--featured">
-              <h3 className="projects__featured-title">Trockenbau aus einer Hand</h3>
-              <p className="projects__featured-text">
-                Decken, Wände und Anschlussdetails sauber geplant und fachgerecht umgesetzt.
-              </p>
+              <h3 className="projects__featured-title">{featuredProject.title}</h3>
+              <p className="projects__featured-text">{featuredProject.shortText}</p>
             </div>
-          </article>
+          </PageLink>
 
           <div className="projects__grid">
             {supportingProjects.map((project) => (
-              <article className="projects__item projects__reveal" key={project.title}>
+              <PageLink
+                className="projects__item projects__reveal"
+                key={project.slug}
+                to={`/referenzen/${project.slug}`}
+              >
                 <ResponsivePicture
                   image={project.image}
                   sizes={responsiveImageSizes.projectsGrid}
@@ -96,7 +61,7 @@ function Projects() {
                 <div className="projects__overlay">
                   <h4 className="projects__item-title">{project.title}</h4>
                 </div>
-              </article>
+              </PageLink>
             ))}
           </div>
         </div>

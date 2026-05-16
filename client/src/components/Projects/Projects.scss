@@ -56,11 +56,20 @@
 .projects__featured,
 .projects__item {
   position: relative;
+  display: block;
   overflow: hidden;
   border-radius: 22px;
   background: var(--color-surface-subtle);
   box-shadow: var(--color-shadow-md);
+  color: inherit;
+  text-decoration: none;
   transition: opacity 0.75s ease, transform 0.75s ease, box-shadow 0.3s ease;
+}
+
+.projects__featured:focus-visible,
+.projects__item:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 .projects__featured {

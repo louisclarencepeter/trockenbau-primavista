@@ -6,6 +6,7 @@ import HomePage from '../pages/HomePage';
 const LegalPage = lazy(() => import('../components/Legal/LegalPage'));
 const CalculatorPage = lazy(() => import('../components/Calculator/Calculator'));
 const AnfragePage = lazy(() => import('../components/Anfrage/Anfrage'));
+const ProjectDetailPage = lazy(() => import('../components/Projects/ProjectDetailPage'));
 
 function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ function AppRoutes() {
             <Route index element={<HomePage />} />
             <Route path="kalkulator" element={<CalculatorPage />} />
             <Route path="anfrage" element={<AnfragePage />} />
+            <Route path="referenzen/:slug" element={<ProjectDetailPage />} />
             <Route path="impressum" element={<LegalPage page="impressum" />} />
             <Route path="datenschutz" element={<LegalPage page="datenschutz" />} />
           </Route>
