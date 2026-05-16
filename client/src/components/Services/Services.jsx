@@ -14,30 +14,35 @@ import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
 
 const services = [
   {
+    choiceId: 'decken',
     title: 'Decken abhängen',
     text: 'Abgehängte Decken für Licht, Akustik, Installationen und eine saubere Raumwirkung.',
     image: serviceCeilingImage,
     alt: 'Trockenbau-Arbeiten an einer abgehängten Decke',
   },
   {
+    choiceId: 'waende-stellen',
     title: 'Wände stellen',
     text: 'Trennwände, Vorsatzschalen und Verkleidungen für flexible Grundrisse und klare Anschlüsse.',
     image: serviceWallsImage,
     alt: 'Metallständerwände im Aufbau mit Platten und Unterkonstruktion',
   },
   {
+    choiceId: 'estrich',
     title: 'Estrich-Boden',
     text: 'Trockene Bodenaufbauten und ebene Flächen als solide Basis für den weiteren Ausbau.',
     image: serviceDrywallImage,
     alt: 'Rohbau-Innenraum mit vorbereitetem Boden für den weiteren Ausbau',
   },
   {
+    choiceId: 'dachschraegen',
     title: 'Dachschrägen',
     text: 'Dachschrägen verkleiden und ausbauen, damit ungenutzte Flächen sauber nutzbar werden.',
     image: serviceRoofSlopeImage,
     alt: 'Ausbauarbeit an einer geneigten Innenraumfläche',
   },
   {
+    choiceId: 'alles',
     title: 'Sonstiges',
     text: 'Dämmung, Brandschutz, Türen, Leitungen und weitere Trockenbauleistungen auf Anfrage.',
     image: serviceSpecialImage,
@@ -67,7 +72,11 @@ function Services() {
 
         <div className="services__grid">
           {services.map((service) => (
-            <article className="services__card services__reveal" key={service.title}>
+            <PageLink
+              className="services__card services__reveal"
+              key={service.title}
+              to={`/kalkulator?choice=${service.choiceId}#kalkulator-konfiguration`}
+            >
               <div className="services__image-wrap">
                 <ResponsivePicture
                   image={service.image}
@@ -83,7 +92,7 @@ function Services() {
                 <h3 className="services__card-title">{service.title}</h3>
                 <p className="services__card-text">{service.text}</p>
               </div>
-            </article>
+            </PageLink>
           ))}
         </div>
 

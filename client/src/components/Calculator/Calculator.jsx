@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './Calculator.scss';
 import useReturnToForm from '../../hooks/useReturnToForm';
 import useScrollReveal from '../../hooks/useScrollReveal';
@@ -11,6 +12,7 @@ import useRotatingMediaIndex from './hooks/useRotatingMediaIndex';
 import CalculatorHero from './sections/CalculatorHero';
 import ConfiguratorSection from './sections/ConfiguratorSection';
 import RequestSection from './sections/RequestSection';
+import { getScrollBehavior, scrollToHashTarget } from '../../utils/hashNavigation';
 
 function CalculatorPage() {
   const { sectionRef: heroRef, isVisible: isHeroVisible } = useScrollReveal({
@@ -31,6 +33,35 @@ function CalculatorPage() {
   const [formStatus, setFormStatus] = useState('idle');
   const successRef = useSuccessView(formStatus === 'success');
   const { formContainerRef, formRef, prepareReturnToForm } = useReturnToForm(formStatus);
+  const location = useLocation();
+
+  useEffect(() => {
+    const requestedChoiceId = new URLSearchParams(location.search).get('choice');
+
+    if (!requestedChoiceId) {
+      return undefined;
+    }
+
+    const requestedChoice = calculatorChoices.find((choice) => choice.id === requestedChoiceId);
+
+    if (!requestedChoice) {
+      return undefined;
+    }
+
+    calculator.actions.selectChoice(requestedChoice);
+
+    const scrollDelays = [0, 120, 320, 700];
+    const timeoutIds = scrollDelays.map((delay) => window.setTimeout(() => {
+      scrollToHashTarget('#kalkulator-konfiguration', {
+        behavior: delay === 0 ? getScrollBehavior() : 'auto',
+      });
+    }, delay));
+
+    return () => {
+      timeoutIds.forEach((id) => window.clearTimeout(id));
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

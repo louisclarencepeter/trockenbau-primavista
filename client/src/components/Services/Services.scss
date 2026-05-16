@@ -56,6 +56,7 @@
 }
 
 .services__card {
+  display: block;
   flex: 1 1 calc(25% - 18px);
   max-width: calc(25% - 18px);
   box-sizing: border-box;
@@ -64,8 +65,15 @@
   border: 1px solid var(--color-border-card);
   border-radius: 22px;
   box-shadow: var(--color-shadow-lg);
+  color: inherit;
+  text-decoration: none;
   transition: opacity 0.75s ease, transform 0.75s ease, box-shadow 0.3s ease;
   transition-delay: 0.38s;
+}
+
+.services__card:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 @for $i from 1 through 8 {
