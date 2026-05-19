@@ -5,12 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:server": "npm --prefix ../server run dev",
     "images:generate": "node scripts/generate-responsive-images.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "test": "node --test \"test/**/*.test.js\"",
-    "start": "npm --prefix ../server run start",
     "preview": "vite preview"
   },
   "dependencies": {

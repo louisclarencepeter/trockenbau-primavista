@@ -1,5 +1,4 @@
 import OpenAI from 'openai';
-import process from 'process';
 
 let openaiClient = null;
 

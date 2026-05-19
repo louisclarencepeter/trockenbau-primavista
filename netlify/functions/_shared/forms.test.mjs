@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { submitForm, FormSubmissionError } from '../lib/forms.js';
+import { submitForm, FormSubmissionError } from './forms.mjs';
 
 const validContact = {
   name: 'Anna Beispiel',
@@ -88,7 +88,6 @@ test('accepts long-text field up to 5000 chars but rejects beyond', async () => 
 });
 
 test('honeypot check runs after length validation', async () => {
-  // Oversized payload should fail with 413 even when bot-field is set
   await expectFormError(
     {
       formName: 'contact',
