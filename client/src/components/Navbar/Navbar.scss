@@ -100,6 +100,10 @@
   align-items: center;
 }
 
+.navbar__utilities {
+  gap: 12px;
+}
+
 .navbar__toggle {
   display: none;
   width: 48px;
@@ -211,6 +215,12 @@
 
 .navbar__mobile-cta {
   padding-top: 16px;
+}
+
+.navbar__mobile-theme {
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
 }
 
 @media (max-width: 992px) {

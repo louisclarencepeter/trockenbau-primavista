@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
 import './Footer.scss';
 import { logoImage } from '../../assets/responsiveImages';
-import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import HashLink from '../HashLink/HashLink';
 import PageLink from '../PageLink/PageLink';
 import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
@@ -100,9 +99,6 @@ function Footer({ isHomePage = true }) {
               </a>
             </div>
 
-            <div className="footer__theme">
-              <ThemeSwitcher />
-            </div>
           </div>
         </div>
 

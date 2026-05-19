@@ -5,6 +5,7 @@ import { logoImage } from '../../assets/responsiveImages';
 import Button from '../Button/Button';
 import HashLink from '../HashLink/HashLink';
 import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import { getScrollBehavior, scrollToHashTarget } from '../../utils/hashNavigation';
 
 const navItems = [
@@ -193,6 +194,7 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
         </nav>
 
         <div className="navbar__utilities">
+          <ThemeSwitcher />
           <div className="navbar__cta">
             <Button href="/anfrage" variant="primary">
               Jetzt Anfrage stellen
@@ -236,6 +238,10 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
             <Button href="/anfrage" variant="primary">
               Jetzt Anfrage stellen
             </Button>
+          </div>
+
+          <div className="navbar__mobile-theme">
+            <ThemeSwitcher />
           </div>
         </nav>
       </div>
