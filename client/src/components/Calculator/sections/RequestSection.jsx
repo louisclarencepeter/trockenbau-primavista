@@ -2,6 +2,7 @@ import { Send } from 'lucide-react';
 import './RequestSection.scss';
 import { responsiveImageSizes } from '../../../assets/responsiveImages';
 import ResponsivePicture from '../../ResponsivePicture/ResponsivePicture';
+import FormErrorMessage from '../../FormErrorMessage/FormErrorMessage';
 import { formatCurrency, formatSquareMeters } from '../utils/formatting';
 
 function RequestSection({
@@ -162,9 +163,7 @@ function RequestSection({
               </button>
 
               {formStatus === 'error' ? (
-                <p className="calculator-request__error">
-                  Fehler beim Senden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.
-                </p>
+                <FormErrorMessage className="calculator-request__error" />
               ) : null}
             </form>
           )}

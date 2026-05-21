@@ -424,13 +424,10 @@ export const processConfirmationRequest = async ({ formName, submission }) => {
   const mailConfig = getMailConfig();
   const { confirmation, internal } = getTemplates(normalizedFormName, normalizedSubmission);
   const clientReplyTo = recipientEmail || mailConfig.customerReplyTo;
-  const normalizedSenderEmail = normalizeEmailAddress(mailConfig.customerFrom);
   const normalizedNotificationRecipient = normalizeEmailAddress(mailConfig.notificationRecipient);
   const shouldSendCustomerConfirmation = confirmationRequested && mailConfig.emailEnabled;
   const canDeliverInternalCopy = Boolean(
-    mailConfig.notificationRecipient
-      && normalizedNotificationRecipient
-      && normalizedNotificationRecipient !== normalizedSenderEmail,
+    mailConfig.notificationRecipient && normalizedNotificationRecipient,
   );
   const shouldSendInternalNotification = canDeliverInternalCopy;
 
@@ -562,12 +559,6 @@ export const processConfirmationRequest = async ({ formName, submission }) => {
         error: getErrorMessage(error),
       });
     }
-  } else if (mailConfig.notificationRecipient) {
-    result.internalNotification = {
-      status: 'skipped',
-      recipient: mailConfig.notificationRecipient,
-      reason: 'EMAIL_NOTIFICATION_TO matches EMAIL_FROM.',
-    };
   } else {
     result.internalNotification = {
       status: 'skipped',

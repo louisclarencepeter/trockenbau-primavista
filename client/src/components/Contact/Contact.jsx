@@ -5,6 +5,7 @@ import useScrollReveal from '../../hooks/useScrollReveal';
 import useReturnToForm from '../../hooks/useReturnToForm';
 import useSuccessView from '../../hooks/useSuccessView';
 import { submitProjectForm } from '../../utils/formSubmission';
+import FormErrorMessage from '../FormErrorMessage/FormErrorMessage';
 
 const contactItems = [
   {
@@ -216,11 +217,7 @@ function Contact() {
                   {formStatus === 'submitting' ? 'Wird gesendet...' : 'Anfrage senden'}
                 </button>
 
-                {formStatus === 'error' ? (
-                  <p className="contact__error">
-                    Fehler beim Senden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.
-                  </p>
-                ) : null}
+                {formStatus === 'error' ? <FormErrorMessage /> : null}
               </form>
             )}
           </div>

@@ -19,6 +19,7 @@ import {
 import './Anfrage.scss';
 import useSuccessView from '../../hooks/useSuccessView';
 import { submitProjectForm } from '../../utils/formSubmission';
+import FormErrorMessage from '../FormErrorMessage/FormErrorMessage';
 import {
   addOns as catalogAddOns,
   calculatorChoices,
@@ -480,16 +481,7 @@ function Anfrage() {
                   </button>
                 </div>
 
-                {formStatus === 'error' && (
-                  <p className="anfrage__error" role="alert">
-                    Fehler beim Senden. Bitte versuchen Sie es erneut oder kontaktieren
-                    Sie uns direkt unter{' '}
-                    <a href="mailto:info@trockenbau-primavista.ch">
-                      info@trockenbau-primavista.ch
-                    </a>
-                    .
-                  </p>
-                )}
+                {formStatus === 'error' && <FormErrorMessage />}
               </form>
             </div>
           )}

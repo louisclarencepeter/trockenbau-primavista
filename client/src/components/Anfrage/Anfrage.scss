@@ -402,19 +402,6 @@
   color: var(--color-text-subtle);
 }
 
-// Error
-
-.anfrage__error {
-  font-size: 14px;
-  color: #c0392b;
-  margin: 0;
-
-  a {
-    color: inherit;
-    font-weight: 600;
-  }
-}
-
 // Success screen
 
 .anfrage__success {
