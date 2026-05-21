@@ -4,7 +4,7 @@ import {
   normalizeSubmission,
   processConfirmationRequest,
   readText,
-} from './confirmations.js';
+} from './confirmations.mjs';
 
 const REQUIRED_FIELDS = {
   contact: ['name', 'email', 'message'],
@@ -112,7 +112,7 @@ export const submitForm = async ({ formName, submission }) => {
   if (emailResult.internalNotification?.status !== 'sent') {
     throw new FormSubmissionError(
       503,
-      'Form delivery is not configured correctly. Set EMAIL_NOTIFICATION_TO plus valid email provider credentials on the server.',
+      'Form delivery is not configured correctly. Set EMAIL_NOTIFICATION_TO plus RESEND_API_KEY on the function environment.',
     );
   }
 

@@ -2,16 +2,15 @@
   "name": "trockenbau-primavista",
   "private": true,
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "install:all": "npm --prefix client install && npm --prefix server install",
-    "postinstall": "npm run install:all",
-    "dev": "node scripts/dev.cjs",
-    "dev:client": "npm --prefix client run dev",
-    "dev:server": "npm --prefix server run dev",
-    "dev:all": "npm run dev",
+    "postinstall": "npm --prefix client install",
+    "dev": "npm --prefix client run dev",
     "build": "npm --prefix client run build",
     "lint": "npm --prefix client run lint",
-    "start": "npm --prefix server run start",
-    "test": "npm --prefix server test && npm --prefix client test"
+    "test": "node --test \"netlify/functions/_shared/**/*.test.mjs\" && npm --prefix client test"
+  },
+  "dependencies": {
+    "openai": "^6.33.0"
   }
 }

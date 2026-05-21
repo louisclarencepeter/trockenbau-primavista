@@ -1,5 +1,3 @@
-import process from 'process';
-
 export const ALLOWED_FORM_NAMES = ['contact', 'calculator', 'anfrage'];
 
 const COMPANY_NAME = 'Trockenbau Prima Vista';
@@ -362,108 +360,31 @@ const sendWithResend = async ({
   return response.json();
 };
 
-const sendWithBrevo = async ({
-  apiKey,
-  from,
-  to,
-  subject,
-  html,
-  text,
-  replyTo,
-  bcc,
-}) => {
-  const sender = parseEmailIdentity(from, COMPANY_NAME);
-  const body = {
-    sender: {
-      email: sender.email,
-      name: sender.name || undefined,
-    },
-    to: to.map((email) => ({ email })),
-    subject,
-    htmlContent: html,
-    textContent: text,
-  };
-
-  if (replyTo) {
-    const replyToIdentity = parseEmailIdentity(replyTo);
-
-    body.replyTo = {
-      email: replyToIdentity.email,
-      name: replyToIdentity.name || undefined,
-    };
-  }
-
-  if (bcc && bcc.length > 0) {
-    body.bcc = bcc.map((email) => ({ email }));
-  }
-
-  const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-    method: 'POST',
-    headers: {
-      'api-key': apiKey,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Brevo email send failed: ${response.status} ${errorText}`);
-  }
-
-  return response.json();
-};
-
-const sendEmail = ({ provider, apiKey, ...rest }) => {
-  if (provider === 'brevo') return sendWithBrevo({ apiKey, ...rest });
-  if (provider === 'resend') return sendWithResend({ apiKey, ...rest });
-  throw new Error(`Unsupported provider: ${provider}`);
-};
-
 const getMailConfig = () => {
-  const provider = getEnv('EMAIL_PROVIDER');
   const emailEnabled = isTruthy(getEnv('EMAIL_CONFIRMATIONS_ENABLED'));
   const customerFrom = getEnv('EMAIL_FROM');
   const customerReplyTo = getEnv('EMAIL_REPLY_TO') || COMPANY_EMAIL;
   const notificationRecipient = getEnv('EMAIL_NOTIFICATION_TO');
   const notificationBcc = getEnv('EMAIL_NOTIFICATION_BCC');
+  const apiKey = getEnv('RESEND_API_KEY');
 
-  if (!provider || !customerFrom) {
+  if (!customerFrom) {
     return {
       ok: false,
-      reason: 'EMAIL_PROVIDER or EMAIL_FROM is missing.',
-      provider,
+      reason: 'EMAIL_FROM is missing.',
       emailEnabled,
       customerFrom,
       customerReplyTo,
       notificationRecipient,
       notificationBcc,
-      apiKey: '',
+      apiKey,
     };
   }
-
-  if (provider !== 'resend' && provider !== 'brevo') {
-    return {
-      ok: false,
-      reason: `Unsupported provider: ${provider}`,
-      provider,
-      emailEnabled,
-      customerFrom,
-      customerReplyTo,
-      notificationRecipient,
-      notificationBcc,
-      apiKey: '',
-    };
-  }
-
-  const apiKeyEnvVar = provider === 'brevo' ? 'BREVO_API_KEY' : 'RESEND_API_KEY';
-  const apiKey = getEnv(apiKeyEnvVar);
 
   if (!apiKey) {
     return {
       ok: false,
-      reason: `${apiKeyEnvVar} is missing.`,
-      provider,
+      reason: 'RESEND_API_KEY is missing.',
       emailEnabled,
       customerFrom,
       customerReplyTo,
@@ -476,7 +397,6 @@ const getMailConfig = () => {
   return {
     ok: true,
     reason: '',
-    provider,
     emailEnabled,
     customerFrom,
     customerReplyTo,
@@ -555,7 +475,6 @@ export const processConfirmationRequest = async ({ formName, submission }) => {
 
   console.log('[confirmations] Processing submission', {
     formName: normalizedFormName,
-    provider: mailConfig.provider,
     recipientEmail: recipientEmail || null,
     confirmationRequested,
     confirmationEnabled: mailConfig.emailEnabled,
@@ -564,8 +483,7 @@ export const processConfirmationRequest = async ({ formName, submission }) => {
 
   if (shouldSendCustomerConfirmation) {
     try {
-      await sendEmail({
-        provider: mailConfig.provider,
+      await sendWithResend({
         apiKey: mailConfig.apiKey,
         from: mailConfig.customerFrom,
         to: [recipientEmail],
@@ -607,8 +525,7 @@ export const processConfirmationRequest = async ({ formName, submission }) => {
 
   if (shouldSendInternalNotification) {
     try {
-      await sendEmail({
-        provider: mailConfig.provider,
+      await sendWithResend({
         apiKey: mailConfig.apiKey,
         from: buildInternalFrom(
           mailConfig.customerFrom,
