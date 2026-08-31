@@ -182,9 +182,11 @@ test('sends both customer confirmation and internal notification when fully conf
     assert.deepEqual(customerCall.body.to, ['anna@example.com']);
     assert.equal(customerCall.body.from, 'Prima Vista <hello@trockenbau-primavista.ch>');
     assert.equal(customerCall.body.reply_to, 'info@trockenbau-primavista.ch');
-    assert.match(customerCall.body.subject, /Ihre Anfrage/);
+    assert.equal(customerCall.body.subject, 'Ihre Anfrage bei Trockenbau PrimaVista Schweiz');
     assert.match(customerCall.body.html, /Anna Beispiel/);
+    assert.match(customerCall.body.html, /Trockenbau PrimaVista Schweiz/);
     assert.match(customerCall.body.text, /Anna Beispiel/);
+    assert.match(customerCall.body.text, /Trockenbau PrimaVista Schweiz/);
 
     // Internal notification: From rewritten with customer name + form label;
     // Reply-To set to the customer's address so replies go straight back.
@@ -365,7 +367,10 @@ test('calculator form renders calculator-specific subject and totals', async () 
     });
 
     const [customerCall, internalCall] = mock.calls;
-    assert.match(customerCall.body.subject, /Kalkulator/);
+    assert.equal(
+      customerCall.body.subject,
+      'Ihre Kalkulator-Anfrage bei Trockenbau PrimaVista Schweiz',
+    );
     assert.match(customerCall.body.html, /CHF 1’234\.50/);
     assert.match(internalCall.body.subject, /Neue Kalkulator-Anfrage von Max Muster/);
     assert.equal(internalCall.body.from, 'Max Muster via Kalkulator <hello@trockenbau-primavista.ch>');

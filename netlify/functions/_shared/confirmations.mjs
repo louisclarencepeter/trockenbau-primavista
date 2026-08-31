@@ -1,6 +1,6 @@
 export const ALLOWED_FORM_NAMES = ['contact', 'calculator', 'anfrage'];
 
-const COMPANY_NAME = 'Trockenbau Prima Vista';
+const COMPANY_NAME = 'Trockenbau PrimaVista Schweiz';
 const COMPANY_EMAIL = 'info@trockenbau-primavista.ch';
 const COMPANY_PHONE = '+41 78 265 93 32';
 
@@ -186,7 +186,7 @@ const getTemplates = (formName, submission) => {
 
     return {
       confirmation: {
-        subject: 'Ihre Anfrage bei Trockenbau Prima Vista',
+        subject: `Ihre Anfrage bei ${COMPANY_NAME}`,
         html: `
           <div style="font-family:Arial,sans-serif;line-height:1.6;color:#1d232b;">
             <p>Hallo ${escapeHtml(customerName)},</p>
@@ -234,7 +234,7 @@ const getTemplates = (formName, submission) => {
 
     return {
       confirmation: {
-        subject: 'Ihre Anfrage bei Trockenbau Prima Vista',
+        subject: `Ihre Anfrage bei ${COMPANY_NAME}`,
         html: `
           <div style="font-family:Arial,sans-serif;line-height:1.6;color:#1d232b;">
             <p>Hallo ${escapeHtml(customerName)},</p>
@@ -281,7 +281,7 @@ const getTemplates = (formName, submission) => {
 
   return {
     confirmation: {
-      subject: 'Ihre Kalkulator-Anfrage bei Trockenbau Prima Vista',
+      subject: `Ihre Kalkulator-Anfrage bei ${COMPANY_NAME}`,
       html: `
         <div style="font-family:Arial,sans-serif;line-height:1.6;color:#1d232b;">
           <p>Hallo ${escapeHtml(customerName)},</p>

@@ -1102,7 +1102,7 @@ export const calculatorChoices = [
     title: 'Alles zu Trockenbau',
     buttonLabel: 'Kalkulator für Profis',
     image: serviceSpecialImage,
-    alt: 'Trockenbau-Detail mit Prima Vista Prägung',
+    alt: 'Trockenbau-Detail von Trockenbau PrimaVista Schweiz',
     packageIds: ['decken', 'waende', 'estrich-boden', 'dachschraegen'],
     combinesChoiceIds: ['decken', 'waende-stellen', 'waende-verkleiden', 'estrich', 'dachschraegen'],
     isDarkButton: true,

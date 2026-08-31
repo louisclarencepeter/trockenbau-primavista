@@ -7,6 +7,7 @@ const MAX_MESSAGE_CHARS = 1200;
 const MAX_TOTAL_CHARS = 6000;
 const DEFAULT_OPENAI_TIMEOUT_MS = 12000;
 const DEFAULT_MAX_TOKENS = 500;
+const CHAT_BUSINESS_NAME = 'Trockenbau PrimaVista Schweiz';
 
 const getOpenAIClient = () => {
   if (!openaiClient) {
@@ -19,7 +20,7 @@ const getOpenAIClient = () => {
 const systemMessage = {
   role: 'system',
   content:
-    'You are a helpful assistant for Prima Vista B&G GmbH in Emmenbruecke, Switzerland. Answer in German. Be concise, professional, and guide users toward contacting the company for quotes or project inquiries. Services include Trockenbau, Sanierung und Renovierung, Fenster and Innenausbau.',
+    `You are a helpful assistant for ${CHAT_BUSINESS_NAME}, operated by Prima Vista B&G GmbH in Emmenbruecke, Switzerland. Answer in German. Be concise, professional, and guide users toward contacting the company for quotes or project inquiries. Core services are Trockenbau, Innenausbau and Renovationen. The main service area is Luzern and Central Switzerland, with projects also accepted in Zurich and the surrounding area. Personal consultations and appointments are by prior arrangement.`,
 };
 
 export class ChatRequestError extends Error {

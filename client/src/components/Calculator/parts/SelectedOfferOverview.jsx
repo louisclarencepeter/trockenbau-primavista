@@ -52,7 +52,7 @@ function SelectedOfferOverview({
 
       {showPanel ? (
         <aside className="calculator-selected-offer__panel">
-          <span className="calculator-selected-offer__label">Prima Vista Blitz-Angebot</span>
+          <span className="calculator-selected-offer__label">Trockenbau PrimaVista Blitz-Angebot</span>
 
           <button className="calculator-selected-offer__help" type="button">
             Wie funktioniert das?

@@ -1,28 +1,19 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Youtube } from 'lucide-react';
+import { Instagram } from 'lucide-react';
 import './Footer.scss';
 import { logoImage } from '../../assets/responsiveImages';
 import HashLink from '../HashLink/HashLink';
 import PageLink from '../PageLink/PageLink';
 import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
+import { businessProfile } from '../../config/businessProfile';
 
 function Footer({ isHomePage = true }) {
   const currentYear = new Date().getFullYear();
   const socialLinks = [
     {
-      label: 'Facebook',
-      icon: Facebook,
-      href: 'https://www.facebook.com/PrimaVistaBauprojekte',
-    },
-    {
       label: 'Instagram',
       icon: Instagram,
-      href: 'https://www.instagram.com/primavista.bauprojekte',
-    },
-    {
-      label: 'YouTube',
-      icon: Youtube,
-      href: 'https://www.youtube.com/@PrimaVistaBauprojekte',
+      href: businessProfile.instagram,
     },
   ];
   const getSectionHref = (id) => (isHomePage ? `#${id}` : `/#${id}`);
@@ -34,39 +25,35 @@ function Footer({ isHomePage = true }) {
           <div className="footer__brand">
             <ResponsivePicture
               image={logoImage}
-              alt="Trockenbau Prima Vista Logo"
+              alt={`${businessProfile.publicName} Logo`}
               loading="lazy"
               decoding="async"
               className="footer__logo"
             />
             <div>
-              <h3 className="footer__title">Trockenbau Prima Vista</h3>
+              <h3 className="footer__title">{businessProfile.publicName}</h3>
               <p className="footer__text">
-                Professionelle Trockenbau-Lösungen für Decken, Wände,
-                Estrich-Boden, Dachschrägen und weitere Ausbauarbeiten mit
-                Fokus auf Qualität, Präzision und saubere Ausführung.
+                {businessProfile.serviceLine}<br />
+                {businessProfile.slogan}
               </p>
-
               <div className="footer__socials">
-                {socialLinks.map((socialLink) => (
-                  (() => {
-                    const Icon = socialLink.icon;
+                {socialLinks.map((socialLink) => {
+                  const Icon = socialLink.icon;
 
-                    return (
-                      <a
-                        key={socialLink.label}
-                        href={socialLink.href}
-                        className="footer__social-link"
-                        aria-label={socialLink.label}
-                        title={socialLink.label}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <Icon size={18} strokeWidth={1.9} aria-hidden="true" />
-                      </a>
-                    );
-                  })()
-                ))}
+                  return (
+                    <a
+                      key={socialLink.label}
+                      href={socialLink.href}
+                      className="footer__social-link"
+                      aria-label={socialLink.label}
+                      title={socialLink.label}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Icon size={18} strokeWidth={1.9} aria-hidden="true" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -141,7 +128,7 @@ function Footer({ isHomePage = true }) {
 
         <div className="footer__bottom">
           <p className="footer__copyright">
-            © {currentYear} Trockenbau Prima Vista. Alle Rechte vorbehalten.
+            © {currentYear} {businessProfile.publicName}. Alle Rechte vorbehalten.
           </p>
 
           <div className="footer__legal">

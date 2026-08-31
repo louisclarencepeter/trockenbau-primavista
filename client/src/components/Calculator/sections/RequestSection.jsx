@@ -35,7 +35,7 @@ function RequestSection({
           <span className="calculator-request__eyebrow calculator-request__reveal">Anfrage</span>
           <h2 className="calculator-request__reveal">Kostenschätzung prüfen lassen</h2>
           <p className="calculator-request__reveal">
-            Senden Sie Ihre Konfiguration an Prima Vista. Wir melden uns mit
+            Senden Sie Ihre Konfiguration an Trockenbau PrimaVista Schweiz. Wir melden uns mit
             einer fachlichen Einschätzung, offenen Punkten und den nächsten Schritten.
           </p>
 

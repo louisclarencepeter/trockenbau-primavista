@@ -15,12 +15,13 @@ import {
   serviceWallsImage,
 } from '../../assets/responsiveImages';
 import useScrollReveal from '../../hooks/useScrollReveal';
+import { businessProfile } from '../../config/businessProfile';
 
 const heroSlides = [
   {
     image: projectFeaturedModernizationImage,
     alt: 'Trockenbau-Projekt mit moderner Unterkonstruktion und sauberer Ausführung',
-    label: 'Prima Vista',
+    label: businessProfile.publicName,
     title: 'Trockenbau mit System',
     text: 'Von der ersten Konstruktion bis zur sauberen Oberfläche bleibt der Ablauf klar kalkulierbar.',
   },
@@ -124,8 +125,8 @@ function Hero() {
 
       <div className="hero__inner">
         <div className="hero__topline hero__reveal" aria-hidden="true">
-          <span><span className="dot" />Prima Vista</span>
-          <span>Innenausbau & Trockenbau — sauber geplant</span>
+          <span><span className="dot" />{businessProfile.publicName}</span>
+          <span>{businessProfile.serviceLine}</span>
           <span>N° 01 / Emmenbrücke</span>
         </div>
 
@@ -139,7 +140,7 @@ function Hero() {
           <div>
             <div className="hero__meta-num">01 — Trockenbau für Decken & Wände</div>
             <p className="hero__lede">
-              <strong>Saubere Ausführung aus einer Hand</strong> — abgehängte Decken,
+              <strong>{businessProfile.slogan}</strong> Abgehängte Decken,
               Trennwände, Estrich-Boden, Dachschrägen und Sonderlösungen mit
               direkter Anfrageoption über den Kalkulator.
             </p>

@@ -1,4 +1,8 @@
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+const BLOCKED_PLACE_IDS = new Set([
+  // Prima Vista Bauprojekte in Frankfurt; it is not the Swiss Trockenbau business.
+  'ChIJJ6jmeYlLly0RavRvS28Sln8',
+]);
 
 let cache = {
   data: null,
@@ -14,8 +18,17 @@ export class ReviewsRequestError extends Error {
 }
 
 export const getGoogleReviews = async () => {
+  const reviewsEnabled = process.env.GOOGLE_REVIEWS_ENABLED?.trim().toLowerCase() === 'true';
   const apiKey = process.env.GOOGLE_PLACES_API_KEY?.trim();
   const placeId = process.env.GOOGLE_PLACE_ID?.trim();
+
+  if (!reviewsEnabled) {
+    throw new ReviewsRequestError(503, 'Google reviews not enabled.');
+  }
+
+  if (BLOCKED_PLACE_IDS.has(placeId)) {
+    throw new ReviewsRequestError(503, 'Configured Google Place ID belongs to a different business.');
+  }
 
   if (!apiKey || !placeId) {
     throw new ReviewsRequestError(500, 'Google Places not configured.');

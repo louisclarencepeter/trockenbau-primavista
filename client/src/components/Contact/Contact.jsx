@@ -1,36 +1,47 @@
 import { useState } from 'react';
 import './Contact.scss';
-import { Mail, MapPin, Phone, MessageCircle } from 'lucide-react';
+import { CalendarCheck2, Clock3, Mail, MapPin, Phone, MessageCircle } from 'lucide-react';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import useReturnToForm from '../../hooks/useReturnToForm';
 import useSuccessView from '../../hooks/useSuccessView';
 import { submitProjectForm } from '../../utils/formSubmission';
 import { trackLeadConversion } from '../../utils/analytics';
 import FormErrorMessage from '../FormErrorMessage/FormErrorMessage';
+import { businessProfile } from '../../config/businessProfile';
 
 const contactItems = [
   {
     icon: Phone,
     label: 'Telefon',
-    value: '+41 78 265 93 32',
-    href: 'tel:+41782659332',
+    value: businessProfile.phone,
+    href: businessProfile.phoneHref,
   },
   {
     icon: Mail,
     label: 'E-Mail',
-    value: 'info@trockenbau-primavista.ch',
-    href: 'mailto:info@trockenbau-primavista.ch',
+    value: businessProfile.email,
+    href: `mailto:${businessProfile.email}`,
   },
   {
     icon: MapPin,
-    label: 'Standort',
-    value: 'Spinnereistrasse 5, 6020 Emmenbrücke, Schweiz',
+    label: 'Firmensitz',
+    value: `${businessProfile.address.streetAddress}, ${businessProfile.address.postalCode} ${businessProfile.address.addressLocality}, Schweiz`,
   },
   {
     icon: MessageCircle,
     label: 'WhatsApp',
     value: 'Jetzt schreiben',
-    href: 'https://wa.me/41782659332',
+    href: businessProfile.whatsapp,
+  },
+  {
+    icon: Clock3,
+    label: 'Erreichbarkeit',
+    value: businessProfile.contactHours,
+  },
+  {
+    icon: CalendarCheck2,
+    label: 'Beratung',
+    value: businessProfile.appointmentNote,
   },
 ];
 
@@ -80,7 +91,9 @@ function Contact() {
               Sie planen Trockenbauarbeiten wie Decken, Wände, Estrich-Boden,
               Dachschrägen oder Sonderleistungen? Kontaktieren Sie uns für
               eine unverbindliche Anfrage. Wir beraten Sie persönlich und
-              stimmen die passende Lösung für Ihr Projekt mit Ihnen ab.
+              stimmen die passende Lösung für Ihr Projekt mit Ihnen ab. Unser
+              Schwerpunkt liegt in Luzern und der Zentralschweiz; Projekte in
+              Zürich und Umgebung übernehmen wir ebenfalls.
             </p>
 
             <div className="contact__info">
@@ -118,6 +131,11 @@ function Contact() {
                   </div>
                 );
               })}
+            </div>
+
+            <div className="contact__service-area contact__reveal">
+              <span className="contact__label">Einzugsgebiet</span>
+              <p>{businessProfile.serviceAreas.join(' · ')}</p>
             </div>
           </div>
 

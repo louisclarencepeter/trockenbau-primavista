@@ -1,21 +1,22 @@
 import { useEffect } from 'react';
 import { getProjectBySlug } from '../components/Projects/data/projectsCatalog';
+import { businessProfile } from '../config/businessProfile';
 
-const SITE_ORIGIN = 'https://www.trockenbau-primavista.ch';
+const SITE_ORIGIN = 'https://trockenbau-primavista.ch';
 
 const META_BY_PATH = {
   '/': {
-    title: 'Trockenbau Prima Vista | Decken, Wände, Boden und Dachschrägen',
+    title: `Trockenbau Luzern | ${businessProfile.publicName}`,
     description:
-      'Trockenbau Prima Vista in Emmenbrücke plant und realisiert Decken, Wände, Estrich-Boden, Dachschrägen und Innenausbau-Projekte.',
+      `${businessProfile.publicName}: Trockenbau, Innenausbau und Renovationen in Luzern, der Zentralschweiz sowie Zürich und Umgebung.`,
   },
   '/kalkulator': {
-    title: 'Trockenbau Kalkulator | Prima Vista B&G GmbH',
+    title: `Trockenbau Kalkulator | ${businessProfile.publicName}`,
     description:
       'Schätzen Sie Ihr Trockenbau-Projekt online: Decken, Wände, Estrich-Boden, Dachschrägen und Zusatzleistungen unverbindlich kalkulieren.',
   },
   '/anfrage': {
-    title: 'Anfrage stellen | Prima Vista B&G GmbH',
+    title: `Anfrage stellen | ${businessProfile.publicName}`,
     description:
       'Stellen Sie eine unverbindliche Anfrage für Ihr Trockenbau-Projekt und teilen Sie Leistung, Fläche, Zeitplan und Kontaktdaten.',
   },
@@ -85,7 +86,7 @@ const resolveMeta = (pathname) => {
 
     if (project) {
       return {
-        title: `${project.title} – Referenzen | Trockenbau Prima Vista`,
+        title: `${project.title} – Referenzen | ${businessProfile.publicName}`,
         description: project.summary,
       };
     }
@@ -106,7 +107,7 @@ export const useDocumentTitle = (pathname) => {
     setPropertyMeta('og:description', meta.description);
     setPropertyMeta('og:type', 'website');
     setPropertyMeta('og:url', canonicalUrl);
-    setPropertyMeta('og:site_name', 'Trockenbau Prima Vista');
+    setPropertyMeta('og:site_name', businessProfile.publicName);
     setNamedMeta('twitter:card', 'summary_large_image');
     setNamedMeta('twitter:title', meta.title);
     setNamedMeta('twitter:description', meta.description);

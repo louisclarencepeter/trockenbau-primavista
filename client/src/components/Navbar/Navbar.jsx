@@ -8,6 +8,7 @@ import PageLink from '../PageLink/PageLink';
 import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import { getScrollBehavior, scrollToHashTarget } from '../../utils/hashNavigation';
+import { businessProfile } from '../../config/businessProfile';
 
 const navItems = [
   { id: 'leistungen', label: 'Leistungen' },
@@ -172,14 +173,14 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
         <HashLink to={homeHref} className="navbar__brand" onClick={handleNavClick({ id: 'top' })}>
           <ResponsivePicture
             image={logoImage}
-            alt="Trockenbau Prima Vista Logo"
+            alt={`${businessProfile.publicName} Logo`}
             loading="eager"
             decoding="sync"
             className="navbar__logo"
           />
           <div className="navbar__brand-text">
-            <span className="navbar__name">Prima Vista</span>
-            <span className="navbar__tagline">Trockenbau</span>
+            <span className="navbar__name">Trockenbau</span>
+            <span className="navbar__tagline">PrimaVista Schweiz</span>
           </div>
         </HashLink>
 

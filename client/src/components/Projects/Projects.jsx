@@ -5,21 +5,6 @@ import PageLink from '../PageLink/PageLink';
 import ResponsivePicture from '../ResponsivePicture/ResponsivePicture';
 import { featuredProject, supportingProjects } from './data/projectsCatalog';
 
-const referenceVideos = [
-  {
-    id: 'trockenbau-details-innenausbau',
-    title: 'Trockenbau-Details im Innenausbau',
-    label: 'Innenausbau',
-    youtubeId: '6HNLfa6FXb8',
-  },
-  {
-    id: 'trockenbau-baustelle',
-    title: 'Trockenbau auf der Baustelle',
-    label: 'Baustelle',
-    youtubeId: 'okEqR_-teL4',
-  },
-];
-
 function Projects() {
   const { sectionRef: projectsRef, isVisible } = useScrollReveal();
 
@@ -30,41 +15,6 @@ function Projects() {
       id="referenzen"
     >
       <div className="container">
-        <div className="projects__video-panel projects__reveal" aria-labelledby="referenzen-videos-title">
-          <div className="projects__video-header">
-            <span className="projects__video-eyebrow">Video-Referenzen</span>
-            <h3 className="projects__video-title" id="referenzen-videos-title">
-              Trockenbau in Bewegung
-            </h3>
-            <p className="projects__video-text">
-              Direkte Einblicke in Ausführung, Detailarbeit und Abläufe auf der Baustelle.
-            </p>
-          </div>
-
-          <div className="projects__video-grid">
-            {referenceVideos.map((video, index) => (
-              <article className="projects__video-card" key={video.id}>
-                <div className="projects__video-frame">
-                  <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}?rel=0&modestbranding=1`}
-                    title={video.title}
-                    loading="lazy"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                </div>
-                <div className="projects__video-copy">
-                  <span className="projects__video-meta">
-                    {String(index + 1).padStart(2, '0')} — {video.label}
-                  </span>
-                  <h4 className="projects__video-card-title">{video.title}</h4>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-
         <div className="projects__header">
           <span className="projects__eyebrow projects__reveal">REFERENZEN</span>
           <h2 className="projects__title projects__reveal">Ausgewählte Projekte</h2>

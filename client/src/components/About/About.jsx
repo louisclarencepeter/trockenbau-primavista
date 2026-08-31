@@ -8,6 +8,7 @@ import {
   responsiveImageSizes,
 } from '../../assets/responsiveImages';
 import { aboutSectionVideo } from '../../assets/videoManifest';
+import { businessProfile } from '../../config/businessProfile';
 
 const highlights = [
   {
@@ -49,7 +50,8 @@ function About() {
               Trockenbau mit klarer Planung und sauberer Ausführung
             </h2>
             <p className="ueber-uns__text ueber-uns__reveal">
-              Trockenbau Prima Vista steht für klare Kommunikation, saubere
+              {businessProfile.publicName} steht für Präzision, Qualität und
+              zeitloses Design. Klare Kommunikation, saubere
               Ausführung und nachvollziehbare Angebote im Bereich Trockenbau.
               Ob Decken, Wände, Estrich-Boden, Dachschrägen oder Sonderleistungen:
               wir schaffen funktionale Lösungen, die fachgerecht umgesetzt
@@ -60,13 +62,13 @@ function About() {
               <ResponsiveVideo
                 media={aboutSectionVideo}
                 isActive={isVisible}
-                posterAlt="Trockenbau-Projekt von Trockenbau Prima Vista"
+                posterAlt={`Trockenbau-Projekt von ${businessProfile.publicName}`}
                 className="ueber-uns__image"
                 fallback={(
                   <ResponsivePicture
                     image={aboutInteriorShowcaseImage}
                     sizes={responsiveImageSizes.about}
-                    alt="Trockenbau-Projekt von Trockenbau Prima Vista"
+                    alt={`Trockenbau-Projekt von ${businessProfile.publicName}`}
                     loading="lazy"
                     decoding="async"
                     className="ueber-uns__image"

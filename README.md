@@ -1,6 +1,6 @@
-# Trockenbau Prima Vista
+# Trockenbau PrimaVista Schweiz
 
-Marketing website for **Trockenbau Prima Vista**, built with React, Vite, Sass, and Netlify Functions.
+Marketing website for **Trockenbau PrimaVista Schweiz**, built with React, Vite, Sass, and Netlify Functions.
 
 The site includes a homepage, an interactive calculator, project reference pages, Google reviews, contact/request forms, cookie consent, and an OpenAI-backed chatbot.
 
@@ -99,7 +99,7 @@ Create a local `.env` from `.env.example`. In Netlify, add the same variables un
 ```bash
 # Email
 RESEND_API_KEY=re_your_resend_api_key
-EMAIL_FROM="Trockenbau Prima Vista <info@trockenbau-primavista.ch>"
+EMAIL_FROM="Trockenbau PrimaVista Schweiz <info@trockenbau-primavista.ch>"
 EMAIL_REPLY_TO=info@trockenbau-primavista.ch
 EMAIL_NOTIFICATION_TO=info@trockenbau-primavista.ch
 EMAIL_NOTIFICATION_BCC=
@@ -109,11 +109,14 @@ EMAIL_CONFIRMATIONS_ENABLED=true
 OPENAI_API_KEY=sk-your-openai-key
 
 # Google reviews
+GOOGLE_REVIEWS_ENABLED=false
 GOOGLE_PLACE_ID=your-google-place-id
 GOOGLE_PLACES_API_KEY=your-google-places-api-key
 ```
 
 Form submissions fail if the internal notification cannot be delivered. This prevents website leads from being silently dropped.
+
+Keep Google reviews disabled until `GOOGLE_PLACE_ID` belongs to the verified Swiss Trockenbau profile. Enable them only after confirming the profile identity in Google Maps.
 
 ## Netlify Functions
 

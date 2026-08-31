@@ -24,12 +24,12 @@ function Impressum() {
         <p className="legal-page__paragraph">
           Webseite:{' '}
           <a
-            href="https://www.primavista-bauprojekte.com"
+            href="https://trockenbau-primavista.ch"
             className="legal-page__link"
             target="_blank"
             rel="noreferrer"
           >
-            www.primavista-bauprojekte.com
+            trockenbau-primavista.ch
           </a>
         </p>
         <p className="legal-page__paragraph">
@@ -41,8 +41,8 @@ function Impressum() {
       </div>
 
       <div className="legal-page__block">
-        <h3 className="legal-page__heading">Vertretungsberechtigte Person</h3>
-        <p className="legal-page__paragraph">Daniel Mihai Cirstea</p>
+        <h3 className="legal-page__heading">Vertretungsberechtigte Personen</h3>
+        <p className="legal-page__paragraph">Monica Irimia und Daniel-Mihai Cristea</p>
       </div>
 
       <div className="legal-page__block">
@@ -54,7 +54,7 @@ function Impressum() {
           </div>
           <div className="legal-page__meta-row">
             <dt>Handelsregister-Nummer (UID)</dt>
-            <dd>CHE-345.302.685</dd>
+            <dd>CHE-354.302.685</dd>
           </div>
           <div className="legal-page__meta-row">
             <dt>Handelsregisteramt</dt>

@@ -5,12 +5,14 @@ import CalculatorTeaser from '../components/CalculatorTeaser/CalculatorTeaser';
 import About from '../components/About/About';
 import Projects from '../components/Projects/Projects';
 import Contact from '../components/Contact/Contact';
+import LocalBusinessJsonLd from '../components/Seo/LocalBusinessJsonLd';
 
 const Reviews = lazy(() => import('../components/Reviews/Reviews'));
 
 function HomePage() {
   return (
     <>
+      <LocalBusinessJsonLd />
       <Hero />
       <Services />
       <CalculatorTeaser />

@@ -17,15 +17,16 @@ import {
 import './Chatbot.scss';
 import { logoSmall } from '../../assets/responsiveImages';
 import { getApiUrl } from '../../utils/api';
+import { businessProfile } from '../../config/businessProfile';
 
 const GREETING =
-  'Guten Tag und herzlich willkommen bei Prima Vista. Ich bin Ihr Trockenbau-Concierge. Erzählen Sie uns kurz von Ihrem Vorhaben, oder wählen Sie unten ein Thema.';
+  `Guten Tag und herzlich willkommen bei ${businessProfile.publicName}. Ich bin Ihr Trockenbau-Concierge. Erzählen Sie uns kurz von Ihrem Vorhaben, oder wählen Sie unten ein Thema.`;
 
 const suggestions = [
   'Trockenbau anfragen',
   'Kosten grob kalkulieren',
   'Dachschrägen ausbauen',
-  'Mit Prima Vista sprechen',
+  'Mit PrimaVista sprechen',
 ];
 
 const CHAT_SCROLL_IDLE_MS = 5000;
@@ -231,12 +232,12 @@ function Eyebrow({ children, dark = false }) {
 
 function BrandRail({ onClose }) {
   return (
-    <aside className="chatbot-rail" aria-label="Prima Vista Trockenbau-Concierge">
-      <Link className="chatbot-rail__brand" to="/" onClick={onClose} aria-label="Prima Vista Startseite">
+    <aside className="chatbot-rail" aria-label={`${businessProfile.publicName} Trockenbau-Concierge`}>
+      <Link className="chatbot-rail__brand" to="/" onClick={onClose} aria-label={`${businessProfile.publicName} Startseite`}>
         <img src={logoSmall} alt="" width="96" height="96" />
         <span>
-          <strong>Prima Vista</strong>
-          <small>Trockenbau</small>
+          <strong>Trockenbau</strong>
+          <small>PrimaVista Schweiz</small>
         </span>
       </Link>
 
@@ -495,7 +496,7 @@ function Chatbot() {
           id={panelId}
           role="dialog"
           aria-modal="true"
-          aria-label="Trockenbau-Concierge von Prima Vista"
+          aria-label={`Trockenbau-Concierge von ${businessProfile.publicName}`}
         >
           <BrandRail onClose={closeChat} />
           <section className="chatbot-panel__main">
@@ -580,7 +581,7 @@ function Chatbot() {
 
             <p className="chatbot-panel__footnote">
               <Lock aria-hidden="true" />
-              Verschlüsselt und vertraulich · Sie sprechen mit dem Prima Vista Team
+              Verschlüsselt und vertraulich · Sie sprechen mit dem PrimaVista Schweiz Team
             </p>
           </section>
         </div>
