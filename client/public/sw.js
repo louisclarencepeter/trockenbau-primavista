@@ -50,6 +50,7 @@ self.addEventListener('fetch', (event) => {
   const requestCacheControl = event.request.headers.get('cache-control') || '';
   const shouldBypassCache =
     requestUrl.pathname.startsWith('/api/') ||
+    requestUrl.pathname.startsWith('/abmelden/') ||
     event.request.cache === 'no-store' ||
     requestCacheControl.includes('no-store');
 
