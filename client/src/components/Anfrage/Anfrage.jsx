@@ -20,7 +20,6 @@ import './Anfrage.scss';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import useSuccessView from '../../hooks/useSuccessView';
 import { submitProjectForm } from '../../utils/formSubmission';
-import { trackLeadConversion } from '../../utils/analytics';
 import FormErrorMessage from '../FormErrorMessage/FormErrorMessage';
 import {
   addOns as catalogAddOns,
@@ -171,7 +170,6 @@ function Anfrage() {
     try {
       await submitProjectForm({ form: event.target, formName: 'anfrage' });
       setFormStatus('success');
-      trackLeadConversion();
     } catch {
       setFormStatus('error');
     }

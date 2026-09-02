@@ -5,7 +5,6 @@ import useScrollReveal from '../../hooks/useScrollReveal';
 import useReturnToForm from '../../hooks/useReturnToForm';
 import useSuccessView from '../../hooks/useSuccessView';
 import { submitProjectForm } from '../../utils/formSubmission';
-import { trackLeadConversion } from '../../utils/analytics';
 import FormErrorMessage from '../FormErrorMessage/FormErrorMessage';
 import { businessProfile } from '../../config/businessProfile';
 
@@ -69,7 +68,6 @@ function Contact() {
       });
 
       setFormStatus('success');
-      trackLeadConversion();
       form.reset();
     } catch {
       setFormStatus('error');
