@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 
 let openaiClient = null;
-const CHAT_MODEL = process.env.OPENAI_CHAT_MODEL || 'gpt-4o-mini';
+const CHAT_MODEL = process.env.OPENAI_CHAT_MODEL || 'gpt-5.6-luna';
 const MAX_MESSAGES = 12;
 const MAX_MESSAGE_CHARS = 1200;
 const MAX_TOTAL_CHARS = 6000;
@@ -107,8 +107,11 @@ export const buildChatReply = async (messages) => {
         systemMessage,
         ...sanitizedMessages,
       ],
-      max_tokens: parsePositiveInteger(process.env.OPENAI_MAX_TOKENS, DEFAULT_MAX_TOKENS),
-      temperature: 0.3,
+      max_completion_tokens: parsePositiveInteger(process.env.OPENAI_MAX_TOKENS, DEFAULT_MAX_TOKENS),
+      // Preserve the previous non-reasoning chatbot's latency and output budget.
+      ...(CHAT_MODEL === 'gpt-5.6-luna'
+        ? { reasoning_effort: 'none' }
+        : { temperature: 0.3 }),
     }, {
       signal: timeoutController.signal,
     });
