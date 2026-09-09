@@ -275,10 +275,10 @@ function Navbar({ isHomePage = true, currentPath = '/' }) {
           })}
 
           <div className="navbar__mobile-actions">
-            <Button href="/anfrage" variant="primary">
+            <Button href="/anfrage" variant="primary" onClick={closeMenu}>
               Jetzt Anfrage stellen
             </Button>
-            <Button href="/kalkulator" variant="secondary">
+            <Button href="/kalkulator" variant="secondary" onClick={closeMenu}>
               Kosten kalkulieren
             </Button>
           </div>
