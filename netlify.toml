@@ -23,7 +23,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://googleads.g.doubleclick.net; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googleadservices.com https://www.google.com https://www.google.de https://ad.doubleclick.net https://googleads.g.doubleclick.net; img-src 'self' data: https:; media-src 'self'; frame-src https://www.youtube-nocookie.com https://www.youtube.com; style-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://googleads.g.doubleclick.net; connect-src 'self' https://pagead2.googlesyndication.com https://www.google-analytics.com https://*.google-analytics.com https://www.googleadservices.com https://www.google.com https://www.google.de https://ad.doubleclick.net https://googleads.g.doubleclick.net; img-src 'self' data: https:; media-src 'self'; frame-src https://www.youtube-nocookie.com https://www.youtube.com; style-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests"
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
